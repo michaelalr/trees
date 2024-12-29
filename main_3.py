@@ -71,9 +71,6 @@ def create_html_with_images_and_details(df, detected_images_folder, output_html_
         # Get the corresponding image path
         file_name_with_detections_full_path = filtered_df.iloc[0]['file_name_with_detections']
         file_name_with_detections = Path(file_name_with_detections_full_path).name
-        print("detected_images_folder: ", detected_images_folder)
-        print("file_name_with_detections_full_path: ", file_name_with_detections_full_path)
-        print("file_name_with_detections: ", file_name_with_detections)
         image_path = os.path.join(detected_images_folder, file_name_with_detections)
 
         # Add a section for the current file_name
@@ -85,7 +82,6 @@ def create_html_with_images_and_details(df, detected_images_folder, output_html_
         html_content += "<div class='left'>"
 
         # Add the detected image
-        print("image_path:", image_path)
         html_content += f"<img src='{image_path}' alt='Detected Image'><div class='details'>"
 
         # Add detection details
@@ -103,9 +99,9 @@ def create_html_with_images_and_details(df, detected_images_folder, output_html_
             # Additional matches
             html_content += f"<strong>Seker Details - Additional Matches:</strong><br>"
             # Convert the 'additional_matches' string to a list of dictionaries
-            additional_matches = ast.literal_eval(row['additional_matches'])
+            additional_matches_none = row['additional_matches'].replace('nan', 'None')
+            additional_matches = ast.literal_eval(additional_matches_none)
             for match in additional_matches:
-                print(match)
                 html_content += f"ID: {match['id']}<br>"
                 html_content += f"Tree Name: {match['tree_name']}<br>"
                 html_content += f"Location: ({match['location_x']}, {match['location_y']})<br>"
@@ -143,21 +139,23 @@ def generate_map(filtered_df):
         str: Path to the saved map HTML file.
     """
     # Create a map centered on the first detection
-    initial_coords = [filtered_df.iloc[0]['y_tree'], filtered_df.iloc[0]['x_tree']]
+    initial_coords = [filtered_df.iloc[0]['y_tree_image'], filtered_df.iloc[0]['x_tree_image']]
     map_obj = folium.Map(location=initial_coords, zoom_start=15)
 
     # Add markers for best matches and additional matches
     for _, row in filtered_df.iterrows():
-        # Best match
-        folium.Marker(
-            location=[row['y_tree'], row['x_tree']],
-            popup=f"Best Match: {row['tree_name']} (ID: {row['tree_id']})",
-            icon=folium.Icon(color='green')
-        ).add_to(map_obj)
+        # Best match not nan
+        if pd.notna(row['tree_id']):
+            folium.Marker(
+                location=[row['y_tree'], row['x_tree']],
+                popup=f"Best Match: {row['tree_name']} (ID: {row['tree_id']})",
+                icon=folium.Icon(color='green')
+            ).add_to(map_obj)
 
         # Additional matches
         # Convert the 'additional_matches' string to a list of dictionaries
-        additional_matches = ast.literal_eval(row['additional_matches'])
+        additional_matches_none = row['additional_matches'].replace('nan', 'None')
+        additional_matches = ast.literal_eval(additional_matches_none)
         for match in additional_matches:
             folium.Marker(
                 location=[match['location_y'], match['location_x']],
@@ -185,7 +183,8 @@ def generate_map(filtered_df):
 
 
 if __name__ == '__main__':
-    df = pd.read_excel("south_trees_example_3.xlsx")
+    df = pd.read_excel("south_trees_output_meters_divide=100000_angle_divide=3_y_times=12_y_exponent=2_count_distinct_trees=316.xlsx")
+    # df = pd.read_excel("south_trees_example_3.xlsx")
     detected_images_folder = "detected_images"
     output_html_file = "index.html"
     create_html_with_images_and_details(df=df, detected_images_folder=detected_images_folder,
