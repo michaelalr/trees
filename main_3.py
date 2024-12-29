@@ -174,6 +174,16 @@ def generate_map(filtered_df):
             icon=folium.Icon(color='red')
         ).add_to(map_obj)
 
+        # Car location
+        x_car = row['x_image']
+        y_car = row['y_image']
+        current_tree_streetview_url = f"https://www.google.com/maps?q={y_car},{x_car}&layer=c&cbll={y_car},{x_car}"
+        folium.Marker(
+            location=[y_car, x_car],
+            popup=f"Car location<br><a href='{current_tree_streetview_url}' target='_blank'>View on Google Street View</a>",
+            icon=folium.Icon(color='orange')
+        ).add_to(map_obj)
+
     # Save the map to an HTML file
     map_path = f"./maps/map_{filtered_df.iloc[0]['file_name']}.html"
     os.makedirs(os.path.dirname(map_path), exist_ok=True)
