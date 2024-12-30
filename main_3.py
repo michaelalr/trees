@@ -68,6 +68,10 @@ def create_html_with_images_and_details(df, detected_images_folder, output_html_
         # Filter rows for the current file_name
         filtered_df = df[df['file_name'] == file_name]
 
+        # Check if all values in the "possible_trees" column are 0
+        if all(filtered_df['possible_trees'] == 0):
+            continue  # Skip to the next file_name
+
         # Get the corresponding image path
         file_name_with_detections_full_path = filtered_df.iloc[0]['file_name_with_detections']
         file_name_with_detections = Path(file_name_with_detections_full_path).name
