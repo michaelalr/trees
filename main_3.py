@@ -62,14 +62,13 @@ def create_html_with_images_and_details(df, detected_images_folder, output_html_
     <body>
     <h1>Detections and Matches</h1>
     """
-
     # Process each file_name
     for file_name in df['file_name'].unique():
         # Filter rows for the current file_name
         filtered_df = df[df['file_name'] == file_name]
 
         # Check if all values in the "possible_trees" column are 0
-        if all(filtered_df['possible_trees'] == 0):
+        if filtered_df['possible_trees'].eq(0).all():
             continue  # Skip to the next file_name
 
         # Get the corresponding image path
@@ -88,29 +87,49 @@ def create_html_with_images_and_details(df, detected_images_folder, output_html_
         # Add the detected image
         html_content += f"<img src='{image_path}' alt='Detected Image'><div class='details'>"
 
+        det_trees_without_match = []
+
         # Add detection details
         for _, row in filtered_df.iterrows():
+            if pd.isna(row['tree_id']):
+                det_trees_without_match.append((row['tree_index'], row['x_tree_image'], row['y_tree_image']))
+                continue
+
             html_content += "<p>"
-            html_content += f"<strong>Detection Details:</strong><br>"
+            html_content += f"<strong>Detection Tree With Match:</strong><br>"
             html_content += f"Tree Index: {row['tree_index']}<br>"
             html_content += f"Location: ({row['x_tree_image']}, {row['y_tree_image']})<br>"
             html_content += f"Distance: {row['distance']}<br>"
-            html_content += f"<strong>Seker Details - Best Match:</strong><br>"
+            html_content += f"<strong>Best Match (Seker):</strong><br>"
             html_content += f"Tree ID: {row['tree_id']}<br>"
             html_content += f"Tree Name: {row['tree_name']}<br>"
             html_content += f"Location: ({row['x_tree']}, {row['y_tree']})<br>"
-
-            # Additional matches
-            html_content += f"<strong>Seker Details - Additional Matches:</strong><br>"
-            # Convert the 'additional_matches' string to a list of dictionaries
-            additional_matches_none = row['additional_matches'].replace('nan', 'None')
-            additional_matches = ast.literal_eval(additional_matches_none)
-            for match in additional_matches:
-                html_content += f"ID: {match['id']}<br>"
-                html_content += f"Tree Name: {match['tree_name']}<br>"
-                html_content += f"Location: ({match['location_x']}, {match['location_y']})<br>"
-
             html_content += "</p>"
+
+        if len(det_trees_without_match) > 0:
+            html_content += f"<strong>Detection Trees Without Match</strong>"
+        for tree in det_trees_without_match:
+            tree_index, x_tree_image, y_tree_image = tree
+            html_content += "<p>"
+            html_content += f"Tree Index: {tree_index}<br>"
+            html_content += f"Location: ({x_tree_image}, {y_tree_image})<br>"
+            html_content += "</p>"
+
+        # Additional matches
+        # Replace 'nan' with 'None' in the 'additional_matches' column
+        # Convert the 'additional_matches' string to a list of dictionaries
+        filtered_df.loc[:, 'additional_matches'] = filtered_df['additional_matches'].apply(
+            lambda x: ast.literal_eval(x.replace('nan', 'None')) if isinstance(x, str) else x
+        )
+
+        html_content += f"<strong>All Possible Matches:</strong>"
+        for match in filtered_df.iloc[0]['additional_matches']:
+            html_content += "<p>"
+            html_content += f"ID: {match['id']}<br>"
+            html_content += f"Tree Name: {match['tree_name']}<br>"
+            html_content += f"Location: ({match['location_x']}, {match['location_y']})<br>"
+            html_content += "</p>"
+
         html_content += "</div></div>"
 
         # Generate the map
@@ -146,6 +165,8 @@ def generate_map(filtered_df):
     initial_coords = [filtered_df.iloc[0]['y_tree_image'], filtered_df.iloc[0]['x_tree_image']]
     map_obj = folium.Map(location=initial_coords, zoom_start=15)
 
+    best_match_ids = filtered_df['tree_id'].unique()
+
     # Add markers for best matches and additional matches
     for _, row in filtered_df.iterrows():
         # Best match not nan
@@ -155,17 +176,22 @@ def generate_map(filtered_df):
                 popup=f"Best Match: {row['tree_name']} (ID: {row['tree_id']})",
                 icon=folium.Icon(color='green')
             ).add_to(map_obj)
+            # Draw a line between the detection tree and the matched seker tree
+            folium.PolyLine(
+                locations=[[row['y_tree_image'], row['x_tree_image']], [row['y_tree'], row['x_tree']]],
+                color='black',  # Color for the connection line
+                weight=2  # Line thickness
+            ).add_to(map_obj)
 
         # Additional matches
-        # Convert the 'additional_matches' string to a list of dictionaries
-        additional_matches_none = row['additional_matches'].replace('nan', 'None')
-        additional_matches = ast.literal_eval(additional_matches_none)
-        for match in additional_matches:
-            folium.Marker(
-                location=[match['location_y'], match['location_x']],
-                popup=f"Additional Match: {match['tree_name']} (ID: {match['id']})",
-                icon=folium.Icon(color='blue')
-            ).add_to(map_obj)
+        for match in row['additional_matches']:
+            id = match['id']
+            if id not in best_match_ids:
+                folium.Marker(
+                    location=[match['location_y'], match['location_x']],
+                    popup=f"Additional Match: {match['tree_name']} (ID: {match['id']})",
+                    icon=folium.Icon(color='blue')
+                ).add_to(map_obj)
 
         # Detection location
         # Create Google Street View URL for the current tree
