@@ -173,7 +173,7 @@ def create_html_with_images_and_details(df, detected_images_folder, output_html_
     """
 
     # Save the HTML content to a file
-    with open(output_html_file, 'w') as file:
+    with open(output_html_file, 'w', encoding='utf-8') as file:
         file.write(html_content)
 
 
@@ -251,8 +251,7 @@ def generate_map(filtered_df):
 
 
 if __name__ == '__main__':
-    df = pd.read_excel(
-        "south_trees_output_meters_divide=100000_angle_divide=3_y_times=12_y_exponent=2_count_distinct_trees=256.xlsx")
+    df = pd.read_excel("south_trees_output_meters_divide=100000_angle_divide=3_y_times=12_y_exponent=2_count_distinct_trees=256.xlsx")
 
     # Conversion factor from decimal to meters
     conversion_factor = 100000
