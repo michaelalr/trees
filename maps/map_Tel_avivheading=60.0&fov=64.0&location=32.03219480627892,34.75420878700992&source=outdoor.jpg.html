@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_b9bb385cfafdc83c5c228cb313b3d335 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+<div style="
+position: fixed;
+bottom: 50px;
+left: 50px;
+width: 200px;
+background-color: white;
+z-index:9999;
+font-size:14px;
+padding: 10px;
+border: 2px solid grey;
+border-radius: 8px;
+box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+">
+<b>Legend</b><br>
+<i class="fa fa-map-marker fa-2x" style="color:orange"></i> Car location<br>
+<i class="fa fa-map-marker fa-2x" style="color:red"></i> Detection location<br>
+<i class="fa fa-map-marker fa-2x" style="color:green"></i> Seker best match<br>
+<i class="fa fa-map-marker fa-2x" style="color:blue"></i> Seker additional match<br>
+</div>
+    
+            <div class="folium-map" id="map_b9bb385cfafdc83c5c228cb313b3d335" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_b9bb385cfafdc83c5c228cb313b3d335 = L.map(
+                "map_b9bb385cfafdc83c5c228cb313b3d335",
+                {
+                    center: [32.03226482292817, 34.75443862454204],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 15,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_a526fef8dd1fc003ef2aa18ef345d2eb = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_a526fef8dd1fc003ef2aa18ef345d2eb.addTo(map_b9bb385cfafdc83c5c228cb313b3d335);
+        
+    
+            var marker_aef1b1c4a7e0a1e69130cdc6b2920fc3 = L.marker(
+                [32.03239428654617, 34.75457290532323],
+                {
+}
+            ).addTo(map_b9bb385cfafdc83c5c228cb313b3d335);
+        
+    
+            var icon_b01a1b3e8bd7b430a6ff57deec7e84fa = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_aef1b1c4a7e0a1e69130cdc6b2920fc3.setIcon(icon_b01a1b3e8bd7b430a6ff57deec7e84fa);
+        
+    
+        var popup_05330b25bf11f58ed9fec6bf7563ff06 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5f2e2b9bc5f015cab2e8caee8db6fc45 = $(`<div id="html_5f2e2b9bc5f015cab2e8caee8db6fc45" style="width: 100.0%; height: 100.0%;">Best Match: אלמוגן זנים שונים (ID: 39204.0)</div>`)[0];
+                popup_05330b25bf11f58ed9fec6bf7563ff06.setContent(html_5f2e2b9bc5f015cab2e8caee8db6fc45);
+            
+        
+
+        marker_aef1b1c4a7e0a1e69130cdc6b2920fc3.bindPopup(popup_05330b25bf11f58ed9fec6bf7563ff06)
+        ;
+
+        
+    
+    
+            var poly_line_59d465d407196e2040a8074b8360d956 = L.polyline(
+                [[32.03226482292817, 34.75443862454204], [32.03239428654617, 34.75457290532323]],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "black", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_b9bb385cfafdc83c5c228cb313b3d335);
+        
+    
+            var marker_7b5b2680b1b9f069c107442de9904eab = L.marker(
+                [32.03239428654617, 34.75457290532323],
+                {
+}
+            ).addTo(map_b9bb385cfafdc83c5c228cb313b3d335);
+        
+    
+            var icon_4aa39040084dc54c4613c056ebaa67b5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_7b5b2680b1b9f069c107442de9904eab.setIcon(icon_4aa39040084dc54c4613c056ebaa67b5);
+        
+    
+        var popup_3cffb2379de996097956de8879e56c9b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_37c37b110997c70c39e6446f86b1376d = $(`<div id="html_37c37b110997c70c39e6446f86b1376d" style="width: 100.0%; height: 100.0%;">Additional Match: סבל פלמטו (ID: 39207)</div>`)[0];
+                popup_3cffb2379de996097956de8879e56c9b.setContent(html_37c37b110997c70c39e6446f86b1376d);
+            
+        
+
+        marker_7b5b2680b1b9f069c107442de9904eab.bindPopup(popup_3cffb2379de996097956de8879e56c9b)
+        ;
+
+        
+    
+    
+            var marker_4f62b297324d4abe844e10a9e93bf15b = L.marker(
+                [32.03226482292817, 34.75443862454204],
+                {
+}
+            ).addTo(map_b9bb385cfafdc83c5c228cb313b3d335);
+        
+    
+            var icon_9b4ccfd885ef47a6705198447edaf750 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_4f62b297324d4abe844e10a9e93bf15b.setIcon(icon_9b4ccfd885ef47a6705198447edaf750);
+        
+    
+        var popup_1a6d2474f49b250e7f27d295c24e59f9 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_15a77c41f0f488d738557119fe2a4b7d = $(`<div id="html_15a77c41f0f488d738557119fe2a4b7d" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 5<br><a href='https://www.google.com/maps?q=32.03226482292817,34.75443862454204&layer=c&cbll=32.03226482292817,34.75443862454204' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_1a6d2474f49b250e7f27d295c24e59f9.setContent(html_15a77c41f0f488d738557119fe2a4b7d);
+            
+        
+
+        marker_4f62b297324d4abe844e10a9e93bf15b.bindPopup(popup_1a6d2474f49b250e7f27d295c24e59f9)
+        ;
+
+        
+    
+    
+            var marker_0d8691e368c6c6d6cfc2d411227b87ec = L.marker(
+                [32.03219480627892, 34.75420878700992],
+                {
+}
+            ).addTo(map_b9bb385cfafdc83c5c228cb313b3d335);
+        
+    
+            var icon_412a57c837a531f42f9fdb87b809dabd = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_0d8691e368c6c6d6cfc2d411227b87ec.setIcon(icon_412a57c837a531f42f9fdb87b809dabd);
+        
+    
+        var popup_869ba8f354028ca38bff863364d5807a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9d2c5e25769fdc0921d2738594b1979c = $(`<div id="html_9d2c5e25769fdc0921d2738594b1979c" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.03219480627892,34.75420878700992&layer=c&cbll=32.03219480627892,34.75420878700992' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_869ba8f354028ca38bff863364d5807a.setContent(html_9d2c5e25769fdc0921d2738594b1979c);
+            
+        
+
+        marker_0d8691e368c6c6d6cfc2d411227b87ec.bindPopup(popup_869ba8f354028ca38bff863364d5807a)
+        ;
+
+        
+    
+    
+            var marker_d7da9ab53918483787c6795394bb94c8 = L.marker(
+                [32.03239428654617, 34.75457290532323],
+                {
+}
+            ).addTo(map_b9bb385cfafdc83c5c228cb313b3d335);
+        
+    
+            var icon_48213ab5386a001ef08e772ef0102abc = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_d7da9ab53918483787c6795394bb94c8.setIcon(icon_48213ab5386a001ef08e772ef0102abc);
+        
+    
+        var popup_b84d49007c1b4baad5059a6ff0bc9193 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_937ee46c8c86613798149113c5e22569 = $(`<div id="html_937ee46c8c86613798149113c5e22569" style="width: 100.0%; height: 100.0%;">Additional Match: סבל פלמטו (ID: 39207)</div>`)[0];
+                popup_b84d49007c1b4baad5059a6ff0bc9193.setContent(html_937ee46c8c86613798149113c5e22569);
+            
+        
+
+        marker_d7da9ab53918483787c6795394bb94c8.bindPopup(popup_b84d49007c1b4baad5059a6ff0bc9193)
+        ;
+
+        
+    
+    
+            var marker_abc877d4d9d2e672881595d0392f6b1d = L.marker(
+                [32.03278608659714, 34.75489410493619],
+                {
+}
+            ).addTo(map_b9bb385cfafdc83c5c228cb313b3d335);
+        
+    
+            var icon_cd5997dadde4a1770f89c66dfd132cc9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_abc877d4d9d2e672881595d0392f6b1d.setIcon(icon_cd5997dadde4a1770f89c66dfd132cc9);
+        
+    
+        var popup_6d26b2bdf1cd716dcaaa3318ba64bac3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8dd30710a50890d1bb69b2a6d2311c4d = $(`<div id="html_8dd30710a50890d1bb69b2a6d2311c4d" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 1<br><a href='https://www.google.com/maps?q=32.03278608659714,34.75489410493619&layer=c&cbll=32.03278608659714,34.75489410493619' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_6d26b2bdf1cd716dcaaa3318ba64bac3.setContent(html_8dd30710a50890d1bb69b2a6d2311c4d);
+            
+        
+
+        marker_abc877d4d9d2e672881595d0392f6b1d.bindPopup(popup_6d26b2bdf1cd716dcaaa3318ba64bac3)
+        ;
+
+        
+    
+    
+            var marker_fca7d870c102a77a0c328201a3987779 = L.marker(
+                [32.03219480627892, 34.75420878700992],
+                {
+}
+            ).addTo(map_b9bb385cfafdc83c5c228cb313b3d335);
+        
+    
+            var icon_349a419b86fbb577fe29c71fb3323f87 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_fca7d870c102a77a0c328201a3987779.setIcon(icon_349a419b86fbb577fe29c71fb3323f87);
+        
+    
+        var popup_7bfd1b97d6eb8149b027126e16a48ac6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_729b96069de0f0624e76b00158e31c57 = $(`<div id="html_729b96069de0f0624e76b00158e31c57" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.03219480627892,34.75420878700992&layer=c&cbll=32.03219480627892,34.75420878700992' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_7bfd1b97d6eb8149b027126e16a48ac6.setContent(html_729b96069de0f0624e76b00158e31c57);
+            
+        
+
+        marker_fca7d870c102a77a0c328201a3987779.bindPopup(popup_7bfd1b97d6eb8149b027126e16a48ac6)
+        ;
+
+        
+    
+    
+            var marker_e8fb583b832cbbf873a8684c0ad56ab3 = L.marker(
+                [32.03239428654617, 34.75457290532323],
+                {
+}
+            ).addTo(map_b9bb385cfafdc83c5c228cb313b3d335);
+        
+    
+            var icon_ac37f3e19ae1f65a867faa4c28a12b6e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_e8fb583b832cbbf873a8684c0ad56ab3.setIcon(icon_ac37f3e19ae1f65a867faa4c28a12b6e);
+        
+    
+        var popup_a5770e787f4a612ab51f04ece5d11825 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_626e75d30f9a1570f4bdf195a115179c = $(`<div id="html_626e75d30f9a1570f4bdf195a115179c" style="width: 100.0%; height: 100.0%;">Additional Match: סבל פלמטו (ID: 39207)</div>`)[0];
+                popup_a5770e787f4a612ab51f04ece5d11825.setContent(html_626e75d30f9a1570f4bdf195a115179c);
+            
+        
+
+        marker_e8fb583b832cbbf873a8684c0ad56ab3.bindPopup(popup_a5770e787f4a612ab51f04ece5d11825)
+        ;
+
+        
+    
+    
+            var marker_71516995bc94eccf9e1e9c32a8981b16 = L.marker(
+                [32.03366808353926, 34.75660809815292],
+                {
+}
+            ).addTo(map_b9bb385cfafdc83c5c228cb313b3d335);
+        
+    
+            var icon_cda774238b76283d87b5ed1494010c73 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_71516995bc94eccf9e1e9c32a8981b16.setIcon(icon_cda774238b76283d87b5ed1494010c73);
+        
+    
+        var popup_f54067adc911e6a8b421aba054c84ade = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b88d56d5bab38b993ecd3b29e2465c67 = $(`<div id="html_b88d56d5bab38b993ecd3b29e2465c67" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 2<br><a href='https://www.google.com/maps?q=32.03366808353926,34.75660809815292&layer=c&cbll=32.03366808353926,34.75660809815292' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_f54067adc911e6a8b421aba054c84ade.setContent(html_b88d56d5bab38b993ecd3b29e2465c67);
+            
+        
+
+        marker_71516995bc94eccf9e1e9c32a8981b16.bindPopup(popup_f54067adc911e6a8b421aba054c84ade)
+        ;
+
+        
+    
+    
+            var marker_ecd25c795e4e00b93f90df3c2e291bad = L.marker(
+                [32.03219480627892, 34.75420878700992],
+                {
+}
+            ).addTo(map_b9bb385cfafdc83c5c228cb313b3d335);
+        
+    
+            var icon_e1c941f476079703ba67a831095f17ff = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_ecd25c795e4e00b93f90df3c2e291bad.setIcon(icon_e1c941f476079703ba67a831095f17ff);
+        
+    
+        var popup_a4173b2f44f5993fc998c40c99ce6698 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_00346f53931f01324ae842cc0d4bd012 = $(`<div id="html_00346f53931f01324ae842cc0d4bd012" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.03219480627892,34.75420878700992&layer=c&cbll=32.03219480627892,34.75420878700992' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_a4173b2f44f5993fc998c40c99ce6698.setContent(html_00346f53931f01324ae842cc0d4bd012);
+            
+        
+
+        marker_ecd25c795e4e00b93f90df3c2e291bad.bindPopup(popup_a4173b2f44f5993fc998c40c99ce6698)
+        ;
+
+        
+    
+    
+            var marker_0a8d692087fe9c03c3b5439ac7e74935 = L.marker(
+                [32.03239428654617, 34.75457290532323],
+                {
+}
+            ).addTo(map_b9bb385cfafdc83c5c228cb313b3d335);
+        
+    
+            var icon_04e3c8c0451d7b7ce658bb56bbeae19f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_0a8d692087fe9c03c3b5439ac7e74935.setIcon(icon_04e3c8c0451d7b7ce658bb56bbeae19f);
+        
+    
+        var popup_d7f12d54155a26487364619b96cf099e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_057b82326e63b6f3e4dbb2d3abd7b17f = $(`<div id="html_057b82326e63b6f3e4dbb2d3abd7b17f" style="width: 100.0%; height: 100.0%;">Additional Match: סבל פלמטו (ID: 39207)</div>`)[0];
+                popup_d7f12d54155a26487364619b96cf099e.setContent(html_057b82326e63b6f3e4dbb2d3abd7b17f);
+            
+        
+
+        marker_0a8d692087fe9c03c3b5439ac7e74935.bindPopup(popup_d7f12d54155a26487364619b96cf099e)
+        ;
+
+        
+    
+    
+            var marker_2708003983e446a2f5e74c2cda3b7252 = L.marker(
+                [32.03435382612724, 34.7572057707428],
+                {
+}
+            ).addTo(map_b9bb385cfafdc83c5c228cb313b3d335);
+        
+    
+            var icon_465a8a317db5d314216cc23525f77f35 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_2708003983e446a2f5e74c2cda3b7252.setIcon(icon_465a8a317db5d314216cc23525f77f35);
+        
+    
+        var popup_ff216d39ac5a750a4cb9294d6171d32b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7d55a3804ec35f62d107272cf9046a40 = $(`<div id="html_7d55a3804ec35f62d107272cf9046a40" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 3<br><a href='https://www.google.com/maps?q=32.03435382612724,34.7572057707428&layer=c&cbll=32.03435382612724,34.7572057707428' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_ff216d39ac5a750a4cb9294d6171d32b.setContent(html_7d55a3804ec35f62d107272cf9046a40);
+            
+        
+
+        marker_2708003983e446a2f5e74c2cda3b7252.bindPopup(popup_ff216d39ac5a750a4cb9294d6171d32b)
+        ;
+
+        
+    
+    
+            var marker_cc57f0ea8c6499e09df04c7aab53ae5c = L.marker(
+                [32.03219480627892, 34.75420878700992],
+                {
+}
+            ).addTo(map_b9bb385cfafdc83c5c228cb313b3d335);
+        
+    
+            var icon_080fa9785ee0781ce23b684ce3d51490 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_cc57f0ea8c6499e09df04c7aab53ae5c.setIcon(icon_080fa9785ee0781ce23b684ce3d51490);
+        
+    
+        var popup_3c38beb5ffe5522cfdeed223fff5887e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e83fb0024a536acc08a58d017763ffc6 = $(`<div id="html_e83fb0024a536acc08a58d017763ffc6" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.03219480627892,34.75420878700992&layer=c&cbll=32.03219480627892,34.75420878700992' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_3c38beb5ffe5522cfdeed223fff5887e.setContent(html_e83fb0024a536acc08a58d017763ffc6);
+            
+        
+
+        marker_cc57f0ea8c6499e09df04c7aab53ae5c.bindPopup(popup_3c38beb5ffe5522cfdeed223fff5887e)
+        ;
+
+        
+    
+    
+            var marker_037bcda3f8fdb6d266d121284add4649 = L.marker(
+                [32.03239428654617, 34.75457290532323],
+                {
+}
+            ).addTo(map_b9bb385cfafdc83c5c228cb313b3d335);
+        
+    
+            var icon_42654531501ec8f53ace9fb30eae33b0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_037bcda3f8fdb6d266d121284add4649.setIcon(icon_42654531501ec8f53ace9fb30eae33b0);
+        
+    
+        var popup_701cdb65b3b391e29bd4ee9e8d9c00f6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a6f0908044b0317dae544fdf5c65fa1b = $(`<div id="html_a6f0908044b0317dae544fdf5c65fa1b" style="width: 100.0%; height: 100.0%;">Additional Match: סבל פלמטו (ID: 39207)</div>`)[0];
+                popup_701cdb65b3b391e29bd4ee9e8d9c00f6.setContent(html_a6f0908044b0317dae544fdf5c65fa1b);
+            
+        
+
+        marker_037bcda3f8fdb6d266d121284add4649.bindPopup(popup_701cdb65b3b391e29bd4ee9e8d9c00f6)
+        ;
+
+        
+    
+    
+            var marker_6a571617c0eb9a13857ff7c71d0b608d = L.marker(
+                [32.03281792784838, 34.75533792507109],
+                {
+}
+            ).addTo(map_b9bb385cfafdc83c5c228cb313b3d335);
+        
+    
+            var icon_d4f3c29fb685c89c322de30c0f1e327d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_6a571617c0eb9a13857ff7c71d0b608d.setIcon(icon_d4f3c29fb685c89c322de30c0f1e327d);
+        
+    
+        var popup_94ccaa24295e1865e5189999b286d097 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1367fe6455bc11e494d1b614a1d3a726 = $(`<div id="html_1367fe6455bc11e494d1b614a1d3a726" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 4<br><a href='https://www.google.com/maps?q=32.03281792784838,34.75533792507109&layer=c&cbll=32.03281792784838,34.75533792507109' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_94ccaa24295e1865e5189999b286d097.setContent(html_1367fe6455bc11e494d1b614a1d3a726);
+            
+        
+
+        marker_6a571617c0eb9a13857ff7c71d0b608d.bindPopup(popup_94ccaa24295e1865e5189999b286d097)
+        ;
+
+        
+    
+    
+            var marker_7a88e4fc0512f314eefabe77ffd02ce8 = L.marker(
+                [32.03219480627892, 34.75420878700992],
+                {
+}
+            ).addTo(map_b9bb385cfafdc83c5c228cb313b3d335);
+        
+    
+            var icon_70ebd3d510326876332810b39c2ac686 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_7a88e4fc0512f314eefabe77ffd02ce8.setIcon(icon_70ebd3d510326876332810b39c2ac686);
+        
+    
+        var popup_29bae33128fd6ca9e73fb0bde04db68c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ec6ed8fd42c0bd2e433709f4afa339db = $(`<div id="html_ec6ed8fd42c0bd2e433709f4afa339db" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.03219480627892,34.75420878700992&layer=c&cbll=32.03219480627892,34.75420878700992' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_29bae33128fd6ca9e73fb0bde04db68c.setContent(html_ec6ed8fd42c0bd2e433709f4afa339db);
+            
+        
+
+        marker_7a88e4fc0512f314eefabe77ffd02ce8.bindPopup(popup_29bae33128fd6ca9e73fb0bde04db68c)
+        ;
+
+        
+    
+    
+            var marker_c02b8751fea819be6f3762fd76a58fb1 = L.marker(
+                [32.03239428654617, 34.75457290532323],
+                {
+}
+            ).addTo(map_b9bb385cfafdc83c5c228cb313b3d335);
+        
+    
+            var icon_585ad3737a162eacb07000379d0212b0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_c02b8751fea819be6f3762fd76a58fb1.setIcon(icon_585ad3737a162eacb07000379d0212b0);
+        
+    
+        var popup_a27e4754926172d34a9ea8703b046c3f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3b425f67dc8e6a119061b1e844d0ceed = $(`<div id="html_3b425f67dc8e6a119061b1e844d0ceed" style="width: 100.0%; height: 100.0%;">Additional Match: סבל פלמטו (ID: 39207)</div>`)[0];
+                popup_a27e4754926172d34a9ea8703b046c3f.setContent(html_3b425f67dc8e6a119061b1e844d0ceed);
+            
+        
+
+        marker_c02b8751fea819be6f3762fd76a58fb1.bindPopup(popup_a27e4754926172d34a9ea8703b046c3f)
+        ;
+
+        
+    
+    
+            var marker_fe6096a070d2a90ec67da0229bbc0d59 = L.marker(
+                [32.03435280538555, 34.75716363628377],
+                {
+}
+            ).addTo(map_b9bb385cfafdc83c5c228cb313b3d335);
+        
+    
+            var icon_fec704e4533b68e752a33a7ea9821ab1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_fe6096a070d2a90ec67da0229bbc0d59.setIcon(icon_fec704e4533b68e752a33a7ea9821ab1);
+        
+    
+        var popup_f3e7f5ea4f79afdfacc1c4c2b0547a03 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e8acab6527207db39f086fae13a7ae95 = $(`<div id="html_e8acab6527207db39f086fae13a7ae95" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 6<br><a href='https://www.google.com/maps?q=32.03435280538555,34.75716363628377&layer=c&cbll=32.03435280538555,34.75716363628377' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_f3e7f5ea4f79afdfacc1c4c2b0547a03.setContent(html_e8acab6527207db39f086fae13a7ae95);
+            
+        
+
+        marker_fe6096a070d2a90ec67da0229bbc0d59.bindPopup(popup_f3e7f5ea4f79afdfacc1c4c2b0547a03)
+        ;
+
+        
+    
+    
+            var marker_193daeaf1aa50b138e425d20eda7b9d9 = L.marker(
+                [32.03219480627892, 34.75420878700992],
+                {
+}
+            ).addTo(map_b9bb385cfafdc83c5c228cb313b3d335);
+        
+    
+            var icon_dac532632fa44848c514fc1646869fe8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_193daeaf1aa50b138e425d20eda7b9d9.setIcon(icon_dac532632fa44848c514fc1646869fe8);
+        
+    
+        var popup_257b57d008dc23a7d32992e46ed829e4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_30e715847cf7278846165810389a1434 = $(`<div id="html_30e715847cf7278846165810389a1434" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.03219480627892,34.75420878700992&layer=c&cbll=32.03219480627892,34.75420878700992' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_257b57d008dc23a7d32992e46ed829e4.setContent(html_30e715847cf7278846165810389a1434);
+            
+        
+
+        marker_193daeaf1aa50b138e425d20eda7b9d9.bindPopup(popup_257b57d008dc23a7d32992e46ed829e4)
+        ;
+
+        
+    
+</script>
+</html>

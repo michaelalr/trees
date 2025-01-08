@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_9e8e492c7a936654f731a47ef3c08e3e {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+<div style="
+position: fixed;
+bottom: 50px;
+left: 50px;
+width: 200px;
+background-color: white;
+z-index:9999;
+font-size:14px;
+padding: 10px;
+border: 2px solid grey;
+border-radius: 8px;
+box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+">
+<b>Legend</b><br>
+<i class="fa fa-map-marker fa-2x" style="color:orange"></i> Car location<br>
+<i class="fa fa-map-marker fa-2x" style="color:red"></i> Detection location<br>
+<i class="fa fa-map-marker fa-2x" style="color:green"></i> Seker best match<br>
+<i class="fa fa-map-marker fa-2x" style="color:blue"></i> Seker additional match<br>
+</div>
+    
+            <div class="folium-map" id="map_9e8e492c7a936654f731a47ef3c08e3e" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_9e8e492c7a936654f731a47ef3c08e3e = L.map(
+                "map_9e8e492c7a936654f731a47ef3c08e3e",
+                {
+                    center: [32.03299780110188, 34.75283829732952],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 15,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_add99c1bc61d82f42a23977f5976381d = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_add99c1bc61d82f42a23977f5976381d.addTo(map_9e8e492c7a936654f731a47ef3c08e3e);
+        
+    
+            var marker_c3e9b495863a7eda8b67c56dc61a584e = L.marker(
+                [32.03287892026977, 34.75271623206018],
+                {
+}
+            ).addTo(map_9e8e492c7a936654f731a47ef3c08e3e);
+        
+    
+            var icon_ca3ff05e847f5c1a6d7d2f415c3dfc1e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_c3e9b495863a7eda8b67c56dc61a584e.setIcon(icon_ca3ff05e847f5c1a6d7d2f415c3dfc1e);
+        
+    
+        var popup_22953696f342daaa91a6e729c99d9341 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_340d0bda1e5f76fdb91ebf2b339e7799 = $(`<div id="html_340d0bda1e5f76fdb91ebf2b339e7799" style="width: 100.0%; height: 100.0%;">Best Match: ברכיכיטון צפצפתי (ID: 36746.0)</div>`)[0];
+                popup_22953696f342daaa91a6e729c99d9341.setContent(html_340d0bda1e5f76fdb91ebf2b339e7799);
+            
+        
+
+        marker_c3e9b495863a7eda8b67c56dc61a584e.bindPopup(popup_22953696f342daaa91a6e729c99d9341)
+        ;
+
+        
+    
+    
+            var poly_line_b486f5378a311cbe25430ca1e12d50cc = L.polyline(
+                [[32.03299780110188, 34.75283829732952], [32.03287892026977, 34.75271623206018]],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "black", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_9e8e492c7a936654f731a47ef3c08e3e);
+        
+    
+            var marker_b05cc935c4e0fe4b7538fdd146c356c8 = L.marker(
+                [32.03306282276443, 34.75249601286728],
+                {
+}
+            ).addTo(map_9e8e492c7a936654f731a47ef3c08e3e);
+        
+    
+            var icon_bce68b8522e14c906edead52fbe0dfd9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_b05cc935c4e0fe4b7538fdd146c356c8.setIcon(icon_bce68b8522e14c906edead52fbe0dfd9);
+        
+    
+        var popup_60858889d62e855d0dfb452e8749d3c8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5c2428872c888f775db17603991af478 = $(`<div id="html_5c2428872c888f775db17603991af478" style="width: 100.0%; height: 100.0%;">Additional Match: סיגלון עלי-מימוסה (ID: 37831)</div>`)[0];
+                popup_60858889d62e855d0dfb452e8749d3c8.setContent(html_5c2428872c888f775db17603991af478);
+            
+        
+
+        marker_b05cc935c4e0fe4b7538fdd146c356c8.bindPopup(popup_60858889d62e855d0dfb452e8749d3c8)
+        ;
+
+        
+    
+    
+            var marker_2796b28939cc49bf543a4b9f3bf7e02d = L.marker(
+                [32.03299780110188, 34.75283829732952],
+                {
+}
+            ).addTo(map_9e8e492c7a936654f731a47ef3c08e3e);
+        
+    
+            var icon_a71ac44a88cb222fb7a5b5f246041d85 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_2796b28939cc49bf543a4b9f3bf7e02d.setIcon(icon_a71ac44a88cb222fb7a5b5f246041d85);
+        
+    
+        var popup_a09d472ca1204f59dd8ad1b7fb6c4b39 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9091bc8e081fa228b8c684aab1665979 = $(`<div id="html_9091bc8e081fa228b8c684aab1665979" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 1<br><a href='https://www.google.com/maps?q=32.03299780110188,34.75283829732952&layer=c&cbll=32.03299780110188,34.75283829732952' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_a09d472ca1204f59dd8ad1b7fb6c4b39.setContent(html_9091bc8e081fa228b8c684aab1665979);
+            
+        
+
+        marker_2796b28939cc49bf543a4b9f3bf7e02d.bindPopup(popup_a09d472ca1204f59dd8ad1b7fb6c4b39)
+        ;
+
+        
+    
+    
+            var marker_845594f72b1b36f4bdf2a848f733c0f9 = L.marker(
+                [32.03270360107343, 34.75227499244284],
+                {
+}
+            ).addTo(map_9e8e492c7a936654f731a47ef3c08e3e);
+        
+    
+            var icon_79452da6f2aeea16b1acf5375a291f95 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_845594f72b1b36f4bdf2a848f733c0f9.setIcon(icon_79452da6f2aeea16b1acf5375a291f95);
+        
+    
+        var popup_77e1391d8c8f1c96de67dd72191ae635 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3d99dca9eb0f484705bb8992043eac45 = $(`<div id="html_3d99dca9eb0f484705bb8992043eac45" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.03270360107343,34.75227499244284&layer=c&cbll=32.03270360107343,34.75227499244284' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_77e1391d8c8f1c96de67dd72191ae635.setContent(html_3d99dca9eb0f484705bb8992043eac45);
+            
+        
+
+        marker_845594f72b1b36f4bdf2a848f733c0f9.bindPopup(popup_77e1391d8c8f1c96de67dd72191ae635)
+        ;
+
+        
+    
+    
+            var marker_42aad5d7a21ee3d91d91bdba09bf4113 = L.marker(
+                [32.03306282276443, 34.75249601286728],
+                {
+}
+            ).addTo(map_9e8e492c7a936654f731a47ef3c08e3e);
+        
+    
+            var icon_2c5d44baabe093b2d85f80bd8dac7dcd = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_42aad5d7a21ee3d91d91bdba09bf4113.setIcon(icon_2c5d44baabe093b2d85f80bd8dac7dcd);
+        
+    
+        var popup_32a9eeebb84c7e44ac4bb0d515131df0 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6d1757b3af871ac9c5bdb4bf5ec1a31e = $(`<div id="html_6d1757b3af871ac9c5bdb4bf5ec1a31e" style="width: 100.0%; height: 100.0%;">Additional Match: סיגלון עלי-מימוסה (ID: 37831)</div>`)[0];
+                popup_32a9eeebb84c7e44ac4bb0d515131df0.setContent(html_6d1757b3af871ac9c5bdb4bf5ec1a31e);
+            
+        
+
+        marker_42aad5d7a21ee3d91d91bdba09bf4113.bindPopup(popup_32a9eeebb84c7e44ac4bb0d515131df0)
+        ;
+
+        
+    
+    
+            var marker_405e6e6f6a65c97e991e11fff7b1d15b = L.marker(
+                [32.03300087201979, 34.75307084926254],
+                {
+}
+            ).addTo(map_9e8e492c7a936654f731a47ef3c08e3e);
+        
+    
+            var icon_f1f3e3788a4f6b65a4561db1beca1f6b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_405e6e6f6a65c97e991e11fff7b1d15b.setIcon(icon_f1f3e3788a4f6b65a4561db1beca1f6b);
+        
+    
+        var popup_c3ef35cecb6624c4a3f580e6c38fb991 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6ebbad1c5d2e09de72fbf2ffe1f2a42f = $(`<div id="html_6ebbad1c5d2e09de72fbf2ffe1f2a42f" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 2<br><a href='https://www.google.com/maps?q=32.03300087201979,34.75307084926254&layer=c&cbll=32.03300087201979,34.75307084926254' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_c3ef35cecb6624c4a3f580e6c38fb991.setContent(html_6ebbad1c5d2e09de72fbf2ffe1f2a42f);
+            
+        
+
+        marker_405e6e6f6a65c97e991e11fff7b1d15b.bindPopup(popup_c3ef35cecb6624c4a3f580e6c38fb991)
+        ;
+
+        
+    
+    
+            var marker_7b92aabcc908c3b998476ab0959c76bb = L.marker(
+                [32.03270360107343, 34.75227499244284],
+                {
+}
+            ).addTo(map_9e8e492c7a936654f731a47ef3c08e3e);
+        
+    
+            var icon_373595d21ff78667e6ecab6dcbf3b810 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_7b92aabcc908c3b998476ab0959c76bb.setIcon(icon_373595d21ff78667e6ecab6dcbf3b810);
+        
+    
+        var popup_50e22b93ec13ee509a158470bed97f16 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b550bd357aaa5c16f6e9f1b0f7558c90 = $(`<div id="html_b550bd357aaa5c16f6e9f1b0f7558c90" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.03270360107343,34.75227499244284&layer=c&cbll=32.03270360107343,34.75227499244284' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_50e22b93ec13ee509a158470bed97f16.setContent(html_b550bd357aaa5c16f6e9f1b0f7558c90);
+            
+        
+
+        marker_7b92aabcc908c3b998476ab0959c76bb.bindPopup(popup_50e22b93ec13ee509a158470bed97f16)
+        ;
+
+        
+    
+    
+            var marker_03a3fc25d5e73e42916d381ffb3366ed = L.marker(
+                [32.03306282276443, 34.75249601286728],
+                {
+}
+            ).addTo(map_9e8e492c7a936654f731a47ef3c08e3e);
+        
+    
+            var icon_23fa2e545fba3bc3664fc97c6f704e09 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_03a3fc25d5e73e42916d381ffb3366ed.setIcon(icon_23fa2e545fba3bc3664fc97c6f704e09);
+        
+    
+        var popup_a20c1e00d30bf6896a16c57325c2abd3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_bba5a0e396af13166749e647cbd79d53 = $(`<div id="html_bba5a0e396af13166749e647cbd79d53" style="width: 100.0%; height: 100.0%;">Additional Match: סיגלון עלי-מימוסה (ID: 37831)</div>`)[0];
+                popup_a20c1e00d30bf6896a16c57325c2abd3.setContent(html_bba5a0e396af13166749e647cbd79d53);
+            
+        
+
+        marker_03a3fc25d5e73e42916d381ffb3366ed.bindPopup(popup_a20c1e00d30bf6896a16c57325c2abd3)
+        ;
+
+        
+    
+    
+            var marker_2a80ca21d7bed3102ce79a6f4ab511ec = L.marker(
+                [32.03298356280845, 34.75313943755855],
+                {
+}
+            ).addTo(map_9e8e492c7a936654f731a47ef3c08e3e);
+        
+    
+            var icon_c8c258f0a9b5900f4e55d6edd41fc42d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_2a80ca21d7bed3102ce79a6f4ab511ec.setIcon(icon_c8c258f0a9b5900f4e55d6edd41fc42d);
+        
+    
+        var popup_8185a2de05c1818f1822b63f22fec0bc = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9469468a6e4632f163082c00f794003d = $(`<div id="html_9469468a6e4632f163082c00f794003d" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 3<br><a href='https://www.google.com/maps?q=32.03298356280845,34.75313943755855&layer=c&cbll=32.03298356280845,34.75313943755855' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_8185a2de05c1818f1822b63f22fec0bc.setContent(html_9469468a6e4632f163082c00f794003d);
+            
+        
+
+        marker_2a80ca21d7bed3102ce79a6f4ab511ec.bindPopup(popup_8185a2de05c1818f1822b63f22fec0bc)
+        ;
+
+        
+    
+    
+            var marker_c34c480aae26bcabd5751670ada14144 = L.marker(
+                [32.03270360107343, 34.75227499244284],
+                {
+}
+            ).addTo(map_9e8e492c7a936654f731a47ef3c08e3e);
+        
+    
+            var icon_7ed2b330c5ba99b3f4d142ef70482f4f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_c34c480aae26bcabd5751670ada14144.setIcon(icon_7ed2b330c5ba99b3f4d142ef70482f4f);
+        
+    
+        var popup_acf368e5f622726fe837efab6edd4c5d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f1c0f57c0502691d2a511f0af981dca4 = $(`<div id="html_f1c0f57c0502691d2a511f0af981dca4" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.03270360107343,34.75227499244284&layer=c&cbll=32.03270360107343,34.75227499244284' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_acf368e5f622726fe837efab6edd4c5d.setContent(html_f1c0f57c0502691d2a511f0af981dca4);
+            
+        
+
+        marker_c34c480aae26bcabd5751670ada14144.bindPopup(popup_acf368e5f622726fe837efab6edd4c5d)
+        ;
+
+        
+    
+</script>
+</html>

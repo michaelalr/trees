@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_deb5ab2cb5a3b25f0e372615c4d9dcd3 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+<div style="
+position: fixed;
+bottom: 50px;
+left: 50px;
+width: 200px;
+background-color: white;
+z-index:9999;
+font-size:14px;
+padding: 10px;
+border: 2px solid grey;
+border-radius: 8px;
+box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+">
+<b>Legend</b><br>
+<i class="fa fa-map-marker fa-2x" style="color:orange"></i> Car location<br>
+<i class="fa fa-map-marker fa-2x" style="color:red"></i> Detection location<br>
+<i class="fa fa-map-marker fa-2x" style="color:green"></i> Seker best match<br>
+<i class="fa fa-map-marker fa-2x" style="color:blue"></i> Seker additional match<br>
+</div>
+    
+            <div class="folium-map" id="map_deb5ab2cb5a3b25f0e372615c4d9dcd3" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_deb5ab2cb5a3b25f0e372615c4d9dcd3 = L.map(
+                "map_deb5ab2cb5a3b25f0e372615c4d9dcd3",
+                {
+                    center: [32.03183288700748, 34.75249397682715],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 15,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_17dcbadf4e2f19a2b786551fb220c0f8 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_17dcbadf4e2f19a2b786551fb220c0f8.addTo(map_deb5ab2cb5a3b25f0e372615c4d9dcd3);
+        
+    
+            var marker_a262cd4d3e4b645e3fe30b6f011a483b = L.marker(
+                [32.03189489616268, 34.75251454713613],
+                {
+}
+            ).addTo(map_deb5ab2cb5a3b25f0e372615c4d9dcd3);
+        
+    
+            var icon_5387c8169ca0d786e5f0716cec52648d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_a262cd4d3e4b645e3fe30b6f011a483b.setIcon(icon_5387c8169ca0d786e5f0716cec52648d);
+        
+    
+        var popup_3550ad938768f57bbf92843cbe3f6e1e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f75fe980423756a9930d299db7af6bb9 = $(`<div id="html_f75fe980423756a9930d299db7af6bb9" style="width: 100.0%; height: 100.0%;">Best Match: ברכיכיטון צפצפתי (ID: 32924.0)</div>`)[0];
+                popup_3550ad938768f57bbf92843cbe3f6e1e.setContent(html_f75fe980423756a9930d299db7af6bb9);
+            
+        
+
+        marker_a262cd4d3e4b645e3fe30b6f011a483b.bindPopup(popup_3550ad938768f57bbf92843cbe3f6e1e)
+        ;
+
+        
+    
+    
+            var poly_line_029ade46f0b2671f4b75c94fe829a6f1 = L.polyline(
+                [[32.03183288700748, 34.75249397682715], [32.03189489616268, 34.75251454713613]],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "black", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_deb5ab2cb5a3b25f0e372615c4d9dcd3);
+        
+    
+            var marker_c955dc661df16d5956c48a34245e4725 = L.marker(
+                [32.03206748104262, 34.75254992557489],
+                {
+}
+            ).addTo(map_deb5ab2cb5a3b25f0e372615c4d9dcd3);
+        
+    
+            var icon_ec9cc5fb71e4baa7d3f62301904d5847 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_c955dc661df16d5956c48a34245e4725.setIcon(icon_ec9cc5fb71e4baa7d3f62301904d5847);
+        
+    
+        var popup_4c6f92b59200a4407508c8629de96b14 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_bdf3e0f4610ab210db6fa9a813bfd5d2 = $(`<div id="html_bdf3e0f4610ab210db6fa9a813bfd5d2" style="width: 100.0%; height: 100.0%;">Additional Match: ברכיכיטון צפצפתי (ID: 33455)</div>`)[0];
+                popup_4c6f92b59200a4407508c8629de96b14.setContent(html_bdf3e0f4610ab210db6fa9a813bfd5d2);
+            
+        
+
+        marker_c955dc661df16d5956c48a34245e4725.bindPopup(popup_4c6f92b59200a4407508c8629de96b14)
+        ;
+
+        
+    
+    
+            var marker_cb23479aa1bfb6eb154dd75a48f3cbd4 = L.marker(
+                [32.03183288700748, 34.75249397682715],
+                {
+}
+            ).addTo(map_deb5ab2cb5a3b25f0e372615c4d9dcd3);
+        
+    
+            var icon_4753c58945af265f958fef8b99f3c502 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_cb23479aa1bfb6eb154dd75a48f3cbd4.setIcon(icon_4753c58945af265f958fef8b99f3c502);
+        
+    
+        var popup_1d111ab4ecb8683aa78a598e51c03bad = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b0e30d6feb3721ee77970b97730427ee = $(`<div id="html_b0e30d6feb3721ee77970b97730427ee" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 1<br><a href='https://www.google.com/maps?q=32.03183288700748,34.75249397682715&layer=c&cbll=32.03183288700748,34.75249397682715' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_1d111ab4ecb8683aa78a598e51c03bad.setContent(html_b0e30d6feb3721ee77970b97730427ee);
+            
+        
+
+        marker_cb23479aa1bfb6eb154dd75a48f3cbd4.bindPopup(popup_1d111ab4ecb8683aa78a598e51c03bad)
+        ;
+
+        
+    
+    
+            var marker_3ed67a3846a8fd19c113401e06138385 = L.marker(
+                [32.03235716029633, 34.75247590271444],
+                {
+}
+            ).addTo(map_deb5ab2cb5a3b25f0e372615c4d9dcd3);
+        
+    
+            var icon_4e017df5d58307c060b725659e8887d9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_3ed67a3846a8fd19c113401e06138385.setIcon(icon_4e017df5d58307c060b725659e8887d9);
+        
+    
+        var popup_99c8777c8596bb5bccc0bef89d592b4d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_73e6cbe2fb3903a18867fe87d29312c3 = $(`<div id="html_73e6cbe2fb3903a18867fe87d29312c3" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.03235716029633,34.75247590271444&layer=c&cbll=32.03235716029633,34.75247590271444' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_99c8777c8596bb5bccc0bef89d592b4d.setContent(html_73e6cbe2fb3903a18867fe87d29312c3);
+            
+        
+
+        marker_3ed67a3846a8fd19c113401e06138385.bindPopup(popup_99c8777c8596bb5bccc0bef89d592b4d)
+        ;
+
+        
+    
+    
+            var marker_19f2df0ea89d8b5c57d8d5eb8179980e = L.marker(
+                [32.03206748104262, 34.75254992557489],
+                {
+}
+            ).addTo(map_deb5ab2cb5a3b25f0e372615c4d9dcd3);
+        
+    
+            var icon_0e81534d50ad1b275ca91124afb8efe2 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_19f2df0ea89d8b5c57d8d5eb8179980e.setIcon(icon_0e81534d50ad1b275ca91124afb8efe2);
+        
+    
+        var popup_84d66ab0124b781a25ceec2eb01b9363 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_447f3aa764c5673e05d4860267065d89 = $(`<div id="html_447f3aa764c5673e05d4860267065d89" style="width: 100.0%; height: 100.0%;">Additional Match: ברכיכיטון צפצפתי (ID: 33455)</div>`)[0];
+                popup_84d66ab0124b781a25ceec2eb01b9363.setContent(html_447f3aa764c5673e05d4860267065d89);
+            
+        
+
+        marker_19f2df0ea89d8b5c57d8d5eb8179980e.bindPopup(popup_84d66ab0124b781a25ceec2eb01b9363)
+        ;
+
+        
+    
+    
+            var marker_a1884d4f70b3d27d9bf349ff1131e05f = L.marker(
+                [32.0314731586919, 34.75233259135313],
+                {
+}
+            ).addTo(map_deb5ab2cb5a3b25f0e372615c4d9dcd3);
+        
+    
+            var icon_2c042cc8430fb1a5829a66980a231a8b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_a1884d4f70b3d27d9bf349ff1131e05f.setIcon(icon_2c042cc8430fb1a5829a66980a231a8b);
+        
+    
+        var popup_70297e5a02fc630b5d0e7a798fdbfd59 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8f37f8388b80c5b49b3b371f76070bec = $(`<div id="html_8f37f8388b80c5b49b3b371f76070bec" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 2<br><a href='https://www.google.com/maps?q=32.0314731586919,34.75233259135313&layer=c&cbll=32.0314731586919,34.75233259135313' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_70297e5a02fc630b5d0e7a798fdbfd59.setContent(html_8f37f8388b80c5b49b3b371f76070bec);
+            
+        
+
+        marker_a1884d4f70b3d27d9bf349ff1131e05f.bindPopup(popup_70297e5a02fc630b5d0e7a798fdbfd59)
+        ;
+
+        
+    
+    
+            var marker_bc82f735ba481b863509bd1ee3541543 = L.marker(
+                [32.03235716029633, 34.75247590271444],
+                {
+}
+            ).addTo(map_deb5ab2cb5a3b25f0e372615c4d9dcd3);
+        
+    
+            var icon_bcb9a98c9a69df42241950d0eb988de0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_bc82f735ba481b863509bd1ee3541543.setIcon(icon_bcb9a98c9a69df42241950d0eb988de0);
+        
+    
+        var popup_9177343d7f530111e4b7d6f2c15af8e4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e4c5233a294f9944a28e075bccd6982c = $(`<div id="html_e4c5233a294f9944a28e075bccd6982c" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.03235716029633,34.75247590271444&layer=c&cbll=32.03235716029633,34.75247590271444' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_9177343d7f530111e4b7d6f2c15af8e4.setContent(html_e4c5233a294f9944a28e075bccd6982c);
+            
+        
+
+        marker_bc82f735ba481b863509bd1ee3541543.bindPopup(popup_9177343d7f530111e4b7d6f2c15af8e4)
+        ;
+
+        
+    
+    
+            var marker_88e1daaace87d6c376d5fe9bf7f89f39 = L.marker(
+                [32.03206748104262, 34.75254992557489],
+                {
+}
+            ).addTo(map_deb5ab2cb5a3b25f0e372615c4d9dcd3);
+        
+    
+            var icon_e971aa87cd6b5f220507f42149d782ad = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_88e1daaace87d6c376d5fe9bf7f89f39.setIcon(icon_e971aa87cd6b5f220507f42149d782ad);
+        
+    
+        var popup_b27918bc86eac1b74ed20e2374ee8797 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b0b5fdf3167d0918627e7a6bbf3982a5 = $(`<div id="html_b0b5fdf3167d0918627e7a6bbf3982a5" style="width: 100.0%; height: 100.0%;">Additional Match: ברכיכיטון צפצפתי (ID: 33455)</div>`)[0];
+                popup_b27918bc86eac1b74ed20e2374ee8797.setContent(html_b0b5fdf3167d0918627e7a6bbf3982a5);
+            
+        
+
+        marker_88e1daaace87d6c376d5fe9bf7f89f39.bindPopup(popup_b27918bc86eac1b74ed20e2374ee8797)
+        ;
+
+        
+    
+    
+            var marker_aae1ed621f61199af95ccf60b8b2f450 = L.marker(
+                [32.03145785554515, 34.75268734832614],
+                {
+}
+            ).addTo(map_deb5ab2cb5a3b25f0e372615c4d9dcd3);
+        
+    
+            var icon_0e4a62f7d2984d6ab99d486d1091cfe3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_aae1ed621f61199af95ccf60b8b2f450.setIcon(icon_0e4a62f7d2984d6ab99d486d1091cfe3);
+        
+    
+        var popup_655151702322f654bc793954f9d95d59 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_985cfe587b147288fcebd6222e87c318 = $(`<div id="html_985cfe587b147288fcebd6222e87c318" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 3<br><a href='https://www.google.com/maps?q=32.03145785554515,34.75268734832614&layer=c&cbll=32.03145785554515,34.75268734832614' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_655151702322f654bc793954f9d95d59.setContent(html_985cfe587b147288fcebd6222e87c318);
+            
+        
+
+        marker_aae1ed621f61199af95ccf60b8b2f450.bindPopup(popup_655151702322f654bc793954f9d95d59)
+        ;
+
+        
+    
+    
+            var marker_227d5295fa93d34a5e6e25125a5bc7c2 = L.marker(
+                [32.03235716029633, 34.75247590271444],
+                {
+}
+            ).addTo(map_deb5ab2cb5a3b25f0e372615c4d9dcd3);
+        
+    
+            var icon_db09fbd36d5603e6e2c43b5507559af3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_227d5295fa93d34a5e6e25125a5bc7c2.setIcon(icon_db09fbd36d5603e6e2c43b5507559af3);
+        
+    
+        var popup_8ed2441c11b1161871f737d2b67bf348 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_053c3555f0cff30f9067d10e943faa32 = $(`<div id="html_053c3555f0cff30f9067d10e943faa32" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.03235716029633,34.75247590271444&layer=c&cbll=32.03235716029633,34.75247590271444' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_8ed2441c11b1161871f737d2b67bf348.setContent(html_053c3555f0cff30f9067d10e943faa32);
+            
+        
+
+        marker_227d5295fa93d34a5e6e25125a5bc7c2.bindPopup(popup_8ed2441c11b1161871f737d2b67bf348)
+        ;
+
+        
+    
+</script>
+</html>

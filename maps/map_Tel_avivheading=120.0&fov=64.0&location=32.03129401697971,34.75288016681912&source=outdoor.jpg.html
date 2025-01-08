@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_623cea29ea4080b3fb2a4543ebd675ca {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+<div style="
+position: fixed;
+bottom: 50px;
+left: 50px;
+width: 200px;
+background-color: white;
+z-index:9999;
+font-size:14px;
+padding: 10px;
+border: 2px solid grey;
+border-radius: 8px;
+box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+">
+<b>Legend</b><br>
+<i class="fa fa-map-marker fa-2x" style="color:orange"></i> Car location<br>
+<i class="fa fa-map-marker fa-2x" style="color:red"></i> Detection location<br>
+<i class="fa fa-map-marker fa-2x" style="color:green"></i> Seker best match<br>
+<i class="fa fa-map-marker fa-2x" style="color:blue"></i> Seker additional match<br>
+</div>
+    
+            <div class="folium-map" id="map_623cea29ea4080b3fb2a4543ebd675ca" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_623cea29ea4080b3fb2a4543ebd675ca = L.map(
+                "map_623cea29ea4080b3fb2a4543ebd675ca",
+                {
+                    center: [32.03094052735716, 34.75326978889898],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 15,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_f1d9d51da14544c56d394ff683807b71 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_f1d9d51da14544c56d394ff683807b71.addTo(map_623cea29ea4080b3fb2a4543ebd675ca);
+        
+    
+            var marker_608eaceaf3ad2aa3f123e766e3a600ec = L.marker(
+                [32.03114140625607, 34.75310794498947],
+                {
+}
+            ).addTo(map_623cea29ea4080b3fb2a4543ebd675ca);
+        
+    
+            var icon_25b9177baf1c250b588f3ec0828328e2 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_608eaceaf3ad2aa3f123e766e3a600ec.setIcon(icon_25b9177baf1c250b588f3ec0828328e2);
+        
+    
+        var popup_a0b9af613b7803ded1da9a2973651df8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_63be71de7acc201671bb84d50704d314 = $(`<div id="html_63be71de7acc201671bb84d50704d314" style="width: 100.0%; height: 100.0%;">Best Match: ברכיכיטון צפצפתי (ID: 30288.0)</div>`)[0];
+                popup_a0b9af613b7803ded1da9a2973651df8.setContent(html_63be71de7acc201671bb84d50704d314);
+            
+        
+
+        marker_608eaceaf3ad2aa3f123e766e3a600ec.bindPopup(popup_a0b9af613b7803ded1da9a2973651df8)
+        ;
+
+        
+    
+    
+            var poly_line_b59a6615af31d84c155861a460cd2234 = L.polyline(
+                [[32.03094052735716, 34.75326978889898], [32.03114140625607, 34.75310794498947]],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "black", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_623cea29ea4080b3fb2a4543ebd675ca);
+        
+    
+            var marker_de1a5d6b7ae830b34e378064f726e9d0 = L.marker(
+                [32.03114140625607, 34.75310794498947],
+                {
+}
+            ).addTo(map_623cea29ea4080b3fb2a4543ebd675ca);
+        
+    
+            var icon_6e66089c2d5c45be55624d99654b486a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_de1a5d6b7ae830b34e378064f726e9d0.setIcon(icon_6e66089c2d5c45be55624d99654b486a);
+        
+    
+        var popup_d5136b5493eaa9331da4422e915553d4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8885d8a50bbda3a3b037605fc6abb50d = $(`<div id="html_8885d8a50bbda3a3b037605fc6abb50d" style="width: 100.0%; height: 100.0%;">Additional Match: הדר החושחש (ID: 23739)</div>`)[0];
+                popup_d5136b5493eaa9331da4422e915553d4.setContent(html_8885d8a50bbda3a3b037605fc6abb50d);
+            
+        
+
+        marker_de1a5d6b7ae830b34e378064f726e9d0.bindPopup(popup_d5136b5493eaa9331da4422e915553d4)
+        ;
+
+        
+    
+    
+            var marker_e0b7f45aeec078e3c7f0830033fdad67 = L.marker(
+                [32.03114140625607, 34.75310794498947],
+                {
+}
+            ).addTo(map_623cea29ea4080b3fb2a4543ebd675ca);
+        
+    
+            var icon_3315e10553d227b293dd5c7d1bbc6c78 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_e0b7f45aeec078e3c7f0830033fdad67.setIcon(icon_3315e10553d227b293dd5c7d1bbc6c78);
+        
+    
+        var popup_ca3b388fa828f4f103b3d9bbf1deff48 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_19fd00d1b7e47a96a8d0406ff2aa30fe = $(`<div id="html_19fd00d1b7e47a96a8d0406ff2aa30fe" style="width: 100.0%; height: 100.0%;">Additional Match: לגרסטרמיה הודית (ID: 23740)</div>`)[0];
+                popup_ca3b388fa828f4f103b3d9bbf1deff48.setContent(html_19fd00d1b7e47a96a8d0406ff2aa30fe);
+            
+        
+
+        marker_e0b7f45aeec078e3c7f0830033fdad67.bindPopup(popup_ca3b388fa828f4f103b3d9bbf1deff48)
+        ;
+
+        
+    
+    
+            var marker_6145ee0b1b1a042e9356e4b40d839ff7 = L.marker(
+                [32.03114140625607, 34.75310794498947],
+                {
+}
+            ).addTo(map_623cea29ea4080b3fb2a4543ebd675ca);
+        
+    
+            var icon_132be3d1318a3a65092ae6a7915983d3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_6145ee0b1b1a042e9356e4b40d839ff7.setIcon(icon_132be3d1318a3a65092ae6a7915983d3);
+        
+    
+        var popup_71d209344df264270ffd6e9a79803851 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_12d44957d97eef641eae61ab1220d86a = $(`<div id="html_12d44957d97eef641eae61ab1220d86a" style="width: 100.0%; height: 100.0%;">Additional Match: פנסית דו-נוצתית (ID: 23741)</div>`)[0];
+                popup_71d209344df264270ffd6e9a79803851.setContent(html_12d44957d97eef641eae61ab1220d86a);
+            
+        
+
+        marker_6145ee0b1b1a042e9356e4b40d839ff7.bindPopup(popup_71d209344df264270ffd6e9a79803851)
+        ;
+
+        
+    
+    
+            var marker_ba8bb8d7dc452e931de53a2f4d1c2614 = L.marker(
+                [32.03094052735716, 34.75326978889898],
+                {
+}
+            ).addTo(map_623cea29ea4080b3fb2a4543ebd675ca);
+        
+    
+            var icon_cf0ea723a04cef8c2b4dc1c679392f98 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_ba8bb8d7dc452e931de53a2f4d1c2614.setIcon(icon_cf0ea723a04cef8c2b4dc1c679392f98);
+        
+    
+        var popup_0365987a2760b293710e3e3eaf0dc8a4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_96a927c030e6a459edfa8a7b191704b2 = $(`<div id="html_96a927c030e6a459edfa8a7b191704b2" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 3<br><a href='https://www.google.com/maps?q=32.03094052735716,34.75326978889898&layer=c&cbll=32.03094052735716,34.75326978889898' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_0365987a2760b293710e3e3eaf0dc8a4.setContent(html_96a927c030e6a459edfa8a7b191704b2);
+            
+        
+
+        marker_ba8bb8d7dc452e931de53a2f4d1c2614.bindPopup(popup_0365987a2760b293710e3e3eaf0dc8a4)
+        ;
+
+        
+    
+    
+            var marker_b02de80aa569d7529c0eae47a89af5d5 = L.marker(
+                [32.03129401697971, 34.75288016681912],
+                {
+}
+            ).addTo(map_623cea29ea4080b3fb2a4543ebd675ca);
+        
+    
+            var icon_33401c31dfc64b966d278aa0c947109b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_b02de80aa569d7529c0eae47a89af5d5.setIcon(icon_33401c31dfc64b966d278aa0c947109b);
+        
+    
+        var popup_63ece891087d4f69bb71c45913e8232e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7544625544f964eb6e0fe2db949927de = $(`<div id="html_7544625544f964eb6e0fe2db949927de" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.03129401697971,34.75288016681912&layer=c&cbll=32.03129401697971,34.75288016681912' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_63ece891087d4f69bb71c45913e8232e.setContent(html_7544625544f964eb6e0fe2db949927de);
+            
+        
+
+        marker_b02de80aa569d7529c0eae47a89af5d5.bindPopup(popup_63ece891087d4f69bb71c45913e8232e)
+        ;
+
+        
+    
+    
+            var marker_31d1dc68903c089f7845bd28c0eede97 = L.marker(
+                [32.03114140625607, 34.75310794498947],
+                {
+}
+            ).addTo(map_623cea29ea4080b3fb2a4543ebd675ca);
+        
+    
+            var icon_b920f3fa6b9187c9b429e157871025d1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_31d1dc68903c089f7845bd28c0eede97.setIcon(icon_b920f3fa6b9187c9b429e157871025d1);
+        
+    
+        var popup_c74c4e6d491ae1b185af5631614b019d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4c974ee34c2b84f959211e4cc6b3dd4d = $(`<div id="html_4c974ee34c2b84f959211e4cc6b3dd4d" style="width: 100.0%; height: 100.0%;">Additional Match: הדר החושחש (ID: 23739)</div>`)[0];
+                popup_c74c4e6d491ae1b185af5631614b019d.setContent(html_4c974ee34c2b84f959211e4cc6b3dd4d);
+            
+        
+
+        marker_31d1dc68903c089f7845bd28c0eede97.bindPopup(popup_c74c4e6d491ae1b185af5631614b019d)
+        ;
+
+        
+    
+    
+            var marker_4b39d7c85880d0ff0eab79bc8122ad8a = L.marker(
+                [32.03114140625607, 34.75310794498947],
+                {
+}
+            ).addTo(map_623cea29ea4080b3fb2a4543ebd675ca);
+        
+    
+            var icon_7497ea38015d3ef43b681ad6054634c4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_4b39d7c85880d0ff0eab79bc8122ad8a.setIcon(icon_7497ea38015d3ef43b681ad6054634c4);
+        
+    
+        var popup_4a8ce567d9e0c8b87c0f2592953cb57b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2bb8347980131e9f23eeb75a432edc8b = $(`<div id="html_2bb8347980131e9f23eeb75a432edc8b" style="width: 100.0%; height: 100.0%;">Additional Match: לגרסטרמיה הודית (ID: 23740)</div>`)[0];
+                popup_4a8ce567d9e0c8b87c0f2592953cb57b.setContent(html_2bb8347980131e9f23eeb75a432edc8b);
+            
+        
+
+        marker_4b39d7c85880d0ff0eab79bc8122ad8a.bindPopup(popup_4a8ce567d9e0c8b87c0f2592953cb57b)
+        ;
+
+        
+    
+    
+            var marker_84054cb38df4c8a0718ef043765c6c17 = L.marker(
+                [32.03114140625607, 34.75310794498947],
+                {
+}
+            ).addTo(map_623cea29ea4080b3fb2a4543ebd675ca);
+        
+    
+            var icon_46c6f1432ac1cc6cf429614944cd4149 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_84054cb38df4c8a0718ef043765c6c17.setIcon(icon_46c6f1432ac1cc6cf429614944cd4149);
+        
+    
+        var popup_dc66e926e5cd5e7daeed6ba178ab87ea = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1f1adc1e07fec1b28da3583f2dba0282 = $(`<div id="html_1f1adc1e07fec1b28da3583f2dba0282" style="width: 100.0%; height: 100.0%;">Additional Match: פנסית דו-נוצתית (ID: 23741)</div>`)[0];
+                popup_dc66e926e5cd5e7daeed6ba178ab87ea.setContent(html_1f1adc1e07fec1b28da3583f2dba0282);
+            
+        
+
+        marker_84054cb38df4c8a0718ef043765c6c17.bindPopup(popup_dc66e926e5cd5e7daeed6ba178ab87ea)
+        ;
+
+        
+    
+    
+            var marker_ae96f23317e1ea5bbbfd2527e9fbf95e = L.marker(
+                [32.03066884231877, 34.75414909118681],
+                {
+}
+            ).addTo(map_623cea29ea4080b3fb2a4543ebd675ca);
+        
+    
+            var icon_def34ee32c4456f31675b13c2c9d4692 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_ae96f23317e1ea5bbbfd2527e9fbf95e.setIcon(icon_def34ee32c4456f31675b13c2c9d4692);
+        
+    
+        var popup_eff47375f326f0a2ae7e4d47c2b618d8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5b4ea969f9b0e1d7fa129fa71cea604f = $(`<div id="html_5b4ea969f9b0e1d7fa129fa71cea604f" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 1<br><a href='https://www.google.com/maps?q=32.03066884231877,34.75414909118681&layer=c&cbll=32.03066884231877,34.75414909118681' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_eff47375f326f0a2ae7e4d47c2b618d8.setContent(html_5b4ea969f9b0e1d7fa129fa71cea604f);
+            
+        
+
+        marker_ae96f23317e1ea5bbbfd2527e9fbf95e.bindPopup(popup_eff47375f326f0a2ae7e4d47c2b618d8)
+        ;
+
+        
+    
+    
+            var marker_267821c7d3f1934f616bdd9dcbdf210d = L.marker(
+                [32.03129401697971, 34.75288016681912],
+                {
+}
+            ).addTo(map_623cea29ea4080b3fb2a4543ebd675ca);
+        
+    
+            var icon_797316989a588f21c13fd0dfc5c7ef67 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_267821c7d3f1934f616bdd9dcbdf210d.setIcon(icon_797316989a588f21c13fd0dfc5c7ef67);
+        
+    
+        var popup_57b5b419f503b3dfa083cd615fb6c98c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5718f976af4620cbd0f7db27b5ba53cc = $(`<div id="html_5718f976af4620cbd0f7db27b5ba53cc" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.03129401697971,34.75288016681912&layer=c&cbll=32.03129401697971,34.75288016681912' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_57b5b419f503b3dfa083cd615fb6c98c.setContent(html_5718f976af4620cbd0f7db27b5ba53cc);
+            
+        
+
+        marker_267821c7d3f1934f616bdd9dcbdf210d.bindPopup(popup_57b5b419f503b3dfa083cd615fb6c98c)
+        ;
+
+        
+    
+    
+            var marker_b929fa167e7321e98a606729b40c6d2b = L.marker(
+                [32.03114140625607, 34.75310794498947],
+                {
+}
+            ).addTo(map_623cea29ea4080b3fb2a4543ebd675ca);
+        
+    
+            var icon_4d7fadfa72b8b1617539981dd75e36da = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_b929fa167e7321e98a606729b40c6d2b.setIcon(icon_4d7fadfa72b8b1617539981dd75e36da);
+        
+    
+        var popup_3c189c45f328e2df1d3660ff09cc528a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3edeaa9b21cf631bb79a7996445516b7 = $(`<div id="html_3edeaa9b21cf631bb79a7996445516b7" style="width: 100.0%; height: 100.0%;">Additional Match: הדר החושחש (ID: 23739)</div>`)[0];
+                popup_3c189c45f328e2df1d3660ff09cc528a.setContent(html_3edeaa9b21cf631bb79a7996445516b7);
+            
+        
+
+        marker_b929fa167e7321e98a606729b40c6d2b.bindPopup(popup_3c189c45f328e2df1d3660ff09cc528a)
+        ;
+
+        
+    
+    
+            var marker_e65ebfbf57a438e555593012734a530b = L.marker(
+                [32.03114140625607, 34.75310794498947],
+                {
+}
+            ).addTo(map_623cea29ea4080b3fb2a4543ebd675ca);
+        
+    
+            var icon_d30b9ae3d6c765081ad376bd3bd83a0a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_e65ebfbf57a438e555593012734a530b.setIcon(icon_d30b9ae3d6c765081ad376bd3bd83a0a);
+        
+    
+        var popup_8b3fe6110a638e7625c9d360f7034c3e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5e4c2e9a8b3ebc0d5bf7380abe89db55 = $(`<div id="html_5e4c2e9a8b3ebc0d5bf7380abe89db55" style="width: 100.0%; height: 100.0%;">Additional Match: לגרסטרמיה הודית (ID: 23740)</div>`)[0];
+                popup_8b3fe6110a638e7625c9d360f7034c3e.setContent(html_5e4c2e9a8b3ebc0d5bf7380abe89db55);
+            
+        
+
+        marker_e65ebfbf57a438e555593012734a530b.bindPopup(popup_8b3fe6110a638e7625c9d360f7034c3e)
+        ;
+
+        
+    
+    
+            var marker_63b9c684e74ef5584baa67fab0d92126 = L.marker(
+                [32.03114140625607, 34.75310794498947],
+                {
+}
+            ).addTo(map_623cea29ea4080b3fb2a4543ebd675ca);
+        
+    
+            var icon_96e8f66f96c7b280a02a6b3f395d294d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_63b9c684e74ef5584baa67fab0d92126.setIcon(icon_96e8f66f96c7b280a02a6b3f395d294d);
+        
+    
+        var popup_1319b6568d20c9d4fc98d825d6b98dc3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b0d990f364b6cdd14f9a2c887dcf3f52 = $(`<div id="html_b0d990f364b6cdd14f9a2c887dcf3f52" style="width: 100.0%; height: 100.0%;">Additional Match: פנסית דו-נוצתית (ID: 23741)</div>`)[0];
+                popup_1319b6568d20c9d4fc98d825d6b98dc3.setContent(html_b0d990f364b6cdd14f9a2c887dcf3f52);
+            
+        
+
+        marker_63b9c684e74ef5584baa67fab0d92126.bindPopup(popup_1319b6568d20c9d4fc98d825d6b98dc3)
+        ;
+
+        
+    
+    
+            var marker_80a6b0fde06e3881ed776baf836ecd01 = L.marker(
+                [32.03080364774173, 34.75425750111407],
+                {
+}
+            ).addTo(map_623cea29ea4080b3fb2a4543ebd675ca);
+        
+    
+            var icon_6b262e5db867cb6d738db181f494492e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_80a6b0fde06e3881ed776baf836ecd01.setIcon(icon_6b262e5db867cb6d738db181f494492e);
+        
+    
+        var popup_b1a8ad94889f9f6481c167ef138cb110 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3a192aea88c7f22241052d53db4b9488 = $(`<div id="html_3a192aea88c7f22241052d53db4b9488" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 2<br><a href='https://www.google.com/maps?q=32.03080364774173,34.75425750111407&layer=c&cbll=32.03080364774173,34.75425750111407' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_b1a8ad94889f9f6481c167ef138cb110.setContent(html_3a192aea88c7f22241052d53db4b9488);
+            
+        
+
+        marker_80a6b0fde06e3881ed776baf836ecd01.bindPopup(popup_b1a8ad94889f9f6481c167ef138cb110)
+        ;
+
+        
+    
+    
+            var marker_acda8bfb36b3792b05df9c174c89b2f8 = L.marker(
+                [32.03129401697971, 34.75288016681912],
+                {
+}
+            ).addTo(map_623cea29ea4080b3fb2a4543ebd675ca);
+        
+    
+            var icon_b46fbd2793adf4921f5b31ffdd3ec8b4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_acda8bfb36b3792b05df9c174c89b2f8.setIcon(icon_b46fbd2793adf4921f5b31ffdd3ec8b4);
+        
+    
+        var popup_564aa88dac18f6697fe20741dd9b2f7e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_04dcf1cd64e9dd99747b461132bc89b6 = $(`<div id="html_04dcf1cd64e9dd99747b461132bc89b6" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.03129401697971,34.75288016681912&layer=c&cbll=32.03129401697971,34.75288016681912' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_564aa88dac18f6697fe20741dd9b2f7e.setContent(html_04dcf1cd64e9dd99747b461132bc89b6);
+            
+        
+
+        marker_acda8bfb36b3792b05df9c174c89b2f8.bindPopup(popup_564aa88dac18f6697fe20741dd9b2f7e)
+        ;
+
+        
+    
+    
+            var marker_538c19a03d504fd31737980b5aa09efa = L.marker(
+                [32.03114140625607, 34.75310794498947],
+                {
+}
+            ).addTo(map_623cea29ea4080b3fb2a4543ebd675ca);
+        
+    
+            var icon_c8983637c66c699c86774597482abdbc = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_538c19a03d504fd31737980b5aa09efa.setIcon(icon_c8983637c66c699c86774597482abdbc);
+        
+    
+        var popup_76251ac40808a97c2c83633724142420 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e3ccad462228b1d732bd6f069231b794 = $(`<div id="html_e3ccad462228b1d732bd6f069231b794" style="width: 100.0%; height: 100.0%;">Additional Match: הדר החושחש (ID: 23739)</div>`)[0];
+                popup_76251ac40808a97c2c83633724142420.setContent(html_e3ccad462228b1d732bd6f069231b794);
+            
+        
+
+        marker_538c19a03d504fd31737980b5aa09efa.bindPopup(popup_76251ac40808a97c2c83633724142420)
+        ;
+
+        
+    
+    
+            var marker_5090aecadbad6f1134152be875c0ca7f = L.marker(
+                [32.03114140625607, 34.75310794498947],
+                {
+}
+            ).addTo(map_623cea29ea4080b3fb2a4543ebd675ca);
+        
+    
+            var icon_597fc7d01e905110d3a39741bd257dfb = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_5090aecadbad6f1134152be875c0ca7f.setIcon(icon_597fc7d01e905110d3a39741bd257dfb);
+        
+    
+        var popup_5d052894474ef004792e1690bc26b741 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_21abc28d06eb2333d35c8534b0ec7e8c = $(`<div id="html_21abc28d06eb2333d35c8534b0ec7e8c" style="width: 100.0%; height: 100.0%;">Additional Match: לגרסטרמיה הודית (ID: 23740)</div>`)[0];
+                popup_5d052894474ef004792e1690bc26b741.setContent(html_21abc28d06eb2333d35c8534b0ec7e8c);
+            
+        
+
+        marker_5090aecadbad6f1134152be875c0ca7f.bindPopup(popup_5d052894474ef004792e1690bc26b741)
+        ;
+
+        
+    
+    
+            var marker_354861f62a8b3e81f40a98c589299d2a = L.marker(
+                [32.03114140625607, 34.75310794498947],
+                {
+}
+            ).addTo(map_623cea29ea4080b3fb2a4543ebd675ca);
+        
+    
+            var icon_48c20d712125181396f68e73dc75e6e4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_354861f62a8b3e81f40a98c589299d2a.setIcon(icon_48c20d712125181396f68e73dc75e6e4);
+        
+    
+        var popup_03713385295860325265b5ab964c83e7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_56369720f6beb503989d44505b0aaf69 = $(`<div id="html_56369720f6beb503989d44505b0aaf69" style="width: 100.0%; height: 100.0%;">Additional Match: פנסית דו-נוצתית (ID: 23741)</div>`)[0];
+                popup_03713385295860325265b5ab964c83e7.setContent(html_56369720f6beb503989d44505b0aaf69);
+            
+        
+
+        marker_354861f62a8b3e81f40a98c589299d2a.bindPopup(popup_03713385295860325265b5ab964c83e7)
+        ;
+
+        
+    
+    
+            var marker_9da1defbba7b162046b988b89769a163 = L.marker(
+                [32.03008150255006, 34.75548993403342],
+                {
+}
+            ).addTo(map_623cea29ea4080b3fb2a4543ebd675ca);
+        
+    
+            var icon_b568ae6264c67ff128ee5a7487c1af1e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_9da1defbba7b162046b988b89769a163.setIcon(icon_b568ae6264c67ff128ee5a7487c1af1e);
+        
+    
+        var popup_7795a2ddb6091edb19e4471994e8e487 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_83d38aba5ff96c5908489155495a9932 = $(`<div id="html_83d38aba5ff96c5908489155495a9932" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 4<br><a href='https://www.google.com/maps?q=32.03008150255006,34.75548993403342&layer=c&cbll=32.03008150255006,34.75548993403342' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_7795a2ddb6091edb19e4471994e8e487.setContent(html_83d38aba5ff96c5908489155495a9932);
+            
+        
+
+        marker_9da1defbba7b162046b988b89769a163.bindPopup(popup_7795a2ddb6091edb19e4471994e8e487)
+        ;
+
+        
+    
+    
+            var marker_f20705535b0a8994e532d180e1a9c118 = L.marker(
+                [32.03129401697971, 34.75288016681912],
+                {
+}
+            ).addTo(map_623cea29ea4080b3fb2a4543ebd675ca);
+        
+    
+            var icon_25a6c4acda91601fef8f8a9bf2d65f3d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_f20705535b0a8994e532d180e1a9c118.setIcon(icon_25a6c4acda91601fef8f8a9bf2d65f3d);
+        
+    
+        var popup_937138a31d50b986b72ece98239e0284 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7fe8ad335fa404afd96017da973425f5 = $(`<div id="html_7fe8ad335fa404afd96017da973425f5" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.03129401697971,34.75288016681912&layer=c&cbll=32.03129401697971,34.75288016681912' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_937138a31d50b986b72ece98239e0284.setContent(html_7fe8ad335fa404afd96017da973425f5);
+            
+        
+
+        marker_f20705535b0a8994e532d180e1a9c118.bindPopup(popup_937138a31d50b986b72ece98239e0284)
+        ;
+
+        
+    
+    
+            var marker_c5c972392f835ad0b0a216623f801f9d = L.marker(
+                [32.03114140625607, 34.75310794498947],
+                {
+}
+            ).addTo(map_623cea29ea4080b3fb2a4543ebd675ca);
+        
+    
+            var icon_8bbcb4f5b4b6fbcedf7752524155bb3c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_c5c972392f835ad0b0a216623f801f9d.setIcon(icon_8bbcb4f5b4b6fbcedf7752524155bb3c);
+        
+    
+        var popup_42b44f097f9169ca11aef64125ddc5c6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_08aab3e8c5b661215671d55a6f45548c = $(`<div id="html_08aab3e8c5b661215671d55a6f45548c" style="width: 100.0%; height: 100.0%;">Additional Match: הדר החושחש (ID: 23739)</div>`)[0];
+                popup_42b44f097f9169ca11aef64125ddc5c6.setContent(html_08aab3e8c5b661215671d55a6f45548c);
+            
+        
+
+        marker_c5c972392f835ad0b0a216623f801f9d.bindPopup(popup_42b44f097f9169ca11aef64125ddc5c6)
+        ;
+
+        
+    
+    
+            var marker_a25edbe5d66483341b09dce0e6468022 = L.marker(
+                [32.03114140625607, 34.75310794498947],
+                {
+}
+            ).addTo(map_623cea29ea4080b3fb2a4543ebd675ca);
+        
+    
+            var icon_6ca585257dd30e6a8cbc437c1b1256fc = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_a25edbe5d66483341b09dce0e6468022.setIcon(icon_6ca585257dd30e6a8cbc437c1b1256fc);
+        
+    
+        var popup_e7276b843ea7afd9efca295ef8d660c0 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_91297b9d333b569869c4e754ec8ae45b = $(`<div id="html_91297b9d333b569869c4e754ec8ae45b" style="width: 100.0%; height: 100.0%;">Additional Match: לגרסטרמיה הודית (ID: 23740)</div>`)[0];
+                popup_e7276b843ea7afd9efca295ef8d660c0.setContent(html_91297b9d333b569869c4e754ec8ae45b);
+            
+        
+
+        marker_a25edbe5d66483341b09dce0e6468022.bindPopup(popup_e7276b843ea7afd9efca295ef8d660c0)
+        ;
+
+        
+    
+    
+            var marker_39b0630c8122d7d3c34bb3d3b2377bcc = L.marker(
+                [32.03114140625607, 34.75310794498947],
+                {
+}
+            ).addTo(map_623cea29ea4080b3fb2a4543ebd675ca);
+        
+    
+            var icon_1d5ea074a0fa5ef967918e62fd7edbbf = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_39b0630c8122d7d3c34bb3d3b2377bcc.setIcon(icon_1d5ea074a0fa5ef967918e62fd7edbbf);
+        
+    
+        var popup_850847c3efff632308afb905a339be9d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ae19d5194e03e7e61435183849d816cc = $(`<div id="html_ae19d5194e03e7e61435183849d816cc" style="width: 100.0%; height: 100.0%;">Additional Match: פנסית דו-נוצתית (ID: 23741)</div>`)[0];
+                popup_850847c3efff632308afb905a339be9d.setContent(html_ae19d5194e03e7e61435183849d816cc);
+            
+        
+
+        marker_39b0630c8122d7d3c34bb3d3b2377bcc.bindPopup(popup_850847c3efff632308afb905a339be9d)
+        ;
+
+        
+    
+    
+            var marker_5154e6e66de6d92fbb8e382491291fc7 = L.marker(
+                [32.03029273650984, 34.7551623371554],
+                {
+}
+            ).addTo(map_623cea29ea4080b3fb2a4543ebd675ca);
+        
+    
+            var icon_b3ba4b27e063cfaaab1875fc0a301e65 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_5154e6e66de6d92fbb8e382491291fc7.setIcon(icon_b3ba4b27e063cfaaab1875fc0a301e65);
+        
+    
+        var popup_9b8981ca8bcc006c720e7c8f25137132 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0fbaf304c5a9352c041d120516421c75 = $(`<div id="html_0fbaf304c5a9352c041d120516421c75" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 5<br><a href='https://www.google.com/maps?q=32.03029273650984,34.7551623371554&layer=c&cbll=32.03029273650984,34.7551623371554' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_9b8981ca8bcc006c720e7c8f25137132.setContent(html_0fbaf304c5a9352c041d120516421c75);
+            
+        
+
+        marker_5154e6e66de6d92fbb8e382491291fc7.bindPopup(popup_9b8981ca8bcc006c720e7c8f25137132)
+        ;
+
+        
+    
+    
+            var marker_9affc16f2c52a458c117feec3d87e9fa = L.marker(
+                [32.03129401697971, 34.75288016681912],
+                {
+}
+            ).addTo(map_623cea29ea4080b3fb2a4543ebd675ca);
+        
+    
+            var icon_9f97482eb48ca511e96b456baa62b8c7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_9affc16f2c52a458c117feec3d87e9fa.setIcon(icon_9f97482eb48ca511e96b456baa62b8c7);
+        
+    
+        var popup_832f89180347a3bae286a3f8457f8fa7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_364ef40e22dbceebfc1df6bae68ac0e6 = $(`<div id="html_364ef40e22dbceebfc1df6bae68ac0e6" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.03129401697971,34.75288016681912&layer=c&cbll=32.03129401697971,34.75288016681912' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_832f89180347a3bae286a3f8457f8fa7.setContent(html_364ef40e22dbceebfc1df6bae68ac0e6);
+            
+        
+
+        marker_9affc16f2c52a458c117feec3d87e9fa.bindPopup(popup_832f89180347a3bae286a3f8457f8fa7)
+        ;
+
+        
+    
+    
+            var marker_8a772c5d1a89ef260e98ac6753599ed5 = L.marker(
+                [32.03114140625607, 34.75310794498947],
+                {
+}
+            ).addTo(map_623cea29ea4080b3fb2a4543ebd675ca);
+        
+    
+            var icon_64b0208a1b732bdb1ddda42001f69f99 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_8a772c5d1a89ef260e98ac6753599ed5.setIcon(icon_64b0208a1b732bdb1ddda42001f69f99);
+        
+    
+        var popup_49701d7034beaf2200312b313b4b2aec = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_979590306c645c52ebbe31f90c21395a = $(`<div id="html_979590306c645c52ebbe31f90c21395a" style="width: 100.0%; height: 100.0%;">Additional Match: הדר החושחש (ID: 23739)</div>`)[0];
+                popup_49701d7034beaf2200312b313b4b2aec.setContent(html_979590306c645c52ebbe31f90c21395a);
+            
+        
+
+        marker_8a772c5d1a89ef260e98ac6753599ed5.bindPopup(popup_49701d7034beaf2200312b313b4b2aec)
+        ;
+
+        
+    
+    
+            var marker_a20f9d79ba53b30490e51b3184252659 = L.marker(
+                [32.03114140625607, 34.75310794498947],
+                {
+}
+            ).addTo(map_623cea29ea4080b3fb2a4543ebd675ca);
+        
+    
+            var icon_c5f489001aeb1435ba8898e7e5ce745f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_a20f9d79ba53b30490e51b3184252659.setIcon(icon_c5f489001aeb1435ba8898e7e5ce745f);
+        
+    
+        var popup_1fd10d6a298aae8501cecef2056a5664 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e71fb826dcb9ad32767109c999b542da = $(`<div id="html_e71fb826dcb9ad32767109c999b542da" style="width: 100.0%; height: 100.0%;">Additional Match: לגרסטרמיה הודית (ID: 23740)</div>`)[0];
+                popup_1fd10d6a298aae8501cecef2056a5664.setContent(html_e71fb826dcb9ad32767109c999b542da);
+            
+        
+
+        marker_a20f9d79ba53b30490e51b3184252659.bindPopup(popup_1fd10d6a298aae8501cecef2056a5664)
+        ;
+
+        
+    
+    
+            var marker_5bc9695aba843f4d167615f2ad391f03 = L.marker(
+                [32.03114140625607, 34.75310794498947],
+                {
+}
+            ).addTo(map_623cea29ea4080b3fb2a4543ebd675ca);
+        
+    
+            var icon_a513d676292df612e3398e642a626571 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_5bc9695aba843f4d167615f2ad391f03.setIcon(icon_a513d676292df612e3398e642a626571);
+        
+    
+        var popup_3c22f527f7dc10eea2464b1c6f5ea60e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1da2a7a9abb51646ae80eb7b59bcb14f = $(`<div id="html_1da2a7a9abb51646ae80eb7b59bcb14f" style="width: 100.0%; height: 100.0%;">Additional Match: פנסית דו-נוצתית (ID: 23741)</div>`)[0];
+                popup_3c22f527f7dc10eea2464b1c6f5ea60e.setContent(html_1da2a7a9abb51646ae80eb7b59bcb14f);
+            
+        
+
+        marker_5bc9695aba843f4d167615f2ad391f03.bindPopup(popup_3c22f527f7dc10eea2464b1c6f5ea60e)
+        ;
+
+        
+    
+    
+            var marker_84457e8615dda2ab09e80dd1bf42d124 = L.marker(
+                [32.03078584457414, 34.75444770323769],
+                {
+}
+            ).addTo(map_623cea29ea4080b3fb2a4543ebd675ca);
+        
+    
+            var icon_45d330a5b2646da10b24e49d44b3e53b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_84457e8615dda2ab09e80dd1bf42d124.setIcon(icon_45d330a5b2646da10b24e49d44b3e53b);
+        
+    
+        var popup_9bcb9c1b8b0e18ba8595fd778890823a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_608cf2a02e7ffcb69ee77f93e4e1cbe6 = $(`<div id="html_608cf2a02e7ffcb69ee77f93e4e1cbe6" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 6<br><a href='https://www.google.com/maps?q=32.03078584457414,34.75444770323769&layer=c&cbll=32.03078584457414,34.75444770323769' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_9bcb9c1b8b0e18ba8595fd778890823a.setContent(html_608cf2a02e7ffcb69ee77f93e4e1cbe6);
+            
+        
+
+        marker_84457e8615dda2ab09e80dd1bf42d124.bindPopup(popup_9bcb9c1b8b0e18ba8595fd778890823a)
+        ;
+
+        
+    
+    
+            var marker_5b78a5a805c09f26c5c28b0cd9ec210f = L.marker(
+                [32.03129401697971, 34.75288016681912],
+                {
+}
+            ).addTo(map_623cea29ea4080b3fb2a4543ebd675ca);
+        
+    
+            var icon_0d9d249bf065626d44d0ddbe096bc5bc = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_5b78a5a805c09f26c5c28b0cd9ec210f.setIcon(icon_0d9d249bf065626d44d0ddbe096bc5bc);
+        
+    
+        var popup_4a20db479e1d13610cb02518ac8b6512 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ad783fda1ef5e574b9dd0a57b76c9033 = $(`<div id="html_ad783fda1ef5e574b9dd0a57b76c9033" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.03129401697971,34.75288016681912&layer=c&cbll=32.03129401697971,34.75288016681912' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_4a20db479e1d13610cb02518ac8b6512.setContent(html_ad783fda1ef5e574b9dd0a57b76c9033);
+            
+        
+
+        marker_5b78a5a805c09f26c5c28b0cd9ec210f.bindPopup(popup_4a20db479e1d13610cb02518ac8b6512)
+        ;
+
+        
+    
+    
+            var marker_d572726be442971548dd6dae0e172721 = L.marker(
+                [32.03114140625607, 34.75310794498947],
+                {
+}
+            ).addTo(map_623cea29ea4080b3fb2a4543ebd675ca);
+        
+    
+            var icon_4f520410b534a508d3b0a3521104d916 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_d572726be442971548dd6dae0e172721.setIcon(icon_4f520410b534a508d3b0a3521104d916);
+        
+    
+        var popup_bfe8be0db0369d38cd67a78499b004ab = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_334b465bcdf3e8f41b2453d6a8d8cdcd = $(`<div id="html_334b465bcdf3e8f41b2453d6a8d8cdcd" style="width: 100.0%; height: 100.0%;">Additional Match: הדר החושחש (ID: 23739)</div>`)[0];
+                popup_bfe8be0db0369d38cd67a78499b004ab.setContent(html_334b465bcdf3e8f41b2453d6a8d8cdcd);
+            
+        
+
+        marker_d572726be442971548dd6dae0e172721.bindPopup(popup_bfe8be0db0369d38cd67a78499b004ab)
+        ;
+
+        
+    
+    
+            var marker_6c9903c5c0bc6eba66817bdb0df63191 = L.marker(
+                [32.03114140625607, 34.75310794498947],
+                {
+}
+            ).addTo(map_623cea29ea4080b3fb2a4543ebd675ca);
+        
+    
+            var icon_be4cc202efdfd4b7b014c33ba5b6db43 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_6c9903c5c0bc6eba66817bdb0df63191.setIcon(icon_be4cc202efdfd4b7b014c33ba5b6db43);
+        
+    
+        var popup_ff385bec6fb8132ff5c8795e25294281 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_15154ebddd67ec78afd275921c531d00 = $(`<div id="html_15154ebddd67ec78afd275921c531d00" style="width: 100.0%; height: 100.0%;">Additional Match: לגרסטרמיה הודית (ID: 23740)</div>`)[0];
+                popup_ff385bec6fb8132ff5c8795e25294281.setContent(html_15154ebddd67ec78afd275921c531d00);
+            
+        
+
+        marker_6c9903c5c0bc6eba66817bdb0df63191.bindPopup(popup_ff385bec6fb8132ff5c8795e25294281)
+        ;
+
+        
+    
+    
+            var marker_9c4ce3138baf8d41453995c96d41891c = L.marker(
+                [32.03114140625607, 34.75310794498947],
+                {
+}
+            ).addTo(map_623cea29ea4080b3fb2a4543ebd675ca);
+        
+    
+            var icon_d1ba739e0b18471f4d8f1053496bafe5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_9c4ce3138baf8d41453995c96d41891c.setIcon(icon_d1ba739e0b18471f4d8f1053496bafe5);
+        
+    
+        var popup_62555e8bad41f07f4f5c1cd2a3014e0d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_05e817b647735c21d8d75400a74b1360 = $(`<div id="html_05e817b647735c21d8d75400a74b1360" style="width: 100.0%; height: 100.0%;">Additional Match: פנסית דו-נוצתית (ID: 23741)</div>`)[0];
+                popup_62555e8bad41f07f4f5c1cd2a3014e0d.setContent(html_05e817b647735c21d8d75400a74b1360);
+            
+        
+
+        marker_9c4ce3138baf8d41453995c96d41891c.bindPopup(popup_62555e8bad41f07f4f5c1cd2a3014e0d)
+        ;
+
+        
+    
+    
+            var marker_8e1ae65de1482a1b45e19866974ff2d5 = L.marker(
+                [32.030879930887, 34.75423704372632],
+                {
+}
+            ).addTo(map_623cea29ea4080b3fb2a4543ebd675ca);
+        
+    
+            var icon_50d2715e4584dd698a842d5d831cb195 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_8e1ae65de1482a1b45e19866974ff2d5.setIcon(icon_50d2715e4584dd698a842d5d831cb195);
+        
+    
+        var popup_b914321d4070467cb74b6fcd70a051cb = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f4f9cc7cb9c7c248134881d1d1d4211d = $(`<div id="html_f4f9cc7cb9c7c248134881d1d1d4211d" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 7<br><a href='https://www.google.com/maps?q=32.030879930887,34.75423704372632&layer=c&cbll=32.030879930887,34.75423704372632' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_b914321d4070467cb74b6fcd70a051cb.setContent(html_f4f9cc7cb9c7c248134881d1d1d4211d);
+            
+        
+
+        marker_8e1ae65de1482a1b45e19866974ff2d5.bindPopup(popup_b914321d4070467cb74b6fcd70a051cb)
+        ;
+
+        
+    
+    
+            var marker_6f4eb1c6767cd5e45773e74193920a23 = L.marker(
+                [32.03129401697971, 34.75288016681912],
+                {
+}
+            ).addTo(map_623cea29ea4080b3fb2a4543ebd675ca);
+        
+    
+            var icon_3636ddf5df535f372f511e820f5c73fd = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_6f4eb1c6767cd5e45773e74193920a23.setIcon(icon_3636ddf5df535f372f511e820f5c73fd);
+        
+    
+        var popup_f7d094569323087416bd45ace6dda772 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f20240ffc1e5f8d9d72433296a57cfdb = $(`<div id="html_f20240ffc1e5f8d9d72433296a57cfdb" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.03129401697971,34.75288016681912&layer=c&cbll=32.03129401697971,34.75288016681912' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_f7d094569323087416bd45ace6dda772.setContent(html_f20240ffc1e5f8d9d72433296a57cfdb);
+            
+        
+
+        marker_6f4eb1c6767cd5e45773e74193920a23.bindPopup(popup_f7d094569323087416bd45ace6dda772)
+        ;
+
+        
+    
+</script>
+</html>
