@@ -1,8 +1,33 @@
-import os
-import pandas as pd
-import folium
 import ast
+import os
 from pathlib import Path
+
+import folium
+import pandas as pd
+from folium import Element
+
+# Add legend as an HTML element
+legend_html = """
+<div style="
+position: fixed;
+bottom: 50px;
+left: 50px;
+width: 200px;
+background-color: white;
+z-index:9999;
+font-size:14px;
+padding: 10px;
+border: 2px solid grey;
+border-radius: 8px;
+box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+">
+<b>Legend</b><br>
+<i class="fa fa-map-marker fa-2x" style="color:orange"></i> Car location<br>
+<i class="fa fa-map-marker fa-2x" style="color:red"></i> Detection location<br>
+<i class="fa fa-map-marker fa-2x" style="color:green"></i> Seker best match<br>
+<i class="fa fa-map-marker fa-2x" style="color:blue"></i> Seker additional match<br>
+</div>
+"""
 
 
 def create_html_with_images_and_details(df, detected_images_folder, output_html_file):
@@ -99,7 +124,7 @@ def create_html_with_images_and_details(df, detected_images_folder, output_html_
             html_content += f"<strong>Detection Tree With Match:</strong><br>"
             html_content += f"Tree Index: {row['tree_index']}<br>"
             html_content += f"Location: ({row['x_tree_image']}, {row['y_tree_image']})<br>"
-            html_content += f"Distance: {row['distance']}<br>"
+            html_content += f"Distance (m): {row['distance_in_meters']:.3f}<br>"
             html_content += f"<strong>Best Match (Seker):</strong><br>"
             html_content += f"Tree ID: {row['tree_id']}<br>"
             html_content += f"Tree Name: {row['tree_name']}<br>"
@@ -122,7 +147,7 @@ def create_html_with_images_and_details(df, detected_images_folder, output_html_
             lambda x: ast.literal_eval(x.replace('nan', 'None')) if isinstance(x, str) else x
         )
 
-        html_content += f"<strong>All Possible Matches:</strong>"
+        html_content += f"<strong>Seker Matches:</strong>"
         for match in filtered_df.iloc[0]['additional_matches']:
             html_content += "<p>"
             html_content += f"ID: {match['id']}<br>"
@@ -214,6 +239,8 @@ def generate_map(filtered_df):
             icon=folium.Icon(color='orange')
         ).add_to(map_obj)
 
+    map_obj.get_root().html.add_child(Element(legend_html))
+
     # Save the map to an HTML file
     map_path = f"./maps/map_{filtered_df.iloc[0]['file_name']}.html"
     os.makedirs(os.path.dirname(map_path), exist_ok=True)
@@ -223,9 +250,16 @@ def generate_map(filtered_df):
 
 
 if __name__ == '__main__':
-    df = pd.read_excel("south_trees_output_meters_divide=100000_angle_divide=3_y_times=12_y_exponent=2_count_distinct_trees=316.xlsx")
-    # df = pd.read_excel("south_trees_example_3.xlsx")
+    df = pd.read_excel(
+        "south_trees_output_meters_divide=100000_angle_divide=3_y_times=12_y_exponent=2_count_distinct_trees=256.xlsx")
+
+    # Conversion factor from decimal to meters
+    conversion_factor = 100000
+    # Convert the column
+    df['distance_in_meters'] = df['distance'] * conversion_factor
+    df_sorted = df.sort_values(by='distance_in_meters')
+
     detected_images_folder = "detected_images"
     output_html_file = "index.html"
-    create_html_with_images_and_details(df=df, detected_images_folder=detected_images_folder,
+    create_html_with_images_and_details(df=df_sorted, detected_images_folder=detected_images_folder,
                                         output_html_file=output_html_file)
