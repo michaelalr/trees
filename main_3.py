@@ -233,7 +233,8 @@ def generate_map(filtered_df):
         # Car location
         x_car = row['x_image']
         y_car = row['y_image']
-        current_tree_streetview_url = f"https://www.google.com/maps?q={y_car},{x_car}&layer=c&cbll={y_car},{x_car}"
+        heading = row['heading']
+        current_tree_streetview_url = f"https://www.google.com/maps?q={y_car},{x_car}&layer=c&cbll={y_car},{x_car}&cbp=12,{heading},0,0,0"
         folium.Marker(
             location=[y_car, x_car],
             popup=f"Car location<br><a href='{current_tree_streetview_url}' target='_blank'>View on Google Street View</a>",
