@@ -259,6 +259,9 @@ if __name__ == '__main__':
     df['distance_in_meters'] = df['distance'] * conversion_factor
     df_sorted = df.sort_values(by='distance_in_meters')
 
+    df_sorted['tree_name'] = df_sorted['tree_name'].apply(
+        lambda x: x.encode('utf-8').decode('utf-8', 'ignore') if isinstance(x, str) else x)
+
     detected_images_folder = "detected_images"
     output_html_file = "index.html"
     create_html_with_images_and_details(df=df_sorted, detected_images_folder=detected_images_folder,
