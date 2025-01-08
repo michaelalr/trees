@@ -44,6 +44,7 @@ def create_html_with_images_and_details(df, detected_images_folder, output_html_
     <!DOCTYPE html>
     <html>
     <head>
+        <meta charset="UTF-8">
         <title>Detections and Matches</title>
         <style>
             body {
