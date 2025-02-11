@@ -1,10 +1,11 @@
 import ast
 import os
 from pathlib import Path
-
+import numpy as np
 import folium
 import pandas as pd
 from folium import Element
+import math
 
 # Add legend as an HTML element
 legend_html = """
@@ -94,7 +95,7 @@ def create_html_with_images_and_details(df, detected_images_folder, output_html_
         filtered_df = df[df['file_name'] == file_name]
 
         # Check if all values in the "possible_trees" column are 0
-        if filtered_df['possible_trees'].eq(0).all():
+        if filtered_df['possible_trees'].eq(0).all() or filtered_df["possible_trees"].astype(np.int64).eq(0).all():
             continue  # Skip to the next file_name
 
         # Get the corresponding image path
@@ -118,14 +119,16 @@ def create_html_with_images_and_details(df, detected_images_folder, output_html_
         # Add detection details
         for _, row in filtered_df.iterrows():
             if pd.isna(row['tree_id']):
-                det_trees_without_match.append((row['tree_index'], row['x_tree_image'], row['y_tree_image']))
+                det_trees_without_match.append((row['tree_index'], row['real_angle'], row['x_tree_image'], row['y_tree_image']))
                 continue
 
             html_content += "<p>"
             html_content += f"<strong>Detection Tree With Match:</strong><br>"
             html_content += f"Tree Index: {row['tree_index']}<br>"
             html_content += f"Location: ({row['x_tree_image']}, {row['y_tree_image']})<br>"
-            html_content += f"Distance (m): {row['distance_in_meters']:.3f}<br>"
+            # html_content += f"Distance (m): {row['distance_in_meters']:.3f}<br>"
+            html_content += f"Real Angle (rad): {row['real_angle']:.5f}<br>"
+            html_content += f"Angle Difference (rad): {row['best_angle_diff']:.5f}<br>"
             html_content += f"<strong>Best Match (Seker):</strong><br>"
             html_content += f"Tree ID: {row['tree_id']}<br>"
             html_content += f"Tree Name: {row['tree_name']}<br>"
@@ -135,9 +138,10 @@ def create_html_with_images_and_details(df, detected_images_folder, output_html_
         if len(det_trees_without_match) > 0:
             html_content += f"<strong>Detection Trees Without Match</strong>"
         for tree in det_trees_without_match:
-            tree_index, x_tree_image, y_tree_image = tree
+            tree_index, real_angle, x_tree_image, y_tree_image = tree
             html_content += "<p>"
             html_content += f"Tree Index: {tree_index}<br>"
+            html_content += f"Real Angle (rad): {real_angle:.5f}<br>"
             html_content += f"Location: ({x_tree_image}, {y_tree_image})<br>"
             html_content += "</p>"
 
@@ -148,13 +152,14 @@ def create_html_with_images_and_details(df, detected_images_folder, output_html_
             lambda x: ast.literal_eval(x.replace('nan', 'None')) if isinstance(x, str) else x
         )
 
-        html_content += f"<strong>Seker Matches:</strong>"
-        for match in filtered_df.iloc[0]['additional_matches']:
-            html_content += "<p>"
-            html_content += f"ID: {match['id']}<br>"
-            html_content += f"Tree Name: {match['tree_name']}<br>"
-            html_content += f"Location: ({match['location_x']}, {match['location_y']})<br>"
-            html_content += "</p>"
+        if not pd.isna(filtered_df.iloc[0]['additional_matches']):
+            html_content += f"<strong>Seker Matches:</strong>"
+            for match in filtered_df.iloc[0]['additional_matches']:
+                html_content += "<p>"
+                html_content += f"ID: {match['id']}<br>"
+                html_content += f"Tree Name: {match['tree_name']}<br>"
+                html_content += f"Location: ({match['location_x']}, {match['location_y']})<br>"
+                html_content += "</p>"
 
         html_content += "</div></div>"
 
@@ -190,10 +195,11 @@ def generate_map(filtered_df):
     # Create a map centered on the first detection
     initial_coords = [filtered_df.iloc[0]['y_tree_image'], filtered_df.iloc[0]['x_tree_image']]
     map_obj = folium.Map(location=initial_coords, zoom_start=15)
-
+    # Line length (adjust for visibility)
+    line_length = 0.0001  # Approx ~10 meters
     best_match_ids = filtered_df['tree_id'].unique()
 
-    # Add markers for best matches and additional matches
+    # Add markers for best matches, detections directions and additional matches
     for _, row in filtered_df.iterrows():
         # Best match not nan
         if pd.notna(row['tree_id']):
@@ -202,33 +208,47 @@ def generate_map(filtered_df):
                 popup=f"Best Match: {row['tree_name']} (ID: {row['tree_id']})",
                 icon=folium.Icon(color='green')
             ).add_to(map_obj)
-            # Draw a line between the detection tree and the matched seker tree
+            # Detection location
+            # Compute endpoint using trigonometry
+            x_end = row['x_tree'] + line_length * math.cos(row['real_angle'])
+            y_end = row['y_tree'] + line_length * math.sin(row['real_angle'])
+            # Add a line representing detection direction
             folium.PolyLine(
-                locations=[[row['y_tree_image'], row['x_tree_image']], [row['y_tree'], row['x_tree']]],
-                color='black',  # Color for the connection line
-                weight=2  # Line thickness
+                locations=[(row['y_tree'], row['x_tree']), (y_end, x_end)],
+                popup=f"Detection: Tree Index {row['tree_index']}, angle: {row['real_angle']}",
+                color="black",
+                weight=2
             ).add_to(map_obj)
+            # # Draw a line between the detection tree and the matched seker tree
+            # folium.PolyLine(
+            #     locations=[[row['y_tree_image'], row['x_tree_image']], [row['y_tree'], row['x_tree']]],
+            #     color='black',  # Color for the connection line
+            #     weight=2  # Line thickness
+            # ).add_to(map_obj)
 
         # Additional matches
-        for match in row['additional_matches']:
-            id = match['id']
-            if id not in best_match_ids:
-                folium.Marker(
-                    location=[match['location_y'], match['location_x']],
-                    popup=f"Additional Match: {match['tree_name']} (ID: {match['id']})",
-                    icon=folium.Icon(color='blue')
-                ).add_to(map_obj)
+        if pd.notna(row['additional_matches']):
+            for match in row['additional_matches']:
+                id = match['id']
+                if id not in best_match_ids:
+                    folium.Marker(
+                        location=[match['location_y'], match['location_x']],
+                        popup=f"Additional Match: {match['tree_name']} (ID: {match['id']})",
+                        icon=folium.Icon(color='blue')
+                    ).add_to(map_obj)
 
         # Detection location
-        # Create Google Street View URL for the current tree
-        x_tree_image = row['x_tree_image']
-        y_tree_image = row['y_tree_image']
-        current_tree_streetview_url = f"https://www.google.com/maps?q={y_tree_image},{x_tree_image}&layer=c&cbll={y_tree_image},{x_tree_image}"
-        folium.Marker(
-            location=[y_tree_image, x_tree_image],
-            popup=f"Detection: Tree Index {row['tree_index']}<br><a href='{current_tree_streetview_url}' target='_blank'>View on Google Street View</a>",
-            icon=folium.Icon(color='red')
-        ).add_to(map_obj)
+        # # Create Google Street View URL for the current tree
+        # x_tree_image = row['x_tree_image']
+        # y_tree_image = row['y_tree_image']
+        # current_tree_streetview_url = f"https://www.google.com/maps?q={y_tree_image},{x_tree_image}&layer=c&cbll={y_tree_image},{x_tree_image}"
+        # folium.Marker(
+        #     location=[y_tree_image, x_tree_image],
+        #     popup=f"Detection: Tree Index {row['tree_index']}<br><a href='{current_tree_streetview_url}' target='_blank'>View on Google Street View</a>",
+        #     icon=folium.Icon(color='red')
+        # ).add_to(map_obj)
+
+
 
         # Car location
         x_car = row['x_image']
@@ -250,20 +270,89 @@ def generate_map(filtered_df):
 
     return map_path
 
+def select_images(df):
+    # Load or use existing dataframe
+    df = df.copy()  # Ensure original df is not modified
+
+
+    # Separate matched and non-matched cases
+    matched = df[df["tree_id"].notna()]  # Rows where a match exists
+    non_matched = df[df["tree_id"].isna()]  # Rows where no match exists
+    # matched["best_angle_diff"] = matched["best_angle_diff"].astype(float)
+    # non_matched["best_angle_diff"] = non_matched["best_angle_diff"].astype(float)
+
+    # Convert 'best_angle_diff' to numeric (force errors to NaN)
+    # matched.loc[:, "best_angle_diff"] = pd.to_numeric(matched["best_angle_diff"], errors="coerce")
+    # non_matched.loc[:, "best_angle_diff"] = pd.to_numeric(non_matched["best_angle_diff"], errors="coerce")
+    # # Handle NaN values in 'additional_matches' column
+    # non_matched.loc[:, "additional_matches"] = non_matched["additional_matches"].apply(
+    #     lambda x: x if isinstance(x, list) else [])
+
+    # Compute quantiles for best_angle_diff
+    matched_high_threshold = matched["best_angle_diff"].quantile(0.9)  # Top 10%
+    matched_low_threshold = matched["best_angle_diff"].quantile(0.1)  # Bottom 10%
+
+
+    # Prioritize interesting matched cases
+    matched_interesting = matched[
+        (matched["matched_details"].apply(
+            lambda x: isinstance(x, dict) and x.get("second_best_match_tree") is not None)) |
+        (matched["best_angle_diff"] > matched_high_threshold) |
+        (matched["best_angle_diff"] < matched_low_threshold)
+        ]
+
+    # Select 50 unique images from matched and 50 from non-matched
+    selected_matched_images = matched_interesting["file_name"].drop_duplicates().sample(n=100, random_state=42)
+
+    # # Ensure 'file_name' column exists
+    # if "file_name" not in non_matched_interesting.columns:
+    #     print("Column 'file_name' does not exist in non_matched_interesting")
+    # Check the number of available unique images
+    unique_files = non_matched["file_name"].drop_duplicates()
+    if unique_files.empty:
+        print("No available images to sample from.")
+        selected_non_matched_images = pd.Series(dtype=object)
+    else:
+        sample_size = min(20, len(unique_files))  # Ensure we don't sample more than available
+        selected_non_matched_images = unique_files.sample(n=sample_size, random_state=42)
+
+    # selected_non_matched_images = non_matched_interesting["file_name"].drop_duplicates().sample(n=50, random_state=42)
+
+    # Combine selected images
+    selected_images = pd.concat([selected_matched_images, selected_non_matched_images])
+
+    # Get all rows that belong to the selected images
+    selected_df = df[df["file_name"].isin(selected_images)]
+
+    # Save to CSV or Parquet
+    selected_df.to_csv("selected_images.csv", index=False)
+
+    return selected_df
 
 if __name__ == '__main__':
-    df = pd.read_excel("south_trees_output_meters_divide=100000_angle_divide=3_y_times=12_y_exponent=2_count_distinct_trees=256.xlsx")
+    # df = pd.read_excel("south_trees_output_meters_divide=100000_angle_divide=3_y_times=12_y_exponent=2_count_distinct_trees=256.xlsx")
+    # df = pd.read_excel("real_angle_south_trees_output_meters_divide=100000_angle_divide=3_y_times=12_y_exponent=2_count_distinct_trees=256.xlsx")
+    df = pd.read_parquet('combined_data.parquet', engine="pyarrow")
+    # clearance
+    df.replace("None", np.nan, inplace=True)
+    df["best_angle_diff"] = pd.to_numeric(df["best_angle_diff"].astype(float), errors="coerce")
+    df["x_tree"] = pd.to_numeric(df["x_tree"].astype(float), errors="coerce")
+    df["y_tree"] = pd.to_numeric(df["y_tree"].astype(float), errors="coerce")
+    selected_df = select_images(df=df)
+    # Save the list of selected images to a text file
+    selected_df["file_name_with_detections"].drop_duplicates().to_csv("selected_images_list.txt", index=False, header=False)
 
-    # Conversion factor from decimal to meters
-    conversion_factor = 100000
-    # Convert the column
-    df['distance_in_meters'] = df['distance'] * conversion_factor
-    df_sorted = df.sort_values(by='distance_in_meters')
+    # # Conversion factor from decimal to meters
+    # conversion_factor = 100000
+    # # Convert the column
+    # df['distance_in_meters'] = df['distance'] * conversion_factor
+    # df_sorted = df.sort_values(by='distance_in_meters')
+    df_sorted = selected_df.sort_values(by='real_angle')
 
     df_sorted['tree_name'] = df_sorted['tree_name'].apply(
         lambda x: x.encode('utf-8').decode('utf-8', 'ignore') if isinstance(x, str) else x)
 
-    detected_images_folder = "detected_images"
+    detected_images_folder = "detected_images/chosen_images_to_download"
     output_html_file = "index.html"
     create_html_with_images_and_details(df=df_sorted, detected_images_folder=detected_images_folder,
                                         output_html_file=output_html_file)
