@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_d24d0ee5536e5ef75a69a7837a030e5c {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+<div style="
+position: fixed;
+bottom: 50px;
+left: 50px;
+width: 200px;
+background-color: white;
+z-index:9999;
+font-size:14px;
+padding: 10px;
+border: 2px solid grey;
+border-radius: 8px;
+box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+">
+<b>Legend</b><br>
+<i class="fa fa-map-marker fa-2x" style="color:orange"></i> Car location<br>
+<i class="fa fa-map-marker fa-2x" style="color:red"></i> Detection location<br>
+<i class="fa fa-map-marker fa-2x" style="color:green"></i> Seker best match<br>
+<i class="fa fa-map-marker fa-2x" style="color:blue"></i> Seker additional match<br>
+</div>
+    
+            <div class="folium-map" id="map_d24d0ee5536e5ef75a69a7837a030e5c" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_d24d0ee5536e5ef75a69a7837a030e5c = L.map(
+                "map_d24d0ee5536e5ef75a69a7837a030e5c",
+                {
+                    center: [32.06691499837781, 34.79651527127078],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 15,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_2195ad62772bfae256cb25c24673edd2 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_2195ad62772bfae256cb25c24673edd2.addTo(map_d24d0ee5536e5ef75a69a7837a030e5c);
+        
+    
+            var marker_a0b98b35ca461cc3a691f6a6193bbeda = L.marker(
+                [32.06682465798051, 34.79644527616336],
+                {
+}
+            ).addTo(map_d24d0ee5536e5ef75a69a7837a030e5c);
+        
+    
+            var icon_74b64fc1cb988f4d195c931befc043fd = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_a0b98b35ca461cc3a691f6a6193bbeda.setIcon(icon_74b64fc1cb988f4d195c931befc043fd);
+        
+    
+        var popup_4a63f6b753aa2dd86d635ee5362575d7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a88111cfe0dd4d65540bcf91fbf73562 = $(`<div id="html_a88111cfe0dd4d65540bcf91fbf73562" style="width: 100.0%; height: 100.0%;">Best Match: אורן ירושלים (ID: 6572.0)</div>`)[0];
+                popup_4a63f6b753aa2dd86d635ee5362575d7.setContent(html_a88111cfe0dd4d65540bcf91fbf73562);
+            
+        
+
+        marker_a0b98b35ca461cc3a691f6a6193bbeda.bindPopup(popup_4a63f6b753aa2dd86d635ee5362575d7)
+        ;
+
+        
+    
+    
+            var poly_line_507c807197d8daa6433052454c3c0b6d = L.polyline(
+                [[32.06682465798051, 34.79644527616336], [32.066732712648246, 34.79640595624633]],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "black", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_d24d0ee5536e5ef75a69a7837a030e5c);
+        
+    
+        var popup_c044e0a5f34cc511497527631f370b1a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d7db590bfc85a0cfcd95dfefef929795 = $(`<div id="html_d7db590bfc85a0cfcd95dfefef929795" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 1, angle: 4.308280538928465</div>`)[0];
+                popup_c044e0a5f34cc511497527631f370b1a.setContent(html_d7db590bfc85a0cfcd95dfefef929795);
+            
+        
+
+        poly_line_507c807197d8daa6433052454c3c0b6d.bindPopup(popup_c044e0a5f34cc511497527631f370b1a)
+        ;
+
+        
+    
+    
+            var marker_181ad067d6baddf96573a9ad04c491fc = L.marker(
+                [32.06678965582424, 34.7961612748867],
+                {
+}
+            ).addTo(map_d24d0ee5536e5ef75a69a7837a030e5c);
+        
+    
+            var icon_63aee1d656c84366003acac2fc394e48 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_181ad067d6baddf96573a9ad04c491fc.setIcon(icon_63aee1d656c84366003acac2fc394e48);
+        
+    
+        var popup_1a0f398da0babdabd5be54e227bb27f6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4f51d027cf6e66c72913d4716770cd7b = $(`<div id="html_4f51d027cf6e66c72913d4716770cd7b" style="width: 100.0%; height: 100.0%;">Additional Match: אורן ירושלים (ID: 6596)</div>`)[0];
+                popup_1a0f398da0babdabd5be54e227bb27f6.setContent(html_4f51d027cf6e66c72913d4716770cd7b);
+            
+        
+
+        marker_181ad067d6baddf96573a9ad04c491fc.bindPopup(popup_1a0f398da0babdabd5be54e227bb27f6)
+        ;
+
+        
+    
+    
+            var marker_9dfb7e22dd6792049c1188d885b16a71 = L.marker(
+                [32.06672765519556, 34.79616327651794],
+                {
+}
+            ).addTo(map_d24d0ee5536e5ef75a69a7837a030e5c);
+        
+    
+            var icon_0dd44508346c934287b7c176841bc10c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_9dfb7e22dd6792049c1188d885b16a71.setIcon(icon_0dd44508346c934287b7c176841bc10c);
+        
+    
+        var popup_d5cbc222bd933a4d368be7ccbbfa7080 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_379bd334fb451fbaa324153c3927e74f = $(`<div id="html_379bd334fb451fbaa324153c3927e74f" style="width: 100.0%; height: 100.0%;">Additional Match: אורן ירושלים (ID: 6597)</div>`)[0];
+                popup_d5cbc222bd933a4d368be7ccbbfa7080.setContent(html_379bd334fb451fbaa324153c3927e74f);
+            
+        
+
+        marker_9dfb7e22dd6792049c1188d885b16a71.bindPopup(popup_d5cbc222bd933a4d368be7ccbbfa7080)
+        ;
+
+        
+    
+    
+            var marker_4b12bda828fc54f4fd85dcae53582c6e = L.marker(
+                [32.06692865578972, 34.79619427079415],
+                {
+}
+            ).addTo(map_d24d0ee5536e5ef75a69a7837a030e5c);
+        
+    
+            var icon_10448b974acce84ffb088a53d36c17dc = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_4b12bda828fc54f4fd85dcae53582c6e.setIcon(icon_10448b974acce84ffb088a53d36c17dc);
+        
+    
+        var popup_ceeab17fcecbca91827ce9a24616c07f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9250bf76e2b9ef112e9aa47f64803c3a = $(`<div id="html_9250bf76e2b9ef112e9aa47f64803c3a" style="width: 100.0%; height: 100.0%;">Additional Match: סיגלון עלי-מימוסה (ID: 6593)</div>`)[0];
+                popup_ceeab17fcecbca91827ce9a24616c07f.setContent(html_9250bf76e2b9ef112e9aa47f64803c3a);
+            
+        
+
+        marker_4b12bda828fc54f4fd85dcae53582c6e.bindPopup(popup_ceeab17fcecbca91827ce9a24616c07f)
+        ;
+
+        
+    
+    
+            var marker_2e19948d9ac5bba29dc701cb9514d7ed = L.marker(
+                [32.06691165448314, 34.79619627373572],
+                {
+}
+            ).addTo(map_d24d0ee5536e5ef75a69a7837a030e5c);
+        
+    
+            var icon_8182755625869328f0127fd5fdfa84be = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_2e19948d9ac5bba29dc701cb9514d7ed.setIcon(icon_8182755625869328f0127fd5fdfa84be);
+        
+    
+        var popup_8061676f868399e8882399c7cba4df8b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f910abcf2d3e197575119f32836f5cdf = $(`<div id="html_f910abcf2d3e197575119f32836f5cdf" style="width: 100.0%; height: 100.0%;">Additional Match: אורן ירושלים (ID: 6594)</div>`)[0];
+                popup_8061676f868399e8882399c7cba4df8b.setContent(html_f910abcf2d3e197575119f32836f5cdf);
+            
+        
+
+        marker_2e19948d9ac5bba29dc701cb9514d7ed.bindPopup(popup_8061676f868399e8882399c7cba4df8b)
+        ;
+
+        
+    
+    
+            var marker_87927b1db3b7c4ef5c5863ea7310657b = L.marker(
+                [32.06671665398751, 34.7962782714949],
+                {
+}
+            ).addTo(map_d24d0ee5536e5ef75a69a7837a030e5c);
+        
+    
+            var icon_47e8de6cd303253a822d80cbf47cc982 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_87927b1db3b7c4ef5c5863ea7310657b.setIcon(icon_47e8de6cd303253a822d80cbf47cc982);
+        
+    
+        var popup_d0739d2ff69b6dea5088e73849da9149 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a9f0773401dc00b03c76ba089aed181a = $(`<div id="html_a9f0773401dc00b03c76ba089aed181a" style="width: 100.0%; height: 100.0%;">Additional Match: סיגלון עלי-מימוסה (ID: 6598)</div>`)[0];
+                popup_d0739d2ff69b6dea5088e73849da9149.setContent(html_a9f0773401dc00b03c76ba089aed181a);
+            
+        
+
+        marker_87927b1db3b7c4ef5c5863ea7310657b.bindPopup(popup_d0739d2ff69b6dea5088e73849da9149)
+        ;
+
+        
+    
+    
+            var marker_16e717220eb0440d08cee3d621527dc1 = L.marker(
+                [32.06656266176608, 34.7963082796137],
+                {
+}
+            ).addTo(map_d24d0ee5536e5ef75a69a7837a030e5c);
+        
+    
+            var icon_bba8d0f8cfca14db70faf001ad8cd07c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_16e717220eb0440d08cee3d621527dc1.setIcon(icon_bba8d0f8cfca14db70faf001ad8cd07c);
+        
+    
+        var popup_0c3990ffeaeaeb944b9f10ff7e08e1fa = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f8d5747af27be283f23f5412885f5ba6 = $(`<div id="html_f8d5747af27be283f23f5412885f5ba6" style="width: 100.0%; height: 100.0%;">Additional Match: אורן ירושלים (ID: 6632)</div>`)[0];
+                popup_0c3990ffeaeaeb944b9f10ff7e08e1fa.setContent(html_f8d5747af27be283f23f5412885f5ba6);
+            
+        
+
+        marker_16e717220eb0440d08cee3d621527dc1.bindPopup(popup_0c3990ffeaeaeb944b9f10ff7e08e1fa)
+        ;
+
+        
+    
+    
+            var marker_28d75c72579790b911ebb2276f122621 = L.marker(
+                [32.06665966214401, 34.79631227556702],
+                {
+}
+            ).addTo(map_d24d0ee5536e5ef75a69a7837a030e5c);
+        
+    
+            var icon_71e4ffd50bff53bb7d9fa5f5964477ee = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_28d75c72579790b911ebb2276f122621.setIcon(icon_71e4ffd50bff53bb7d9fa5f5964477ee);
+        
+    
+        var popup_f7c1db9d089fb48584e192bbef468ab6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_87bc190b1d93dc7f4b7aaceac60f2ad0 = $(`<div id="html_87bc190b1d93dc7f4b7aaceac60f2ad0" style="width: 100.0%; height: 100.0%;">Additional Match: אורן ירושלים (ID: 6633)</div>`)[0];
+                popup_f7c1db9d089fb48584e192bbef468ab6.setContent(html_87bc190b1d93dc7f4b7aaceac60f2ad0);
+            
+        
+
+        marker_28d75c72579790b911ebb2276f122621.bindPopup(popup_f7c1db9d089fb48584e192bbef468ab6)
+        ;
+
+        
+    
+    
+            var marker_4c36afe98c950a201433c00abba84461 = L.marker(
+                [32.0667416611959, 34.7963792757606],
+                {
+}
+            ).addTo(map_d24d0ee5536e5ef75a69a7837a030e5c);
+        
+    
+            var icon_4ea43d49690f739984f747399949866d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_4c36afe98c950a201433c00abba84461.setIcon(icon_4ea43d49690f739984f747399949866d);
+        
+    
+        var popup_8299b08341e6cc7832f7dcde5b47ab22 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e9ec7ed7490524bc1be0c23d7a77a2ce = $(`<div id="html_e9ec7ed7490524bc1be0c23d7a77a2ce" style="width: 100.0%; height: 100.0%;">Additional Match: סיגלון עלי-מימוסה (ID: 6599)</div>`)[0];
+                popup_8299b08341e6cc7832f7dcde5b47ab22.setContent(html_e9ec7ed7490524bc1be0c23d7a77a2ce);
+            
+        
+
+        marker_4c36afe98c950a201433c00abba84461.bindPopup(popup_8299b08341e6cc7832f7dcde5b47ab22)
+        ;
+
+        
+    
+    
+            var marker_a572b2a04266eccf5384328941670fa4 = L.marker(
+                [32.06668765622216, 34.7963802780347],
+                {
+}
+            ).addTo(map_d24d0ee5536e5ef75a69a7837a030e5c);
+        
+    
+            var icon_46ae64d2f65577836d157539cd40883f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_a572b2a04266eccf5384328941670fa4.setIcon(icon_46ae64d2f65577836d157539cd40883f);
+        
+    
+        var popup_6d10d6d9b59468f89de68cdb4e44f43d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_79a0b36a2a5783dcfb73b88de5dfcffa = $(`<div id="html_79a0b36a2a5783dcfb73b88de5dfcffa" style="width: 100.0%; height: 100.0%;">Additional Match: אורן ירושלים (ID: 6602)</div>`)[0];
+                popup_6d10d6d9b59468f89de68cdb4e44f43d.setContent(html_79a0b36a2a5783dcfb73b88de5dfcffa);
+            
+        
+
+        marker_a572b2a04266eccf5384328941670fa4.bindPopup(popup_6d10d6d9b59468f89de68cdb4e44f43d)
+        ;
+
+        
+    
+    
+            var marker_d0837a61898be335fda5b6161135790a = L.marker(
+                [32.06692865699177, 34.79639627945328],
+                {
+}
+            ).addTo(map_d24d0ee5536e5ef75a69a7837a030e5c);
+        
+    
+            var icon_7b7fc039eef9ea872fb24649bc2aa3e9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_d0837a61898be335fda5b6161135790a.setIcon(icon_7b7fc039eef9ea872fb24649bc2aa3e9);
+        
+    
+        var popup_8bf6f9c146c51760de928371127b261f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b40d6de3e58a1a394f22f4a352d96857 = $(`<div id="html_b40d6de3e58a1a394f22f4a352d96857" style="width: 100.0%; height: 100.0%;">Additional Match: סיגלון עלי-מימוסה (ID: 6600)</div>`)[0];
+                popup_8bf6f9c146c51760de928371127b261f.setContent(html_b40d6de3e58a1a394f22f4a352d96857);
+            
+        
+
+        marker_d0837a61898be335fda5b6161135790a.bindPopup(popup_8bf6f9c146c51760de928371127b261f)
+        ;
+
+        
+    
+    
+            var marker_79c9612d16af225c5355f011923878aa = L.marker(
+                [32.06685365443471, 34.79642127707834],
+                {
+}
+            ).addTo(map_d24d0ee5536e5ef75a69a7837a030e5c);
+        
+    
+            var icon_063e553f94950629db4ed96adb7822b7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_79c9612d16af225c5355f011923878aa.setIcon(icon_063e553f94950629db4ed96adb7822b7);
+        
+    
+        var popup_304ad829e3ac74a88d2a1b54ccc57b2b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_159e61ecf0d101193003f3818c2cf8a2 = $(`<div id="html_159e61ecf0d101193003f3818c2cf8a2" style="width: 100.0%; height: 100.0%;">Additional Match: אורן ירושלים (ID: 6571)</div>`)[0];
+                popup_304ad829e3ac74a88d2a1b54ccc57b2b.setContent(html_159e61ecf0d101193003f3818c2cf8a2);
+            
+        
+
+        marker_79c9612d16af225c5355f011923878aa.bindPopup(popup_304ad829e3ac74a88d2a1b54ccc57b2b)
+        ;
+
+        
+    
+    
+            var marker_07906f3935e24972f051ebbafc9f44e9 = L.marker(
+                [32.06692966223103, 34.79652927770939],
+                {
+}
+            ).addTo(map_d24d0ee5536e5ef75a69a7837a030e5c);
+        
+    
+            var icon_e3a2a3f9019e966eb690bb8b92a88b40 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_07906f3935e24972f051ebbafc9f44e9.setIcon(icon_e3a2a3f9019e966eb690bb8b92a88b40);
+        
+    
+        var popup_70138664694d1b5b6ee1b405c0944665 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_858c80dba31cc0cc08d4d1d247ff8c0a = $(`<div id="html_858c80dba31cc0cc08d4d1d247ff8c0a" style="width: 100.0%; height: 100.0%;">Additional Match: סיסם הודי (ID: 6570)</div>`)[0];
+                popup_70138664694d1b5b6ee1b405c0944665.setContent(html_858c80dba31cc0cc08d4d1d247ff8c0a);
+            
+        
+
+        marker_07906f3935e24972f051ebbafc9f44e9.bindPopup(popup_70138664694d1b5b6ee1b405c0944665)
+        ;
+
+        
+    
+    
+            var marker_60fcbc1894c6f1308de1275ebea36c88 = L.marker(
+                [32.06693888142432, 34.79657111916704],
+                {
+}
+            ).addTo(map_d24d0ee5536e5ef75a69a7837a030e5c);
+        
+    
+            var icon_a922bc0c5f3274b80837ae1d82fdf41a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_60fcbc1894c6f1308de1275ebea36c88.setIcon(icon_a922bc0c5f3274b80837ae1d82fdf41a);
+        
+    
+        var popup_4e73a5b2ca6f7b3781dc95ba8e9cda52 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a97ff56ca6fa7aaf39bb7db2d544f83e = $(`<div id="html_a97ff56ca6fa7aaf39bb7db2d544f83e" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.06693888142432,34.79657111916704&layer=c&cbll=32.06693888142432,34.79657111916704&cbp=12,240,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_4e73a5b2ca6f7b3781dc95ba8e9cda52.setContent(html_a97ff56ca6fa7aaf39bb7db2d544f83e);
+            
+        
+
+        marker_60fcbc1894c6f1308de1275ebea36c88.bindPopup(popup_4e73a5b2ca6f7b3781dc95ba8e9cda52)
+        ;
+
+        
+    
+</script>
+</html>

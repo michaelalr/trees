@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_30510c59a7ef982f4260c8a0e7edc0c0 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+<div style="
+position: fixed;
+bottom: 50px;
+left: 50px;
+width: 200px;
+background-color: white;
+z-index:9999;
+font-size:14px;
+padding: 10px;
+border: 2px solid grey;
+border-radius: 8px;
+box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+">
+<b>Legend</b><br>
+<i class="fa fa-map-marker fa-2x" style="color:orange"></i> Car location<br>
+<i class="fa fa-map-marker fa-2x" style="color:red"></i> Detection location<br>
+<i class="fa fa-map-marker fa-2x" style="color:green"></i> Seker best match<br>
+<i class="fa fa-map-marker fa-2x" style="color:blue"></i> Seker additional match<br>
+</div>
+    
+            <div class="folium-map" id="map_30510c59a7ef982f4260c8a0e7edc0c0" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_30510c59a7ef982f4260c8a0e7edc0c0 = L.map(
+                "map_30510c59a7ef982f4260c8a0e7edc0c0",
+                {
+                    center: [32.054554255283875, 34.75212254642312],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 15,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_4b20326a4e51535860673b373886c6b8 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_4b20326a4e51535860673b373886c6b8.addTo(map_30510c59a7ef982f4260c8a0e7edc0c0);
+        
+    
+            var marker_fbb2397a11b7c6524f6b7e6f7456412a = L.marker(
+                [32.05471366050902, 34.75189227115712],
+                {
+}
+            ).addTo(map_30510c59a7ef982f4260c8a0e7edc0c0);
+        
+    
+            var icon_4ff9927fb3e4bfad95184860b794a263 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_fbb2397a11b7c6524f6b7e6f7456412a.setIcon(icon_4ff9927fb3e4bfad95184860b794a263);
+        
+    
+        var popup_6b3afd9e74402af2ecf94d4eb37bf98f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_471bd2f5ac594b4acc715e8cc1fef0a0 = $(`<div id="html_471bd2f5ac594b4acc715e8cc1fef0a0" style="width: 100.0%; height: 100.0%;">Best Match: וושינגטוניה חסונה (ID: 9627)</div>`)[0];
+                popup_6b3afd9e74402af2ecf94d4eb37bf98f.setContent(html_471bd2f5ac594b4acc715e8cc1fef0a0);
+            
+        
+
+        marker_fbb2397a11b7c6524f6b7e6f7456412a.bindPopup(popup_6b3afd9e74402af2ecf94d4eb37bf98f)
+        ;
+
+        
+    
+    
+            var poly_line_33284d674630b87ae03d92beab2e76e9 = L.polyline(
+                [[32.05471366050902, 34.75189227115712], [32.05461752629673, 34.75191980682903]],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "black", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_30510c59a7ef982f4260c8a0e7edc0c0);
+        
+    
+        var popup_45476ba20ffa55eb4da72707d23a725b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a4bea356227bae08e533af829aded66d = $(`<div id="html_a4bea356227bae08e533af829aded66d" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 6, angle: 4.991349726725041</div>`)[0];
+                popup_45476ba20ffa55eb4da72707d23a725b.setContent(html_a4bea356227bae08e533af829aded66d);
+            
+        
+
+        poly_line_33284d674630b87ae03d92beab2e76e9.bindPopup(popup_45476ba20ffa55eb4da72707d23a725b)
+        ;
+
+        
+    
+    
+            var marker_f4f5611f107c11d82bdcec439a03fe23 = L.marker(
+                [32.05449620055227, 34.75232523063252],
+                {
+}
+            ).addTo(map_30510c59a7ef982f4260c8a0e7edc0c0);
+        
+    
+            var icon_e3fb9cbeb2049cf87a9565de5432ed1b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_f4f5611f107c11d82bdcec439a03fe23.setIcon(icon_e3fb9cbeb2049cf87a9565de5432ed1b);
+        
+    
+        var popup_da37edb24b8438965a35cb6babb34595 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_639136ee7ed56d9f31843f19708cfc3b = $(`<div id="html_639136ee7ed56d9f31843f19708cfc3b" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.05449620055227,34.75232523063252&layer=c&cbll=32.05449620055227,34.75232523063252&cbp=12,300.0,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_da37edb24b8438965a35cb6babb34595.setContent(html_639136ee7ed56d9f31843f19708cfc3b);
+            
+        
+
+        marker_f4f5611f107c11d82bdcec439a03fe23.bindPopup(popup_da37edb24b8438965a35cb6babb34595)
+        ;
+
+        
+    
+    
+            var marker_f97cc0288cd30dd08f140e6886ec8ce3 = L.marker(
+                [32.05471366050902, 34.75189227115712],
+                {
+}
+            ).addTo(map_30510c59a7ef982f4260c8a0e7edc0c0);
+        
+    
+            var icon_4ba3b0735e9ef3ba809f90787f5cb294 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_f97cc0288cd30dd08f140e6886ec8ce3.setIcon(icon_4ba3b0735e9ef3ba809f90787f5cb294);
+        
+    
+        var popup_a8d62d11cf5e82fbe7bc62f75bc5881b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ec2b42b3fbb188226f49fe029959a6e2 = $(`<div id="html_ec2b42b3fbb188226f49fe029959a6e2" style="width: 100.0%; height: 100.0%;">Best Match: וושינגטוניה חסונה (ID: 9627)</div>`)[0];
+                popup_a8d62d11cf5e82fbe7bc62f75bc5881b.setContent(html_ec2b42b3fbb188226f49fe029959a6e2);
+            
+        
+
+        marker_f97cc0288cd30dd08f140e6886ec8ce3.bindPopup(popup_a8d62d11cf5e82fbe7bc62f75bc5881b)
+        ;
+
+        
+    
+    
+            var poly_line_187d03c7700288cf049df2e744cf1d24 = L.polyline(
+                [[32.05471366050902, 34.75189227115712], [32.054618359170284, 34.75192256397531]],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "black", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_30510c59a7ef982f4260c8a0e7edc0c0);
+        
+    
+        var popup_94885072b4f7f77551d4c86e363a9de6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0ad7e7417465124d1b4c4f14dba2f7ac = $(`<div id="html_0ad7e7417465124d1b4c4f14dba2f7ac" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 5, angle: 5.020152690969432</div>`)[0];
+                popup_94885072b4f7f77551d4c86e363a9de6.setContent(html_0ad7e7417465124d1b4c4f14dba2f7ac);
+            
+        
+
+        poly_line_187d03c7700288cf049df2e744cf1d24.bindPopup(popup_94885072b4f7f77551d4c86e363a9de6)
+        ;
+
+        
+    
+    
+            var marker_b44902cc002eb2212aebf3db3454f1b5 = L.marker(
+                [32.05449620055227, 34.75232523063252],
+                {
+}
+            ).addTo(map_30510c59a7ef982f4260c8a0e7edc0c0);
+        
+    
+            var icon_b4992a113dac6a4d22a12cd195c88d20 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_b44902cc002eb2212aebf3db3454f1b5.setIcon(icon_b4992a113dac6a4d22a12cd195c88d20);
+        
+    
+        var popup_082dda4d5b821273cc4f2f3889e3d0e5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_977817e0157d1781990374834f10cf03 = $(`<div id="html_977817e0157d1781990374834f10cf03" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.05449620055227,34.75232523063252&layer=c&cbll=32.05449620055227,34.75232523063252&cbp=12,300.0,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_082dda4d5b821273cc4f2f3889e3d0e5.setContent(html_977817e0157d1781990374834f10cf03);
+            
+        
+
+        marker_b44902cc002eb2212aebf3db3454f1b5.bindPopup(popup_082dda4d5b821273cc4f2f3889e3d0e5)
+        ;
+
+        
+    
+    
+            var marker_36fcd10e41534ac0defb87fd8f65a50b = L.marker(
+                [32.05471366050902, 34.75189227115712],
+                {
+}
+            ).addTo(map_30510c59a7ef982f4260c8a0e7edc0c0);
+        
+    
+            var icon_7275f9695f12a3b39dd547f581c9e453 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_36fcd10e41534ac0defb87fd8f65a50b.setIcon(icon_7275f9695f12a3b39dd547f581c9e453);
+        
+    
+        var popup_1669fe2694bac3f45e9eb1fed0404956 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_03a8867685f6b1ebad720dc9de4e87d5 = $(`<div id="html_03a8867685f6b1ebad720dc9de4e87d5" style="width: 100.0%; height: 100.0%;">Best Match: וושינגטוניה חסונה (ID: 9627)</div>`)[0];
+                popup_1669fe2694bac3f45e9eb1fed0404956.setContent(html_03a8867685f6b1ebad720dc9de4e87d5);
+            
+        
+
+        marker_36fcd10e41534ac0defb87fd8f65a50b.bindPopup(popup_1669fe2694bac3f45e9eb1fed0404956)
+        ;
+
+        
+    
+    
+            var poly_line_8a75c07b9b0ae85c4b25ca7f5c4fc3ce = L.polyline(
+                [[32.05471366050902, 34.75189227115712], [32.054623562573354, 34.751935657352945]],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "black", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_30510c59a7ef982f4260c8a0e7edc0c0);
+        
+    
+        var popup_f61c9ba7dad713fce781c1c82ce7e2ca = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_24fd0cef94a9d149b2b8c9320b873bc9 = $(`<div id="html_24fd0cef94a9d149b2b8c9320b873bc9" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 2, angle: 5.161163756092754</div>`)[0];
+                popup_f61c9ba7dad713fce781c1c82ce7e2ca.setContent(html_24fd0cef94a9d149b2b8c9320b873bc9);
+            
+        
+
+        poly_line_8a75c07b9b0ae85c4b25ca7f5c4fc3ce.bindPopup(popup_f61c9ba7dad713fce781c1c82ce7e2ca)
+        ;
+
+        
+    
+    
+            var marker_f8f2a178ca79873aa379a558754a655f = L.marker(
+                [32.05449620055227, 34.75232523063252],
+                {
+}
+            ).addTo(map_30510c59a7ef982f4260c8a0e7edc0c0);
+        
+    
+            var icon_871d956b96c1fe74103a54441246825b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_f8f2a178ca79873aa379a558754a655f.setIcon(icon_871d956b96c1fe74103a54441246825b);
+        
+    
+        var popup_49dfa6c785f00cc18d30753436f7836a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_757a2725ac19331c8dee4db7c169639a = $(`<div id="html_757a2725ac19331c8dee4db7c169639a" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.05449620055227,34.75232523063252&layer=c&cbll=32.05449620055227,34.75232523063252&cbp=12,300.0,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_49dfa6c785f00cc18d30753436f7836a.setContent(html_757a2725ac19331c8dee4db7c169639a);
+            
+        
+
+        marker_f8f2a178ca79873aa379a558754a655f.bindPopup(popup_49dfa6c785f00cc18d30753436f7836a)
+        ;
+
+        
+    
+    
+            var marker_018b782426a7ba9deb51fbc41be3136f = L.marker(
+                [32.05471366050902, 34.75189227115712],
+                {
+}
+            ).addTo(map_30510c59a7ef982f4260c8a0e7edc0c0);
+        
+    
+            var icon_c2de98bc7f017a66f990e4668ad11564 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_018b782426a7ba9deb51fbc41be3136f.setIcon(icon_c2de98bc7f017a66f990e4668ad11564);
+        
+    
+        var popup_bdcac338434c5f1b5dd71cb0dbb8da9c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_88bfbb7373b0a1414a049c4312169365 = $(`<div id="html_88bfbb7373b0a1414a049c4312169365" style="width: 100.0%; height: 100.0%;">Best Match: וושינגטוניה חסונה (ID: 9627)</div>`)[0];
+                popup_bdcac338434c5f1b5dd71cb0dbb8da9c.setContent(html_88bfbb7373b0a1414a049c4312169365);
+            
+        
+
+        marker_018b782426a7ba9deb51fbc41be3136f.bindPopup(popup_bdcac338434c5f1b5dd71cb0dbb8da9c)
+        ;
+
+        
+    
+    
+            var poly_line_729ff7749374b85b6c80b8520e38681a = L.polyline(
+                [[32.05471366050902, 34.75189227115712], [32.054625582264315, 34.751939623272264]],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "black", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_30510c59a7ef982f4260c8a0e7edc0c0);
+        
+    
+        var popup_5f55674e5560ae78d25f6bc5ff4afb6b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_581c911e2534a1f4f78468523a4f64ea = $(`<div id="html_581c911e2534a1f4f78468523a4f64ea" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 3, angle: 5.205673236020152</div>`)[0];
+                popup_5f55674e5560ae78d25f6bc5ff4afb6b.setContent(html_581c911e2534a1f4f78468523a4f64ea);
+            
+        
+
+        poly_line_729ff7749374b85b6c80b8520e38681a.bindPopup(popup_5f55674e5560ae78d25f6bc5ff4afb6b)
+        ;
+
+        
+    
+    
+            var marker_2f215f1bf868459c8d28494cc6392981 = L.marker(
+                [32.05449620055227, 34.75232523063252],
+                {
+}
+            ).addTo(map_30510c59a7ef982f4260c8a0e7edc0c0);
+        
+    
+            var icon_cf6197ed2993a374b26af50e3c4f8439 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_2f215f1bf868459c8d28494cc6392981.setIcon(icon_cf6197ed2993a374b26af50e3c4f8439);
+        
+    
+        var popup_ca56d1215021dc8ebad0159af1dbb885 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d49071acaa0e9e1e6f98988714c3d08c = $(`<div id="html_d49071acaa0e9e1e6f98988714c3d08c" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.05449620055227,34.75232523063252&layer=c&cbll=32.05449620055227,34.75232523063252&cbp=12,300.0,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_ca56d1215021dc8ebad0159af1dbb885.setContent(html_d49071acaa0e9e1e6f98988714c3d08c);
+            
+        
+
+        marker_2f215f1bf868459c8d28494cc6392981.bindPopup(popup_ca56d1215021dc8ebad0159af1dbb885)
+        ;
+
+        
+    
+    
+            var marker_c67cfcaab8b0c123f59ef9b039a1ec0f = L.marker(
+                [32.05471366050902, 34.75189227115712],
+                {
+}
+            ).addTo(map_30510c59a7ef982f4260c8a0e7edc0c0);
+        
+    
+            var icon_07f8ecc3477b3779ae57a6f29dfde821 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_c67cfcaab8b0c123f59ef9b039a1ec0f.setIcon(icon_07f8ecc3477b3779ae57a6f29dfde821);
+        
+    
+        var popup_36ad0d6d38a622af8bd08e5e9154482e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_38ae90671ad84126686e149bec640663 = $(`<div id="html_38ae90671ad84126686e149bec640663" style="width: 100.0%; height: 100.0%;">Best Match: וושינגטוניה חסונה (ID: 9627)</div>`)[0];
+                popup_36ad0d6d38a622af8bd08e5e9154482e.setContent(html_38ae90671ad84126686e149bec640663);
+            
+        
+
+        marker_c67cfcaab8b0c123f59ef9b039a1ec0f.bindPopup(popup_36ad0d6d38a622af8bd08e5e9154482e)
+        ;
+
+        
+    
+    
+            var poly_line_9ba7ea53163ddf73056650af62690f60 = L.polyline(
+                [[32.05471366050902, 34.75189227115712], [32.054628403671146, 34.75194453272613]],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "black", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_30510c59a7ef982f4260c8a0e7edc0c0);
+        
+    
+        var popup_b7b0770b4a7dcd0fd0a8af913e63c626 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_421f5dc4a3fce609359ce75746f45758 = $(`<div id="html_421f5dc4a3fce609359ce75746f45758" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 7, angle: 5.26230506841676</div>`)[0];
+                popup_b7b0770b4a7dcd0fd0a8af913e63c626.setContent(html_421f5dc4a3fce609359ce75746f45758);
+            
+        
+
+        poly_line_9ba7ea53163ddf73056650af62690f60.bindPopup(popup_b7b0770b4a7dcd0fd0a8af913e63c626)
+        ;
+
+        
+    
+    
+            var marker_c6fe38fd20e1df1e2ec07bd873a924bb = L.marker(
+                [32.05449620055227, 34.75232523063252],
+                {
+}
+            ).addTo(map_30510c59a7ef982f4260c8a0e7edc0c0);
+        
+    
+            var icon_e9028237be44d4b065aad652a135a7f9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_c6fe38fd20e1df1e2ec07bd873a924bb.setIcon(icon_e9028237be44d4b065aad652a135a7f9);
+        
+    
+        var popup_48b91597a5e46b381a773c90699f1d16 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c5c9b17dd2d50d0bdf7db4087c7b3450 = $(`<div id="html_c5c9b17dd2d50d0bdf7db4087c7b3450" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.05449620055227,34.75232523063252&layer=c&cbll=32.05449620055227,34.75232523063252&cbp=12,300.0,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_48b91597a5e46b381a773c90699f1d16.setContent(html_c5c9b17dd2d50d0bdf7db4087c7b3450);
+            
+        
+
+        marker_c6fe38fd20e1df1e2ec07bd873a924bb.bindPopup(popup_48b91597a5e46b381a773c90699f1d16)
+        ;
+
+        
+    
+    
+            var marker_19cb37bb45e37663f9cb362ed762d4d9 = L.marker(
+                [32.05471366050902, 34.75189227115712],
+                {
+}
+            ).addTo(map_30510c59a7ef982f4260c8a0e7edc0c0);
+        
+    
+            var icon_1213abb6b5af903a7e9fca541887dbbc = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_19cb37bb45e37663f9cb362ed762d4d9.setIcon(icon_1213abb6b5af903a7e9fca541887dbbc);
+        
+    
+        var popup_2c0e0c50e9f2d73cc6ceceffb6fc916f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_46a76081a141841b67b69badde07705b = $(`<div id="html_46a76081a141841b67b69badde07705b" style="width: 100.0%; height: 100.0%;">Best Match: וושינגטוניה חסונה (ID: 9627)</div>`)[0];
+                popup_2c0e0c50e9f2d73cc6ceceffb6fc916f.setContent(html_46a76081a141841b67b69badde07705b);
+            
+        
+
+        marker_19cb37bb45e37663f9cb362ed762d4d9.bindPopup(popup_2c0e0c50e9f2d73cc6ceceffb6fc916f)
+        ;
+
+        
+    
+    
+            var poly_line_8d7af8d032c59f6c984befe5bdd00d52 = L.polyline(
+                [[32.05471366050902, 34.75189227115712], [32.05462933741289, 34.75194602630067]],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "black", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_30510c59a7ef982f4260c8a0e7edc0c0);
+        
+    
+        var popup_bf0c988cfaf257163b71315fa009b7aa = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8154c865eba0e240af4caf59c5711cb8 = $(`<div id="html_8154c865eba0e240af4caf59c5711cb8" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 1, angle: 5.2799196044405035</div>`)[0];
+                popup_bf0c988cfaf257163b71315fa009b7aa.setContent(html_8154c865eba0e240af4caf59c5711cb8);
+            
+        
+
+        poly_line_8d7af8d032c59f6c984befe5bdd00d52.bindPopup(popup_bf0c988cfaf257163b71315fa009b7aa)
+        ;
+
+        
+    
+    
+            var marker_4c2a338bd77143f0a05ab11d2f01512e = L.marker(
+                [32.05449620055227, 34.75232523063252],
+                {
+}
+            ).addTo(map_30510c59a7ef982f4260c8a0e7edc0c0);
+        
+    
+            var icon_8fbbb5f33e6a2921d91030f2b88f3db0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_4c2a338bd77143f0a05ab11d2f01512e.setIcon(icon_8fbbb5f33e6a2921d91030f2b88f3db0);
+        
+    
+        var popup_fae04fd100dab8b94f3cbb89d3d5dc8f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_965ed80b0d448709c26e703d3d7ea739 = $(`<div id="html_965ed80b0d448709c26e703d3d7ea739" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.05449620055227,34.75232523063252&layer=c&cbll=32.05449620055227,34.75232523063252&cbp=12,300.0,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_fae04fd100dab8b94f3cbb89d3d5dc8f.setContent(html_965ed80b0d448709c26e703d3d7ea739);
+            
+        
+
+        marker_4c2a338bd77143f0a05ab11d2f01512e.bindPopup(popup_fae04fd100dab8b94f3cbb89d3d5dc8f)
+        ;
+
+        
+    
+    
+            var marker_170a99358565a9a4cdc8830f0e32ff9b = L.marker(
+                [32.05471366050902, 34.75189227115712],
+                {
+}
+            ).addTo(map_30510c59a7ef982f4260c8a0e7edc0c0);
+        
+    
+            var icon_c894d942870e71ecc9721fad468a1fa7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_170a99358565a9a4cdc8830f0e32ff9b.setIcon(icon_c894d942870e71ecc9721fad468a1fa7);
+        
+    
+        var popup_f612970ef87ba90b735ee626ad19c79d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5c3f587bec2df8df723594116ae287e8 = $(`<div id="html_5c3f587bec2df8df723594116ae287e8" style="width: 100.0%; height: 100.0%;">Best Match: וושינגטוניה חסונה (ID: 9627)</div>`)[0];
+                popup_f612970ef87ba90b735ee626ad19c79d.setContent(html_5c3f587bec2df8df723594116ae287e8);
+            
+        
+
+        marker_170a99358565a9a4cdc8830f0e32ff9b.bindPopup(popup_f612970ef87ba90b735ee626ad19c79d)
+        ;
+
+        
+    
+    
+            var poly_line_74b30f7c840beabd174318d7c60b1f37 = L.polyline(
+                [[32.05471366050902, 34.75189227115712], [32.05463778105853, 34.75195740416713]],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "black", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_30510c59a7ef982f4260c8a0e7edc0c0);
+        
+    
+        var popup_10a55dfc5022f61faf976b753516afb8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a27ad6b98f855b27ba8d3f6c0a17eecb = $(`<div id="html_a27ad6b98f855b27ba8d3f6c0a17eecb" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 4, angle: 5.421725013378538</div>`)[0];
+                popup_10a55dfc5022f61faf976b753516afb8.setContent(html_a27ad6b98f855b27ba8d3f6c0a17eecb);
+            
+        
+
+        poly_line_74b30f7c840beabd174318d7c60b1f37.bindPopup(popup_10a55dfc5022f61faf976b753516afb8)
+        ;
+
+        
+    
+    
+            var marker_b8b78a2006c0239c3dceeab4d1789a55 = L.marker(
+                [32.05449620055227, 34.75232523063252],
+                {
+}
+            ).addTo(map_30510c59a7ef982f4260c8a0e7edc0c0);
+        
+    
+            var icon_7b66757a1ea7bee028fa3dae9a5e2165 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_b8b78a2006c0239c3dceeab4d1789a55.setIcon(icon_7b66757a1ea7bee028fa3dae9a5e2165);
+        
+    
+        var popup_fa727ec251fd57ff2c25e5a0d62cd55b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_93c69595fd6975baa813f708350d8ec7 = $(`<div id="html_93c69595fd6975baa813f708350d8ec7" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.05449620055227,34.75232523063252&layer=c&cbll=32.05449620055227,34.75232523063252&cbp=12,300.0,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_fa727ec251fd57ff2c25e5a0d62cd55b.setContent(html_93c69595fd6975baa813f708350d8ec7);
+            
+        
+
+        marker_b8b78a2006c0239c3dceeab4d1789a55.bindPopup(popup_fa727ec251fd57ff2c25e5a0d62cd55b)
+        ;
+
+        
+    
+</script>
+</html>

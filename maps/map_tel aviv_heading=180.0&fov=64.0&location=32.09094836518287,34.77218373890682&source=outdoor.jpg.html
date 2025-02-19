@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_72573a0cd396885f1f906b21a1122b02 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+<div style="
+position: fixed;
+bottom: 50px;
+left: 50px;
+width: 200px;
+background-color: white;
+z-index:9999;
+font-size:14px;
+padding: 10px;
+border: 2px solid grey;
+border-radius: 8px;
+box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+">
+<b>Legend</b><br>
+<i class="fa fa-map-marker fa-2x" style="color:orange"></i> Car location<br>
+<i class="fa fa-map-marker fa-2x" style="color:red"></i> Detection location<br>
+<i class="fa fa-map-marker fa-2x" style="color:green"></i> Seker best match<br>
+<i class="fa fa-map-marker fa-2x" style="color:blue"></i> Seker additional match<br>
+</div>
+    
+            <div class="folium-map" id="map_72573a0cd396885f1f906b21a1122b02" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_72573a0cd396885f1f906b21a1122b02 = L.map(
+                "map_72573a0cd396885f1f906b21a1122b02",
+                {
+                    center: [32.09052368134304, 34.77207363610513],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 15,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_bc524fe2b75a3479110375d170cbc0ae = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_bc524fe2b75a3479110375d170cbc0ae.addTo(map_72573a0cd396885f1f906b21a1122b02);
+        
+    
+            var marker_3ff9ff3410be034be689097995b2a708 = L.marker(
+                [32.09059665361407, 34.77199426930486],
+                {
+}
+            ).addTo(map_72573a0cd396885f1f906b21a1122b02);
+        
+    
+            var icon_24d36f490b2663041da5824178a0549b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_3ff9ff3410be034be689097995b2a708.setIcon(icon_24d36f490b2663041da5824178a0549b);
+        
+    
+        var popup_a3be1344f2648affbdeb3982ad8f3855 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8f0e22f62913954aeed7041f1b7961cf = $(`<div id="html_8f0e22f62913954aeed7041f1b7961cf" style="width: 100.0%; height: 100.0%;">Best Match: פיקוס מעוקם (ID: 13093.0)</div>`)[0];
+                popup_a3be1344f2648affbdeb3982ad8f3855.setContent(html_8f0e22f62913954aeed7041f1b7961cf);
+            
+        
+
+        marker_3ff9ff3410be034be689097995b2a708.bindPopup(popup_a3be1344f2648affbdeb3982ad8f3855)
+        ;
+
+        
+    
+    
+            var poly_line_b7b26d7d72a75768efd523b78f0bf24c = L.polyline(
+                [[32.09059665361407, 34.77199426930486], [32.09057155748705, 34.771897469592005]],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "black", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_72573a0cd396885f1f906b21a1122b02);
+        
+    
+        var popup_96ab3438149e749b3066fd5167b65ee0 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1c0ed29c8ad70190c71487b5d3c2cd5b = $(`<div id="html_1c0ed29c8ad70190c71487b5d3c2cd5b" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 1, angle: 3.395265831759301</div>`)[0];
+                popup_96ab3438149e749b3066fd5167b65ee0.setContent(html_1c0ed29c8ad70190c71487b5d3c2cd5b);
+            
+        
+
+        poly_line_b7b26d7d72a75768efd523b78f0bf24c.bindPopup(popup_96ab3438149e749b3066fd5167b65ee0)
+        ;
+
+        
+    
+    
+            var marker_29f8c6efc0c8f6c65cb070bf73a54f56 = L.marker(
+                [32.09051865846882, 34.77200227414512],
+                {
+}
+            ).addTo(map_72573a0cd396885f1f906b21a1122b02);
+        
+    
+            var icon_4984c76bd8df5f69a6805e33690fb992 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_29f8c6efc0c8f6c65cb070bf73a54f56.setIcon(icon_4984c76bd8df5f69a6805e33690fb992);
+        
+    
+        var popup_e0c7db16f6eb0cc3758203ec134fe088 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1de5a82b4a210ad1e57e0686de1a1f97 = $(`<div id="html_1de5a82b4a210ad1e57e0686de1a1f97" style="width: 100.0%; height: 100.0%;">Additional Match: פיקוס מעוקם (ID: 13117)</div>`)[0];
+                popup_e0c7db16f6eb0cc3758203ec134fe088.setContent(html_1de5a82b4a210ad1e57e0686de1a1f97);
+            
+        
+
+        marker_29f8c6efc0c8f6c65cb070bf73a54f56.bindPopup(popup_e0c7db16f6eb0cc3758203ec134fe088)
+        ;
+
+        
+    
+    
+            var marker_2ece5b01f84284091afdb492736bfd0e = L.marker(
+                [32.09049665639211, 34.77201327789568],
+                {
+}
+            ).addTo(map_72573a0cd396885f1f906b21a1122b02);
+        
+    
+            var icon_73d596ce2fd1fc97ff4307c780258d4b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_2ece5b01f84284091afdb492736bfd0e.setIcon(icon_73d596ce2fd1fc97ff4307c780258d4b);
+        
+    
+        var popup_8f6887dfaa53d6040fa6685ac9d62e1a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_49821b97e0c72ae4a98172c31f66f64a = $(`<div id="html_49821b97e0c72ae4a98172c31f66f64a" style="width: 100.0%; height: 100.0%;">Additional Match: אשל הפרקים (ID: 13146)</div>`)[0];
+                popup_8f6887dfaa53d6040fa6685ac9d62e1a.setContent(html_49821b97e0c72ae4a98172c31f66f64a);
+            
+        
+
+        marker_2ece5b01f84284091afdb492736bfd0e.bindPopup(popup_8f6887dfaa53d6040fa6685ac9d62e1a)
+        ;
+
+        
+    
+    
+            var marker_8e9071442f73905fba61da15e56e40e4 = L.marker(
+                [32.09051865656031, 34.77204927501667],
+                {
+}
+            ).addTo(map_72573a0cd396885f1f906b21a1122b02);
+        
+    
+            var icon_6b9c261c4eef9733c8cc3a2df302fe1a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_8e9071442f73905fba61da15e56e40e4.setIcon(icon_6b9c261c4eef9733c8cc3a2df302fe1a);
+        
+    
+        var popup_14e8159e1e01a2ec2c36e43bf76ad0b6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_406894b1064dc35a09a599c1e7fee60b = $(`<div id="html_406894b1064dc35a09a599c1e7fee60b" style="width: 100.0%; height: 100.0%;">Additional Match: אשל הפרקים (ID: 13124)</div>`)[0];
+                popup_14e8159e1e01a2ec2c36e43bf76ad0b6.setContent(html_406894b1064dc35a09a599c1e7fee60b);
+            
+        
+
+        marker_8e9071442f73905fba61da15e56e40e4.bindPopup(popup_14e8159e1e01a2ec2c36e43bf76ad0b6)
+        ;
+
+        
+    
+    
+            var marker_037cbbeefa9594d8a676dba6952fa93f = L.marker(
+                [32.09054165257633, 34.77210226913438],
+                {
+}
+            ).addTo(map_72573a0cd396885f1f906b21a1122b02);
+        
+    
+            var icon_3280120731aa69889a04fc920f3f0c41 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_037cbbeefa9594d8a676dba6952fa93f.setIcon(icon_3280120731aa69889a04fc920f3f0c41);
+        
+    
+        var popup_f9af189c6d88c0ebb8bd4dd8dd229637 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_dd3f763a1e757332a10c021b07abc60a = $(`<div id="html_dd3f763a1e757332a10c021b07abc60a" style="width: 100.0%; height: 100.0%;">Additional Match: אשל הפרקים (ID: 13123)</div>`)[0];
+                popup_f9af189c6d88c0ebb8bd4dd8dd229637.setContent(html_dd3f763a1e757332a10c021b07abc60a);
+            
+        
+
+        marker_037cbbeefa9594d8a676dba6952fa93f.bindPopup(popup_f9af189c6d88c0ebb8bd4dd8dd229637)
+        ;
+
+        
+    
+    
+            var marker_45f3ef26105582e9823b80a26fb3b0a0 = L.marker(
+                [32.09080465901688, 34.77212627380675],
+                {
+}
+            ).addTo(map_72573a0cd396885f1f906b21a1122b02);
+        
+    
+            var icon_3a6d6d586598007048d2288e25e8cc44 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_45f3ef26105582e9823b80a26fb3b0a0.setIcon(icon_3a6d6d586598007048d2288e25e8cc44);
+        
+    
+        var popup_7a307540f5563a84cc98658e7af7a7c8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c50b68d1df019a11d4bbe825aca847f1 = $(`<div id="html_c50b68d1df019a11d4bbe825aca847f1" style="width: 100.0%; height: 100.0%;">Additional Match: אשל הפרקים (ID: 13411)</div>`)[0];
+                popup_7a307540f5563a84cc98658e7af7a7c8.setContent(html_c50b68d1df019a11d4bbe825aca847f1);
+            
+        
+
+        marker_45f3ef26105582e9823b80a26fb3b0a0.bindPopup(popup_7a307540f5563a84cc98658e7af7a7c8)
+        ;
+
+        
+    
+    
+            var marker_34234364a9398139ab9487c5a5050637 = L.marker(
+                [32.09073665539458, 34.77212627619839],
+                {
+}
+            ).addTo(map_72573a0cd396885f1f906b21a1122b02);
+        
+    
+            var icon_496161a29fe90334af5cb7d4c7a592de = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_34234364a9398139ab9487c5a5050637.setIcon(icon_496161a29fe90334af5cb7d4c7a592de);
+        
+    
+        var popup_d441f5e4bba256f3432f87adf80294bb = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e2fc209eb5d7b3d1fb50d6d9435b9f1f = $(`<div id="html_e2fc209eb5d7b3d1fb50d6d9435b9f1f" style="width: 100.0%; height: 100.0%;">Additional Match: פיקוס מעוקם (ID: 13129)</div>`)[0];
+                popup_d441f5e4bba256f3432f87adf80294bb.setContent(html_e2fc209eb5d7b3d1fb50d6d9435b9f1f);
+            
+        
+
+        marker_34234364a9398139ab9487c5a5050637.bindPopup(popup_d441f5e4bba256f3432f87adf80294bb)
+        ;
+
+        
+    
+    
+            var marker_afe9c941a939bdded4d18c8a5f7b9472 = L.marker(
+                [32.09047165698338, 34.77213427157489],
+                {
+}
+            ).addTo(map_72573a0cd396885f1f906b21a1122b02);
+        
+    
+            var icon_6e48cc946d56187687d71ce5eed583df = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_afe9c941a939bdded4d18c8a5f7b9472.setIcon(icon_6e48cc946d56187687d71ce5eed583df);
+        
+    
+        var popup_65df4466b749d547bbc9230f1c4130dc = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1f3b7d3a7f7b8e36f6ff157bde57d3e3 = $(`<div id="html_1f3b7d3a7f7b8e36f6ff157bde57d3e3" style="width: 100.0%; height: 100.0%;">Additional Match: אשל הפרקים (ID: 13127)</div>`)[0];
+                popup_65df4466b749d547bbc9230f1c4130dc.setContent(html_1f3b7d3a7f7b8e36f6ff157bde57d3e3);
+            
+        
+
+        marker_afe9c941a939bdded4d18c8a5f7b9472.bindPopup(popup_65df4466b749d547bbc9230f1c4130dc)
+        ;
+
+        
+    
+    
+            var marker_3c974d1382109206bbe6081a290c14e0 = L.marker(
+                [32.09045865350185, 34.77214227749493],
+                {
+}
+            ).addTo(map_72573a0cd396885f1f906b21a1122b02);
+        
+    
+            var icon_73fbc93629fd941906eeedea1228dc05 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_3c974d1382109206bbe6081a290c14e0.setIcon(icon_73fbc93629fd941906eeedea1228dc05);
+        
+    
+        var popup_848f1726a71509e59133e93104791e9a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_80c7fe5582b5dcab5524955c36d35ae3 = $(`<div id="html_80c7fe5582b5dcab5524955c36d35ae3" style="width: 100.0%; height: 100.0%;">Additional Match: אשל הפרקים (ID: 13128)</div>`)[0];
+                popup_848f1726a71509e59133e93104791e9a.setContent(html_80c7fe5582b5dcab5524955c36d35ae3);
+            
+        
+
+        marker_3c974d1382109206bbe6081a290c14e0.bindPopup(popup_848f1726a71509e59133e93104791e9a)
+        ;
+
+        
+    
+    
+            var marker_1d25028b32c21924fef810ead95e9d74 = L.marker(
+                [32.09083266041137, 34.77215827045663],
+                {
+}
+            ).addTo(map_72573a0cd396885f1f906b21a1122b02);
+        
+    
+            var icon_5af51cab673819e41efcebb3a38462c8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_1d25028b32c21924fef810ead95e9d74.setIcon(icon_5af51cab673819e41efcebb3a38462c8);
+        
+    
+        var popup_5b9ef91d13142c3009eef4872b5a5ff2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_46dae622957232cde14cd70a57efe62f = $(`<div id="html_46dae622957232cde14cd70a57efe62f" style="width: 100.0%; height: 100.0%;">Additional Match: פיקוס מעוקם (ID: 13130)</div>`)[0];
+                popup_5b9ef91d13142c3009eef4872b5a5ff2.setContent(html_46dae622957232cde14cd70a57efe62f);
+            
+        
+
+        marker_1d25028b32c21924fef810ead95e9d74.bindPopup(popup_5b9ef91d13142c3009eef4872b5a5ff2)
+        ;
+
+        
+    
+    
+            var marker_9d95b78e3f34d026ee89f974e4cbf621 = L.marker(
+                [32.09088266123494, 34.77216527005982],
+                {
+}
+            ).addTo(map_72573a0cd396885f1f906b21a1122b02);
+        
+    
+            var icon_02c8ae9dee45df4e48ec1a9e0dfc6dc0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_9d95b78e3f34d026ee89f974e4cbf621.setIcon(icon_02c8ae9dee45df4e48ec1a9e0dfc6dc0);
+        
+    
+        var popup_f2ec8ad088a10de7149090bbb4a668ea = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6354b4a8c18ccadcb53f5b7272560e5c = $(`<div id="html_6354b4a8c18ccadcb53f5b7272560e5c" style="width: 100.0%; height: 100.0%;">Additional Match: אשל הפרקים (ID: 13410)</div>`)[0];
+                popup_f2ec8ad088a10de7149090bbb4a668ea.setContent(html_6354b4a8c18ccadcb53f5b7272560e5c);
+            
+        
+
+        marker_9d95b78e3f34d026ee89f974e4cbf621.bindPopup(popup_f2ec8ad088a10de7149090bbb4a668ea)
+        ;
+
+        
+    
+    
+            var marker_50254dd445ed1fa9c3906416e8fd27c0 = L.marker(
+                [32.09050865307551, 34.77218326980143],
+                {
+}
+            ).addTo(map_72573a0cd396885f1f906b21a1122b02);
+        
+    
+            var icon_6ec72ee2f9952bb9dd8a050a480f9fac = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_50254dd445ed1fa9c3906416e8fd27c0.setIcon(icon_6ec72ee2f9952bb9dd8a050a480f9fac);
+        
+    
+        var popup_058a425de8f4ee6d011c5e2def5421a7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_521f581c540e8a9fc180201b1f1edcb8 = $(`<div id="html_521f581c540e8a9fc180201b1f1edcb8" style="width: 100.0%; height: 100.0%;">Additional Match: אשל הפרקים (ID: 13125)</div>`)[0];
+                popup_058a425de8f4ee6d011c5e2def5421a7.setContent(html_521f581c540e8a9fc180201b1f1edcb8);
+            
+        
+
+        marker_50254dd445ed1fa9c3906416e8fd27c0.bindPopup(popup_058a425de8f4ee6d011c5e2def5421a7)
+        ;
+
+        
+    
+    
+            var marker_957dc0da652a823bd6465284aa2b1fac = L.marker(
+                [32.09080665535332, 34.77220127323195],
+                {
+}
+            ).addTo(map_72573a0cd396885f1f906b21a1122b02);
+        
+    
+            var icon_ad99c5f78b7436e5068578ee97dbc23e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_957dc0da652a823bd6465284aa2b1fac.setIcon(icon_ad99c5f78b7436e5068578ee97dbc23e);
+        
+    
+        var popup_08b4d87d46a220b9aeff205ca4c38958 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_077134e82f386cb61e6ec6877e7cd94a = $(`<div id="html_077134e82f386cb61e6ec6877e7cd94a" style="width: 100.0%; height: 100.0%;">Additional Match: אשל הפרקים (ID: 13131)</div>`)[0];
+                popup_08b4d87d46a220b9aeff205ca4c38958.setContent(html_077134e82f386cb61e6ec6877e7cd94a);
+            
+        
+
+        marker_957dc0da652a823bd6465284aa2b1fac.bindPopup(popup_08b4d87d46a220b9aeff205ca4c38958)
+        ;
+
+        
+    
+    
+            var marker_8e88b5e50728603ac9572ed75d426aae = L.marker(
+                [32.0904836570465, 34.77223127812466],
+                {
+}
+            ).addTo(map_72573a0cd396885f1f906b21a1122b02);
+        
+    
+            var icon_45c932c3b08dac41c50c47e8329fa516 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_8e88b5e50728603ac9572ed75d426aae.setIcon(icon_45c932c3b08dac41c50c47e8329fa516);
+        
+    
+        var popup_fdc6d8085df0d336138837767b268c34 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1a0f83337fa0926ce8d81ae425217205 = $(`<div id="html_1a0f83337fa0926ce8d81ae425217205" style="width: 100.0%; height: 100.0%;">Additional Match: אשל הפרקים (ID: 13145)</div>`)[0];
+                popup_fdc6d8085df0d336138837767b268c34.setContent(html_1a0f83337fa0926ce8d81ae425217205);
+            
+        
+
+        marker_8e88b5e50728603ac9572ed75d426aae.bindPopup(popup_fdc6d8085df0d336138837767b268c34)
+        ;
+
+        
+    
+    
+            var marker_41183c5c9433b5647e0fd67277ecd127 = L.marker(
+                [32.09063666097398, 34.77227827916271],
+                {
+}
+            ).addTo(map_72573a0cd396885f1f906b21a1122b02);
+        
+    
+            var icon_adb8cb7719f2fd5973941f12036fcfd4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_41183c5c9433b5647e0fd67277ecd127.setIcon(icon_adb8cb7719f2fd5973941f12036fcfd4);
+        
+    
+        var popup_7c66a2aba2d8c7b7759b89adefbb2120 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f76ac6a318f479c51ff4d6d2bdd3be5e = $(`<div id="html_f76ac6a318f479c51ff4d6d2bdd3be5e" style="width: 100.0%; height: 100.0%;">Additional Match: אשל הפרקים (ID: 13142)</div>`)[0];
+                popup_7c66a2aba2d8c7b7759b89adefbb2120.setContent(html_f76ac6a318f479c51ff4d6d2bdd3be5e);
+            
+        
+
+        marker_41183c5c9433b5647e0fd67277ecd127.bindPopup(popup_7c66a2aba2d8c7b7759b89adefbb2120)
+        ;
+
+        
+    
+    
+            var marker_87fcfbf22f499e36da6c8450dac138f5 = L.marker(
+                [32.09055365354859, 34.77230527931419],
+                {
+}
+            ).addTo(map_72573a0cd396885f1f906b21a1122b02);
+        
+    
+            var icon_35a7d1bb37654f39c2de4bbed06f39f0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_87fcfbf22f499e36da6c8450dac138f5.setIcon(icon_35a7d1bb37654f39c2de4bbed06f39f0);
+        
+    
+        var popup_26c52f859bce8c1dd3dcffbc169e4caf = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5d675c57f16a09cbe0791fdd9e2be396 = $(`<div id="html_5d675c57f16a09cbe0791fdd9e2be396" style="width: 100.0%; height: 100.0%;">Additional Match: פיקוס מעוקם (ID: 13144)</div>`)[0];
+                popup_26c52f859bce8c1dd3dcffbc169e4caf.setContent(html_5d675c57f16a09cbe0791fdd9e2be396);
+            
+        
+
+        marker_87fcfbf22f499e36da6c8450dac138f5.bindPopup(popup_26c52f859bce8c1dd3dcffbc169e4caf)
+        ;
+
+        
+    
+    
+            var marker_9b9606865260c514ce473cdaf62c88c7 = L.marker(
+                [32.09058665690352, 34.77231527203199],
+                {
+}
+            ).addTo(map_72573a0cd396885f1f906b21a1122b02);
+        
+    
+            var icon_cdacf0d718949d15f49d8065884b0f08 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_9b9606865260c514ce473cdaf62c88c7.setIcon(icon_cdacf0d718949d15f49d8065884b0f08);
+        
+    
+        var popup_38db5c3676ab7617f5c3ee89b1823869 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_dd4c18f1d5ca369009f0e0a319ad9168 = $(`<div id="html_dd4c18f1d5ca369009f0e0a319ad9168" style="width: 100.0%; height: 100.0%;">Additional Match: אשל הפרקים (ID: 13143)</div>`)[0];
+                popup_38db5c3676ab7617f5c3ee89b1823869.setContent(html_dd4c18f1d5ca369009f0e0a319ad9168);
+            
+        
+
+        marker_9b9606865260c514ce473cdaf62c88c7.bindPopup(popup_38db5c3676ab7617f5c3ee89b1823869)
+        ;
+
+        
+    
+    
+            var marker_732eea82977401a9254f20c5597c3e98 = L.marker(
+                [32.09094836518287, 34.77218373890682],
+                {
+}
+            ).addTo(map_72573a0cd396885f1f906b21a1122b02);
+        
+    
+            var icon_99736fa1e220c4827b6a056bafce9a27 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_732eea82977401a9254f20c5597c3e98.setIcon(icon_99736fa1e220c4827b6a056bafce9a27);
+        
+    
+        var popup_3b5c7da2d44e5328454cedec08b626d9 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_86c6f721dd24862fb1c3d20206eacbe6 = $(`<div id="html_86c6f721dd24862fb1c3d20206eacbe6" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.09094836518287,34.77218373890682&layer=c&cbll=32.09094836518287,34.77218373890682&cbp=12,180,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_3b5c7da2d44e5328454cedec08b626d9.setContent(html_86c6f721dd24862fb1c3d20206eacbe6);
+            
+        
+
+        marker_732eea82977401a9254f20c5597c3e98.bindPopup(popup_3b5c7da2d44e5328454cedec08b626d9)
+        ;
+
+        
+    
+</script>
+</html>

@@ -6,6 +6,8 @@ import folium
 import pandas as pd
 from folium import Element
 import math
+import re
+import matplotlib.pyplot as plt
 
 # Add legend as an HTML element
 legend_html = """
@@ -128,7 +130,7 @@ def create_html_with_images_and_details(df, detected_images_folder, output_html_
             html_content += f"Location: ({row['x_tree_image']}, {row['y_tree_image']})<br>"
             # html_content += f"Distance (m): {row['distance_in_meters']:.3f}<br>"
             html_content += f"Real Angle (rad): {row['real_angle']:.5f}<br>"
-            html_content += f"Angle Difference (rad): {row['best_angle_diff']:.5f}<br>"
+            html_content += f"Angle Difference (deg): {row['best_angle_diff']:.5f}<br>"
             html_content += f"<strong>Best Match (Seker):</strong><br>"
             html_content += f"Tree ID: {row['tree_id']}<br>"
             html_content += f"Tree Name: {row['tree_name']}<br>"
@@ -152,7 +154,8 @@ def create_html_with_images_and_details(df, detected_images_folder, output_html_
             lambda x: ast.literal_eval(x.replace('nan', 'None')) if isinstance(x, str) else x
         )
 
-        if not pd.isna(filtered_df.iloc[0]['additional_matches']):
+        # if not pd.isna(filtered_df.iloc[0]['additional_matches']):
+        if len(filtered_df.iloc[0]['additional_matches']) > 0:
             html_content += f"<strong>Seker Matches:</strong>"
             for match in filtered_df.iloc[0]['additional_matches']:
                 html_content += "<p>"
@@ -227,7 +230,8 @@ def generate_map(filtered_df):
             # ).add_to(map_obj)
 
         # Additional matches
-        if pd.notna(row['additional_matches']):
+        # if pd.notna(row['additional_matches']):
+        if len(row['additional_matches']) > 0:
             for match in row['additional_matches']:
                 id = match['id']
                 if id not in best_match_ids:
@@ -329,30 +333,99 @@ def select_images(df):
 
     return selected_df
 
+
+def update_df_with_min_angle_diff(df, min_threshold=20, second_threshold=30):
+    # Create a copy to avoid modifying the original dataframe
+    updated_df = df.copy()
+
+    # Group by 'file_name' and 'tree_id' to process each combination
+    grouped = updated_df.groupby(['file_name', 'tree_id'])
+    counter = 0
+    # Iterate over the groups
+    for (file_name, tree_id), group in grouped:
+        # Sort the group by best_angle_diff
+        sorted_group = group.sort_values(by='best_angle_diff')
+
+        # Get the minimum and second minimum best_angle_diff values
+        if len(sorted_group) > 1:
+            min_angle_diff = sorted_group.iloc[0]['best_angle_diff']
+            second_min_angle_diff = sorted_group.iloc[1]['best_angle_diff']
+        else:
+            min_angle_diff = sorted_group.iloc[0]['best_angle_diff']
+            second_min_angle_diff = float('inf')  # No second value available
+
+        # Check if conditions are met
+        if min_angle_diff < min_threshold and second_min_angle_diff > second_threshold:
+            min_distance_idx = sorted_group.index[0]
+        else:
+            min_distance_idx = None  # No valid match
+
+        # Get all indices of the group
+        group_indices = group.index
+
+        # Define the numeric columns that should get np.nan
+        numeric_cols = ['tree_id', 'x_tree', 'y_tree', 'best_angle_diff']
+
+        # Define the string columns that should get "None"
+        string_cols = ['tree_name', 'name_eng', 'name_heb', 'type_1', 'type_2', 'type_3']
+
+        # Set fields to 'None' for rows not meeting the criteria
+        for idx in group_indices:
+            if idx != min_distance_idx:
+                updated_df.loc[idx, numeric_cols] = np.nan  # Assign NaN to numeric columns
+                updated_df.loc[idx, string_cols] = "None"  # Assign "None" to string columns
+        print(counter)
+        counter += 1
+
+    return updated_df
+
+def fix_and_eval(value):
+    if isinstance(value, str):
+        value = value.strip()  # Remove extra spaces
+        value = value.replace("nan", "None")  # Replace 'nan' with 'None'
+        value = re.sub(r"}\s*{", "}, {", value)  # Fix missing commas between dictionaries (handles newlines & spaces)
+        try:
+            return ast.literal_eval(value)  # Convert string to Python object
+        except SyntaxError as e:
+            print("Error parsing:", value)  # Debug print
+            return None  # Return None for problematic values
+    return value  # Return as is if not a string
+
+
 if __name__ == '__main__':
-    # df = pd.read_excel("south_trees_output_meters_divide=100000_angle_divide=3_y_times=12_y_exponent=2_count_distinct_trees=256.xlsx")
+    # df = pd.read_excel("all_trees_output_meters_divide=100000_angle_divide=3_y_times=12_y_exponent=2_count_distinct_trees=30590.xlsx")
     # df = pd.read_excel("real_angle_south_trees_output_meters_divide=100000_angle_divide=3_y_times=12_y_exponent=2_count_distinct_trees=256.xlsx")
-    df = pd.read_parquet('combined_data.parquet', engine="pyarrow")
+    # df = pd.read_parquet('combined_data.parquet', engine="pyarrow")
+
     # clearance
-    df.replace("None", np.nan, inplace=True)
-    df["best_angle_diff"] = pd.to_numeric(df["best_angle_diff"].astype(float), errors="coerce")
-    df["x_tree"] = pd.to_numeric(df["x_tree"].astype(float), errors="coerce")
-    df["y_tree"] = pd.to_numeric(df["y_tree"].astype(float), errors="coerce")
-    selected_df = select_images(df=df)
+    # df.replace("None", np.nan, inplace=True)
+    # df["best_angle_diff"] = pd.to_numeric(df["best_angle_diff"].astype(float), errors="coerce")
+    # df["x_tree"] = pd.to_numeric(df["x_tree"].astype(float), errors="coerce")
+    # df["y_tree"] = pd.to_numeric(df["y_tree"].astype(float), errors="coerce")
+
+    # selected_df = select_images(df=df)
+    # updated_df = update_df_with_min_angle_diff(df=df)
+    # df_sorted = updated_df.sort_values(by='best_angle_diff')
+    # df_subset = df_sorted.head(1000)
+
     # Save the list of selected images to a text file
-    selected_df["file_name_with_detections"].drop_duplicates().to_csv("selected_images_list.txt", index=False, header=False)
+    # df_subset["file_name_with_detections"].drop_duplicates().to_csv("selected_images_list.txt", index=False, header=False)
 
     # # Conversion factor from decimal to meters
     # conversion_factor = 100000
     # # Convert the column
     # df['distance_in_meters'] = df['distance'] * conversion_factor
     # df_sorted = df.sort_values(by='distance_in_meters')
-    df_sorted = selected_df.sort_values(by='real_angle')
 
-    df_sorted['tree_name'] = df_sorted['tree_name'].apply(
+    df_subset = pd.read_excel("first_1000_rows_updated_min_angle_diff.xlsx")
+
+    df_subset.loc[:, 'additional_matches'] = df_subset['additional_matches'].apply(fix_and_eval)
+
+    df_subset['tree_name'] = df_subset['tree_name'].apply(
         lambda x: x.encode('utf-8').decode('utf-8', 'ignore') if isinstance(x, str) else x)
 
     detected_images_folder = "detected_images/chosen_images_to_download"
     output_html_file = "index.html"
-    create_html_with_images_and_details(df=df_sorted, detected_images_folder=detected_images_folder,
+    create_html_with_images_and_details(df=df_subset, detected_images_folder=detected_images_folder,
                                         output_html_file=output_html_file)
+

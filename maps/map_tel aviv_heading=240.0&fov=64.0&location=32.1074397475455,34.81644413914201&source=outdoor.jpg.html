@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_f7ca89d2aad1c0b160af2f1ce95a7485 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+<div style="
+position: fixed;
+bottom: 50px;
+left: 50px;
+width: 200px;
+background-color: white;
+z-index:9999;
+font-size:14px;
+padding: 10px;
+border: 2px solid grey;
+border-radius: 8px;
+box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+">
+<b>Legend</b><br>
+<i class="fa fa-map-marker fa-2x" style="color:orange"></i> Car location<br>
+<i class="fa fa-map-marker fa-2x" style="color:red"></i> Detection location<br>
+<i class="fa fa-map-marker fa-2x" style="color:green"></i> Seker best match<br>
+<i class="fa fa-map-marker fa-2x" style="color:blue"></i> Seker additional match<br>
+</div>
+    
+            <div class="folium-map" id="map_f7ca89d2aad1c0b160af2f1ce95a7485" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_f7ca89d2aad1c0b160af2f1ce95a7485 = L.map(
+                "map_f7ca89d2aad1c0b160af2f1ce95a7485",
+                {
+                    center: [32.10735825225235, 34.81629028059399],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 15,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_44b6d5973423a5e2dc3662287c973041 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_44b6d5973423a5e2dc3662287c973041.addTo(map_f7ca89d2aad1c0b160af2f1ce95a7485);
+        
+    
+            var marker_7bf1b1efea2650553dbfcd92d20c6f70 = L.marker(
+                [32.1072896576563, 34.81629327349698],
+                {
+}
+            ).addTo(map_f7ca89d2aad1c0b160af2f1ce95a7485);
+        
+    
+            var icon_cc8a8c9c263874c32fa0d4c0fa8f80ae = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_7bf1b1efea2650553dbfcd92d20c6f70.setIcon(icon_cc8a8c9c263874c32fa0d4c0fa8f80ae);
+        
+    
+        var popup_973cba88f9b7cbdd1ef1e8245a53f3b6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_bc7d939533039f9b1d73056d8854390a = $(`<div id="html_bc7d939533039f9b1d73056d8854390a" style="width: 100.0%; height: 100.0%;">Best Match: סיגלון עלי-מימוסה (ID: 3370.0)</div>`)[0];
+                popup_973cba88f9b7cbdd1ef1e8245a53f3b6.setContent(html_bc7d939533039f9b1d73056d8854390a);
+            
+        
+
+        marker_7bf1b1efea2650553dbfcd92d20c6f70.bindPopup(popup_973cba88f9b7cbdd1ef1e8245a53f3b6)
+        ;
+
+        
+    
+    
+            var poly_line_7d9a7507b53609ac87ceababadaf73a1 = L.polyline(
+                [[32.1072896576563, 34.81629327349698], [32.10720128854901, 34.81624646643687]],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "black", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_f7ca89d2aad1c0b160af2f1ce95a7485);
+        
+    
+        var popup_21d8a2365523d1771bf40ac4fdcf8117 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3c57c3333f782608ac0a6261a9bcbd4e = $(`<div id="html_3c57c3333f782608ac0a6261a9bcbd4e" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 1, angle: 4.225282809045853</div>`)[0];
+                popup_21d8a2365523d1771bf40ac4fdcf8117.setContent(html_3c57c3333f782608ac0a6261a9bcbd4e);
+            
+        
+
+        poly_line_7d9a7507b53609ac87ceababadaf73a1.bindPopup(popup_21d8a2365523d1771bf40ac4fdcf8117)
+        ;
+
+        
+    
+    
+            var marker_bdcf83c8a6d6efc4cbe3a6330b2cc70b = L.marker(
+                [32.10731266178723, 34.81598427124236],
+                {
+}
+            ).addTo(map_f7ca89d2aad1c0b160af2f1ce95a7485);
+        
+    
+            var icon_4c1e42ef38e899f5ba6180f82cbc7693 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_bdcf83c8a6d6efc4cbe3a6330b2cc70b.setIcon(icon_4c1e42ef38e899f5ba6180f82cbc7693);
+        
+    
+        var popup_d4cf56547a75ec73bfabd248f4e7db41 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8e82c9d297c4a714487e4294d6ae9561 = $(`<div id="html_8e82c9d297c4a714487e4294d6ae9561" style="width: 100.0%; height: 100.0%;">Additional Match: וושינגטוניה חסונה (ID: 3347)</div>`)[0];
+                popup_d4cf56547a75ec73bfabd248f4e7db41.setContent(html_8e82c9d297c4a714487e4294d6ae9561);
+            
+        
+
+        marker_bdcf83c8a6d6efc4cbe3a6330b2cc70b.bindPopup(popup_d4cf56547a75ec73bfabd248f4e7db41)
+        ;
+
+        
+    
+    
+            var marker_9c98deca1866c52fa23c6f7375115d53 = L.marker(
+                [32.1073376623585, 34.81598527787244],
+                {
+}
+            ).addTo(map_f7ca89d2aad1c0b160af2f1ce95a7485);
+        
+    
+            var icon_555079e881eaff1017ab3b17d0c7e441 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_9c98deca1866c52fa23c6f7375115d53.setIcon(icon_555079e881eaff1017ab3b17d0c7e441);
+        
+    
+        var popup_35e25bde37700395e50a849ee3dc914b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1b885d406c40d539e09f33bb815d4456 = $(`<div id="html_1b885d406c40d539e09f33bb815d4456" style="width: 100.0%; height: 100.0%;">Additional Match: סיגלון עלי-מימוסה (ID: 3390)</div>`)[0];
+                popup_35e25bde37700395e50a849ee3dc914b.setContent(html_1b885d406c40d539e09f33bb815d4456);
+            
+        
+
+        marker_9c98deca1866c52fa23c6f7375115d53.bindPopup(popup_35e25bde37700395e50a849ee3dc914b)
+        ;
+
+        
+    
+    
+            var marker_8dac647aa7dfbda211a02857ddf82435 = L.marker(
+                [32.10718666042738, 34.81601827388932],
+                {
+}
+            ).addTo(map_f7ca89d2aad1c0b160af2f1ce95a7485);
+        
+    
+            var icon_0c4674cca5bc51a3e9f3509038583184 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_8dac647aa7dfbda211a02857ddf82435.setIcon(icon_0c4674cca5bc51a3e9f3509038583184);
+        
+    
+        var popup_55a329c1776e5c497983746622b04531 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f4d54ad6e31831aa1fb55437fc61a605 = $(`<div id="html_f4d54ad6e31831aa1fb55437fc61a605" style="width: 100.0%; height: 100.0%;">Additional Match: זית אירופאי (ID: 3345)</div>`)[0];
+                popup_55a329c1776e5c497983746622b04531.setContent(html_f4d54ad6e31831aa1fb55437fc61a605);
+            
+        
+
+        marker_8dac647aa7dfbda211a02857ddf82435.bindPopup(popup_55a329c1776e5c497983746622b04531)
+        ;
+
+        
+    
+    
+            var marker_355a662925e264b9870874b76a4ed7b8 = L.marker(
+                [32.1073136536144, 34.81603127662191],
+                {
+}
+            ).addTo(map_f7ca89d2aad1c0b160af2f1ce95a7485);
+        
+    
+            var icon_365e9ce6e65f7b9ef0d38ff40105ca5d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_355a662925e264b9870874b76a4ed7b8.setIcon(icon_365e9ce6e65f7b9ef0d38ff40105ca5d);
+        
+    
+        var popup_12b0593ccb7675fa3d73d1d1f98c3bdd = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a5629fc8bd59327e46a15c378ec92331 = $(`<div id="html_a5629fc8bd59327e46a15c378ec92331" style="width: 100.0%; height: 100.0%;">Additional Match: סיגלון עלי-מימוסה (ID: 3391)</div>`)[0];
+                popup_12b0593ccb7675fa3d73d1d1f98c3bdd.setContent(html_a5629fc8bd59327e46a15c378ec92331);
+            
+        
+
+        marker_355a662925e264b9870874b76a4ed7b8.bindPopup(popup_12b0593ccb7675fa3d73d1d1f98c3bdd)
+        ;
+
+        
+    
+    
+            var marker_d8a540a3820e2c557a96a8912761a097 = L.marker(
+                [32.10730365604734, 34.81603527083728],
+                {
+}
+            ).addTo(map_f7ca89d2aad1c0b160af2f1ce95a7485);
+        
+    
+            var icon_224a9b60f0b3e0c6a9aeae47114a754a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_d8a540a3820e2c557a96a8912761a097.setIcon(icon_224a9b60f0b3e0c6a9aeae47114a754a);
+        
+    
+        var popup_e82736bf6797bee9a04b3e3b0d9022ba = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_dfb17b839b8dafdc317d839812ee29a9 = $(`<div id="html_dfb17b839b8dafdc317d839812ee29a9" style="width: 100.0%; height: 100.0%;">Additional Match: סיגלון עלי-מימוסה (ID: 3392)</div>`)[0];
+                popup_e82736bf6797bee9a04b3e3b0d9022ba.setContent(html_dfb17b839b8dafdc317d839812ee29a9);
+            
+        
+
+        marker_d8a540a3820e2c557a96a8912761a097.bindPopup(popup_e82736bf6797bee9a04b3e3b0d9022ba)
+        ;
+
+        
+    
+    
+            var marker_7731284f54497497cb9c3614ae2ab038 = L.marker(
+                [32.10733165990906, 34.81604227207946],
+                {
+}
+            ).addTo(map_f7ca89d2aad1c0b160af2f1ce95a7485);
+        
+    
+            var icon_d4868a9389c357403c5bcfc1fd6deafb = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_7731284f54497497cb9c3614ae2ab038.setIcon(icon_d4868a9389c357403c5bcfc1fd6deafb);
+        
+    
+        var popup_c1241b8891651b022585240082ce5673 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_67445b9b6f0301664ae94b7aac8cd73f = $(`<div id="html_67445b9b6f0301664ae94b7aac8cd73f" style="width: 100.0%; height: 100.0%;">Additional Match: פיקוס השדרות (ID: 3362)</div>`)[0];
+                popup_c1241b8891651b022585240082ce5673.setContent(html_67445b9b6f0301664ae94b7aac8cd73f);
+            
+        
+
+        marker_7731284f54497497cb9c3614ae2ab038.bindPopup(popup_c1241b8891651b022585240082ce5673)
+        ;
+
+        
+    
+    
+            var marker_7e6dadd8b8c2ac820af4dd0a22fa9a2c = L.marker(
+                [32.10721465383819, 34.81605127502243],
+                {
+}
+            ).addTo(map_f7ca89d2aad1c0b160af2f1ce95a7485);
+        
+    
+            var icon_4c48d529c49a16f12bc056a603db24ee = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_7e6dadd8b8c2ac820af4dd0a22fa9a2c.setIcon(icon_4c48d529c49a16f12bc056a603db24ee);
+        
+    
+        var popup_f62d5325c3cd47b4fd481938941d7166 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3caa0c282b8de3ee82b943372df2c1a1 = $(`<div id="html_3caa0c282b8de3ee82b943372df2c1a1" style="width: 100.0%; height: 100.0%;">Additional Match: זית אירופאי (ID: 3344)</div>`)[0];
+                popup_f62d5325c3cd47b4fd481938941d7166.setContent(html_3caa0c282b8de3ee82b943372df2c1a1);
+            
+        
+
+        marker_7e6dadd8b8c2ac820af4dd0a22fa9a2c.bindPopup(popup_f62d5325c3cd47b4fd481938941d7166)
+        ;
+
+        
+    
+    
+            var marker_1063e6b1af0d4fed1148a1c8e5224ca6 = L.marker(
+                [32.10719565899449, 34.81609727366348],
+                {
+}
+            ).addTo(map_f7ca89d2aad1c0b160af2f1ce95a7485);
+        
+    
+            var icon_ff9b131c784027665aff16c018942c34 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_1063e6b1af0d4fed1148a1c8e5224ca6.setIcon(icon_ff9b131c784027665aff16c018942c34);
+        
+    
+        var popup_c6d263d2adb679eaa117d4c9d5307f2c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6357bfa1f7ff33a75fd3d487d38904d5 = $(`<div id="html_6357bfa1f7ff33a75fd3d487d38904d5" style="width: 100.0%; height: 100.0%;">Additional Match: פיקוס השדרות (ID: 3343)</div>`)[0];
+                popup_c6d263d2adb679eaa117d4c9d5307f2c.setContent(html_6357bfa1f7ff33a75fd3d487d38904d5);
+            
+        
+
+        marker_1063e6b1af0d4fed1148a1c8e5224ca6.bindPopup(popup_c6d263d2adb679eaa117d4c9d5307f2c)
+        ;
+
+        
+    
+    
+            var marker_40aa3a478ea2355a625239784bb7db78 = L.marker(
+                [32.10719665403118, 34.81609827596682],
+                {
+}
+            ).addTo(map_f7ca89d2aad1c0b160af2f1ce95a7485);
+        
+    
+            var icon_f9d4fff13ac2e4c6c5fa0f64470a385f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_40aa3a478ea2355a625239784bb7db78.setIcon(icon_f9d4fff13ac2e4c6c5fa0f64470a385f);
+        
+    
+        var popup_b90627696d9627856281020b5ae4be1d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5de54f583b7891e47ec345e47293f1cf = $(`<div id="html_5de54f583b7891e47ec345e47293f1cf" style="width: 100.0%; height: 100.0%;">Additional Match: וושינגטוניה חסונה (ID: 3342)</div>`)[0];
+                popup_b90627696d9627856281020b5ae4be1d.setContent(html_5de54f583b7891e47ec345e47293f1cf);
+            
+        
+
+        marker_40aa3a478ea2355a625239784bb7db78.bindPopup(popup_b90627696d9627856281020b5ae4be1d)
+        ;
+
+        
+    
+    
+            var marker_50181891d14e7a195a00d1518b7fb8bb = L.marker(
+                [32.10739065703978, 34.81613127389003],
+                {
+}
+            ).addTo(map_f7ca89d2aad1c0b160af2f1ce95a7485);
+        
+    
+            var icon_b31613bb8a9f0e8cb9d8e435b4d3100e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_50181891d14e7a195a00d1518b7fb8bb.setIcon(icon_b31613bb8a9f0e8cb9d8e435b4d3100e);
+        
+    
+        var popup_e139744d925c456d2c11b02b5677a61f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f016cd3d5d18d68f5c4a4aea09a49152 = $(`<div id="html_f016cd3d5d18d68f5c4a4aea09a49152" style="width: 100.0%; height: 100.0%;">Additional Match: פיקוס השדרות (ID: 3364)</div>`)[0];
+                popup_e139744d925c456d2c11b02b5677a61f.setContent(html_f016cd3d5d18d68f5c4a4aea09a49152);
+            
+        
+
+        marker_50181891d14e7a195a00d1518b7fb8bb.bindPopup(popup_e139744d925c456d2c11b02b5677a61f)
+        ;
+
+        
+    
+    
+            var marker_232c57580f305a1e063abe3de6aa95a7 = L.marker(
+                [32.10741365741077, 34.8161622726294],
+                {
+}
+            ).addTo(map_f7ca89d2aad1c0b160af2f1ce95a7485);
+        
+    
+            var icon_3b8522f255ddd79e3a177aca69670a4e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_232c57580f305a1e063abe3de6aa95a7.setIcon(icon_3b8522f255ddd79e3a177aca69670a4e);
+        
+    
+        var popup_902560d7a3a6310edf2537a4b214366a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_52b00d830bb39362c3bfd981ff595d97 = $(`<div id="html_52b00d830bb39362c3bfd981ff595d97" style="width: 100.0%; height: 100.0%;">Additional Match: פיקוס השדרות (ID: 3389)</div>`)[0];
+                popup_902560d7a3a6310edf2537a4b214366a.setContent(html_52b00d830bb39362c3bfd981ff595d97);
+            
+        
+
+        marker_232c57580f305a1e063abe3de6aa95a7.bindPopup(popup_902560d7a3a6310edf2537a4b214366a)
+        ;
+
+        
+    
+    
+            var marker_9333eda06421a58d4d7cff5aa79e2794 = L.marker(
+                [32.1074076576227, 34.81621427665757],
+                {
+}
+            ).addTo(map_f7ca89d2aad1c0b160af2f1ce95a7485);
+        
+    
+            var icon_99643ed92fa8c008c4eea5845a4b05cd = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_9333eda06421a58d4d7cff5aa79e2794.setIcon(icon_99643ed92fa8c008c4eea5845a4b05cd);
+        
+    
+        var popup_afeb95c8ee62b30a955c2a4aa84e2bd2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b83bc7554a2c17d7bd000873adc3ba52 = $(`<div id="html_b83bc7554a2c17d7bd000873adc3ba52" style="width: 100.0%; height: 100.0%;">Additional Match: פיקוס השדרות (ID: 3363)</div>`)[0];
+                popup_afeb95c8ee62b30a955c2a4aa84e2bd2.setContent(html_b83bc7554a2c17d7bd000873adc3ba52);
+            
+        
+
+        marker_9333eda06421a58d4d7cff5aa79e2794.bindPopup(popup_afeb95c8ee62b30a955c2a4aa84e2bd2)
+        ;
+
+        
+    
+    
+            var marker_9691643214d3501a4e67b578e105827a = L.marker(
+                [32.10743766205713, 34.81630027578696],
+                {
+}
+            ).addTo(map_f7ca89d2aad1c0b160af2f1ce95a7485);
+        
+    
+            var icon_18168638dd2d485ef67da1a9cf13ab18 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_9691643214d3501a4e67b578e105827a.setIcon(icon_18168638dd2d485ef67da1a9cf13ab18);
+        
+    
+        var popup_9d63dff1439681a35c6461e92449dd21 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0e757a261cd54ea28e34ad137406ec84 = $(`<div id="html_0e757a261cd54ea28e34ad137406ec84" style="width: 100.0%; height: 100.0%;">Additional Match: פיקוס השדרות (ID: 3366)</div>`)[0];
+                popup_9d63dff1439681a35c6461e92449dd21.setContent(html_0e757a261cd54ea28e34ad137406ec84);
+            
+        
+
+        marker_9691643214d3501a4e67b578e105827a.bindPopup(popup_9d63dff1439681a35c6461e92449dd21)
+        ;
+
+        
+    
+    
+            var marker_324e20f241f16b4fef5fcc64aab71163 = L.marker(
+                [32.1072756565143, 34.81630327073442],
+                {
+}
+            ).addTo(map_f7ca89d2aad1c0b160af2f1ce95a7485);
+        
+    
+            var icon_8e2ce51b2642567e9c6d5dd3af086e3b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_324e20f241f16b4fef5fcc64aab71163.setIcon(icon_8e2ce51b2642567e9c6d5dd3af086e3b);
+        
+    
+        var popup_2c04fd9a5a5d3717297188d0a00afc5d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9512ec4b7bb223778dc79f49d6a92cc4 = $(`<div id="html_9512ec4b7bb223778dc79f49d6a92cc4" style="width: 100.0%; height: 100.0%;">Additional Match: סיגלון עלי-מימוסה (ID: 3371)</div>`)[0];
+                popup_2c04fd9a5a5d3717297188d0a00afc5d.setContent(html_9512ec4b7bb223778dc79f49d6a92cc4);
+            
+        
+
+        marker_324e20f241f16b4fef5fcc64aab71163.bindPopup(popup_2c04fd9a5a5d3717297188d0a00afc5d)
+        ;
+
+        
+    
+    
+            var marker_ca598b3abf1002af94f083a0888092a8 = L.marker(
+                [32.10738165906852, 34.81636727119746],
+                {
+}
+            ).addTo(map_f7ca89d2aad1c0b160af2f1ce95a7485);
+        
+    
+            var icon_a8d0cf3f4b350a41614ae7a342ebf9a8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_ca598b3abf1002af94f083a0888092a8.setIcon(icon_a8d0cf3f4b350a41614ae7a342ebf9a8);
+        
+    
+        var popup_3d39acbd4705bcb04e75754beda922a6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_cab033cb522b30781843361af337a2e2 = $(`<div id="html_cab033cb522b30781843361af337a2e2" style="width: 100.0%; height: 100.0%;">Additional Match: פיקוס השדרות (ID: 3367)</div>`)[0];
+                popup_3d39acbd4705bcb04e75754beda922a6.setContent(html_cab033cb522b30781843361af337a2e2);
+            
+        
+
+        marker_ca598b3abf1002af94f083a0888092a8.bindPopup(popup_3d39acbd4705bcb04e75754beda922a6)
+        ;
+
+        
+    
+    
+            var marker_e48a4cbb0d03475792257c65c895fe67 = L.marker(
+                [32.10739065618334, 34.81637227632494],
+                {
+}
+            ).addTo(map_f7ca89d2aad1c0b160af2f1ce95a7485);
+        
+    
+            var icon_af6908e06ad86a4202aca03fc4639ede = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_e48a4cbb0d03475792257c65c895fe67.setIcon(icon_af6908e06ad86a4202aca03fc4639ede);
+        
+    
+        var popup_38a7a89c3ac70275cb28bd7f5a21397d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_db58796b6e7390433bb2716fe528a4ad = $(`<div id="html_db58796b6e7390433bb2716fe528a4ad" style="width: 100.0%; height: 100.0%;">Additional Match: פיקוס השדרות (ID: 3369)</div>`)[0];
+                popup_38a7a89c3ac70275cb28bd7f5a21397d.setContent(html_db58796b6e7390433bb2716fe528a4ad);
+            
+        
+
+        marker_e48a4cbb0d03475792257c65c895fe67.bindPopup(popup_38a7a89c3ac70275cb28bd7f5a21397d)
+        ;
+
+        
+    
+    
+            var marker_b8620b726c9887a2c2d9b8e84997dc5a = L.marker(
+                [32.10736965804843, 34.81639727375693],
+                {
+}
+            ).addTo(map_f7ca89d2aad1c0b160af2f1ce95a7485);
+        
+    
+            var icon_4f35685390ea01df12c95a4d2323ade7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_b8620b726c9887a2c2d9b8e84997dc5a.setIcon(icon_4f35685390ea01df12c95a4d2323ade7);
+        
+    
+        var popup_e74d070aa494d8a8c13a22da4757021c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3a119c071f7b57ab51e7481614ea824e = $(`<div id="html_3a119c071f7b57ab51e7481614ea824e" style="width: 100.0%; height: 100.0%;">Additional Match: פיקוס השדרות (ID: 3368)</div>`)[0];
+                popup_e74d070aa494d8a8c13a22da4757021c.setContent(html_3a119c071f7b57ab51e7481614ea824e);
+            
+        
+
+        marker_b8620b726c9887a2c2d9b8e84997dc5a.bindPopup(popup_e74d070aa494d8a8c13a22da4757021c)
+        ;
+
+        
+    
+    
+            var marker_31d998b8b9fe5999d819f2b0f3cc2b9f = L.marker(
+                [32.1074397475455, 34.81644413914201],
+                {
+}
+            ).addTo(map_f7ca89d2aad1c0b160af2f1ce95a7485);
+        
+    
+            var icon_dd2126e352f7faca84da4cdd83fc1d46 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_31d998b8b9fe5999d819f2b0f3cc2b9f.setIcon(icon_dd2126e352f7faca84da4cdd83fc1d46);
+        
+    
+        var popup_72c14764764ae5d57b60167655399eb6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_24aa520c70e645c1e903149470e0f95c = $(`<div id="html_24aa520c70e645c1e903149470e0f95c" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.1074397475455,34.81644413914201&layer=c&cbll=32.1074397475455,34.81644413914201&cbp=12,240,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_72c14764764ae5d57b60167655399eb6.setContent(html_24aa520c70e645c1e903149470e0f95c);
+            
+        
+
+        marker_31d998b8b9fe5999d819f2b0f3cc2b9f.bindPopup(popup_72c14764764ae5d57b60167655399eb6)
+        ;
+
+        
+    
+</script>
+</html>

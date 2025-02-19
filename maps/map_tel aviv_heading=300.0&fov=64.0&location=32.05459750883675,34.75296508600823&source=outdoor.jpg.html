@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_0c45a08af5a343d58d1ffcd329a6a271 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+<div style="
+position: fixed;
+bottom: 50px;
+left: 50px;
+width: 200px;
+background-color: white;
+z-index:9999;
+font-size:14px;
+padding: 10px;
+border: 2px solid grey;
+border-radius: 8px;
+box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+">
+<b>Legend</b><br>
+<i class="fa fa-map-marker fa-2x" style="color:orange"></i> Car location<br>
+<i class="fa fa-map-marker fa-2x" style="color:red"></i> Detection location<br>
+<i class="fa fa-map-marker fa-2x" style="color:green"></i> Seker best match<br>
+<i class="fa fa-map-marker fa-2x" style="color:blue"></i> Seker additional match<br>
+</div>
+    
+            <div class="folium-map" id="map_0c45a08af5a343d58d1ffcd329a6a271" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_0c45a08af5a343d58d1ffcd329a6a271 = L.map(
+                "map_0c45a08af5a343d58d1ffcd329a6a271",
+                {
+                    center: [32.05477387549023, 34.75242053608941],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 15,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_0c551763d4d3873ed9415a915ccc427c = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_0c551763d4d3873ed9415a915ccc427c.addTo(map_0c45a08af5a343d58d1ffcd329a6a271);
+        
+    
+            var marker_b4b2bed002078ce3d53a660803cff548 = L.marker(
+                [32.05476365477751, 34.75267327756296],
+                {
+}
+            ).addTo(map_0c45a08af5a343d58d1ffcd329a6a271);
+        
+    
+            var icon_3b47999752ba2783f04664ad2fcaeb79 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_b4b2bed002078ce3d53a660803cff548.setIcon(icon_3b47999752ba2783f04664ad2fcaeb79);
+        
+    
+        var popup_32f26a90ff22702cb76ed8baef8d8694 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0a5c8c6857b431d7b16d54c369782113 = $(`<div id="html_0a5c8c6857b431d7b16d54c369782113" style="width: 100.0%; height: 100.0%;">Best Match: פיקוס תאילנדי (ID: 9726)</div>`)[0];
+                popup_32f26a90ff22702cb76ed8baef8d8694.setContent(html_0a5c8c6857b431d7b16d54c369782113);
+            
+        
+
+        marker_b4b2bed002078ce3d53a660803cff548.bindPopup(popup_32f26a90ff22702cb76ed8baef8d8694)
+        ;
+
+        
+    
+    
+            var poly_line_7a5615b4180c0a0505ab9dcb7f68f185 = L.polyline(
+                [[32.05476365477751, 34.75267327756296], [32.05466851998735, 34.75270408943895]],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "black", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_0c45a08af5a343d58d1ffcd329a6a271);
+        
+    
+        var popup_dc6328a1919dd152898505223157e0de = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_cc8d5d0710922fc7423030658b2ed55c = $(`<div id="html_cc8d5d0710922fc7423030658b2ed55c" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 2, angle: 5.0256039308541</div>`)[0];
+                popup_dc6328a1919dd152898505223157e0de.setContent(html_cc8d5d0710922fc7423030658b2ed55c);
+            
+        
+
+        poly_line_7a5615b4180c0a0505ab9dcb7f68f185.bindPopup(popup_dc6328a1919dd152898505223157e0de)
+        ;
+
+        
+    
+    
+            var marker_d41baec055990c5cebd5c140f2ec6737 = L.marker(
+                [32.05459750883675, 34.75296508600823],
+                {
+}
+            ).addTo(map_0c45a08af5a343d58d1ffcd329a6a271);
+        
+    
+            var icon_b64c42ad30dd78abbd51749d39d951d3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_d41baec055990c5cebd5c140f2ec6737.setIcon(icon_b64c42ad30dd78abbd51749d39d951d3);
+        
+    
+        var popup_8579ab0b41ea195b8d0e8f1779cce678 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6e7594535d5e87f01db86a6bc82afa64 = $(`<div id="html_6e7594535d5e87f01db86a6bc82afa64" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.05459750883675,34.75296508600823&layer=c&cbll=32.05459750883675,34.75296508600823&cbp=12,300.0,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_8579ab0b41ea195b8d0e8f1779cce678.setContent(html_6e7594535d5e87f01db86a6bc82afa64);
+            
+        
+
+        marker_d41baec055990c5cebd5c140f2ec6737.bindPopup(popup_8579ab0b41ea195b8d0e8f1779cce678)
+        ;
+
+        
+    
+    
+            var marker_7a19fd1e07a61f3f8e59847623c5dbb3 = L.marker(
+                [32.05476365477751, 34.75267327756296],
+                {
+}
+            ).addTo(map_0c45a08af5a343d58d1ffcd329a6a271);
+        
+    
+            var icon_677f0005d09e2574ecc1cabec8589cb4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_7a19fd1e07a61f3f8e59847623c5dbb3.setIcon(icon_677f0005d09e2574ecc1cabec8589cb4);
+        
+    
+        var popup_f1acacc0ce7f13cceac340f9bd2d3db4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9f634c47c8a665e537920503c5dc1c9c = $(`<div id="html_9f634c47c8a665e537920503c5dc1c9c" style="width: 100.0%; height: 100.0%;">Best Match: פיקוס תאילנדי (ID: 9726)</div>`)[0];
+                popup_f1acacc0ce7f13cceac340f9bd2d3db4.setContent(html_9f634c47c8a665e537920503c5dc1c9c);
+            
+        
+
+        marker_7a19fd1e07a61f3f8e59847623c5dbb3.bindPopup(popup_f1acacc0ce7f13cceac340f9bd2d3db4)
+        ;
+
+        
+    
+    
+            var poly_line_f9a100d2dbf5a601e6905864af51671e = L.polyline(
+                [[32.05476365477751, 34.75267327756296], [32.05467301967238, 34.752715530109846]],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "black", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_0c45a08af5a343d58d1ffcd329a6a271);
+        
+    
+        var popup_c5e801d56873d7c9f134e0b19c833848 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_93bfa5f04bea114d5ea0bdc5c5616ec4 = $(`<div id="html_93bfa5f04bea114d5ea0bdc5c5616ec4" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 5, angle: 5.14861891016687</div>`)[0];
+                popup_c5e801d56873d7c9f134e0b19c833848.setContent(html_93bfa5f04bea114d5ea0bdc5c5616ec4);
+            
+        
+
+        poly_line_f9a100d2dbf5a601e6905864af51671e.bindPopup(popup_c5e801d56873d7c9f134e0b19c833848)
+        ;
+
+        
+    
+    
+            var marker_cdaee3e24dc9c34b5df407b701ca0240 = L.marker(
+                [32.05459750883675, 34.75296508600823],
+                {
+}
+            ).addTo(map_0c45a08af5a343d58d1ffcd329a6a271);
+        
+    
+            var icon_76d576e6296b14ca8394725076c0b496 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_cdaee3e24dc9c34b5df407b701ca0240.setIcon(icon_76d576e6296b14ca8394725076c0b496);
+        
+    
+        var popup_faf80a7535564702eaa2643524a31a70 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_970f3c407c9fd28bdc1b3430c1d4e559 = $(`<div id="html_970f3c407c9fd28bdc1b3430c1d4e559" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.05459750883675,34.75296508600823&layer=c&cbll=32.05459750883675,34.75296508600823&cbp=12,300.0,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_faf80a7535564702eaa2643524a31a70.setContent(html_970f3c407c9fd28bdc1b3430c1d4e559);
+            
+        
+
+        marker_cdaee3e24dc9c34b5df407b701ca0240.bindPopup(popup_faf80a7535564702eaa2643524a31a70)
+        ;
+
+        
+    
+    
+            var marker_856099c106ea7b28912e2c8019043549 = L.marker(
+                [32.05476365477751, 34.75267327756296],
+                {
+}
+            ).addTo(map_0c45a08af5a343d58d1ffcd329a6a271);
+        
+    
+            var icon_fcbf77c4718747e86d6e5ac06d6ca8cd = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_856099c106ea7b28912e2c8019043549.setIcon(icon_fcbf77c4718747e86d6e5ac06d6ca8cd);
+        
+    
+        var popup_a2a60d9bffa4b838c62d734f44404eed = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9ac924fe9302506ac815849277ffdd16 = $(`<div id="html_9ac924fe9302506ac815849277ffdd16" style="width: 100.0%; height: 100.0%;">Best Match: פיקוס תאילנדי (ID: 9726)</div>`)[0];
+                popup_a2a60d9bffa4b838c62d734f44404eed.setContent(html_9ac924fe9302506ac815849277ffdd16);
+            
+        
+
+        marker_856099c106ea7b28912e2c8019043549.bindPopup(popup_a2a60d9bffa4b838c62d734f44404eed)
+        ;
+
+        
+    
+    
+            var poly_line_0d090ff84204df7d52ccf0f4b8a24ed0 = L.polyline(
+                [[32.05476365477751, 34.75267327756296], [32.054674130437725, 34.75271783530737]],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "black", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_0c45a08af5a343d58d1ffcd329a6a271);
+        
+    
+        var popup_e3480604bd6b87d7add8a17876240d5d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_18f16d10efe42d33f281116fb7ac7226 = $(`<div id="html_18f16d10efe42d33f281116fb7ac7226" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 4, angle: 5.174208151257942</div>`)[0];
+                popup_e3480604bd6b87d7add8a17876240d5d.setContent(html_18f16d10efe42d33f281116fb7ac7226);
+            
+        
+
+        poly_line_0d090ff84204df7d52ccf0f4b8a24ed0.bindPopup(popup_e3480604bd6b87d7add8a17876240d5d)
+        ;
+
+        
+    
+    
+            var marker_6b6565e27a8a2ab6616bcfe36f6ac332 = L.marker(
+                [32.05459750883675, 34.75296508600823],
+                {
+}
+            ).addTo(map_0c45a08af5a343d58d1ffcd329a6a271);
+        
+    
+            var icon_44202aaff79e85e0fc061e6281b55bdf = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_6b6565e27a8a2ab6616bcfe36f6ac332.setIcon(icon_44202aaff79e85e0fc061e6281b55bdf);
+        
+    
+        var popup_56700e8b8f3cec41532412b88020de74 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2722e8054b8b43507eaa7fab1b8f4262 = $(`<div id="html_2722e8054b8b43507eaa7fab1b8f4262" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.05459750883675,34.75296508600823&layer=c&cbll=32.05459750883675,34.75296508600823&cbp=12,300.0,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_56700e8b8f3cec41532412b88020de74.setContent(html_2722e8054b8b43507eaa7fab1b8f4262);
+            
+        
+
+        marker_6b6565e27a8a2ab6616bcfe36f6ac332.bindPopup(popup_56700e8b8f3cec41532412b88020de74)
+        ;
+
+        
+    
+    
+            var marker_fcd193573b381ae2a960a2aa66d2a02f = L.marker(
+                [32.05476365477751, 34.75267327756296],
+                {
+}
+            ).addTo(map_0c45a08af5a343d58d1ffcd329a6a271);
+        
+    
+            var icon_d329610260ff907879dfc20b04438f41 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_fcd193573b381ae2a960a2aa66d2a02f.setIcon(icon_d329610260ff907879dfc20b04438f41);
+        
+    
+        var popup_e706e257c08e1add0a9b989f13334eb8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a8436d8ed115245cb4e8dadb7e60ea97 = $(`<div id="html_a8436d8ed115245cb4e8dadb7e60ea97" style="width: 100.0%; height: 100.0%;">Best Match: פיקוס תאילנדי (ID: 9726)</div>`)[0];
+                popup_e706e257c08e1add0a9b989f13334eb8.setContent(html_a8436d8ed115245cb4e8dadb7e60ea97);
+            
+        
+
+        marker_fcd193573b381ae2a960a2aa66d2a02f.bindPopup(popup_e706e257c08e1add0a9b989f13334eb8)
+        ;
+
+        
+    
+    
+            var poly_line_f85ed25a516137a862f4d30f3b7f2f3c = L.polyline(
+                [[32.05476365477751, 34.75267327756296], [32.05467575517227, 34.75272096046764]],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "black", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_0c45a08af5a343d58d1ffcd329a6a271);
+        
+    
+        var popup_bd3b6a8567a6e4689e00f01b0a7aceb8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e2d7ec02dce22c5566ccf6243982dd03 = $(`<div id="html_e2d7ec02dce22c5566ccf6243982dd03" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 8, angle: 5.209432676679618</div>`)[0];
+                popup_bd3b6a8567a6e4689e00f01b0a7aceb8.setContent(html_e2d7ec02dce22c5566ccf6243982dd03);
+            
+        
+
+        poly_line_f85ed25a516137a862f4d30f3b7f2f3c.bindPopup(popup_bd3b6a8567a6e4689e00f01b0a7aceb8)
+        ;
+
+        
+    
+    
+            var marker_2ee48ed897737b50ab3d755e87f511ef = L.marker(
+                [32.05459750883675, 34.75296508600823],
+                {
+}
+            ).addTo(map_0c45a08af5a343d58d1ffcd329a6a271);
+        
+    
+            var icon_52f230d87536911176f7d51c40ec78b3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_2ee48ed897737b50ab3d755e87f511ef.setIcon(icon_52f230d87536911176f7d51c40ec78b3);
+        
+    
+        var popup_ea9a29f980be77d3764d3fa950c672fa = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ab7b076d9e701fcd87715ee5924883ee = $(`<div id="html_ab7b076d9e701fcd87715ee5924883ee" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.05459750883675,34.75296508600823&layer=c&cbll=32.05459750883675,34.75296508600823&cbp=12,300.0,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_ea9a29f980be77d3764d3fa950c672fa.setContent(html_ab7b076d9e701fcd87715ee5924883ee);
+            
+        
+
+        marker_2ee48ed897737b50ab3d755e87f511ef.bindPopup(popup_ea9a29f980be77d3764d3fa950c672fa)
+        ;
+
+        
+    
+    
+            var marker_6aba8b97cb68ffe4922483698fbdb773 = L.marker(
+                [32.05476365477751, 34.75267327756296],
+                {
+}
+            ).addTo(map_0c45a08af5a343d58d1ffcd329a6a271);
+        
+    
+            var icon_4ad95f5bf47b3f4c252407460223b068 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_6aba8b97cb68ffe4922483698fbdb773.setIcon(icon_4ad95f5bf47b3f4c252407460223b068);
+        
+    
+        var popup_ff0662ff2e04c78fb38853b627fb50c1 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_abc5c761e40c25c07ee6eaf8547f19a2 = $(`<div id="html_abc5c761e40c25c07ee6eaf8547f19a2" style="width: 100.0%; height: 100.0%;">Best Match: פיקוס תאילנדי (ID: 9726)</div>`)[0];
+                popup_ff0662ff2e04c78fb38853b627fb50c1.setContent(html_abc5c761e40c25c07ee6eaf8547f19a2);
+            
+        
+
+        marker_6aba8b97cb68ffe4922483698fbdb773.bindPopup(popup_ff0662ff2e04c78fb38853b627fb50c1)
+        ;
+
+        
+    
+    
+            var poly_line_4bfca31db7b4fad78114c0014fd837e2 = L.polyline(
+                [[32.05476365477751, 34.75267327756296], [32.054675939698775, 34.75272129906816]],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "black", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_0c45a08af5a343d58d1ffcd329a6a271);
+        
+    
+        var popup_c9631885bddead78a79082ef12bb2038 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_fe1f9810bea6cf8dd0cdfbed89ac8c6c = $(`<div id="html_fe1f9810bea6cf8dd0cdfbed89ac8c6c" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 7, angle: 5.213288847454507</div>`)[0];
+                popup_c9631885bddead78a79082ef12bb2038.setContent(html_fe1f9810bea6cf8dd0cdfbed89ac8c6c);
+            
+        
+
+        poly_line_4bfca31db7b4fad78114c0014fd837e2.bindPopup(popup_c9631885bddead78a79082ef12bb2038)
+        ;
+
+        
+    
+    
+            var marker_bb0f8156f863ed7647728bcba678cc30 = L.marker(
+                [32.05459750883675, 34.75296508600823],
+                {
+}
+            ).addTo(map_0c45a08af5a343d58d1ffcd329a6a271);
+        
+    
+            var icon_fdf4c9a1246cab00c419bca421f7b680 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_bb0f8156f863ed7647728bcba678cc30.setIcon(icon_fdf4c9a1246cab00c419bca421f7b680);
+        
+    
+        var popup_fac1fe827ccca3bf81c2894c04c6d16c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4572c359824ab0e1e679a0af7c253b01 = $(`<div id="html_4572c359824ab0e1e679a0af7c253b01" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.05459750883675,34.75296508600823&layer=c&cbll=32.05459750883675,34.75296508600823&cbp=12,300.0,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_fac1fe827ccca3bf81c2894c04c6d16c.setContent(html_4572c359824ab0e1e679a0af7c253b01);
+            
+        
+
+        marker_bb0f8156f863ed7647728bcba678cc30.bindPopup(popup_fac1fe827ccca3bf81c2894c04c6d16c)
+        ;
+
+        
+    
+    
+            var marker_e80ad2cf4e064cc41d204ecd74a47685 = L.marker(
+                [32.05476365477751, 34.75267327756296],
+                {
+}
+            ).addTo(map_0c45a08af5a343d58d1ffcd329a6a271);
+        
+    
+            var icon_4544942765139c7e5707f3937e393efa = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_e80ad2cf4e064cc41d204ecd74a47685.setIcon(icon_4544942765139c7e5707f3937e393efa);
+        
+    
+        var popup_15226a058326e57deb358cf23fff025e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ad484d3d4d21e9bde681650716c35a13 = $(`<div id="html_ad484d3d4d21e9bde681650716c35a13" style="width: 100.0%; height: 100.0%;">Best Match: פיקוס תאילנדי (ID: 9726)</div>`)[0];
+                popup_15226a058326e57deb358cf23fff025e.setContent(html_ad484d3d4d21e9bde681650716c35a13);
+            
+        
+
+        marker_e80ad2cf4e064cc41d204ecd74a47685.bindPopup(popup_15226a058326e57deb358cf23fff025e)
+        ;
+
+        
+    
+    
+            var poly_line_f35fccd377ad09ececd75b583c80c188 = L.polyline(
+                [[32.05476365477751, 34.75267327756296], [32.054680194455315, 34.752728362720845]],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "black", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_0c45a08af5a343d58d1ffcd329a6a271);
+        
+    
+        var popup_ac0d97a42c7e48309744f5d63f460236 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_15688b2644cba566ee3b586d35e84327 = $(`<div id="html_15688b2644cba566ee3b586d35e84327" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 3, angle: 5.2957732148073315</div>`)[0];
+                popup_ac0d97a42c7e48309744f5d63f460236.setContent(html_15688b2644cba566ee3b586d35e84327);
+            
+        
+
+        poly_line_f35fccd377ad09ececd75b583c80c188.bindPopup(popup_ac0d97a42c7e48309744f5d63f460236)
+        ;
+
+        
+    
+    
+            var marker_60b752674435db42717af3844f6e6428 = L.marker(
+                [32.05459750883675, 34.75296508600823],
+                {
+}
+            ).addTo(map_0c45a08af5a343d58d1ffcd329a6a271);
+        
+    
+            var icon_f0fc7f2b9b4be6d73388cdddc55d2cbf = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_60b752674435db42717af3844f6e6428.setIcon(icon_f0fc7f2b9b4be6d73388cdddc55d2cbf);
+        
+    
+        var popup_e87740b6e85d5c5078a380dc90fa4048 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_730362d961fa8b52c4ebffa84c10ead7 = $(`<div id="html_730362d961fa8b52c4ebffa84c10ead7" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.05459750883675,34.75296508600823&layer=c&cbll=32.05459750883675,34.75296508600823&cbp=12,300.0,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_e87740b6e85d5c5078a380dc90fa4048.setContent(html_730362d961fa8b52c4ebffa84c10ead7);
+            
+        
+
+        marker_60b752674435db42717af3844f6e6428.bindPopup(popup_e87740b6e85d5c5078a380dc90fa4048)
+        ;
+
+        
+    
+    
+            var marker_26c722549e26b2715ede71aad465e582 = L.marker(
+                [32.05476365477751, 34.75267327756296],
+                {
+}
+            ).addTo(map_0c45a08af5a343d58d1ffcd329a6a271);
+        
+    
+            var icon_0d2ec60b71b0f008de1b2dac520b594e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_26c722549e26b2715ede71aad465e582.setIcon(icon_0d2ec60b71b0f008de1b2dac520b594e);
+        
+    
+        var popup_d303276a37e17c24477469709e283f6d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_037ee4929625e245f51745243e73339a = $(`<div id="html_037ee4929625e245f51745243e73339a" style="width: 100.0%; height: 100.0%;">Best Match: פיקוס תאילנדי (ID: 9726)</div>`)[0];
+                popup_d303276a37e17c24477469709e283f6d.setContent(html_037ee4929625e245f51745243e73339a);
+            
+        
+
+        marker_26c722549e26b2715ede71aad465e582.bindPopup(popup_d303276a37e17c24477469709e283f6d)
+        ;
+
+        
+    
+    
+            var poly_line_006d21e7d49d50df47dfa6b751dc81bd = L.polyline(
+                [[32.05476365477751, 34.75267327756296], [32.05469021357735, 34.75274114795503]],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "black", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_0c45a08af5a343d58d1ffcd329a6a271);
+        
+    
+        var popup_b4c6e90a9c9a2809020239dbdc3c29c3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e437d78958d2f37c543ab46c60c86a9a = $(`<div id="html_e437d78958d2f37c543ab46c60c86a9a" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 1, angle: 5.458385387583965</div>`)[0];
+                popup_b4c6e90a9c9a2809020239dbdc3c29c3.setContent(html_e437d78958d2f37c543ab46c60c86a9a);
+            
+        
+
+        poly_line_006d21e7d49d50df47dfa6b751dc81bd.bindPopup(popup_b4c6e90a9c9a2809020239dbdc3c29c3)
+        ;
+
+        
+    
+    
+            var marker_0fe1656b12d50deee55022e861da5998 = L.marker(
+                [32.05459750883675, 34.75296508600823],
+                {
+}
+            ).addTo(map_0c45a08af5a343d58d1ffcd329a6a271);
+        
+    
+            var icon_b900166647fbf7ca4ac02bb5c41d109f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_0fe1656b12d50deee55022e861da5998.setIcon(icon_b900166647fbf7ca4ac02bb5c41d109f);
+        
+    
+        var popup_7cb0d1d0c992d7ef18dc75296192eebb = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_754e75351db8bd31215bd93f286efa31 = $(`<div id="html_754e75351db8bd31215bd93f286efa31" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.05459750883675,34.75296508600823&layer=c&cbll=32.05459750883675,34.75296508600823&cbp=12,300.0,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_7cb0d1d0c992d7ef18dc75296192eebb.setContent(html_754e75351db8bd31215bd93f286efa31);
+            
+        
+
+        marker_0fe1656b12d50deee55022e861da5998.bindPopup(popup_7cb0d1d0c992d7ef18dc75296192eebb)
+        ;
+
+        
+    
+    
+            var marker_69d292c127cbbca8e1e0b5f27a3c833d = L.marker(
+                [32.05476365477751, 34.75267327756296],
+                {
+}
+            ).addTo(map_0c45a08af5a343d58d1ffcd329a6a271);
+        
+    
+            var icon_afd53d104d0dcf90635469549efcff22 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_69d292c127cbbca8e1e0b5f27a3c833d.setIcon(icon_afd53d104d0dcf90635469549efcff22);
+        
+    
+        var popup_c29f836d3e3e9d91fada9ddec063b3c8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_332151963b1cbae4167cd482f8f7164b = $(`<div id="html_332151963b1cbae4167cd482f8f7164b" style="width: 100.0%; height: 100.0%;">Best Match: פיקוס תאילנדי (ID: 9726)</div>`)[0];
+                popup_c29f836d3e3e9d91fada9ddec063b3c8.setContent(html_332151963b1cbae4167cd482f8f7164b);
+            
+        
+
+        marker_69d292c127cbbca8e1e0b5f27a3c833d.bindPopup(popup_c29f836d3e3e9d91fada9ddec063b3c8)
+        ;
+
+        
+    
+    
+            var poly_line_d510a605bd179721040222f1828fb910 = L.polyline(
+                [[32.05476365477751, 34.75267327756296], [32.054694229917004, 34.75274525109104]],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "black", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_0c45a08af5a343d58d1ffcd329a6a271);
+        
+    
+        var popup_152374b8b699414953921a0b1bc88ad8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_687fa1a1941e7100d0d300e047e87b55 = $(`<div id="html_687fa1a1941e7100d0d300e047e87b55" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 6, angle: 5.515809920712951</div>`)[0];
+                popup_152374b8b699414953921a0b1bc88ad8.setContent(html_687fa1a1941e7100d0d300e047e87b55);
+            
+        
+
+        poly_line_d510a605bd179721040222f1828fb910.bindPopup(popup_152374b8b699414953921a0b1bc88ad8)
+        ;
+
+        
+    
+    
+            var marker_e0a61fe5b061966ccd3bb999956bddc2 = L.marker(
+                [32.05459750883675, 34.75296508600823],
+                {
+}
+            ).addTo(map_0c45a08af5a343d58d1ffcd329a6a271);
+        
+    
+            var icon_0cc547f0b171f767e647aaa59ec54508 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_e0a61fe5b061966ccd3bb999956bddc2.setIcon(icon_0cc547f0b171f767e647aaa59ec54508);
+        
+    
+        var popup_c97b9589763654111bf0709c2792f4a4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a053874e2507392ade5d9c2d5c25e9bb = $(`<div id="html_a053874e2507392ade5d9c2d5c25e9bb" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.05459750883675,34.75296508600823&layer=c&cbll=32.05459750883675,34.75296508600823&cbp=12,300.0,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_c97b9589763654111bf0709c2792f4a4.setContent(html_a053874e2507392ade5d9c2d5c25e9bb);
+            
+        
+
+        marker_e0a61fe5b061966ccd3bb999956bddc2.bindPopup(popup_c97b9589763654111bf0709c2792f4a4)
+        ;
+
+        
+    
+</script>
+</html>

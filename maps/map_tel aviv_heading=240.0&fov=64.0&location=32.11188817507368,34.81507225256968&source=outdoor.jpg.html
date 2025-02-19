@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_16b7d2e17c6c02b9d103f0bf950aa386 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+<div style="
+position: fixed;
+bottom: 50px;
+left: 50px;
+width: 200px;
+background-color: white;
+z-index:9999;
+font-size:14px;
+padding: 10px;
+border: 2px solid grey;
+border-radius: 8px;
+box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+">
+<b>Legend</b><br>
+<i class="fa fa-map-marker fa-2x" style="color:orange"></i> Car location<br>
+<i class="fa fa-map-marker fa-2x" style="color:red"></i> Detection location<br>
+<i class="fa fa-map-marker fa-2x" style="color:green"></i> Seker best match<br>
+<i class="fa fa-map-marker fa-2x" style="color:blue"></i> Seker additional match<br>
+</div>
+    
+            <div class="folium-map" id="map_16b7d2e17c6c02b9d103f0bf950aa386" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_16b7d2e17c6c02b9d103f0bf950aa386 = L.map(
+                "map_16b7d2e17c6c02b9d103f0bf950aa386",
+                {
+                    center: [32.11174373002044, 34.81480918963133],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 15,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_350ae8d9098963ee428c96975c89ac7e = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_350ae8d9098963ee428c96975c89ac7e.addTo(map_16b7d2e17c6c02b9d103f0bf950aa386);
+        
+    
+            var marker_8a5143d5537027ae4f78d3a3a828dfc8 = L.marker(
+                [32.1116746572141, 34.81478327167412],
+                {
+}
+            ).addTo(map_16b7d2e17c6c02b9d103f0bf950aa386);
+        
+    
+            var icon_2466a43779d4cd3db5c73af8ee628c9d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_8a5143d5537027ae4f78d3a3a828dfc8.setIcon(icon_2466a43779d4cd3db5c73af8ee628c9d);
+        
+    
+        var popup_d329e0a6897e236c42a0da06824e7f04 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f0840bdf2c74691b0e52c4f6062404bd = $(`<div id="html_f0840bdf2c74691b0e52c4f6062404bd" style="width: 100.0%; height: 100.0%;">Best Match: סיסם הודי (ID: 4889.0)</div>`)[0];
+                popup_d329e0a6897e236c42a0da06824e7f04.setContent(html_f0840bdf2c74691b0e52c4f6062404bd);
+            
+        
+
+        marker_8a5143d5537027ae4f78d3a3a828dfc8.bindPopup(popup_d329e0a6897e236c42a0da06824e7f04)
+        ;
+
+        
+    
+    
+            var poly_line_4c9c6a131998bdb3a14ca32e6ba594d1 = L.polyline(
+                [[32.1116746572141, 34.81478327167412], [32.11158700193746, 34.814735141096776]],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "black", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_16b7d2e17c6c02b9d103f0bf950aa386);
+        
+    
+        var popup_11f11c775faeb46064f7a26c7b1fbf2f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_adf5b8d3e583b8bf754a106b0580466c = $(`<div id="html_adf5b8d3e583b8bf754a106b0580466c" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 1, angle: 4.210245207169302</div>`)[0];
+                popup_11f11c775faeb46064f7a26c7b1fbf2f.setContent(html_adf5b8d3e583b8bf754a106b0580466c);
+            
+        
+
+        poly_line_4c9c6a131998bdb3a14ca32e6ba594d1.bindPopup(popup_11f11c775faeb46064f7a26c7b1fbf2f)
+        ;
+
+        
+    
+    
+            var marker_d67f8c3bb1a0390db1c3edb83592f8d7 = L.marker(
+                [32.11186465480828, 34.81458127877304],
+                {
+}
+            ).addTo(map_16b7d2e17c6c02b9d103f0bf950aa386);
+        
+    
+            var icon_b042e5b89cad1ceb729c711548c39093 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_d67f8c3bb1a0390db1c3edb83592f8d7.setIcon(icon_b042e5b89cad1ceb729c711548c39093);
+        
+    
+        var popup_5b2e2fab8f1873672cee09c64b707dac = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ba3d1190eceb83695f249769e79e7fcc = $(`<div id="html_ba3d1190eceb83695f249769e79e7fcc" style="width: 100.0%; height: 100.0%;">Additional Match: סיגלון עלי-מימוסה (ID: 4935)</div>`)[0];
+                popup_5b2e2fab8f1873672cee09c64b707dac.setContent(html_ba3d1190eceb83695f249769e79e7fcc);
+            
+        
+
+        marker_d67f8c3bb1a0390db1c3edb83592f8d7.bindPopup(popup_5b2e2fab8f1873672cee09c64b707dac)
+        ;
+
+        
+    
+    
+            var marker_f58e2fbb1f4be06d13725f5676c60671 = L.marker(
+                [32.11187266173082, 34.81461027621976],
+                {
+}
+            ).addTo(map_16b7d2e17c6c02b9d103f0bf950aa386);
+        
+    
+            var icon_d43d405d47a4f61e36a0aaeb67dd3449 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_f58e2fbb1f4be06d13725f5676c60671.setIcon(icon_d43d405d47a4f61e36a0aaeb67dd3449);
+        
+    
+        var popup_fa3c4eba9a8235c36fb0e7ee29b25b86 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7abb7e72306cf829d7053aa208a4c909 = $(`<div id="html_7abb7e72306cf829d7053aa208a4c909" style="width: 100.0%; height: 100.0%;">Additional Match: סיגלון עלי-מימוסה (ID: 4933)</div>`)[0];
+                popup_fa3c4eba9a8235c36fb0e7ee29b25b86.setContent(html_7abb7e72306cf829d7053aa208a4c909);
+            
+        
+
+        marker_f58e2fbb1f4be06d13725f5676c60671.bindPopup(popup_fa3c4eba9a8235c36fb0e7ee29b25b86)
+        ;
+
+        
+    
+    
+            var marker_3644b86937b8a85082348dff6a58c2f4 = L.marker(
+                [32.11188365965153, 34.81468227840391],
+                {
+}
+            ).addTo(map_16b7d2e17c6c02b9d103f0bf950aa386);
+        
+    
+            var icon_fab6a3fe848df87efe297440589735cb = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_3644b86937b8a85082348dff6a58c2f4.setIcon(icon_fab6a3fe848df87efe297440589735cb);
+        
+    
+        var popup_0ae7085633e21dc61431298f26697ffb = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4129d157e27c36e6ceffbd5fbf925b08 = $(`<div id="html_4129d157e27c36e6ceffbd5fbf925b08" style="width: 100.0%; height: 100.0%;">Additional Match: סיסם הודי (ID: 4934)</div>`)[0];
+                popup_0ae7085633e21dc61431298f26697ffb.setContent(html_4129d157e27c36e6ceffbd5fbf925b08);
+            
+        
+
+        marker_3644b86937b8a85082348dff6a58c2f4.bindPopup(popup_0ae7085633e21dc61431298f26697ffb)
+        ;
+
+        
+    
+    
+            var marker_32bb56d16a1edb6ded9d7b17001ea77d = L.marker(
+                [32.11182166102726, 34.81471127657171],
+                {
+}
+            ).addTo(map_16b7d2e17c6c02b9d103f0bf950aa386);
+        
+    
+            var icon_405391ab9d17aab41feeb57f5687a1dd = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_32bb56d16a1edb6ded9d7b17001ea77d.setIcon(icon_405391ab9d17aab41feeb57f5687a1dd);
+        
+    
+        var popup_f8f88751a0c9ff311a030a850126187e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_39185f8a0df5693de669957b7ac6291a = $(`<div id="html_39185f8a0df5693de669957b7ac6291a" style="width: 100.0%; height: 100.0%;">Additional Match: צאלון נאה (ID: 4881)</div>`)[0];
+                popup_f8f88751a0c9ff311a030a850126187e.setContent(html_39185f8a0df5693de669957b7ac6291a);
+            
+        
+
+        marker_32bb56d16a1edb6ded9d7b17001ea77d.bindPopup(popup_f8f88751a0c9ff311a030a850126187e)
+        ;
+
+        
+    
+    
+            var marker_140f916c53ae3717fb813d21c6ec746c = L.marker(
+                [32.1116506602167, 34.81473327853231],
+                {
+}
+            ).addTo(map_16b7d2e17c6c02b9d103f0bf950aa386);
+        
+    
+            var icon_c8b2631ab72dbf6972080665a22465ac = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_140f916c53ae3717fb813d21c6ec746c.setIcon(icon_c8b2631ab72dbf6972080665a22465ac);
+        
+    
+        var popup_d107459ed151b26659d234914c8ebc96 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_be1b3f1f64429f127471788abf646b5e = $(`<div id="html_be1b3f1f64429f127471788abf646b5e" style="width: 100.0%; height: 100.0%;">Additional Match: סיסם הודי (ID: 4888)</div>`)[0];
+                popup_d107459ed151b26659d234914c8ebc96.setContent(html_be1b3f1f64429f127471788abf646b5e);
+            
+        
+
+        marker_140f916c53ae3717fb813d21c6ec746c.bindPopup(popup_d107459ed151b26659d234914c8ebc96)
+        ;
+
+        
+    
+    
+            var marker_73174fbe750dd1de98cac751c981b9b1 = L.marker(
+                [32.11168065389305, 34.81478027949211],
+                {
+}
+            ).addTo(map_16b7d2e17c6c02b9d103f0bf950aa386);
+        
+    
+            var icon_241b46aedae2adc86049adf91bcfbd60 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_73174fbe750dd1de98cac751c981b9b1.setIcon(icon_241b46aedae2adc86049adf91bcfbd60);
+        
+    
+        var popup_07e123e0101ba40e57e070156381eb67 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8bef7397755e49853e7f449a186b0c5e = $(`<div id="html_8bef7397755e49853e7f449a186b0c5e" style="width: 100.0%; height: 100.0%;">Additional Match: סיסם הודי (ID: 4890)</div>`)[0];
+                popup_07e123e0101ba40e57e070156381eb67.setContent(html_8bef7397755e49853e7f449a186b0c5e);
+            
+        
+
+        marker_73174fbe750dd1de98cac751c981b9b1.bindPopup(popup_07e123e0101ba40e57e070156381eb67)
+        ;
+
+        
+    
+    
+            var marker_0a259f501ebb4c54913a9a27e13fc160 = L.marker(
+                [32.1118226583764, 34.81483026951552],
+                {
+}
+            ).addTo(map_16b7d2e17c6c02b9d103f0bf950aa386);
+        
+    
+            var icon_90839fa8fc4397b9ddc3f59e1535fd79 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_0a259f501ebb4c54913a9a27e13fc160.setIcon(icon_90839fa8fc4397b9ddc3f59e1535fd79);
+        
+    
+        var popup_d53decf1edf0effb54116fd24b95fb1b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_38850c6f6e095cf4ab4d0b0f9f63db13 = $(`<div id="html_38850c6f6e095cf4ab4d0b0f9f63db13" style="width: 100.0%; height: 100.0%;">Additional Match: סיסם הודי (ID: 4883)</div>`)[0];
+                popup_d53decf1edf0effb54116fd24b95fb1b.setContent(html_38850c6f6e095cf4ab4d0b0f9f63db13);
+            
+        
+
+        marker_0a259f501ebb4c54913a9a27e13fc160.bindPopup(popup_d53decf1edf0effb54116fd24b95fb1b)
+        ;
+
+        
+    
+    
+            var marker_ea498e931d9e5d46c462e2564f86da0f = L.marker(
+                [32.11174165460238, 34.81483727802129],
+                {
+}
+            ).addTo(map_16b7d2e17c6c02b9d103f0bf950aa386);
+        
+    
+            var icon_092974ec47cbd974d1903738037631e5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_ea498e931d9e5d46c462e2564f86da0f.setIcon(icon_092974ec47cbd974d1903738037631e5);
+        
+    
+        var popup_ef378160b3e2d5fa82523a59b6c7cca1 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2ef57735feaf3c38ac0180933556d542 = $(`<div id="html_2ef57735feaf3c38ac0180933556d542" style="width: 100.0%; height: 100.0%;">Additional Match: סיסם הודי (ID: 4891)</div>`)[0];
+                popup_ef378160b3e2d5fa82523a59b6c7cca1.setContent(html_2ef57735feaf3c38ac0180933556d542);
+            
+        
+
+        marker_ea498e931d9e5d46c462e2564f86da0f.bindPopup(popup_ef378160b3e2d5fa82523a59b6c7cca1)
+        ;
+
+        
+    
+    
+            var marker_e3524de5e45674ff004bf2b7146989c9 = L.marker(
+                [32.11175866105019, 34.81486327052204],
+                {
+}
+            ).addTo(map_16b7d2e17c6c02b9d103f0bf950aa386);
+        
+    
+            var icon_0940012d35f429392cf5f7b42490ade1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_e3524de5e45674ff004bf2b7146989c9.setIcon(icon_0940012d35f429392cf5f7b42490ade1);
+        
+    
+        var popup_b28fba845e608b61b0fd0bec15aa7e74 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_04cae07e79d4378599bed2a4969e671f = $(`<div id="html_04cae07e79d4378599bed2a4969e671f" style="width: 100.0%; height: 100.0%;">Additional Match: סיסם הודי (ID: 4892)</div>`)[0];
+                popup_b28fba845e608b61b0fd0bec15aa7e74.setContent(html_04cae07e79d4378599bed2a4969e671f);
+            
+        
+
+        marker_e3524de5e45674ff004bf2b7146989c9.bindPopup(popup_b28fba845e608b61b0fd0bec15aa7e74)
+        ;
+
+        
+    
+    
+            var marker_7203880660406f98aca5d01e9db94580 = L.marker(
+                [32.11178465489094, 34.81492627704667],
+                {
+}
+            ).addTo(map_16b7d2e17c6c02b9d103f0bf950aa386);
+        
+    
+            var icon_93ec068b4ad7607e784d5d8b81f78db5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_7203880660406f98aca5d01e9db94580.setIcon(icon_93ec068b4ad7607e784d5d8b81f78db5);
+        
+    
+        var popup_103c881975a2aa5f37a1c6762dc4ee3c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_11d8377b87e6b5956102ab4e1a8e4041 = $(`<div id="html_11d8377b87e6b5956102ab4e1a8e4041" style="width: 100.0%; height: 100.0%;">Additional Match: סיסם הודי (ID: 4893)</div>`)[0];
+                popup_103c881975a2aa5f37a1c6762dc4ee3c.setContent(html_11d8377b87e6b5956102ab4e1a8e4041);
+            
+        
+
+        marker_7203880660406f98aca5d01e9db94580.bindPopup(popup_103c881975a2aa5f37a1c6762dc4ee3c)
+        ;
+
+        
+    
+    
+            var marker_501f16506ebb3cda41e1618c4b9d8408 = L.marker(
+                [32.11183766037155, 34.81494927717636],
+                {
+}
+            ).addTo(map_16b7d2e17c6c02b9d103f0bf950aa386);
+        
+    
+            var icon_4675cc696571e0faa408c5affd0faff0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_501f16506ebb3cda41e1618c4b9d8408.setIcon(icon_4675cc696571e0faa408c5affd0faff0);
+        
+    
+        var popup_8c963b688385eeb83ff03373e7435946 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_544bd991d3a78000caf5599013b4e0a1 = $(`<div id="html_544bd991d3a78000caf5599013b4e0a1" style="width: 100.0%; height: 100.0%;">Additional Match: סיסם הודי (ID: 4894)</div>`)[0];
+                popup_8c963b688385eeb83ff03373e7435946.setContent(html_544bd991d3a78000caf5599013b4e0a1);
+            
+        
+
+        marker_501f16506ebb3cda41e1618c4b9d8408.bindPopup(popup_8c963b688385eeb83ff03373e7435946)
+        ;
+
+        
+    
+    
+            var marker_f60966bebac0c94bccae611d2c63f43f = L.marker(
+                [32.11187366168756, 34.81497927892605],
+                {
+}
+            ).addTo(map_16b7d2e17c6c02b9d103f0bf950aa386);
+        
+    
+            var icon_7c5a81fa7900ca3d88a7c0e438f4def5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_f60966bebac0c94bccae611d2c63f43f.setIcon(icon_7c5a81fa7900ca3d88a7c0e438f4def5);
+        
+    
+        var popup_00088b26173ab2fcf97920e9e7b68726 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_38d0974e5efab7702bd4f94d69f5a2a3 = $(`<div id="html_38d0974e5efab7702bd4f94d69f5a2a3" style="width: 100.0%; height: 100.0%;">Additional Match: סיסם הודי (ID: 4895)</div>`)[0];
+                popup_00088b26173ab2fcf97920e9e7b68726.setContent(html_38d0974e5efab7702bd4f94d69f5a2a3);
+            
+        
+
+        marker_f60966bebac0c94bccae611d2c63f43f.bindPopup(popup_00088b26173ab2fcf97920e9e7b68726)
+        ;
+
+        
+    
+    
+            var marker_1571258fb339d7984394c796e50304b9 = L.marker(
+                [32.11188817507368, 34.81507225256968],
+                {
+}
+            ).addTo(map_16b7d2e17c6c02b9d103f0bf950aa386);
+        
+    
+            var icon_e6ce0d3d431557cdd2e06c07edbd9dde = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_1571258fb339d7984394c796e50304b9.setIcon(icon_e6ce0d3d431557cdd2e06c07edbd9dde);
+        
+    
+        var popup_bfa64e8c6fe587e65c26badbc2800d6b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_502afa74990bd4e322124db3852ecde1 = $(`<div id="html_502afa74990bd4e322124db3852ecde1" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.11188817507368,34.81507225256968&layer=c&cbll=32.11188817507368,34.81507225256968&cbp=12,240,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_bfa64e8c6fe587e65c26badbc2800d6b.setContent(html_502afa74990bd4e322124db3852ecde1);
+            
+        
+
+        marker_1571258fb339d7984394c796e50304b9.bindPopup(popup_bfa64e8c6fe587e65c26badbc2800d6b)
+        ;
+
+        
+    
+</script>
+</html>

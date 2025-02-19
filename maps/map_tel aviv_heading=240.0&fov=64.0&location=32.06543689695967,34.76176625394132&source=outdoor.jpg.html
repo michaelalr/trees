@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_8bb5b14abcc15eb7f5045e3393cb95ab {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+<div style="
+position: fixed;
+bottom: 50px;
+left: 50px;
+width: 200px;
+background-color: white;
+z-index:9999;
+font-size:14px;
+padding: 10px;
+border: 2px solid grey;
+border-radius: 8px;
+box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+">
+<b>Legend</b><br>
+<i class="fa fa-map-marker fa-2x" style="color:orange"></i> Car location<br>
+<i class="fa fa-map-marker fa-2x" style="color:red"></i> Detection location<br>
+<i class="fa fa-map-marker fa-2x" style="color:green"></i> Seker best match<br>
+<i class="fa fa-map-marker fa-2x" style="color:blue"></i> Seker additional match<br>
+</div>
+    
+            <div class="folium-map" id="map_8bb5b14abcc15eb7f5045e3393cb95ab" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_8bb5b14abcc15eb7f5045e3393cb95ab = L.map(
+                "map_8bb5b14abcc15eb7f5045e3393cb95ab",
+                {
+                    center: [32.06514190468562, 34.76098639056218],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 15,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_5cec77376bc2b1054c43de2b0bb535ec = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_5cec77376bc2b1054c43de2b0bb535ec.addTo(map_8bb5b14abcc15eb7f5045e3393cb95ab);
+        
+    
+            var marker_e1e02f6c7f7610c067bf6389114e8995 = L.marker(
+                [32.06511765573104, 34.76143327129696],
+                {
+}
+            ).addTo(map_8bb5b14abcc15eb7f5045e3393cb95ab);
+        
+    
+            var icon_9bea3dfd69a120998408bf4866971af2 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_e1e02f6c7f7610c067bf6389114e8995.setIcon(icon_9bea3dfd69a120998408bf4866971af2);
+        
+    
+        var popup_9227365b259d7e945b5effbbd55d3abd = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0c7057445f3425da85d845131ada5b87 = $(`<div id="html_0c7057445f3425da85d845131ada5b87" style="width: 100.0%; height: 100.0%;">Best Match: אשל זנים שונים (ID: 9458.0)</div>`)[0];
+                popup_9227365b259d7e945b5effbbd55d3abd.setContent(html_0c7057445f3425da85d845131ada5b87);
+            
+        
+
+        marker_e1e02f6c7f7610c067bf6389114e8995.bindPopup(popup_9227365b259d7e945b5effbbd55d3abd)
+        ;
+
+        
+    
+    
+            var poly_line_e5d1d49768595f95784ffdb3b8e8109d = L.polyline(
+                [[32.06511765573104, 34.76143327129696], [32.06502412348673, 34.76139789165203]],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "black", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_8bb5b14abcc15eb7f5045e3393cb95ab);
+        
+    
+        var popup_9cd4b6289ec52f9cb546f19c953e8308 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6117f5cc81f0701fec3267ad21d7e8da = $(`<div id="html_6117f5cc81f0701fec3267ad21d7e8da" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 1, angle: 4.350762003073431</div>`)[0];
+                popup_9cd4b6289ec52f9cb546f19c953e8308.setContent(html_6117f5cc81f0701fec3267ad21d7e8da);
+            
+        
+
+        poly_line_e5d1d49768595f95784ffdb3b8e8109d.bindPopup(popup_9cd4b6289ec52f9cb546f19c953e8308)
+        ;
+
+        
+    
+    
+            var marker_535ab12efe2a096b207532792d7fd303 = L.marker(
+                [32.06542365825562, 34.76128327110438],
+                {
+}
+            ).addTo(map_8bb5b14abcc15eb7f5045e3393cb95ab);
+        
+    
+            var icon_253353dd58f0c4d075d74d00377a2acf = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_535ab12efe2a096b207532792d7fd303.setIcon(icon_253353dd58f0c4d075d74d00377a2acf);
+        
+    
+        var popup_93d8c088a1028ef7f422198af369cf70 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8c17c9a0d68b7f2ef44bf3aa6ac35cb2 = $(`<div id="html_8c17c9a0d68b7f2ef44bf3aa6ac35cb2" style="width: 100.0%; height: 100.0%;">Additional Match: אשל זנים שונים (ID: 9498)</div>`)[0];
+                popup_93d8c088a1028ef7f422198af369cf70.setContent(html_8c17c9a0d68b7f2ef44bf3aa6ac35cb2);
+            
+        
+
+        marker_535ab12efe2a096b207532792d7fd303.bindPopup(popup_93d8c088a1028ef7f422198af369cf70)
+        ;
+
+        
+    
+    
+            var marker_0b44abab604140354de99233a220dba1 = L.marker(
+                [32.06535266044143, 34.76133227461066],
+                {
+}
+            ).addTo(map_8bb5b14abcc15eb7f5045e3393cb95ab);
+        
+    
+            var icon_001e1095fb159b443266f18e3d97caa5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_0b44abab604140354de99233a220dba1.setIcon(icon_001e1095fb159b443266f18e3d97caa5);
+        
+    
+        var popup_b10bbded3bfa9c8bf44231caef1461d0 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_afc4ff3b6a2f11db2a89e1281497ea18 = $(`<div id="html_afc4ff3b6a2f11db2a89e1281497ea18" style="width: 100.0%; height: 100.0%;">Additional Match: אשל זנים שונים (ID: 9484)</div>`)[0];
+                popup_b10bbded3bfa9c8bf44231caef1461d0.setContent(html_afc4ff3b6a2f11db2a89e1281497ea18);
+            
+        
+
+        marker_0b44abab604140354de99233a220dba1.bindPopup(popup_b10bbded3bfa9c8bf44231caef1461d0)
+        ;
+
+        
+    
+    
+            var marker_bbc6847586cf52cdc44eafac651895b5 = L.marker(
+                [32.06518065311523, 34.7613502702736],
+                {
+}
+            ).addTo(map_8bb5b14abcc15eb7f5045e3393cb95ab);
+        
+    
+            var icon_6b7b295e0ccf354d40bab69b60b75c28 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_bbc6847586cf52cdc44eafac651895b5.setIcon(icon_6b7b295e0ccf354d40bab69b60b75c28);
+        
+    
+        var popup_241e928b6fbc9bd1243f844a8d32d1b0 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_72fd154d2647b2a9f346ebbb5a7c87f8 = $(`<div id="html_72fd154d2647b2a9f346ebbb5a7c87f8" style="width: 100.0%; height: 100.0%;">Additional Match: אשל זנים שונים (ID: 9466)</div>`)[0];
+                popup_241e928b6fbc9bd1243f844a8d32d1b0.setContent(html_72fd154d2647b2a9f346ebbb5a7c87f8);
+            
+        
+
+        marker_bbc6847586cf52cdc44eafac651895b5.bindPopup(popup_241e928b6fbc9bd1243f844a8d32d1b0)
+        ;
+
+        
+    
+    
+            var marker_f158efab9647ff26152310af6faa5995 = L.marker(
+                [32.06528265733508, 34.76135627020706],
+                {
+}
+            ).addTo(map_8bb5b14abcc15eb7f5045e3393cb95ab);
+        
+    
+            var icon_a20bf987ce804c16dafa3ab7e0827b7d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_f158efab9647ff26152310af6faa5995.setIcon(icon_a20bf987ce804c16dafa3ab7e0827b7d);
+        
+    
+        var popup_f60fa04d5f5d9c98b93d945fdad9d61f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d130714816e94834f659c6be4480af2b = $(`<div id="html_d130714816e94834f659c6be4480af2b" style="width: 100.0%; height: 100.0%;">Additional Match: אשל זנים שונים (ID: 9471)</div>`)[0];
+                popup_f60fa04d5f5d9c98b93d945fdad9d61f.setContent(html_d130714816e94834f659c6be4480af2b);
+            
+        
+
+        marker_f158efab9647ff26152310af6faa5995.bindPopup(popup_f60fa04d5f5d9c98b93d945fdad9d61f)
+        ;
+
+        
+    
+    
+            var marker_04f002e7b796a16e3e8e3c32ada82c8b = L.marker(
+                [32.06532065815959, 34.76136127612426],
+                {
+}
+            ).addTo(map_8bb5b14abcc15eb7f5045e3393cb95ab);
+        
+    
+            var icon_bbf9b8bf1ddf7c3ae593b3e06ea4df0a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_04f002e7b796a16e3e8e3c32ada82c8b.setIcon(icon_bbf9b8bf1ddf7c3ae593b3e06ea4df0a);
+        
+    
+        var popup_28106d52363eb573f96b202b9b723b85 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_df0fa2e88c7c160738afdabfadb39af2 = $(`<div id="html_df0fa2e88c7c160738afdabfadb39af2" style="width: 100.0%; height: 100.0%;">Additional Match: אשל זנים שונים (ID: 9473)</div>`)[0];
+                popup_28106d52363eb573f96b202b9b723b85.setContent(html_df0fa2e88c7c160738afdabfadb39af2);
+            
+        
+
+        marker_04f002e7b796a16e3e8e3c32ada82c8b.bindPopup(popup_28106d52363eb573f96b202b9b723b85)
+        ;
+
+        
+    
+    
+            var marker_4a679faaf1ff03bba80ef2e699c1f126 = L.marker(
+                [32.06519066020569, 34.76137527799442],
+                {
+}
+            ).addTo(map_8bb5b14abcc15eb7f5045e3393cb95ab);
+        
+    
+            var icon_1c9e49f0727627f69b0aa60671d03c50 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_4a679faaf1ff03bba80ef2e699c1f126.setIcon(icon_1c9e49f0727627f69b0aa60671d03c50);
+        
+    
+        var popup_7f86eebb4416d7641bd541240d73e886 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_40880d086ce6c023eab805bbb2e32b95 = $(`<div id="html_40880d086ce6c023eab805bbb2e32b95" style="width: 100.0%; height: 100.0%;">Additional Match: אשל זנים שונים (ID: 9461)</div>`)[0];
+                popup_7f86eebb4416d7641bd541240d73e886.setContent(html_40880d086ce6c023eab805bbb2e32b95);
+            
+        
+
+        marker_4a679faaf1ff03bba80ef2e699c1f126.bindPopup(popup_7f86eebb4416d7641bd541240d73e886)
+        ;
+
+        
+    
+    
+            var marker_1ad878a42d68f40857495f6a9ccf75e2 = L.marker(
+                [32.06529565632682, 34.76138327563777],
+                {
+}
+            ).addTo(map_8bb5b14abcc15eb7f5045e3393cb95ab);
+        
+    
+            var icon_f5f29d52bf9f83638f93581ae8dbd6e7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_1ad878a42d68f40857495f6a9ccf75e2.setIcon(icon_f5f29d52bf9f83638f93581ae8dbd6e7);
+        
+    
+        var popup_d28a99b2d58ec8b46be65ab067d9ccfc = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_58b95b2bb72514c5815fcac82d2b414e = $(`<div id="html_58b95b2bb72514c5815fcac82d2b414e" style="width: 100.0%; height: 100.0%;">Additional Match: אשל זנים שונים (ID: 9472)</div>`)[0];
+                popup_d28a99b2d58ec8b46be65ab067d9ccfc.setContent(html_58b95b2bb72514c5815fcac82d2b414e);
+            
+        
+
+        marker_1ad878a42d68f40857495f6a9ccf75e2.bindPopup(popup_d28a99b2d58ec8b46be65ab067d9ccfc)
+        ;
+
+        
+    
+    
+            var marker_722c5315116568c6b190cc3ed0788c43 = L.marker(
+                [32.06511965462585, 34.76139627078602],
+                {
+}
+            ).addTo(map_8bb5b14abcc15eb7f5045e3393cb95ab);
+        
+    
+            var icon_62b50d547309b411d613e7792b0e3f24 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_722c5315116568c6b190cc3ed0788c43.setIcon(icon_62b50d547309b411d613e7792b0e3f24);
+        
+    
+        var popup_9862745df0d24a5b99523a50524e3e98 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_feaa63f65db32a2d6f23d284e02b36f0 = $(`<div id="html_feaa63f65db32a2d6f23d284e02b36f0" style="width: 100.0%; height: 100.0%;">Additional Match: אשל זנים שונים (ID: 9455)</div>`)[0];
+                popup_9862745df0d24a5b99523a50524e3e98.setContent(html_feaa63f65db32a2d6f23d284e02b36f0);
+            
+        
+
+        marker_722c5315116568c6b190cc3ed0788c43.bindPopup(popup_9862745df0d24a5b99523a50524e3e98)
+        ;
+
+        
+    
+    
+            var marker_837d50bf394226ef3b13ae642c0354cc = L.marker(
+                [32.06515765690735, 34.76140427367647],
+                {
+}
+            ).addTo(map_8bb5b14abcc15eb7f5045e3393cb95ab);
+        
+    
+            var icon_e8c4080e41eaea1650277adfe544d6a5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_837d50bf394226ef3b13ae642c0354cc.setIcon(icon_e8c4080e41eaea1650277adfe544d6a5);
+        
+    
+        var popup_8e8d4de827d8f6f0df66243dd30efdc6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7cef25fe16695571628e8401cd099e20 = $(`<div id="html_7cef25fe16695571628e8401cd099e20" style="width: 100.0%; height: 100.0%;">Additional Match: אשל זנים שונים (ID: 9459)</div>`)[0];
+                popup_8e8d4de827d8f6f0df66243dd30efdc6.setContent(html_7cef25fe16695571628e8401cd099e20);
+            
+        
+
+        marker_837d50bf394226ef3b13ae642c0354cc.bindPopup(popup_8e8d4de827d8f6f0df66243dd30efdc6)
+        ;
+
+        
+    
+    
+            var marker_d8a86681335856fc4b209441daa99cb9 = L.marker(
+                [32.06519765473044, 34.76140527754733],
+                {
+}
+            ).addTo(map_8bb5b14abcc15eb7f5045e3393cb95ab);
+        
+    
+            var icon_82aa8006e0c7cd8d08386517b1167d85 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_d8a86681335856fc4b209441daa99cb9.setIcon(icon_82aa8006e0c7cd8d08386517b1167d85);
+        
+    
+        var popup_2443cefd6cb804a8272f695fb4a4006d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_42dee84f465058a93b117a1270b1d703 = $(`<div id="html_42dee84f465058a93b117a1270b1d703" style="width: 100.0%; height: 100.0%;">Additional Match: אשל זנים שונים (ID: 9468)</div>`)[0];
+                popup_2443cefd6cb804a8272f695fb4a4006d.setContent(html_42dee84f465058a93b117a1270b1d703);
+            
+        
+
+        marker_d8a86681335856fc4b209441daa99cb9.bindPopup(popup_2443cefd6cb804a8272f695fb4a4006d)
+        ;
+
+        
+    
+    
+            var marker_c57e47b7a817467e3e2e2cde1c5be6b1 = L.marker(
+                [32.0653526550228, 34.76141327776593],
+                {
+}
+            ).addTo(map_8bb5b14abcc15eb7f5045e3393cb95ab);
+        
+    
+            var icon_471cef35f53252e346eacf6e36d362fa = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_c57e47b7a817467e3e2e2cde1c5be6b1.setIcon(icon_471cef35f53252e346eacf6e36d362fa);
+        
+    
+        var popup_f510cec45b0f46ed3307344f4515c0cf = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4b8451959a29f974abeb546cc67a91b8 = $(`<div id="html_4b8451959a29f974abeb546cc67a91b8" style="width: 100.0%; height: 100.0%;">Additional Match: אשל זנים שונים (ID: 9482)</div>`)[0];
+                popup_f510cec45b0f46ed3307344f4515c0cf.setContent(html_4b8451959a29f974abeb546cc67a91b8);
+            
+        
+
+        marker_c57e47b7a817467e3e2e2cde1c5be6b1.bindPopup(popup_f510cec45b0f46ed3307344f4515c0cf)
+        ;
+
+        
+    
+    
+            var marker_f74ebf62cdc77e9f083bddabee0fbf9b = L.marker(
+                [32.06535866037824, 34.76141827908284],
+                {
+}
+            ).addTo(map_8bb5b14abcc15eb7f5045e3393cb95ab);
+        
+    
+            var icon_a7a6e6c48afe8fcb840a06ab8f3858e7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_f74ebf62cdc77e9f083bddabee0fbf9b.setIcon(icon_a7a6e6c48afe8fcb840a06ab8f3858e7);
+        
+    
+        var popup_ee18a199db5289471f61114bfa411ffd = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_02b6d7cfc4ace8e2c94e9611fef0ffac = $(`<div id="html_02b6d7cfc4ace8e2c94e9611fef0ffac" style="width: 100.0%; height: 100.0%;">Additional Match: אשל זנים שונים (ID: 9478)</div>`)[0];
+                popup_ee18a199db5289471f61114bfa411ffd.setContent(html_02b6d7cfc4ace8e2c94e9611fef0ffac);
+            
+        
+
+        marker_f74ebf62cdc77e9f083bddabee0fbf9b.bindPopup(popup_ee18a199db5289471f61114bfa411ffd)
+        ;
+
+        
+    
+    
+            var marker_770ed2b50503665c282dc609c97332ed = L.marker(
+                [32.06543265851714, 34.76142527188622],
+                {
+}
+            ).addTo(map_8bb5b14abcc15eb7f5045e3393cb95ab);
+        
+    
+            var icon_7490c36e3074a9e880f436c5e64a48ef = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_770ed2b50503665c282dc609c97332ed.setIcon(icon_7490c36e3074a9e880f436c5e64a48ef);
+        
+    
+        var popup_c5912c48e843cd796bbe1d50321417d2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d98c0d54dc07b072a171aa69b6a285e6 = $(`<div id="html_d98c0d54dc07b072a171aa69b6a285e6" style="width: 100.0%; height: 100.0%;">Additional Match: אשל זנים שונים (ID: 9497)</div>`)[0];
+                popup_c5912c48e843cd796bbe1d50321417d2.setContent(html_d98c0d54dc07b072a171aa69b6a285e6);
+            
+        
+
+        marker_770ed2b50503665c282dc609c97332ed.bindPopup(popup_c5912c48e843cd796bbe1d50321417d2)
+        ;
+
+        
+    
+    
+            var marker_ccd6b79f3ba9119de91474f16a5e5cb8 = L.marker(
+                [32.06539465753066, 34.76143827958481],
+                {
+}
+            ).addTo(map_8bb5b14abcc15eb7f5045e3393cb95ab);
+        
+    
+            var icon_db0a4b88c295f281511072fd4435bfe3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_ccd6b79f3ba9119de91474f16a5e5cb8.setIcon(icon_db0a4b88c295f281511072fd4435bfe3);
+        
+    
+        var popup_c2f3922abdd116a22ca2060a970d889b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_aa1607842545714e675d9681d451c315 = $(`<div id="html_aa1607842545714e675d9681d451c315" style="width: 100.0%; height: 100.0%;">Additional Match: אשל זנים שונים (ID: 9477)</div>`)[0];
+                popup_c2f3922abdd116a22ca2060a970d889b.setContent(html_aa1607842545714e675d9681d451c315);
+            
+        
+
+        marker_ccd6b79f3ba9119de91474f16a5e5cb8.bindPopup(popup_c2f3922abdd116a22ca2060a970d889b)
+        ;
+
+        
+    
+    
+            var marker_3257c18fe5bcf51de3b99d0b98eac920 = L.marker(
+                [32.06539665553971, 34.76147327001616],
+                {
+}
+            ).addTo(map_8bb5b14abcc15eb7f5045e3393cb95ab);
+        
+    
+            var icon_e524df04fec0092a480eb00b40174d27 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_3257c18fe5bcf51de3b99d0b98eac920.setIcon(icon_e524df04fec0092a480eb00b40174d27);
+        
+    
+        var popup_215dabdefb9f15b671cb9f60590b8ae5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c57f3c3ffd2b8bd21caa09a25b193f6f = $(`<div id="html_c57f3c3ffd2b8bd21caa09a25b193f6f" style="width: 100.0%; height: 100.0%;">Additional Match: אשל זנים שונים (ID: 9475)</div>`)[0];
+                popup_215dabdefb9f15b671cb9f60590b8ae5.setContent(html_c57f3c3ffd2b8bd21caa09a25b193f6f);
+            
+        
+
+        marker_3257c18fe5bcf51de3b99d0b98eac920.bindPopup(popup_215dabdefb9f15b671cb9f60590b8ae5)
+        ;
+
+        
+    
+    
+            var marker_433bc26d198e6546661fa1d8434d633f = L.marker(
+                [32.06513165706643, 34.76151227936553],
+                {
+}
+            ).addTo(map_8bb5b14abcc15eb7f5045e3393cb95ab);
+        
+    
+            var icon_b58e9c93ceff140187858a500ebf670e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_433bc26d198e6546661fa1d8434d633f.setIcon(icon_b58e9c93ceff140187858a500ebf670e);
+        
+    
+        var popup_d7818216b74c136d1e2c3890d9e8014b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3970d18b94d705ebf59792f93dde2a62 = $(`<div id="html_3970d18b94d705ebf59792f93dde2a62" style="width: 100.0%; height: 100.0%;">Additional Match: אשל זנים שונים (ID: 9456)</div>`)[0];
+                popup_d7818216b74c136d1e2c3890d9e8014b.setContent(html_3970d18b94d705ebf59792f93dde2a62);
+            
+        
+
+        marker_433bc26d198e6546661fa1d8434d633f.bindPopup(popup_d7818216b74c136d1e2c3890d9e8014b)
+        ;
+
+        
+    
+    
+            var marker_006f9c0c92a755cc61a79635bce4a020 = L.marker(
+                [32.06543689695967, 34.76176625394132],
+                {
+}
+            ).addTo(map_8bb5b14abcc15eb7f5045e3393cb95ab);
+        
+    
+            var icon_e028781f90c5b7acfb02cfc3573ffcb1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_006f9c0c92a755cc61a79635bce4a020.setIcon(icon_e028781f90c5b7acfb02cfc3573ffcb1);
+        
+    
+        var popup_15c0d7ff93f56e1513990eaf418d5f25 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_911ae0459dd3c8d1f365f6967278b71c = $(`<div id="html_911ae0459dd3c8d1f365f6967278b71c" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.06543689695967,34.76176625394132&layer=c&cbll=32.06543689695967,34.76176625394132&cbp=12,240,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_15c0d7ff93f56e1513990eaf418d5f25.setContent(html_911ae0459dd3c8d1f365f6967278b71c);
+            
+        
+
+        marker_006f9c0c92a755cc61a79635bce4a020.bindPopup(popup_15c0d7ff93f56e1513990eaf418d5f25)
+        ;
+
+        
+    
+</script>
+</html>

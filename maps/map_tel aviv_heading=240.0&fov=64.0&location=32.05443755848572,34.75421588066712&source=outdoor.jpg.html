@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_a6cec56dfaf1133cc6b5c085c3c8342e {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+<div style="
+position: fixed;
+bottom: 50px;
+left: 50px;
+width: 200px;
+background-color: white;
+z-index:9999;
+font-size:14px;
+padding: 10px;
+border: 2px solid grey;
+border-radius: 8px;
+box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+">
+<b>Legend</b><br>
+<i class="fa fa-map-marker fa-2x" style="color:orange"></i> Car location<br>
+<i class="fa fa-map-marker fa-2x" style="color:red"></i> Detection location<br>
+<i class="fa fa-map-marker fa-2x" style="color:green"></i> Seker best match<br>
+<i class="fa fa-map-marker fa-2x" style="color:blue"></i> Seker additional match<br>
+</div>
+    
+            <div class="folium-map" id="map_a6cec56dfaf1133cc6b5c085c3c8342e" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_a6cec56dfaf1133cc6b5c085c3c8342e = L.map(
+                "map_a6cec56dfaf1133cc6b5c085c3c8342e",
+                {
+                    center: [32.05341215827478, 34.75294816912863],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 15,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_9abff1dc9548b5e30b1fa4a1a02f2897 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_9abff1dc9548b5e30b1fa4a1a02f2897.addTo(map_a6cec56dfaf1133cc6b5c085c3c8342e);
+        
+    
+            var marker_dc2eb37372f6e081ac40e1d40b9764bf = L.marker(
+                [32.05426665986297, 34.75401627587375],
+                {
+}
+            ).addTo(map_a6cec56dfaf1133cc6b5c085c3c8342e);
+        
+    
+            var icon_37d48986951a0e15d22cac794981feb1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_dc2eb37372f6e081ac40e1d40b9764bf.setIcon(icon_37d48986951a0e15d22cac794981feb1);
+        
+    
+        var popup_b5aa92c3f200b94b57731cea679a7763 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5d44fb6014223b130b68fe9ef5a0c2e6 = $(`<div id="html_5d44fb6014223b130b68fe9ef5a0c2e6" style="width: 100.0%; height: 100.0%;">Best Match: אשל הפרקים (ID: 9786.0)</div>`)[0];
+                popup_b5aa92c3f200b94b57731cea679a7763.setContent(html_5d44fb6014223b130b68fe9ef5a0c2e6);
+            
+        
+
+        marker_dc2eb37372f6e081ac40e1d40b9764bf.bindPopup(popup_b5aa92c3f200b94b57731cea679a7763)
+        ;
+
+        
+    
+    
+            var poly_line_9136dec6013f58343d3de214f584d7c0 = L.polyline(
+                [[32.05426665986297, 34.75401627587375], [32.054188910113936, 34.753953387269654]],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "black", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_a6cec56dfaf1133cc6b5c085c3c8342e);
+        
+    
+        var popup_1181793d2ece54c1778fb35657ef67d3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_aa9ba3890488f3c443589bde2c1c55e9 = $(`<div id="html_aa9ba3890488f3c443589bde2c1c55e9" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 1, angle: 4.032269349795892</div>`)[0];
+                popup_1181793d2ece54c1778fb35657ef67d3.setContent(html_aa9ba3890488f3c443589bde2c1c55e9);
+            
+        
+
+        poly_line_9136dec6013f58343d3de214f584d7c0.bindPopup(popup_1181793d2ece54c1778fb35657ef67d3)
+        ;
+
+        
+    
+    
+            var marker_c7bdef185671d66270c1c49dc127d609 = L.marker(
+                [32.0542956577336, 34.75374627953097],
+                {
+}
+            ).addTo(map_a6cec56dfaf1133cc6b5c085c3c8342e);
+        
+    
+            var icon_93426719733e478c21f99d18028ca4fa = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_c7bdef185671d66270c1c49dc127d609.setIcon(icon_93426719733e478c21f99d18028ca4fa);
+        
+    
+        var popup_f75a0ea16ca793172e8b5deaff9681bc = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_944789db11be1fae092a5fdc2c734814 = $(`<div id="html_944789db11be1fae092a5fdc2c734814" style="width: 100.0%; height: 100.0%;">Additional Match: וושינגטוניה חסונה (ID: 9815)</div>`)[0];
+                popup_f75a0ea16ca793172e8b5deaff9681bc.setContent(html_944789db11be1fae092a5fdc2c734814);
+            
+        
+
+        marker_c7bdef185671d66270c1c49dc127d609.bindPopup(popup_f75a0ea16ca793172e8b5deaff9681bc)
+        ;
+
+        
+    
+    
+            var marker_e97de105756776ae55041c0315263f71 = L.marker(
+                [32.05427265991689, 34.75375327494099],
+                {
+}
+            ).addTo(map_a6cec56dfaf1133cc6b5c085c3c8342e);
+        
+    
+            var icon_cc8430b3f83c6f85081d496ec3e7b20f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_e97de105756776ae55041c0315263f71.setIcon(icon_cc8430b3f83c6f85081d496ec3e7b20f);
+        
+    
+        var popup_82a66bca32b66e8f68d7a263bc0bb82b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_127fce1a45ebba71db084896d6992373 = $(`<div id="html_127fce1a45ebba71db084896d6992373" style="width: 100.0%; height: 100.0%;">Additional Match: אשל הפרקים (ID: 9817)</div>`)[0];
+                popup_82a66bca32b66e8f68d7a263bc0bb82b.setContent(html_127fce1a45ebba71db084896d6992373);
+            
+        
+
+        marker_e97de105756776ae55041c0315263f71.bindPopup(popup_82a66bca32b66e8f68d7a263bc0bb82b)
+        ;
+
+        
+    
+    
+            var marker_7e2b23556ad0302ad9d206c23c7a01fa = L.marker(
+                [32.0543746558767, 34.75375427861609],
+                {
+}
+            ).addTo(map_a6cec56dfaf1133cc6b5c085c3c8342e);
+        
+    
+            var icon_4d32e24e20b75b67205450a28826cc34 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_7e2b23556ad0302ad9d206c23c7a01fa.setIcon(icon_4d32e24e20b75b67205450a28826cc34);
+        
+    
+        var popup_dd2e338cec8ae43c5ab8be227e31c286 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a8a393eb054be3aa4c26fe9d5fe6b564 = $(`<div id="html_a8a393eb054be3aa4c26fe9d5fe6b564" style="width: 100.0%; height: 100.0%;">Additional Match: וושינגטוניה חסונה (ID: 9811)</div>`)[0];
+                popup_dd2e338cec8ae43c5ab8be227e31c286.setContent(html_a8a393eb054be3aa4c26fe9d5fe6b564);
+            
+        
+
+        marker_7e2b23556ad0302ad9d206c23c7a01fa.bindPopup(popup_dd2e338cec8ae43c5ab8be227e31c286)
+        ;
+
+        
+    
+    
+            var marker_ac9c8931ebbb7390878cf30fa4e9f6e2 = L.marker(
+                [32.05436165370818, 34.75375727543141],
+                {
+}
+            ).addTo(map_a6cec56dfaf1133cc6b5c085c3c8342e);
+        
+    
+            var icon_58999efb9ba103db55c350b298850dd2 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_ac9c8931ebbb7390878cf30fa4e9f6e2.setIcon(icon_58999efb9ba103db55c350b298850dd2);
+        
+    
+        var popup_47e2d425e600ace1a120830ce8dc84de = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8bdfb275e491307797dc44b60c1c94d7 = $(`<div id="html_8bdfb275e491307797dc44b60c1c94d7" style="width: 100.0%; height: 100.0%;">Additional Match: אשל הפרקים (ID: 9809)</div>`)[0];
+                popup_47e2d425e600ace1a120830ce8dc84de.setContent(html_8bdfb275e491307797dc44b60c1c94d7);
+            
+        
+
+        marker_ac9c8931ebbb7390878cf30fa4e9f6e2.bindPopup(popup_47e2d425e600ace1a120830ce8dc84de)
+        ;
+
+        
+    
+    
+            var marker_0a08864e976359a0b496326b29640ca5 = L.marker(
+                [32.05438365328963, 34.7537662739359],
+                {
+}
+            ).addTo(map_a6cec56dfaf1133cc6b5c085c3c8342e);
+        
+    
+            var icon_8fb7c5ae61d014b2c14b4c882ec5f05b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_0a08864e976359a0b496326b29640ca5.setIcon(icon_8fb7c5ae61d014b2c14b4c882ec5f05b);
+        
+    
+        var popup_72c75133c0b9cf89319720705a201c44 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0360d862a119be7da03e93437d98b4e7 = $(`<div id="html_0360d862a119be7da03e93437d98b4e7" style="width: 100.0%; height: 100.0%;">Additional Match: אשל זנים שונים (ID: 9803)</div>`)[0];
+                popup_72c75133c0b9cf89319720705a201c44.setContent(html_0360d862a119be7da03e93437d98b4e7);
+            
+        
+
+        marker_0a08864e976359a0b496326b29640ca5.bindPopup(popup_72c75133c0b9cf89319720705a201c44)
+        ;
+
+        
+    
+    
+            var marker_7eeb5eb919693fe6463740c809f849be = L.marker(
+                [32.05418265923537, 34.75379327559443],
+                {
+}
+            ).addTo(map_a6cec56dfaf1133cc6b5c085c3c8342e);
+        
+    
+            var icon_e64c223bb2576cfaa9940760bb74146d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_7eeb5eb919693fe6463740c809f849be.setIcon(icon_e64c223bb2576cfaa9940760bb74146d);
+        
+    
+        var popup_b1fef9fe4770cefbd5634ae99eb8d744 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_90bb1dd6d8cb451037b12818d788bb7c = $(`<div id="html_90bb1dd6d8cb451037b12818d788bb7c" style="width: 100.0%; height: 100.0%;">Additional Match: וושינגטוניה חסונה (ID: 9818)</div>`)[0];
+                popup_b1fef9fe4770cefbd5634ae99eb8d744.setContent(html_90bb1dd6d8cb451037b12818d788bb7c);
+            
+        
+
+        marker_7eeb5eb919693fe6463740c809f849be.bindPopup(popup_b1fef9fe4770cefbd5634ae99eb8d744)
+        ;
+
+        
+    
+    
+            var marker_c4adc0061cb5a3a3446222cbe29244e3 = L.marker(
+                [32.05433165756885, 34.7538072743092],
+                {
+}
+            ).addTo(map_a6cec56dfaf1133cc6b5c085c3c8342e);
+        
+    
+            var icon_2fdf46aa9ee2a0d175b8b1749e34cafc = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_c4adc0061cb5a3a3446222cbe29244e3.setIcon(icon_2fdf46aa9ee2a0d175b8b1749e34cafc);
+        
+    
+        var popup_6e13cce498761fa0000093d24566df7c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7d4a65cdc95c2e794397b950b785144e = $(`<div id="html_7d4a65cdc95c2e794397b950b785144e" style="width: 100.0%; height: 100.0%;">Additional Match: אשל הפרקים (ID: 9797)</div>`)[0];
+                popup_6e13cce498761fa0000093d24566df7c.setContent(html_7d4a65cdc95c2e794397b950b785144e);
+            
+        
+
+        marker_c4adc0061cb5a3a3446222cbe29244e3.bindPopup(popup_6e13cce498761fa0000093d24566df7c)
+        ;
+
+        
+    
+    
+            var marker_82e74f90be7e3634773521bd6919dbc3 = L.marker(
+                [32.05442866089358, 34.75381427457592],
+                {
+}
+            ).addTo(map_a6cec56dfaf1133cc6b5c085c3c8342e);
+        
+    
+            var icon_bdccc537649e382dd26de0a683ef8a40 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_82e74f90be7e3634773521bd6919dbc3.setIcon(icon_bdccc537649e382dd26de0a683ef8a40);
+        
+    
+        var popup_524a808f64bb26896d37cd3b8663de77 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_846e7181ec7445254b0de9b006aed1af = $(`<div id="html_846e7181ec7445254b0de9b006aed1af" style="width: 100.0%; height: 100.0%;">Additional Match: אשל הפרקים (ID: 9801)</div>`)[0];
+                popup_524a808f64bb26896d37cd3b8663de77.setContent(html_846e7181ec7445254b0de9b006aed1af);
+            
+        
+
+        marker_82e74f90be7e3634773521bd6919dbc3.bindPopup(popup_524a808f64bb26896d37cd3b8663de77)
+        ;
+
+        
+    
+    
+            var marker_7c162bb42f69d386cf2cbcd06a907de0 = L.marker(
+                [32.05426465492691, 34.75383527107406],
+                {
+}
+            ).addTo(map_a6cec56dfaf1133cc6b5c085c3c8342e);
+        
+    
+            var icon_7524a98c93d9ea051667aae34f969d83 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_7c162bb42f69d386cf2cbcd06a907de0.setIcon(icon_7524a98c93d9ea051667aae34f969d83);
+        
+    
+        var popup_b5c86eed95602edc2cfdd0c1122772b7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_adce81bcff46f421295af8b58b283858 = $(`<div id="html_adce81bcff46f421295af8b58b283858" style="width: 100.0%; height: 100.0%;">Additional Match: וושינגטוניה חסונה (ID: 9795)</div>`)[0];
+                popup_b5c86eed95602edc2cfdd0c1122772b7.setContent(html_adce81bcff46f421295af8b58b283858);
+            
+        
+
+        marker_7c162bb42f69d386cf2cbcd06a907de0.bindPopup(popup_b5c86eed95602edc2cfdd0c1122772b7)
+        ;
+
+        
+    
+    
+            var marker_f6a019c336adcae06d38056ed02ee5b1 = L.marker(
+                [32.05426565413447, 34.75390327769653],
+                {
+}
+            ).addTo(map_a6cec56dfaf1133cc6b5c085c3c8342e);
+        
+    
+            var icon_3811c2b7432726939cb62826316ba0e8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_f6a019c336adcae06d38056ed02ee5b1.setIcon(icon_3811c2b7432726939cb62826316ba0e8);
+        
+    
+        var popup_9622c9124ea97db75ba93ca2376b751e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_78b30af7006a5764c63cc52d3379965d = $(`<div id="html_78b30af7006a5764c63cc52d3379965d" style="width: 100.0%; height: 100.0%;">Additional Match: זית אירופאי (ID: 9799)</div>`)[0];
+                popup_9622c9124ea97db75ba93ca2376b751e.setContent(html_78b30af7006a5764c63cc52d3379965d);
+            
+        
+
+        marker_f6a019c336adcae06d38056ed02ee5b1.bindPopup(popup_9622c9124ea97db75ba93ca2376b751e)
+        ;
+
+        
+    
+    
+            var marker_ef4db4db47324eceb5a4fa31bc81307e = L.marker(
+                [32.05422665208729, 34.7539642799449],
+                {
+}
+            ).addTo(map_a6cec56dfaf1133cc6b5c085c3c8342e);
+        
+    
+            var icon_b263c302f42e17888b101df25e87de5c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_ef4db4db47324eceb5a4fa31bc81307e.setIcon(icon_b263c302f42e17888b101df25e87de5c);
+        
+    
+        var popup_99be4dbf77a1b8e042ef0aadee0830d2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1d7a38b01b1253016144c6d475f05ce3 = $(`<div id="html_1d7a38b01b1253016144c6d475f05ce3" style="width: 100.0%; height: 100.0%;">Additional Match: זית אירופאי (ID: 9796)</div>`)[0];
+                popup_99be4dbf77a1b8e042ef0aadee0830d2.setContent(html_1d7a38b01b1253016144c6d475f05ce3);
+            
+        
+
+        marker_ef4db4db47324eceb5a4fa31bc81307e.bindPopup(popup_99be4dbf77a1b8e042ef0aadee0830d2)
+        ;
+
+        
+    
+    
+            var marker_8c0f76961c941612d5d8abd5f7aa11cf = L.marker(
+                [32.05423065767275, 34.75400027263454],
+                {
+}
+            ).addTo(map_a6cec56dfaf1133cc6b5c085c3c8342e);
+        
+    
+            var icon_84054ec24f4c17b20ed7de568626a4aa = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_8c0f76961c941612d5d8abd5f7aa11cf.setIcon(icon_84054ec24f4c17b20ed7de568626a4aa);
+        
+    
+        var popup_16195d88956bb3b2e017df86e56bb3ee = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3aeefb364be04073f6e1c26c7b45f4dc = $(`<div id="html_3aeefb364be04073f6e1c26c7b45f4dc" style="width: 100.0%; height: 100.0%;">Additional Match: אשל הפרקים (ID: 9794)</div>`)[0];
+                popup_16195d88956bb3b2e017df86e56bb3ee.setContent(html_3aeefb364be04073f6e1c26c7b45f4dc);
+            
+        
+
+        marker_8c0f76961c941612d5d8abd5f7aa11cf.bindPopup(popup_16195d88956bb3b2e017df86e56bb3ee)
+        ;
+
+        
+    
+    
+            var marker_40b20abe7a2bdc841d7e2b47bd562a2e = L.marker(
+                [32.05441566090938, 34.75404627457023],
+                {
+}
+            ).addTo(map_a6cec56dfaf1133cc6b5c085c3c8342e);
+        
+    
+            var icon_37ea20dc4f138771c76dacff54506c18 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_40b20abe7a2bdc841d7e2b47bd562a2e.setIcon(icon_37ea20dc4f138771c76dacff54506c18);
+        
+    
+        var popup_ebc20ad2beb379df8220ac280b585855 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f6f1dc9f2a3ba10d8716b2bcbbdd42d4 = $(`<div id="html_f6f1dc9f2a3ba10d8716b2bcbbdd42d4" style="width: 100.0%; height: 100.0%;">Additional Match: זית אירופאי (ID: 9810)</div>`)[0];
+                popup_ebc20ad2beb379df8220ac280b585855.setContent(html_f6f1dc9f2a3ba10d8716b2bcbbdd42d4);
+            
+        
+
+        marker_40b20abe7a2bdc841d7e2b47bd562a2e.bindPopup(popup_ebc20ad2beb379df8220ac280b585855)
+        ;
+
+        
+    
+    
+            var marker_64ab5a2532e375e4a4b12fa1960fa6be = L.marker(
+                [32.05422965782815, 34.75407928014047],
+                {
+}
+            ).addTo(map_a6cec56dfaf1133cc6b5c085c3c8342e);
+        
+    
+            var icon_5c6dc189560a77ce9e7d14783143cdf9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_64ab5a2532e375e4a4b12fa1960fa6be.setIcon(icon_5c6dc189560a77ce9e7d14783143cdf9);
+        
+    
+        var popup_9a94548e4dbb5eb2c049799e884c56bb = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_16d9f9bf063f0bb48345d33b8266bb26 = $(`<div id="html_16d9f9bf063f0bb48345d33b8266bb26" style="width: 100.0%; height: 100.0%;">Additional Match: אשל זנים שונים (ID: 9788)</div>`)[0];
+                popup_9a94548e4dbb5eb2c049799e884c56bb.setContent(html_16d9f9bf063f0bb48345d33b8266bb26);
+            
+        
+
+        marker_64ab5a2532e375e4a4b12fa1960fa6be.bindPopup(popup_9a94548e4dbb5eb2c049799e884c56bb)
+        ;
+
+        
+    
+    
+            var marker_fc08186e23f473c5793d78df9c1bdf59 = L.marker(
+                [32.05439465934595, 34.75409227972307],
+                {
+}
+            ).addTo(map_a6cec56dfaf1133cc6b5c085c3c8342e);
+        
+    
+            var icon_9cc0f1987e08acd84907be3c8d1e7533 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_fc08186e23f473c5793d78df9c1bdf59.setIcon(icon_9cc0f1987e08acd84907be3c8d1e7533);
+        
+    
+        var popup_04192c464bfbef8af695a89a54ccfbbc = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_724eb2edf6a18779dde290f3ab6d904e = $(`<div id="html_724eb2edf6a18779dde290f3ab6d904e" style="width: 100.0%; height: 100.0%;">Additional Match: אזדרכת מצויה (ID: 9802)</div>`)[0];
+                popup_04192c464bfbef8af695a89a54ccfbbc.setContent(html_724eb2edf6a18779dde290f3ab6d904e);
+            
+        
+
+        marker_fc08186e23f473c5793d78df9c1bdf59.bindPopup(popup_04192c464bfbef8af695a89a54ccfbbc)
+        ;
+
+        
+    
+    
+            var marker_b4db155afa4c224ccdcdacfb815a0f94 = L.marker(
+                [32.05441565705542, 34.75414927149633],
+                {
+}
+            ).addTo(map_a6cec56dfaf1133cc6b5c085c3c8342e);
+        
+    
+            var icon_996a1bda8cdd019815d8af00b255cb3b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_b4db155afa4c224ccdcdacfb815a0f94.setIcon(icon_996a1bda8cdd019815d8af00b255cb3b);
+        
+    
+        var popup_ce5974345227855a8d232a29df952ea6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5b539629ed8006b20e7a58949671a98a = $(`<div id="html_5b539629ed8006b20e7a58949671a98a" style="width: 100.0%; height: 100.0%;">Additional Match: תמר מצוי (ID: 9805)</div>`)[0];
+                popup_ce5974345227855a8d232a29df952ea6.setContent(html_5b539629ed8006b20e7a58949671a98a);
+            
+        
+
+        marker_b4db155afa4c224ccdcdacfb815a0f94.bindPopup(popup_ce5974345227855a8d232a29df952ea6)
+        ;
+
+        
+    
+    
+            var marker_3c7b4dc6754a7d81b6bc22881adf8eca = L.marker(
+                [32.05442265769179, 34.75416527919177],
+                {
+}
+            ).addTo(map_a6cec56dfaf1133cc6b5c085c3c8342e);
+        
+    
+            var icon_55057e096e3e59ffd0d837911d5a29da = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_3c7b4dc6754a7d81b6bc22881adf8eca.setIcon(icon_55057e096e3e59ffd0d837911d5a29da);
+        
+    
+        var popup_1d7567193fa7bbf0c5582482416854ad = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_eadbb017c82ba17cd4bad87e49a3c3a3 = $(`<div id="html_eadbb017c82ba17cd4bad87e49a3c3a3" style="width: 100.0%; height: 100.0%;">Additional Match: וושינגטוניה חסונה (ID: 9807)</div>`)[0];
+                popup_1d7567193fa7bbf0c5582482416854ad.setContent(html_eadbb017c82ba17cd4bad87e49a3c3a3);
+            
+        
+
+        marker_3c7b4dc6754a7d81b6bc22881adf8eca.bindPopup(popup_1d7567193fa7bbf0c5582482416854ad)
+        ;
+
+        
+    
+    
+            var marker_582f1f1aa0d80be323e0d64625d6bff1 = L.marker(
+                [32.05443065462864, 34.75416727307387],
+                {
+}
+            ).addTo(map_a6cec56dfaf1133cc6b5c085c3c8342e);
+        
+    
+            var icon_18b7b7fceff02a01bf41c194ed2815b9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_582f1f1aa0d80be323e0d64625d6bff1.setIcon(icon_18b7b7fceff02a01bf41c194ed2815b9);
+        
+    
+        var popup_abc74f051352f20421d1645940efca9f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_636adc14d7dd79b1e741f6988ce0f49e = $(`<div id="html_636adc14d7dd79b1e741f6988ce0f49e" style="width: 100.0%; height: 100.0%;">Additional Match: תמר מצוי (ID: 9820)</div>`)[0];
+                popup_abc74f051352f20421d1645940efca9f.setContent(html_636adc14d7dd79b1e741f6988ce0f49e);
+            
+        
+
+        marker_582f1f1aa0d80be323e0d64625d6bff1.bindPopup(popup_abc74f051352f20421d1645940efca9f)
+        ;
+
+        
+    
+    
+            var marker_471b8767b94e8f4ebbb9186a7548bd09 = L.marker(
+                [32.05443755848572, 34.75421588066712],
+                {
+}
+            ).addTo(map_a6cec56dfaf1133cc6b5c085c3c8342e);
+        
+    
+            var icon_f7ef4d36994872af84b08f1098e8f66e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_471b8767b94e8f4ebbb9186a7548bd09.setIcon(icon_f7ef4d36994872af84b08f1098e8f66e);
+        
+    
+        var popup_94f1e0457f2385383e1eb21a2ebb5975 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_496c08fe87c9c5e39a8eb7849009db7c = $(`<div id="html_496c08fe87c9c5e39a8eb7849009db7c" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.05443755848572,34.75421588066712&layer=c&cbll=32.05443755848572,34.75421588066712&cbp=12,240,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_94f1e0457f2385383e1eb21a2ebb5975.setContent(html_496c08fe87c9c5e39a8eb7849009db7c);
+            
+        
+
+        marker_471b8767b94e8f4ebbb9186a7548bd09.bindPopup(popup_94f1e0457f2385383e1eb21a2ebb5975)
+        ;
+
+        
+    
+</script>
+</html>

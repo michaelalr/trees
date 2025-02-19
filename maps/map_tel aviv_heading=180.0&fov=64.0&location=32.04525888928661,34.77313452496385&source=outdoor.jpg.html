@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_5867115230204eeb140df3ccbb9045c8 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+<div style="
+position: fixed;
+bottom: 50px;
+left: 50px;
+width: 200px;
+background-color: white;
+z-index:9999;
+font-size:14px;
+padding: 10px;
+border: 2px solid grey;
+border-radius: 8px;
+box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+">
+<b>Legend</b><br>
+<i class="fa fa-map-marker fa-2x" style="color:orange"></i> Car location<br>
+<i class="fa fa-map-marker fa-2x" style="color:red"></i> Detection location<br>
+<i class="fa fa-map-marker fa-2x" style="color:green"></i> Seker best match<br>
+<i class="fa fa-map-marker fa-2x" style="color:blue"></i> Seker additional match<br>
+</div>
+    
+            <div class="folium-map" id="map_5867115230204eeb140df3ccbb9045c8" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_5867115230204eeb140df3ccbb9045c8 = L.map(
+                "map_5867115230204eeb140df3ccbb9045c8",
+                {
+                    center: [32.04457198224911, 34.77309745858688],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 15,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_3279a13f6ebcab876c3ca37653910d86 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_3279a13f6ebcab876c3ca37653910d86.addTo(map_5867115230204eeb140df3ccbb9045c8);
+        
+    
+            var marker_40609749fbc461d82de00d0c6db7676a = L.marker(
+                [32.04491265592516, 34.77294127803573],
+                {
+}
+            ).addTo(map_5867115230204eeb140df3ccbb9045c8);
+        
+    
+            var icon_a39fb529571cca7e57ba437d2d9703f2 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_40609749fbc461d82de00d0c6db7676a.setIcon(icon_a39fb529571cca7e57ba437d2d9703f2);
+        
+    
+        var popup_948c12b9fd98d6c275c141270d96f33f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_629a4984188973d015523ba588afe077 = $(`<div id="html_629a4984188973d015523ba588afe077" style="width: 100.0%; height: 100.0%;">Best Match: אורן הסלע (ID: 10454.0)</div>`)[0];
+                popup_948c12b9fd98d6c275c141270d96f33f.setContent(html_629a4984188973d015523ba588afe077);
+            
+        
+
+        marker_40609749fbc461d82de00d0c6db7676a.bindPopup(popup_948c12b9fd98d6c275c141270d96f33f)
+        ;
+
+        
+    
+    
+            var poly_line_84fefd92ef15530dc3553cd05ef32aa6 = L.polyline(
+                [[32.04491265592516, 34.77294127803573], [32.04490726763719, 34.77284142330949]],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "black", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_5867115230204eeb140df3ccbb9045c8);
+        
+    
+        var popup_a33f66a03a387679159294b130a5e9fb = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b6b6ba852a69cde7f9fa459b85938a8a = $(`<div id="html_b6b6ba852a69cde7f9fa459b85938a8a" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 1, angle: 3.195501641010924</div>`)[0];
+                popup_a33f66a03a387679159294b130a5e9fb.setContent(html_b6b6ba852a69cde7f9fa459b85938a8a);
+            
+        
+
+        poly_line_84fefd92ef15530dc3553cd05ef32aa6.bindPopup(popup_a33f66a03a387679159294b130a5e9fb)
+        ;
+
+        
+    
+    
+            var marker_5c24fb0af6c56ca34fb1b81ccb9ebca8 = L.marker(
+                [32.04478265904686, 34.77298527610986],
+                {
+}
+            ).addTo(map_5867115230204eeb140df3ccbb9045c8);
+        
+    
+            var icon_f5770970e24d4368b5d3abe0dcfdbbb3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_5c24fb0af6c56ca34fb1b81ccb9ebca8.setIcon(icon_f5770970e24d4368b5d3abe0dcfdbbb3);
+        
+    
+        var popup_0d13fa341978c82ee19bcc9bce635573 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_00b864ad103f6d6c400872e076db9864 = $(`<div id="html_00b864ad103f6d6c400872e076db9864" style="width: 100.0%; height: 100.0%;">Additional Match: אורן הסלע (ID: 10257)</div>`)[0];
+                popup_0d13fa341978c82ee19bcc9bce635573.setContent(html_00b864ad103f6d6c400872e076db9864);
+            
+        
+
+        marker_5c24fb0af6c56ca34fb1b81ccb9ebca8.bindPopup(popup_0d13fa341978c82ee19bcc9bce635573)
+        ;
+
+        
+    
+    
+            var marker_e140ba53bf3d5fdf5c13d562da0fb616 = L.marker(
+                [32.04476666156827, 34.77305427684406],
+                {
+}
+            ).addTo(map_5867115230204eeb140df3ccbb9045c8);
+        
+    
+            var icon_174f7abea58eb7b7d88ffec46731b0ef = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_e140ba53bf3d5fdf5c13d562da0fb616.setIcon(icon_174f7abea58eb7b7d88ffec46731b0ef);
+        
+    
+        var popup_2a9c22ae8ce1fc290261c9f7fec23139 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7a05bc9bd3f2f37b995eef898dfd4903 = $(`<div id="html_7a05bc9bd3f2f37b995eef898dfd4903" style="width: 100.0%; height: 100.0%;">Additional Match: אורן הסלע (ID: 10255)</div>`)[0];
+                popup_2a9c22ae8ce1fc290261c9f7fec23139.setContent(html_7a05bc9bd3f2f37b995eef898dfd4903);
+            
+        
+
+        marker_e140ba53bf3d5fdf5c13d562da0fb616.bindPopup(popup_2a9c22ae8ce1fc290261c9f7fec23139)
+        ;
+
+        
+    
+    
+            var marker_b6833a46201249a005c4f2eb73fabde7 = L.marker(
+                [32.04493966147583, 34.77306227446473],
+                {
+}
+            ).addTo(map_5867115230204eeb140df3ccbb9045c8);
+        
+    
+            var icon_184fd6da32828f342f874c65dc82275c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_b6833a46201249a005c4f2eb73fabde7.setIcon(icon_184fd6da32828f342f874c65dc82275c);
+        
+    
+        var popup_0543249ec8160402a25a1780f1761217 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2c3fdbdb36892f6537945e9d19767e74 = $(`<div id="html_2c3fdbdb36892f6537945e9d19767e74" style="width: 100.0%; height: 100.0%;">Additional Match: אורן הסלע (ID: 10071)</div>`)[0];
+                popup_0543249ec8160402a25a1780f1761217.setContent(html_2c3fdbdb36892f6537945e9d19767e74);
+            
+        
+
+        marker_b6833a46201249a005c4f2eb73fabde7.bindPopup(popup_0543249ec8160402a25a1780f1761217)
+        ;
+
+        
+    
+    
+            var marker_4a2b7e0f2558c9d731228a5fcbf8e855 = L.marker(
+                [32.04503365304351, 34.77306427942788],
+                {
+}
+            ).addTo(map_5867115230204eeb140df3ccbb9045c8);
+        
+    
+            var icon_7d854527d6d8a3128031aa2e2325aa9f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_4a2b7e0f2558c9d731228a5fcbf8e855.setIcon(icon_7d854527d6d8a3128031aa2e2325aa9f);
+        
+    
+        var popup_1198a27a63d3e8c4d9a8480e47043cf6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_213e8f01d01f89be9ecf36e8457b4888 = $(`<div id="html_213e8f01d01f89be9ecf36e8457b4888" style="width: 100.0%; height: 100.0%;">Additional Match: אורן הסלע (ID: 10075)</div>`)[0];
+                popup_1198a27a63d3e8c4d9a8480e47043cf6.setContent(html_213e8f01d01f89be9ecf36e8457b4888);
+            
+        
+
+        marker_4a2b7e0f2558c9d731228a5fcbf8e855.bindPopup(popup_1198a27a63d3e8c4d9a8480e47043cf6)
+        ;
+
+        
+    
+    
+            var marker_f4afc6eb44b1291553198e71f83bb88f = L.marker(
+                [32.04477966028143, 34.77307927688921],
+                {
+}
+            ).addTo(map_5867115230204eeb140df3ccbb9045c8);
+        
+    
+            var icon_b7c4db3a92eb1723fc4a59ad1a19458f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_f4afc6eb44b1291553198e71f83bb88f.setIcon(icon_b7c4db3a92eb1723fc4a59ad1a19458f);
+        
+    
+        var popup_c457e78962e9ecfea020ecf189c1b09a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e980b293362b674c44af52e6ea651cfc = $(`<div id="html_e980b293362b674c44af52e6ea651cfc" style="width: 100.0%; height: 100.0%;">Additional Match: אורן הסלע (ID: 10256)</div>`)[0];
+                popup_c457e78962e9ecfea020ecf189c1b09a.setContent(html_e980b293362b674c44af52e6ea651cfc);
+            
+        
+
+        marker_f4afc6eb44b1291553198e71f83bb88f.bindPopup(popup_c457e78962e9ecfea020ecf189c1b09a)
+        ;
+
+        
+    
+    
+            var marker_a2f99aa32183cd1af82994e402c56e90 = L.marker(
+                [32.04486865931783, 34.77308227934692],
+                {
+}
+            ).addTo(map_5867115230204eeb140df3ccbb9045c8);
+        
+    
+            var icon_082094cda0f1c6e06269faec286502a7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_a2f99aa32183cd1af82994e402c56e90.setIcon(icon_082094cda0f1c6e06269faec286502a7);
+        
+    
+        var popup_e953bda270a8abed5737ab770a1e8b8c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_49da147ac3c73cf6e8a4ac8243783c33 = $(`<div id="html_49da147ac3c73cf6e8a4ac8243783c33" style="width: 100.0%; height: 100.0%;">Additional Match: אורן הסלע (ID: 10087)</div>`)[0];
+                popup_e953bda270a8abed5737ab770a1e8b8c.setContent(html_49da147ac3c73cf6e8a4ac8243783c33);
+            
+        
+
+        marker_a2f99aa32183cd1af82994e402c56e90.bindPopup(popup_e953bda270a8abed5737ab770a1e8b8c)
+        ;
+
+        
+    
+    
+            var marker_4a47b6313e8ab85e3c0d83b958d87a75 = L.marker(
+                [32.04488865322423, 34.77308527718803],
+                {
+}
+            ).addTo(map_5867115230204eeb140df3ccbb9045c8);
+        
+    
+            var icon_02ba481a3c23cf30525e3b842e1061a3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_4a47b6313e8ab85e3c0d83b958d87a75.setIcon(icon_02ba481a3c23cf30525e3b842e1061a3);
+        
+    
+        var popup_ba2f60736909e06de47b2624fa6c36cd = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e7c52329942c5fd0e3ef6ba42998ad1b = $(`<div id="html_e7c52329942c5fd0e3ef6ba42998ad1b" style="width: 100.0%; height: 100.0%;">Additional Match: אורן הסלע (ID: 10070)</div>`)[0];
+                popup_ba2f60736909e06de47b2624fa6c36cd.setContent(html_e7c52329942c5fd0e3ef6ba42998ad1b);
+            
+        
+
+        marker_4a47b6313e8ab85e3c0d83b958d87a75.bindPopup(popup_ba2f60736909e06de47b2624fa6c36cd)
+        ;
+
+        
+    
+    
+            var marker_3940fc161889881fbe212c88cb13c1a0 = L.marker(
+                [32.04485966078651, 34.77309327978953],
+                {
+}
+            ).addTo(map_5867115230204eeb140df3ccbb9045c8);
+        
+    
+            var icon_d981699f6e324ba0fe834dc2c807911a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_3940fc161889881fbe212c88cb13c1a0.setIcon(icon_d981699f6e324ba0fe834dc2c807911a);
+        
+    
+        var popup_92403f8239a70a72183f79b3c463b40f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f849873c05d73c317b012c44356131e4 = $(`<div id="html_f849873c05d73c317b012c44356131e4" style="width: 100.0%; height: 100.0%;">Additional Match: אורן הסלע (ID: 10088)</div>`)[0];
+                popup_92403f8239a70a72183f79b3c463b40f.setContent(html_f849873c05d73c317b012c44356131e4);
+            
+        
+
+        marker_3940fc161889881fbe212c88cb13c1a0.bindPopup(popup_92403f8239a70a72183f79b3c463b40f)
+        ;
+
+        
+    
+    
+            var marker_24fca5984b993ccd97908e1015f676e2 = L.marker(
+                [32.04486565699446, 34.77311427879611],
+                {
+}
+            ).addTo(map_5867115230204eeb140df3ccbb9045c8);
+        
+    
+            var icon_b89652715983421d4f1052185d2b3727 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_24fca5984b993ccd97908e1015f676e2.setIcon(icon_b89652715983421d4f1052185d2b3727);
+        
+    
+        var popup_c67e858fa2d35e6b9bb1bc06820245f9 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_397a14a74657a0fd1db27e732254c9f3 = $(`<div id="html_397a14a74657a0fd1db27e732254c9f3" style="width: 100.0%; height: 100.0%;">Additional Match: אורן הסלע (ID: 10069)</div>`)[0];
+                popup_c67e858fa2d35e6b9bb1bc06820245f9.setContent(html_397a14a74657a0fd1db27e732254c9f3);
+            
+        
+
+        marker_24fca5984b993ccd97908e1015f676e2.bindPopup(popup_c67e858fa2d35e6b9bb1bc06820245f9)
+        ;
+
+        
+    
+    
+            var marker_7d6ad8580a3929f607c18a1d9cec78be = L.marker(
+                [32.04492165755263, 34.77313527626847],
+                {
+}
+            ).addTo(map_5867115230204eeb140df3ccbb9045c8);
+        
+    
+            var icon_33e44103a04d95832faa02cfaa050e69 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_7d6ad8580a3929f607c18a1d9cec78be.setIcon(icon_33e44103a04d95832faa02cfaa050e69);
+        
+    
+        var popup_46a207ba9cf8790dddba326d8df75e8f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_89dbf43af9d00a9ae0f0c2ea005ea2a5 = $(`<div id="html_89dbf43af9d00a9ae0f0c2ea005ea2a5" style="width: 100.0%; height: 100.0%;">Additional Match: אורן הסלע (ID: 10074)</div>`)[0];
+                popup_46a207ba9cf8790dddba326d8df75e8f.setContent(html_89dbf43af9d00a9ae0f0c2ea005ea2a5);
+            
+        
+
+        marker_7d6ad8580a3929f607c18a1d9cec78be.bindPopup(popup_46a207ba9cf8790dddba326d8df75e8f)
+        ;
+
+        
+    
+    
+            var marker_ce7fdb1afef05ca34854fee065199e32 = L.marker(
+                [32.04491765700996, 34.77313627968112],
+                {
+}
+            ).addTo(map_5867115230204eeb140df3ccbb9045c8);
+        
+    
+            var icon_e16505b7ecfaaf2f34b59e703db9dfbf = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_ce7fdb1afef05ca34854fee065199e32.setIcon(icon_e16505b7ecfaaf2f34b59e703db9dfbf);
+        
+    
+        var popup_8afa0b833d49666f813f5eaa5be95950 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_27283bf1fd8a8874298c51e51b77de27 = $(`<div id="html_27283bf1fd8a8874298c51e51b77de27" style="width: 100.0%; height: 100.0%;">Additional Match: אורן הסלע (ID: 10073)</div>`)[0];
+                popup_8afa0b833d49666f813f5eaa5be95950.setContent(html_27283bf1fd8a8874298c51e51b77de27);
+            
+        
+
+        marker_ce7fdb1afef05ca34854fee065199e32.bindPopup(popup_8afa0b833d49666f813f5eaa5be95950)
+        ;
+
+        
+    
+    
+            var marker_5ee0602ed429cb9e7d4b23806825b2d5 = L.marker(
+                [32.04490465654796, 34.77313727235494],
+                {
+}
+            ).addTo(map_5867115230204eeb140df3ccbb9045c8);
+        
+    
+            var icon_fec662cccb5e0c99ddc3bf9492d03fdd = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_5ee0602ed429cb9e7d4b23806825b2d5.setIcon(icon_fec662cccb5e0c99ddc3bf9492d03fdd);
+        
+    
+        var popup_34e8159799f240ee5c643e55db4a6120 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8d8f3c42fefbcee7456bdb86a77d2baa = $(`<div id="html_8d8f3c42fefbcee7456bdb86a77d2baa" style="width: 100.0%; height: 100.0%;">Additional Match: אורן הסלע (ID: 10072)</div>`)[0];
+                popup_34e8159799f240ee5c643e55db4a6120.setContent(html_8d8f3c42fefbcee7456bdb86a77d2baa);
+            
+        
+
+        marker_5ee0602ed429cb9e7d4b23806825b2d5.bindPopup(popup_34e8159799f240ee5c643e55db4a6120)
+        ;
+
+        
+    
+    
+            var marker_27c8babc297baffb012b367a27bf0723 = L.marker(
+                [32.04478365609757, 34.77318027507978],
+                {
+}
+            ).addTo(map_5867115230204eeb140df3ccbb9045c8);
+        
+    
+            var icon_6e5f3696545b9e8f3605a510ee590e18 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_27c8babc297baffb012b367a27bf0723.setIcon(icon_6e5f3696545b9e8f3605a510ee590e18);
+        
+    
+        var popup_efbde47b6925ba9da0e319d83a903393 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9648ecdc76a7fdb95c8d825723ddec93 = $(`<div id="html_9648ecdc76a7fdb95c8d825723ddec93" style="width: 100.0%; height: 100.0%;">Additional Match: אורן הסלע (ID: 10068)</div>`)[0];
+                popup_efbde47b6925ba9da0e319d83a903393.setContent(html_9648ecdc76a7fdb95c8d825723ddec93);
+            
+        
+
+        marker_27c8babc297baffb012b367a27bf0723.bindPopup(popup_efbde47b6925ba9da0e319d83a903393)
+        ;
+
+        
+    
+    
+            var marker_0bcb3447e8310abf49db204cef8899c0 = L.marker(
+                [32.04497765429659, 34.77319227192702],
+                {
+}
+            ).addTo(map_5867115230204eeb140df3ccbb9045c8);
+        
+    
+            var icon_ff5d0b9e7a690aeafb3fd18e66b3b8d3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_0bcb3447e8310abf49db204cef8899c0.setIcon(icon_ff5d0b9e7a690aeafb3fd18e66b3b8d3);
+        
+    
+        var popup_6190057e3630b89c2c026ab133c28d48 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a484e6863deadab9ac460b087867b003 = $(`<div id="html_a484e6863deadab9ac460b087867b003" style="width: 100.0%; height: 100.0%;">Additional Match: אורן הסלע (ID: 10077)</div>`)[0];
+                popup_6190057e3630b89c2c026ab133c28d48.setContent(html_a484e6863deadab9ac460b087867b003);
+            
+        
+
+        marker_0bcb3447e8310abf49db204cef8899c0.bindPopup(popup_6190057e3630b89c2c026ab133c28d48)
+        ;
+
+        
+    
+    
+            var marker_63f8d8c109b980dad4e57d0986820004 = L.marker(
+                [32.0449106558058, 34.77325727676979],
+                {
+}
+            ).addTo(map_5867115230204eeb140df3ccbb9045c8);
+        
+    
+            var icon_f62f5c0bfeb88c837c1e03e5b71413d1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_63f8d8c109b980dad4e57d0986820004.setIcon(icon_f62f5c0bfeb88c837c1e03e5b71413d1);
+        
+    
+        var popup_3f436140937202734e24cea92371c883 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3dd2eb158ec398240832ac6df209aba3 = $(`<div id="html_3dd2eb158ec398240832ac6df209aba3" style="width: 100.0%; height: 100.0%;">Additional Match: אורן הסלע (ID: 10078)</div>`)[0];
+                popup_3f436140937202734e24cea92371c883.setContent(html_3dd2eb158ec398240832ac6df209aba3);
+            
+        
+
+        marker_63f8d8c109b980dad4e57d0986820004.bindPopup(popup_3f436140937202734e24cea92371c883)
+        ;
+
+        
+    
+    
+            var marker_71c94e71a26994b3fb4a57dd22ace080 = L.marker(
+                [32.04487065911271, 34.77325927475035],
+                {
+}
+            ).addTo(map_5867115230204eeb140df3ccbb9045c8);
+        
+    
+            var icon_0165fd1a0e27567340d9dad1bae7f6b3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_71c94e71a26994b3fb4a57dd22ace080.setIcon(icon_0165fd1a0e27567340d9dad1bae7f6b3);
+        
+    
+        var popup_c618b1986e7bb21e01b02c52943712d2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8ad35704926af2486e3b0823e442b9be = $(`<div id="html_8ad35704926af2486e3b0823e442b9be" style="width: 100.0%; height: 100.0%;">Additional Match: אורן הסלע (ID: 10486)</div>`)[0];
+                popup_c618b1986e7bb21e01b02c52943712d2.setContent(html_8ad35704926af2486e3b0823e442b9be);
+            
+        
+
+        marker_71c94e71a26994b3fb4a57dd22ace080.bindPopup(popup_c618b1986e7bb21e01b02c52943712d2)
+        ;
+
+        
+    
+    
+            var marker_44d552ac8b84072612d946153b945a04 = L.marker(
+                [32.04490665422043, 34.77326327756736],
+                {
+}
+            ).addTo(map_5867115230204eeb140df3ccbb9045c8);
+        
+    
+            var icon_a3a6fbc88be96017219b64c5a70fb59b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_44d552ac8b84072612d946153b945a04.setIcon(icon_a3a6fbc88be96017219b64c5a70fb59b);
+        
+    
+        var popup_61f5cbba0212e59e8b994b428fb3e61f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_dddeafdc9a46c90de82bfe2f282d7209 = $(`<div id="html_dddeafdc9a46c90de82bfe2f282d7209" style="width: 100.0%; height: 100.0%;">Additional Match: אורן הסלע (ID: 10079)</div>`)[0];
+                popup_61f5cbba0212e59e8b994b428fb3e61f.setContent(html_dddeafdc9a46c90de82bfe2f282d7209);
+            
+        
+
+        marker_44d552ac8b84072612d946153b945a04.bindPopup(popup_61f5cbba0212e59e8b994b428fb3e61f)
+        ;
+
+        
+    
+    
+            var marker_93fb0029ca28934662a439cce54a3e37 = L.marker(
+                [32.04480666029169, 34.77327027888199],
+                {
+}
+            ).addTo(map_5867115230204eeb140df3ccbb9045c8);
+        
+    
+            var icon_26d37b9edc6daf0f103aab501b26e5f0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_93fb0029ca28934662a439cce54a3e37.setIcon(icon_26d37b9edc6daf0f103aab501b26e5f0);
+        
+    
+        var popup_b6127ec8fb3f1368a786081a1f651132 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_173b098228decdb095a1141b3272e7d8 = $(`<div id="html_173b098228decdb095a1141b3272e7d8" style="width: 100.0%; height: 100.0%;">Additional Match: אורן הסלע (ID: 10080)</div>`)[0];
+                popup_b6127ec8fb3f1368a786081a1f651132.setContent(html_173b098228decdb095a1141b3272e7d8);
+            
+        
+
+        marker_93fb0029ca28934662a439cce54a3e37.bindPopup(popup_b6127ec8fb3f1368a786081a1f651132)
+        ;
+
+        
+    
+    
+            var marker_c41dad71cc68426daa8072ec9f3a4ef0 = L.marker(
+                [32.04482265599217, 34.77328027277876],
+                {
+}
+            ).addTo(map_5867115230204eeb140df3ccbb9045c8);
+        
+    
+            var icon_8f88a6dd32cddfa527bd317beabb208b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_c41dad71cc68426daa8072ec9f3a4ef0.setIcon(icon_8f88a6dd32cddfa527bd317beabb208b);
+        
+    
+        var popup_acde8a691ecf8805a8c426287aa1628c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2c7297527cf1b9d19fa44a1e2b23a276 = $(`<div id="html_2c7297527cf1b9d19fa44a1e2b23a276" style="width: 100.0%; height: 100.0%;">Additional Match: אורן הסלע (ID: 10485)</div>`)[0];
+                popup_acde8a691ecf8805a8c426287aa1628c.setContent(html_2c7297527cf1b9d19fa44a1e2b23a276);
+            
+        
+
+        marker_c41dad71cc68426daa8072ec9f3a4ef0.bindPopup(popup_acde8a691ecf8805a8c426287aa1628c)
+        ;
+
+        
+    
+    
+            var marker_2ca585b04462ef272706c331cd8fa4ee = L.marker(
+                [32.04494966008878, 34.7732922768142],
+                {
+}
+            ).addTo(map_5867115230204eeb140df3ccbb9045c8);
+        
+    
+            var icon_1b086f8ab2d85150e8284fb0b0d0ef5f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_2ca585b04462ef272706c331cd8fa4ee.setIcon(icon_1b086f8ab2d85150e8284fb0b0d0ef5f);
+        
+    
+        var popup_f0af6d6400677821827b74d342b0174b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_93fa9b3dded8d22aeb5ecb52a3c69fcb = $(`<div id="html_93fa9b3dded8d22aeb5ecb52a3c69fcb" style="width: 100.0%; height: 100.0%;">Additional Match: אורן הסלע (ID: 10487)</div>`)[0];
+                popup_f0af6d6400677821827b74d342b0174b.setContent(html_93fa9b3dded8d22aeb5ecb52a3c69fcb);
+            
+        
+
+        marker_2ca585b04462ef272706c331cd8fa4ee.bindPopup(popup_f0af6d6400677821827b74d342b0174b)
+        ;
+
+        
+    
+    
+            var marker_f0f43b543a47d9e54dd2310c9a09b76d = L.marker(
+                [32.04483466151058, 34.77336327679805],
+                {
+}
+            ).addTo(map_5867115230204eeb140df3ccbb9045c8);
+        
+    
+            var icon_9fc3824867bedc49dca245321e59d2c3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_f0f43b543a47d9e54dd2310c9a09b76d.setIcon(icon_9fc3824867bedc49dca245321e59d2c3);
+        
+    
+        var popup_996092eadb35426c34ed2481ecb91763 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b5386b45a7207b2fb1873dbc9ef87caa = $(`<div id="html_b5386b45a7207b2fb1873dbc9ef87caa" style="width: 100.0%; height: 100.0%;">Additional Match: אורן הסלע (ID: 10484)</div>`)[0];
+                popup_996092eadb35426c34ed2481ecb91763.setContent(html_b5386b45a7207b2fb1873dbc9ef87caa);
+            
+        
+
+        marker_f0f43b543a47d9e54dd2310c9a09b76d.bindPopup(popup_996092eadb35426c34ed2481ecb91763)
+        ;
+
+        
+    
+    
+            var marker_9d01eb1e5ff76aa95cdcb4c445503352 = L.marker(
+                [32.04525888928661, 34.77313452496385],
+                {
+}
+            ).addTo(map_5867115230204eeb140df3ccbb9045c8);
+        
+    
+            var icon_e6a168a6fd4fc61c8765fc1558010594 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_9d01eb1e5ff76aa95cdcb4c445503352.setIcon(icon_e6a168a6fd4fc61c8765fc1558010594);
+        
+    
+        var popup_77caa1ad011fee7431201cb2c8b0c87c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7cef02a071a771e3ec02119b185d7ee4 = $(`<div id="html_7cef02a071a771e3ec02119b185d7ee4" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.04525888928661,34.77313452496385&layer=c&cbll=32.04525888928661,34.77313452496385&cbp=12,180,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_77caa1ad011fee7431201cb2c8b0c87c.setContent(html_7cef02a071a771e3ec02119b185d7ee4);
+            
+        
+
+        marker_9d01eb1e5ff76aa95cdcb4c445503352.bindPopup(popup_77caa1ad011fee7431201cb2c8b0c87c)
+        ;
+
+        
+    
+</script>
+</html>

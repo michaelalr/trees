@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_58d656f404ab75a81dcfb14145e3d49d {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+<div style="
+position: fixed;
+bottom: 50px;
+left: 50px;
+width: 200px;
+background-color: white;
+z-index:9999;
+font-size:14px;
+padding: 10px;
+border: 2px solid grey;
+border-radius: 8px;
+box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+">
+<b>Legend</b><br>
+<i class="fa fa-map-marker fa-2x" style="color:orange"></i> Car location<br>
+<i class="fa fa-map-marker fa-2x" style="color:red"></i> Detection location<br>
+<i class="fa fa-map-marker fa-2x" style="color:green"></i> Seker best match<br>
+<i class="fa fa-map-marker fa-2x" style="color:blue"></i> Seker additional match<br>
+</div>
+    
+            <div class="folium-map" id="map_58d656f404ab75a81dcfb14145e3d49d" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_58d656f404ab75a81dcfb14145e3d49d = L.map(
+                "map_58d656f404ab75a81dcfb14145e3d49d",
+                {
+                    center: [32.05150031174035, 34.79748101232407],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 15,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_2e6cd821627b3312ac6971ed2f4d0560 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_2e6cd821627b3312ac6971ed2f4d0560.addTo(map_58d656f404ab75a81dcfb14145e3d49d);
+        
+    
+            var marker_5563acf76fac3a77091599ff6505fc2e = L.marker(
+                [32.05149566039034, 34.79737327251999],
+                {
+}
+            ).addTo(map_58d656f404ab75a81dcfb14145e3d49d);
+        
+    
+            var icon_d33e8af70eed14e81a3cc3e5fa5ee8ef = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_5563acf76fac3a77091599ff6505fc2e.setIcon(icon_d33e8af70eed14e81a3cc3e5fa5ee8ef);
+        
+    
+        var popup_fecf077bd089065b4260bb71e3b6e478 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_22df5f9e74db7f5a6cae9390fe2f6929 = $(`<div id="html_22df5f9e74db7f5a6cae9390fe2f6929" style="width: 100.0%; height: 100.0%;">Best Match: מכנף נאה (ID: 12445.0)</div>`)[0];
+                popup_fecf077bd089065b4260bb71e3b6e478.setContent(html_22df5f9e74db7f5a6cae9390fe2f6929);
+            
+        
+
+        marker_5563acf76fac3a77091599ff6505fc2e.bindPopup(popup_fecf077bd089065b4260bb71e3b6e478)
+        ;
+
+        
+    
+    
+            var poly_line_2b364cd0cb458fd7fd61b71f8cea12aa = L.polyline(
+                [[32.05149566039034, 34.79737327251999], [32.05149565462705, 34.79727327252016]],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "black", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_58d656f404ab75a81dcfb14145e3d49d);
+        
+    
+        var popup_3acb50119b367ac7f02af9863f8c1df1 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e830f10270328ba52eb07eecce1084fe = $(`<div id="html_e830f10270328ba52eb07eecce1084fe" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 1, angle: 3.141650286510959</div>`)[0];
+                popup_3acb50119b367ac7f02af9863f8c1df1.setContent(html_e830f10270328ba52eb07eecce1084fe);
+            
+        
+
+        poly_line_2b364cd0cb458fd7fd61b71f8cea12aa.bindPopup(popup_3acb50119b367ac7f02af9863f8c1df1)
+        ;
+
+        
+    
+    
+            var marker_6e91bbeee51c043c0cc26aff042c9ca0 = L.marker(
+                [32.05130065778173, 34.79727527151072],
+                {
+}
+            ).addTo(map_58d656f404ab75a81dcfb14145e3d49d);
+        
+    
+            var icon_76d9480d37bec7a935f0ed79a969db8c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_6e91bbeee51c043c0cc26aff042c9ca0.setIcon(icon_76d9480d37bec7a935f0ed79a969db8c);
+        
+    
+        var popup_0bd48db43887bffa61c2173a644fa675 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_cdce6823eeb57359cd32d9bca265aa79 = $(`<div id="html_cdce6823eeb57359cd32d9bca265aa79" style="width: 100.0%; height: 100.0%;">Additional Match: מכנף נאה (ID: 12417)</div>`)[0];
+                popup_0bd48db43887bffa61c2173a644fa675.setContent(html_cdce6823eeb57359cd32d9bca265aa79);
+            
+        
+
+        marker_6e91bbeee51c043c0cc26aff042c9ca0.bindPopup(popup_0bd48db43887bffa61c2173a644fa675)
+        ;
+
+        
+    
+    
+            var marker_38560a27c102d89f775cf037b1740887 = L.marker(
+                [32.05126766123268, 34.79727527995466],
+                {
+}
+            ).addTo(map_58d656f404ab75a81dcfb14145e3d49d);
+        
+    
+            var icon_8c4c5e9c077d984b552425e082db9940 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_38560a27c102d89f775cf037b1740887.setIcon(icon_8c4c5e9c077d984b552425e082db9940);
+        
+    
+        var popup_b301856d6a64a8b747ad7a3b56500870 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d3ce379752df9274e247f206cc827ef4 = $(`<div id="html_d3ce379752df9274e247f206cc827ef4" style="width: 100.0%; height: 100.0%;">Additional Match: מכנף נאה (ID: 12435)</div>`)[0];
+                popup_b301856d6a64a8b747ad7a3b56500870.setContent(html_d3ce379752df9274e247f206cc827ef4);
+            
+        
+
+        marker_38560a27c102d89f775cf037b1740887.bindPopup(popup_b301856d6a64a8b747ad7a3b56500870)
+        ;
+
+        
+    
+    
+            var marker_b147afcd53d2a7767d815b57b0e52e72 = L.marker(
+                [32.05123766080477, 34.79731527820022],
+                {
+}
+            ).addTo(map_58d656f404ab75a81dcfb14145e3d49d);
+        
+    
+            var icon_db63bc1509c10a278528bb21848baa56 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_b147afcd53d2a7767d815b57b0e52e72.setIcon(icon_db63bc1509c10a278528bb21848baa56);
+        
+    
+        var popup_e1e1c56f7a9caeba0d8cdeba477616a3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_eefa11d9e9a86ad00e4015792e8a72b1 = $(`<div id="html_eefa11d9e9a86ad00e4015792e8a72b1" style="width: 100.0%; height: 100.0%;">Additional Match: מכנף נאה (ID: 12416)</div>`)[0];
+                popup_e1e1c56f7a9caeba0d8cdeba477616a3.setContent(html_eefa11d9e9a86ad00e4015792e8a72b1);
+            
+        
+
+        marker_b147afcd53d2a7767d815b57b0e52e72.bindPopup(popup_e1e1c56f7a9caeba0d8cdeba477616a3)
+        ;
+
+        
+    
+    
+            var marker_54a04832d81a5794e2272a744327d516 = L.marker(
+                [32.05125166227235, 34.79732827174359],
+                {
+}
+            ).addTo(map_58d656f404ab75a81dcfb14145e3d49d);
+        
+    
+            var icon_fe395532f7e9776d9812bb68068bcfd6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_54a04832d81a5794e2272a744327d516.setIcon(icon_fe395532f7e9776d9812bb68068bcfd6);
+        
+    
+        var popup_9fe834ade529b6e23d2087b7714be09d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ff5c6a51f08e8275eb9687fa173cffef = $(`<div id="html_ff5c6a51f08e8275eb9687fa173cffef" style="width: 100.0%; height: 100.0%;">Additional Match: מכנף נאה (ID: 12471)</div>`)[0];
+                popup_9fe834ade529b6e23d2087b7714be09d.setContent(html_ff5c6a51f08e8275eb9687fa173cffef);
+            
+        
+
+        marker_54a04832d81a5794e2272a744327d516.bindPopup(popup_9fe834ade529b6e23d2087b7714be09d)
+        ;
+
+        
+    
+    
+            var marker_ee3b2a0999c96379d5f49c12fe7ee097 = L.marker(
+                [32.05128065538359, 34.79734527547087],
+                {
+}
+            ).addTo(map_58d656f404ab75a81dcfb14145e3d49d);
+        
+    
+            var icon_95f269aa536bba3012b7c9bb2d15598d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_ee3b2a0999c96379d5f49c12fe7ee097.setIcon(icon_95f269aa536bba3012b7c9bb2d15598d);
+        
+    
+        var popup_57f04e6014b733645dd7b3281bd1ac6e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_aa2e76448fd643a5c0c502c5789b66b2 = $(`<div id="html_aa2e76448fd643a5c0c502c5789b66b2" style="width: 100.0%; height: 100.0%;">Additional Match: מכנף נאה (ID: 12469)</div>`)[0];
+                popup_57f04e6014b733645dd7b3281bd1ac6e.setContent(html_aa2e76448fd643a5c0c502c5789b66b2);
+            
+        
+
+        marker_ee3b2a0999c96379d5f49c12fe7ee097.bindPopup(popup_57f04e6014b733645dd7b3281bd1ac6e)
+        ;
+
+        
+    
+    
+            var marker_24af8afed54732b5065dc022b61f4c82 = L.marker(
+                [32.051284655868, 34.79737227943447],
+                {
+}
+            ).addTo(map_58d656f404ab75a81dcfb14145e3d49d);
+        
+    
+            var icon_2dc2871da0c9b1d6902c17bbf8957b87 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_24af8afed54732b5065dc022b61f4c82.setIcon(icon_2dc2871da0c9b1d6902c17bbf8957b87);
+        
+    
+        var popup_d0fec61bf9fca2e41ceba0d367b17774 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_32de4b5970d35304f7862f72c311b857 = $(`<div id="html_32de4b5970d35304f7862f72c311b857" style="width: 100.0%; height: 100.0%;">Additional Match: מכנף נאה (ID: 12470)</div>`)[0];
+                popup_d0fec61bf9fca2e41ceba0d367b17774.setContent(html_32de4b5970d35304f7862f72c311b857);
+            
+        
+
+        marker_24af8afed54732b5065dc022b61f4c82.bindPopup(popup_d0fec61bf9fca2e41ceba0d367b17774)
+        ;
+
+        
+    
+    
+            var marker_8a7d573a072b7e74a7ad0ff52673ccb0 = L.marker(
+                [32.05145765886463, 34.79737327131876],
+                {
+}
+            ).addTo(map_58d656f404ab75a81dcfb14145e3d49d);
+        
+    
+            var icon_8562cee03bb67d595b3e9ff0c931702a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_8a7d573a072b7e74a7ad0ff52673ccb0.setIcon(icon_8562cee03bb67d595b3e9ff0c931702a);
+        
+    
+        var popup_fee7abadbfc88ce9e0de46542fe05458 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0b07c6a44d5b691865f920864cbde30b = $(`<div id="html_0b07c6a44d5b691865f920864cbde30b" style="width: 100.0%; height: 100.0%;">Additional Match: אורן ירושלים (ID: 12446)</div>`)[0];
+                popup_fee7abadbfc88ce9e0de46542fe05458.setContent(html_0b07c6a44d5b691865f920864cbde30b);
+            
+        
+
+        marker_8a7d573a072b7e74a7ad0ff52673ccb0.bindPopup(popup_fee7abadbfc88ce9e0de46542fe05458)
+        ;
+
+        
+    
+    
+            var marker_20b1ceafe50b820ba945c0d02381b487 = L.marker(
+                [32.05149466186167, 34.79738527365835],
+                {
+}
+            ).addTo(map_58d656f404ab75a81dcfb14145e3d49d);
+        
+    
+            var icon_8f739a700d90e6583f14af12cf18aa20 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_20b1ceafe50b820ba945c0d02381b487.setIcon(icon_8f739a700d90e6583f14af12cf18aa20);
+        
+    
+        var popup_6eae4a1c26185c9110c4f63b321e4948 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_68688a2617a385d243ff537e9702e23c = $(`<div id="html_68688a2617a385d243ff537e9702e23c" style="width: 100.0%; height: 100.0%;">Additional Match: אורן קנרי (ID: 12444)</div>`)[0];
+                popup_6eae4a1c26185c9110c4f63b321e4948.setContent(html_68688a2617a385d243ff537e9702e23c);
+            
+        
+
+        marker_20b1ceafe50b820ba945c0d02381b487.bindPopup(popup_6eae4a1c26185c9110c4f63b321e4948)
+        ;
+
+        
+    
+    
+            var marker_b8f9185a16f44b2b374501f93645abaa = L.marker(
+                [32.05136365425971, 34.79742327308895],
+                {
+}
+            ).addTo(map_58d656f404ab75a81dcfb14145e3d49d);
+        
+    
+            var icon_4f7c31e70ec511d61f8599ce23dd6f82 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_b8f9185a16f44b2b374501f93645abaa.setIcon(icon_4f7c31e70ec511d61f8599ce23dd6f82);
+        
+    
+        var popup_1d7dc64ac3b8321dc807899eeb20c251 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6ef8fd4ae1545cf186bdbbe8065e0e8a = $(`<div id="html_6ef8fd4ae1545cf186bdbbe8065e0e8a" style="width: 100.0%; height: 100.0%;">Additional Match: מכנף נאה (ID: 12466)</div>`)[0];
+                popup_1d7dc64ac3b8321dc807899eeb20c251.setContent(html_6ef8fd4ae1545cf186bdbbe8065e0e8a);
+            
+        
+
+        marker_b8f9185a16f44b2b374501f93645abaa.bindPopup(popup_1d7dc64ac3b8321dc807899eeb20c251)
+        ;
+
+        
+    
+    
+            var marker_b87b84ce22f06ecf9ef03a43c075a9e3 = L.marker(
+                [32.0515136556348, 34.79743927541895],
+                {
+}
+            ).addTo(map_58d656f404ab75a81dcfb14145e3d49d);
+        
+    
+            var icon_8928296416705fbf2360299e5f400027 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_b87b84ce22f06ecf9ef03a43c075a9e3.setIcon(icon_8928296416705fbf2360299e5f400027);
+        
+    
+        var popup_55e65f4d7d240f2c8861f96f664c466a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ff4cc7f17cc35b93ce189f8479a46a9e = $(`<div id="html_ff4cc7f17cc35b93ce189f8479a46a9e" style="width: 100.0%; height: 100.0%;">Additional Match: אורן קנרי (ID: 12443)</div>`)[0];
+                popup_55e65f4d7d240f2c8861f96f664c466a.setContent(html_ff4cc7f17cc35b93ce189f8479a46a9e);
+            
+        
+
+        marker_b87b84ce22f06ecf9ef03a43c075a9e3.bindPopup(popup_55e65f4d7d240f2c8861f96f664c466a)
+        ;
+
+        
+    
+    
+            var marker_078b48e6dc809423d5e94fcfdc512a25 = L.marker(
+                [32.05159466103563, 34.79744127813272],
+                {
+}
+            ).addTo(map_58d656f404ab75a81dcfb14145e3d49d);
+        
+    
+            var icon_3169848401834ccffea3fbdaec311e15 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_078b48e6dc809423d5e94fcfdc512a25.setIcon(icon_3169848401834ccffea3fbdaec311e15);
+        
+    
+        var popup_31c5e1da820321c6a0fd5ac5a8858d32 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_32c9a1e0ef1842a10b161fcb886d880a = $(`<div id="html_32c9a1e0ef1842a10b161fcb886d880a" style="width: 100.0%; height: 100.0%;">Additional Match: מכנף נאה (ID: 12409)</div>`)[0];
+                popup_31c5e1da820321c6a0fd5ac5a8858d32.setContent(html_32c9a1e0ef1842a10b161fcb886d880a);
+            
+        
+
+        marker_078b48e6dc809423d5e94fcfdc512a25.bindPopup(popup_31c5e1da820321c6a0fd5ac5a8858d32)
+        ;
+
+        
+    
+    
+            var marker_f0cdd0873736b4effc9576a5e0032ddb = L.marker(
+                [32.05136965607645, 34.79744727169477],
+                {
+}
+            ).addTo(map_58d656f404ab75a81dcfb14145e3d49d);
+        
+    
+            var icon_5a13cf73a22c26d058621a2afa98ebae = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_f0cdd0873736b4effc9576a5e0032ddb.setIcon(icon_5a13cf73a22c26d058621a2afa98ebae);
+        
+    
+        var popup_1958bbd2cb82deb9dd3585d3573dd05c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6b9d9f2c949aaa1bbf691636b017aaea = $(`<div id="html_6b9d9f2c949aaa1bbf691636b017aaea" style="width: 100.0%; height: 100.0%;">Additional Match: מכנף נאה (ID: 12467)</div>`)[0];
+                popup_1958bbd2cb82deb9dd3585d3573dd05c.setContent(html_6b9d9f2c949aaa1bbf691636b017aaea);
+            
+        
+
+        marker_f0cdd0873736b4effc9576a5e0032ddb.bindPopup(popup_1958bbd2cb82deb9dd3585d3573dd05c)
+        ;
+
+        
+    
+    
+            var marker_e409ce8bb33c20f8de2b1e44ec84efb5 = L.marker(
+                [32.05139365906883, 34.7974632810744],
+                {
+}
+            ).addTo(map_58d656f404ab75a81dcfb14145e3d49d);
+        
+    
+            var icon_1652c2dcd19b4ce55bd108e54e4e0962 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_e409ce8bb33c20f8de2b1e44ec84efb5.setIcon(icon_1652c2dcd19b4ce55bd108e54e4e0962);
+        
+    
+        var popup_6f8caefb0e45af88b752e44472529834 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f8e95fef7eeaf716f34efac096e0b622 = $(`<div id="html_f8e95fef7eeaf716f34efac096e0b622" style="width: 100.0%; height: 100.0%;">Additional Match: מכנף נאה (ID: 12468)</div>`)[0];
+                popup_6f8caefb0e45af88b752e44472529834.setContent(html_f8e95fef7eeaf716f34efac096e0b622);
+            
+        
+
+        marker_e409ce8bb33c20f8de2b1e44ec84efb5.bindPopup(popup_6f8caefb0e45af88b752e44472529834)
+        ;
+
+        
+    
+    
+            var marker_ed81bc614b77063beb841da9b1964736 = L.marker(
+                [32.05144665448169, 34.79749327656271],
+                {
+}
+            ).addTo(map_58d656f404ab75a81dcfb14145e3d49d);
+        
+    
+            var icon_84ec8a045b1ec31e26cff4aaee7fb120 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_ed81bc614b77063beb841da9b1964736.setIcon(icon_84ec8a045b1ec31e26cff4aaee7fb120);
+        
+    
+        var popup_c1b36639d1a126c2b615d40536f4e831 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d665306b1943e64381739f65f50c8444 = $(`<div id="html_d665306b1943e64381739f65f50c8444" style="width: 100.0%; height: 100.0%;">Additional Match: ברוש  מצוי 'צריפי' (ID: 12350)</div>`)[0];
+                popup_c1b36639d1a126c2b615d40536f4e831.setContent(html_d665306b1943e64381739f65f50c8444);
+            
+        
+
+        marker_ed81bc614b77063beb841da9b1964736.bindPopup(popup_c1b36639d1a126c2b615d40536f4e831)
+        ;
+
+        
+    
+    
+            var marker_8b068840a1232f34e084c6e12886f628 = L.marker(
+                [32.05152765345944, 34.79749327813318],
+                {
+}
+            ).addTo(map_58d656f404ab75a81dcfb14145e3d49d);
+        
+    
+            var icon_0340c267f1d51b56829828bc9f3fcd5f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_8b068840a1232f34e084c6e12886f628.setIcon(icon_0340c267f1d51b56829828bc9f3fcd5f);
+        
+    
+        var popup_7051ad93fadd9ed3b923b376376e0eca = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9313ba9ff353106d95c8232b4d211d84 = $(`<div id="html_9313ba9ff353106d95c8232b4d211d84" style="width: 100.0%; height: 100.0%;">Additional Match: מכנף נאה (ID: 12408)</div>`)[0];
+                popup_7051ad93fadd9ed3b923b376376e0eca.setContent(html_9313ba9ff353106d95c8232b4d211d84);
+            
+        
+
+        marker_8b068840a1232f34e084c6e12886f628.bindPopup(popup_7051ad93fadd9ed3b923b376376e0eca)
+        ;
+
+        
+    
+    
+            var marker_b12464dcaae3e9fd927ff669a35f2c8b = L.marker(
+                [32.0514476605203, 34.79750327819477],
+                {
+}
+            ).addTo(map_58d656f404ab75a81dcfb14145e3d49d);
+        
+    
+            var icon_0ed85cbc26cab77d73cfa2cc98dc024e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_b12464dcaae3e9fd927ff669a35f2c8b.setIcon(icon_0ed85cbc26cab77d73cfa2cc98dc024e);
+        
+    
+        var popup_e7fec686f221e2c84d2114e1ce27e6e6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0a8304d490c19e58208d7333db24e746 = $(`<div id="html_0a8304d490c19e58208d7333db24e746" style="width: 100.0%; height: 100.0%;">Additional Match: ברוש  מצוי 'צריפי' (ID: 12407)</div>`)[0];
+                popup_e7fec686f221e2c84d2114e1ce27e6e6.setContent(html_0a8304d490c19e58208d7333db24e746);
+            
+        
+
+        marker_b12464dcaae3e9fd927ff669a35f2c8b.bindPopup(popup_e7fec686f221e2c84d2114e1ce27e6e6)
+        ;
+
+        
+    
+    
+            var marker_aad1390f867f7dc433c300692b092993 = L.marker(
+                [32.05139265729683, 34.79753327511148],
+                {
+}
+            ).addTo(map_58d656f404ab75a81dcfb14145e3d49d);
+        
+    
+            var icon_d77b9b5538a4dca7239f6e0821444988 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_aad1390f867f7dc433c300692b092993.setIcon(icon_d77b9b5538a4dca7239f6e0821444988);
+        
+    
+        var popup_6b2a35b7d536d7cac158d0a34bc352f2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_26e7896539fb876c240327f7600e8c7b = $(`<div id="html_26e7896539fb876c240327f7600e8c7b" style="width: 100.0%; height: 100.0%;">Additional Match: מכנף נאה (ID: 12406)</div>`)[0];
+                popup_6b2a35b7d536d7cac158d0a34bc352f2.setContent(html_26e7896539fb876c240327f7600e8c7b);
+            
+        
+
+        marker_aad1390f867f7dc433c300692b092993.bindPopup(popup_6b2a35b7d536d7cac158d0a34bc352f2)
+        ;
+
+        
+    
+    
+            var marker_c62ee5344d618bb55ade91fbc526fc8d = L.marker(
+                [32.05137466180479, 34.797554277495],
+                {
+}
+            ).addTo(map_58d656f404ab75a81dcfb14145e3d49d);
+        
+    
+            var icon_2ae53752808d050e352c8cf1ca38a30f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_c62ee5344d618bb55ade91fbc526fc8d.setIcon(icon_2ae53752808d050e352c8cf1ca38a30f);
+        
+    
+        var popup_e7c439aa21ee1c1f2e1be61fb3608d76 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_95cc8d7ca19029f524244188607ac185 = $(`<div id="html_95cc8d7ca19029f524244188607ac185" style="width: 100.0%; height: 100.0%;">Additional Match: מכנף נאה (ID: 12405)</div>`)[0];
+                popup_e7c439aa21ee1c1f2e1be61fb3608d76.setContent(html_95cc8d7ca19029f524244188607ac185);
+            
+        
+
+        marker_c62ee5344d618bb55ade91fbc526fc8d.bindPopup(popup_e7c439aa21ee1c1f2e1be61fb3608d76)
+        ;
+
+        
+    
+    
+            var marker_b5595d25a44aa466cb3dc54d3bd1ab45 = L.marker(
+                [32.05135266174219, 34.79757227988291],
+                {
+}
+            ).addTo(map_58d656f404ab75a81dcfb14145e3d49d);
+        
+    
+            var icon_b46242bf7db79db34be75222635af3a8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_b5595d25a44aa466cb3dc54d3bd1ab45.setIcon(icon_b46242bf7db79db34be75222635af3a8);
+        
+    
+        var popup_2e681f6601ec9c36c6ae3dd741aaa2e6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_58799e80e3413e541fb9a6e1bea76979 = $(`<div id="html_58799e80e3413e541fb9a6e1bea76979" style="width: 100.0%; height: 100.0%;">Additional Match: מכנף נאה (ID: 12404)</div>`)[0];
+                popup_2e681f6601ec9c36c6ae3dd741aaa2e6.setContent(html_58799e80e3413e541fb9a6e1bea76979);
+            
+        
+
+        marker_b5595d25a44aa466cb3dc54d3bd1ab45.bindPopup(popup_2e681f6601ec9c36c6ae3dd741aaa2e6)
+        ;
+
+        
+    
+    
+            var marker_6f041abfb8097e3020508fc83c839f96 = L.marker(
+                [32.05126965801306, 34.7975882756373],
+                {
+}
+            ).addTo(map_58d656f404ab75a81dcfb14145e3d49d);
+        
+    
+            var icon_79c9ee088f7cc677a8864f1c21057d50 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_6f041abfb8097e3020508fc83c839f96.setIcon(icon_79c9ee088f7cc677a8864f1c21057d50);
+        
+    
+        var popup_62b980fc58ca3fd8b73b2c166ac6f9a6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1977c528451c4f7e369a6fb48a10bdc3 = $(`<div id="html_1977c528451c4f7e369a6fb48a10bdc3" style="width: 100.0%; height: 100.0%;">Additional Match: מכנף נאה (ID: 12465)</div>`)[0];
+                popup_62b980fc58ca3fd8b73b2c166ac6f9a6.setContent(html_1977c528451c4f7e369a6fb48a10bdc3);
+            
+        
+
+        marker_6f041abfb8097e3020508fc83c839f96.bindPopup(popup_62b980fc58ca3fd8b73b2c166ac6f9a6)
+        ;
+
+        
+    
+    
+            var marker_b06ae0cc5b7cfb4857fa8add13b906ed = L.marker(
+                [32.05130065826651, 34.7976012787318],
+                {
+}
+            ).addTo(map_58d656f404ab75a81dcfb14145e3d49d);
+        
+    
+            var icon_64c336bc1a15714310ea81c4833d323b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_b06ae0cc5b7cfb4857fa8add13b906ed.setIcon(icon_64c336bc1a15714310ea81c4833d323b);
+        
+    
+        var popup_968acd8d91bb9caa37cd716903f74c51 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4493b2dadbbc3b154a89d829dd98ad96 = $(`<div id="html_4493b2dadbbc3b154a89d829dd98ad96" style="width: 100.0%; height: 100.0%;">Additional Match: ברוש  מצוי 'צריפי' (ID: 12402)</div>`)[0];
+                popup_968acd8d91bb9caa37cd716903f74c51.setContent(html_4493b2dadbbc3b154a89d829dd98ad96);
+            
+        
+
+        marker_b06ae0cc5b7cfb4857fa8add13b906ed.bindPopup(popup_968acd8d91bb9caa37cd716903f74c51)
+        ;
+
+        
+    
+    
+            var marker_fb9f017e64ea5819e3a8c4921c0b03e8 = L.marker(
+                [32.05128965701967, 34.79760428157339],
+                {
+}
+            ).addTo(map_58d656f404ab75a81dcfb14145e3d49d);
+        
+    
+            var icon_af6feb8bb714810c8d88d5493ef0ee93 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_fb9f017e64ea5819e3a8c4921c0b03e8.setIcon(icon_af6feb8bb714810c8d88d5493ef0ee93);
+        
+    
+        var popup_13157eb8b90d6806c75292ed90e57b61 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a706ee6ff22754dea5774be47ce5a26e = $(`<div id="html_a706ee6ff22754dea5774be47ce5a26e" style="width: 100.0%; height: 100.0%;">Additional Match: מכנף נאה (ID: 12403)</div>`)[0];
+                popup_13157eb8b90d6806c75292ed90e57b61.setContent(html_a706ee6ff22754dea5774be47ce5a26e);
+            
+        
+
+        marker_fb9f017e64ea5819e3a8c4921c0b03e8.bindPopup(popup_13157eb8b90d6806c75292ed90e57b61)
+        ;
+
+        
+    
+    
+            var marker_942a99ea52caeee0416285ab74fbccce = L.marker(
+                [32.05168449072426, 34.79748102293884],
+                {
+}
+            ).addTo(map_58d656f404ab75a81dcfb14145e3d49d);
+        
+    
+            var icon_585249652ea717c706496236a799b6f5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_942a99ea52caeee0416285ab74fbccce.setIcon(icon_585249652ea717c706496236a799b6f5);
+        
+    
+        var popup_30c43686aa286e256393e075ef9f06bc = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b105f39215e9fd5b12dda9b2d7e6861f = $(`<div id="html_b105f39215e9fd5b12dda9b2d7e6861f" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.05168449072426,34.79748102293884&layer=c&cbll=32.05168449072426,34.79748102293884&cbp=12,180,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_30c43686aa286e256393e075ef9f06bc.setContent(html_b105f39215e9fd5b12dda9b2d7e6861f);
+            
+        
+
+        marker_942a99ea52caeee0416285ab74fbccce.bindPopup(popup_30c43686aa286e256393e075ef9f06bc)
+        ;
+
+        
+    
+</script>
+</html>

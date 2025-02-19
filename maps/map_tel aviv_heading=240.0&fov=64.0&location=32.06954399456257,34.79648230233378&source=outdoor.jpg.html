@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_2a691953088c577a89599f0c5ca7ac9e {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+<div style="
+position: fixed;
+bottom: 50px;
+left: 50px;
+width: 200px;
+background-color: white;
+z-index:9999;
+font-size:14px;
+padding: 10px;
+border: 2px solid grey;
+border-radius: 8px;
+box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+">
+<b>Legend</b><br>
+<i class="fa fa-map-marker fa-2x" style="color:orange"></i> Car location<br>
+<i class="fa fa-map-marker fa-2x" style="color:red"></i> Detection location<br>
+<i class="fa fa-map-marker fa-2x" style="color:green"></i> Seker best match<br>
+<i class="fa fa-map-marker fa-2x" style="color:blue"></i> Seker additional match<br>
+</div>
+    
+            <div class="folium-map" id="map_2a691953088c577a89599f0c5ca7ac9e" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_2a691953088c577a89599f0c5ca7ac9e = L.map(
+                "map_2a691953088c577a89599f0c5ca7ac9e",
+                {
+                    center: [32.06937008701036, 34.79618119263385],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 15,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_576b46eb0198e78205a608d535760218 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_576b46eb0198e78205a608d535760218.addTo(map_2a691953088c577a89599f0c5ca7ac9e);
+        
+    
+            var marker_997e96f6ce26dcc58df035c5e4e84d93 = L.marker(
+                [32.06921565383876, 34.796134272495],
+                {
+}
+            ).addTo(map_2a691953088c577a89599f0c5ca7ac9e);
+        
+    
+            var icon_341839eb9ab66471a7d99756ebaf6f05 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_997e96f6ce26dcc58df035c5e4e84d93.setIcon(icon_341839eb9ab66471a7d99756ebaf6f05);
+        
+    
+        var popup_278f62d246e6b584e96b36eafccb9795 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ec43e1c6b5ccca6f7e4e9b9174163328 = $(`<div id="html_ec43e1c6b5ccca6f7e4e9b9174163328" style="width: 100.0%; height: 100.0%;">Best Match: דולב מזרחי (ID: 6453.0)</div>`)[0];
+                popup_278f62d246e6b584e96b36eafccb9795.setContent(html_ec43e1c6b5ccca6f7e4e9b9174163328);
+            
+        
+
+        marker_997e96f6ce26dcc58df035c5e4e84d93.bindPopup(popup_278f62d246e6b584e96b36eafccb9795)
+        ;
+
+        
+    
+    
+            var poly_line_0996052e4a8f640317f9727cb35c8a47 = L.polyline(
+                [[32.06921565383876, 34.796134272495], [32.0691290589935, 34.796084259169035]],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "black", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_2a691953088c577a89599f0c5ca7ac9e);
+        
+    
+        var popup_5098af805a26de9565fcd0ead00585e8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_de4e2078700f8c98f080348552d526c9 = $(`<div id="html_de4e2078700f8c98f080348552d526c9" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 1, angle: 4.188636322944219</div>`)[0];
+                popup_5098af805a26de9565fcd0ead00585e8.setContent(html_de4e2078700f8c98f080348552d526c9);
+            
+        
+
+        poly_line_0996052e4a8f640317f9727cb35c8a47.bindPopup(popup_5098af805a26de9565fcd0ead00585e8)
+        ;
+
+        
+    
+    
+            var marker_0f9084f83cb6b89c8ba3f18f2bf5e88a = L.marker(
+                [32.06931165765508, 34.79606127979724],
+                {
+}
+            ).addTo(map_2a691953088c577a89599f0c5ca7ac9e);
+        
+    
+            var icon_02ecb604580ecaaf66bec0c1ae1343cb = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_0f9084f83cb6b89c8ba3f18f2bf5e88a.setIcon(icon_02ecb604580ecaaf66bec0c1ae1343cb);
+        
+    
+        var popup_da191fa188c564e97645dbcef1b4aeff = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_49096838370e0fc8eef42e60d8a26583 = $(`<div id="html_49096838370e0fc8eef42e60d8a26583" style="width: 100.0%; height: 100.0%;">Additional Match: ברוש  מצוי 'צריפי' (ID: 6440)</div>`)[0];
+                popup_da191fa188c564e97645dbcef1b4aeff.setContent(html_49096838370e0fc8eef42e60d8a26583);
+            
+        
+
+        marker_0f9084f83cb6b89c8ba3f18f2bf5e88a.bindPopup(popup_da191fa188c564e97645dbcef1b4aeff)
+        ;
+
+        
+    
+    
+            var marker_46275d433e74eed6ed1703d2aa68162d = L.marker(
+                [32.06923866102395, 34.79609027266045],
+                {
+}
+            ).addTo(map_2a691953088c577a89599f0c5ca7ac9e);
+        
+    
+            var icon_e1be77f46e1458bbaffda890e90dcee6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_46275d433e74eed6ed1703d2aa68162d.setIcon(icon_e1be77f46e1458bbaffda890e90dcee6);
+        
+    
+        var popup_2dc23f1d3c365c654dc913dd339ee8eb = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6ff41d2b8feb9aa9b82f22a4a1e02b6f = $(`<div id="html_6ff41d2b8feb9aa9b82f22a4a1e02b6f" style="width: 100.0%; height: 100.0%;">Additional Match: דולב מזרחי (ID: 6452)</div>`)[0];
+                popup_2dc23f1d3c365c654dc913dd339ee8eb.setContent(html_6ff41d2b8feb9aa9b82f22a4a1e02b6f);
+            
+        
+
+        marker_46275d433e74eed6ed1703d2aa68162d.bindPopup(popup_2dc23f1d3c365c654dc913dd339ee8eb)
+        ;
+
+        
+    
+    
+            var marker_a147f60dad2f5262f169ece9133e1f51 = L.marker(
+                [32.0692206562217, 34.79616427432392],
+                {
+}
+            ).addTo(map_2a691953088c577a89599f0c5ca7ac9e);
+        
+    
+            var icon_161950e872bbb361c376c831b87c816a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_a147f60dad2f5262f169ece9133e1f51.setIcon(icon_161950e872bbb361c376c831b87c816a);
+        
+    
+        var popup_7772d68a70f2cbf298a8be63908f1ab6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5ea73f8bd3ce44ff26d63cbec05ea20b = $(`<div id="html_5ea73f8bd3ce44ff26d63cbec05ea20b" style="width: 100.0%; height: 100.0%;">Additional Match: דולב מזרחי (ID: 6454)</div>`)[0];
+                popup_7772d68a70f2cbf298a8be63908f1ab6.setContent(html_5ea73f8bd3ce44ff26d63cbec05ea20b);
+            
+        
+
+        marker_a147f60dad2f5262f169ece9133e1f51.bindPopup(popup_7772d68a70f2cbf298a8be63908f1ab6)
+        ;
+
+        
+    
+    
+            var marker_5d7a732a97f47aca3c67978b0b6ddf3a = L.marker(
+                [32.06930065333008, 34.79617527193909],
+                {
+}
+            ).addTo(map_2a691953088c577a89599f0c5ca7ac9e);
+        
+    
+            var icon_3baeb0fb68f4e102c54649f23c587dae = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_5d7a732a97f47aca3c67978b0b6ddf3a.setIcon(icon_3baeb0fb68f4e102c54649f23c587dae);
+        
+    
+        var popup_08589ad572da5670b01c36aef2820887 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_188dc38c5492b9461129943922ccd79f = $(`<div id="html_188dc38c5492b9461129943922ccd79f" style="width: 100.0%; height: 100.0%;">Additional Match: ברוש  מצוי 'צריפי' (ID: 6441)</div>`)[0];
+                popup_08589ad572da5670b01c36aef2820887.setContent(html_188dc38c5492b9461129943922ccd79f);
+            
+        
+
+        marker_5d7a732a97f47aca3c67978b0b6ddf3a.bindPopup(popup_08589ad572da5670b01c36aef2820887)
+        ;
+
+        
+    
+    
+            var marker_7998ec2324067d0bb2bfa826544b334a = L.marker(
+                [32.06943565697295, 34.79639828041429],
+                {
+}
+            ).addTo(map_2a691953088c577a89599f0c5ca7ac9e);
+        
+    
+            var icon_cf228ef4bf945ada26fc06598c614f3a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_7998ec2324067d0bb2bfa826544b334a.setIcon(icon_cf228ef4bf945ada26fc06598c614f3a);
+        
+    
+        var popup_d301e6b4710c165b25012af56b40c7b7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_823dea5d99eba97c29045548baa0ca2a = $(`<div id="html_823dea5d99eba97c29045548baa0ca2a" style="width: 100.0%; height: 100.0%;">Additional Match: איקליפטוס טורלי (ID: 6438)</div>`)[0];
+                popup_d301e6b4710c165b25012af56b40c7b7.setContent(html_823dea5d99eba97c29045548baa0ca2a);
+            
+        
+
+        marker_7998ec2324067d0bb2bfa826544b334a.bindPopup(popup_d301e6b4710c165b25012af56b40c7b7)
+        ;
+
+        
+    
+    
+            var marker_2c3d3feb815e151dc68aeb7287eff224 = L.marker(
+                [32.06951465370153, 34.79642628049866],
+                {
+}
+            ).addTo(map_2a691953088c577a89599f0c5ca7ac9e);
+        
+    
+            var icon_accdd5c7edcaa13220994731d5e2bd38 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_2c3d3feb815e151dc68aeb7287eff224.setIcon(icon_accdd5c7edcaa13220994731d5e2bd38);
+        
+    
+        var popup_a554146b0bf95ae66ef7e38651a3411e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_de44eb8f261c2cb5cddaacf219572bae = $(`<div id="html_de44eb8f261c2cb5cddaacf219572bae" style="width: 100.0%; height: 100.0%;">Additional Match: איקליפטוס טורלי (ID: 6437)</div>`)[0];
+                popup_a554146b0bf95ae66ef7e38651a3411e.setContent(html_de44eb8f261c2cb5cddaacf219572bae);
+            
+        
+
+        marker_2c3d3feb815e151dc68aeb7287eff224.bindPopup(popup_a554146b0bf95ae66ef7e38651a3411e)
+        ;
+
+        
+    
+    
+            var marker_341a6ccde4355187eb0c2144c979cfd1 = L.marker(
+                [32.06954399456257, 34.79648230233378],
+                {
+}
+            ).addTo(map_2a691953088c577a89599f0c5ca7ac9e);
+        
+    
+            var icon_00281aa40492904c6784602dd7b758e4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_341a6ccde4355187eb0c2144c979cfd1.setIcon(icon_00281aa40492904c6784602dd7b758e4);
+        
+    
+        var popup_8407571dfa70b07eaa46c3d1d26981b7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4df7e7e0dcd2b035bd8b85f9a6341c37 = $(`<div id="html_4df7e7e0dcd2b035bd8b85f9a6341c37" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.06954399456257,34.79648230233378&layer=c&cbll=32.06954399456257,34.79648230233378&cbp=12,240,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_8407571dfa70b07eaa46c3d1d26981b7.setContent(html_4df7e7e0dcd2b035bd8b85f9a6341c37);
+            
+        
+
+        marker_341a6ccde4355187eb0c2144c979cfd1.bindPopup(popup_8407571dfa70b07eaa46c3d1d26981b7)
+        ;
+
+        
+    
+</script>
+</html>

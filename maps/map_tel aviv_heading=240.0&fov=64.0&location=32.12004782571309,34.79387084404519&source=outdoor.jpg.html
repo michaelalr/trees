@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_2c29fe5b285ce83a8eaaa3b06c6a3147 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+<div style="
+position: fixed;
+bottom: 50px;
+left: 50px;
+width: 200px;
+background-color: white;
+z-index:9999;
+font-size:14px;
+padding: 10px;
+border: 2px solid grey;
+border-radius: 8px;
+box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+">
+<b>Legend</b><br>
+<i class="fa fa-map-marker fa-2x" style="color:orange"></i> Car location<br>
+<i class="fa fa-map-marker fa-2x" style="color:red"></i> Detection location<br>
+<i class="fa fa-map-marker fa-2x" style="color:green"></i> Seker best match<br>
+<i class="fa fa-map-marker fa-2x" style="color:blue"></i> Seker additional match<br>
+</div>
+    
+            <div class="folium-map" id="map_2c29fe5b285ce83a8eaaa3b06c6a3147" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_2c29fe5b285ce83a8eaaa3b06c6a3147 = L.map(
+                "map_2c29fe5b285ce83a8eaaa3b06c6a3147",
+                {
+                    center: [32.11916602267596, 34.79288113715833],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 15,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_7efa05a0d9ce5f2f975048be3c922428 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_7efa05a0d9ce5f2f975048be3c922428.addTo(map_2c29fe5b285ce83a8eaaa3b06c6a3147);
+        
+    
+            var marker_bb5eaab9fd10f5ef53296acb4ec7a2d0 = L.marker(
+                [32.11987920836802, 34.79368032845836],
+                {
+}
+            ).addTo(map_2c29fe5b285ce83a8eaaa3b06c6a3147);
+        
+    
+            var icon_809e16281bd09f7d65b5d7723e6cba07 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_bb5eaab9fd10f5ef53296acb4ec7a2d0.setIcon(icon_809e16281bd09f7d65b5d7723e6cba07);
+        
+    
+        var popup_cfd2ca7e95a9b0a12a115c39d757fa18 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c80216861ba29c4f95c4a3f5c398abfd = $(`<div id="html_c80216861ba29c4f95c4a3f5c398abfd" style="width: 100.0%; height: 100.0%;">Best Match: תמר מצוי (ID: 447.0)</div>`)[0];
+                popup_cfd2ca7e95a9b0a12a115c39d757fa18.setContent(html_c80216861ba29c4f95c4a3f5c398abfd);
+            
+        
+
+        marker_bb5eaab9fd10f5ef53296acb4ec7a2d0.bindPopup(popup_cfd2ca7e95a9b0a12a115c39d757fa18)
+        ;
+
+        
+    
+    
+            var poly_line_673a00d0e25f688fccc5d3b93cc4806a = L.polyline(
+                [[32.11987920836802, 34.79368032845836], [32.119804544788344, 34.79361380515515]],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "black", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_2c29fe5b285ce83a8eaaa3b06c6a3147);
+        
+    
+        var popup_86c14ebac653e6d9315da97e1fdeed4d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a075acc489781efe087f0bdfb2efd538 = $(`<div id="html_a075acc489781efe087f0bdfb2efd538" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 1, angle: 3.984583096313628</div>`)[0];
+                popup_86c14ebac653e6d9315da97e1fdeed4d.setContent(html_a075acc489781efe087f0bdfb2efd538);
+            
+        
+
+        poly_line_673a00d0e25f688fccc5d3b93cc4806a.bindPopup(popup_86c14ebac653e6d9315da97e1fdeed4d)
+        ;
+
+        
+    
+    
+            var marker_efa8ac2c87b4a7ebb6e1996d566acd81 = L.marker(
+                [32.11969398011846, 34.79356568992672],
+                {
+}
+            ).addTo(map_2c29fe5b285ce83a8eaaa3b06c6a3147);
+        
+    
+            var icon_5b780e6eed970935e238af314eae6e7f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_efa8ac2c87b4a7ebb6e1996d566acd81.setIcon(icon_5b780e6eed970935e238af314eae6e7f);
+        
+    
+        var popup_a105a4396fd56dca54251afb6c61acf4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7056787ac39a4b0d39bc6a09583b6025 = $(`<div id="html_7056787ac39a4b0d39bc6a09583b6025" style="width: 100.0%; height: 100.0%;">Additional Match: שיטה כחלחלה (ID: 443)</div>`)[0];
+                popup_a105a4396fd56dca54251afb6c61acf4.setContent(html_7056787ac39a4b0d39bc6a09583b6025);
+            
+        
+
+        marker_efa8ac2c87b4a7ebb6e1996d566acd81.bindPopup(popup_a105a4396fd56dca54251afb6c61acf4)
+        ;
+
+        
+    
+    
+            var marker_65057feacdd770a7beab7c31f6d546c0 = L.marker(
+                [32.11972777499635, 34.79358115751215],
+                {
+}
+            ).addTo(map_2c29fe5b285ce83a8eaaa3b06c6a3147);
+        
+    
+            var icon_01c3f93c06ae0c5ff9ea18f2dc087b70 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_65057feacdd770a7beab7c31f6d546c0.setIcon(icon_01c3f93c06ae0c5ff9ea18f2dc087b70);
+        
+    
+        var popup_2fc50dca49547f0293e695b7440d4eca = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_44244e991265c2869427dea083561ca7 = $(`<div id="html_44244e991265c2869427dea083561ca7" style="width: 100.0%; height: 100.0%;">Additional Match: מילה ירוקת-עד (ID: 444)</div>`)[0];
+                popup_2fc50dca49547f0293e695b7440d4eca.setContent(html_44244e991265c2869427dea083561ca7);
+            
+        
+
+        marker_65057feacdd770a7beab7c31f6d546c0.bindPopup(popup_2fc50dca49547f0293e695b7440d4eca)
+        ;
+
+        
+    
+    
+            var marker_71e41fb336d8977d82a2d40279be8440 = L.marker(
+                [32.1198479150648, 34.79361316067661],
+                {
+}
+            ).addTo(map_2c29fe5b285ce83a8eaaa3b06c6a3147);
+        
+    
+            var icon_f491568d7b6b40d5c100da1907571c22 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_71e41fb336d8977d82a2d40279be8440.setIcon(icon_f491568d7b6b40d5c100da1907571c22);
+        
+    
+        var popup_3f74ac6a6ac88fe423da4500f9c992e1 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_29df278d9f97d8f555136c7165233954 = $(`<div id="html_29df278d9f97d8f555136c7165233954" style="width: 100.0%; height: 100.0%;">Additional Match: שיטה כחלחלה (ID: 448)</div>`)[0];
+                popup_3f74ac6a6ac88fe423da4500f9c992e1.setContent(html_29df278d9f97d8f555136c7165233954);
+            
+        
+
+        marker_71e41fb336d8977d82a2d40279be8440.bindPopup(popup_3f74ac6a6ac88fe423da4500f9c992e1)
+        ;
+
+        
+    
+    
+            var marker_541e0f8088a29589f8dc69d0b63cd0ee = L.marker(
+                [32.11988512903965, 34.79362348436117],
+                {
+}
+            ).addTo(map_2c29fe5b285ce83a8eaaa3b06c6a3147);
+        
+    
+            var icon_cd4fe1f9dcf9ff19053b76eea9536a98 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_541e0f8088a29589f8dc69d0b63cd0ee.setIcon(icon_cd4fe1f9dcf9ff19053b76eea9536a98);
+        
+    
+        var popup_269fd9ed3476616ad4a411bf2fbd1438 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_74e8776531546e2534011765cca0b328 = $(`<div id="html_74e8776531546e2534011765cca0b328" style="width: 100.0%; height: 100.0%;">Additional Match: שיטה כחלחלה (ID: 449)</div>`)[0];
+                popup_269fd9ed3476616ad4a411bf2fbd1438.setContent(html_74e8776531546e2534011765cca0b328);
+            
+        
+
+        marker_541e0f8088a29589f8dc69d0b63cd0ee.bindPopup(popup_269fd9ed3476616ad4a411bf2fbd1438)
+        ;
+
+        
+    
+    
+            var marker_483068a28591735ca7a82800eb7dee5e = L.marker(
+                [32.11966142343212, 34.79362611821138],
+                {
+}
+            ).addTo(map_2c29fe5b285ce83a8eaaa3b06c6a3147);
+        
+    
+            var icon_9f38981d715085657f8192dd07d9692e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_483068a28591735ca7a82800eb7dee5e.setIcon(icon_9f38981d715085657f8192dd07d9692e);
+        
+    
+        var popup_752293a7077e76bf8899e8f3808fe99d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_951954f03418ab1032745c410b2eb915 = $(`<div id="html_951954f03418ab1032745c410b2eb915" style="width: 100.0%; height: 100.0%;">Additional Match: מילה ירוקת-עד (ID: 441)</div>`)[0];
+                popup_752293a7077e76bf8899e8f3808fe99d.setContent(html_951954f03418ab1032745c410b2eb915);
+            
+        
+
+        marker_483068a28591735ca7a82800eb7dee5e.bindPopup(popup_752293a7077e76bf8899e8f3808fe99d)
+        ;
+
+        
+    
+    
+            var marker_9535f9cd852ba4e6d236b511a5b6cc93 = L.marker(
+                [32.11965345313229, 34.79363490646706],
+                {
+}
+            ).addTo(map_2c29fe5b285ce83a8eaaa3b06c6a3147);
+        
+    
+            var icon_b71015f1bf4e1537c92e4cc9852a968a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_9535f9cd852ba4e6d236b511a5b6cc93.setIcon(icon_b71015f1bf4e1537c92e4cc9852a968a);
+        
+    
+        var popup_9b64a67349f8f70773912f8e01d7a7cf = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5f9fffa77def561cffa746180b47d0b9 = $(`<div id="html_5f9fffa77def561cffa746180b47d0b9" style="width: 100.0%; height: 100.0%;">Additional Match: מילה ירוקת-עד (ID: 440)</div>`)[0];
+                popup_9b64a67349f8f70773912f8e01d7a7cf.setContent(html_5f9fffa77def561cffa746180b47d0b9);
+            
+        
+
+        marker_9535f9cd852ba4e6d236b511a5b6cc93.bindPopup(popup_9b64a67349f8f70773912f8e01d7a7cf)
+        ;
+
+        
+    
+    
+            var marker_3e33fc39888e05695e32f65da81e51ca = L.marker(
+                [32.11974676898704, 34.79364584776116],
+                {
+}
+            ).addTo(map_2c29fe5b285ce83a8eaaa3b06c6a3147);
+        
+    
+            var icon_cbabc7854364ddc5b4206f2a607291cc = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_3e33fc39888e05695e32f65da81e51ca.setIcon(icon_cbabc7854364ddc5b4206f2a607291cc);
+        
+    
+        var popup_46e66989da2bfaf2e3b440fca8256fb6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_69516806e53007e2960892f3a83121e7 = $(`<div id="html_69516806e53007e2960892f3a83121e7" style="width: 100.0%; height: 100.0%;">Additional Match: מילה ירוקת-עד (ID: 442)</div>`)[0];
+                popup_46e66989da2bfaf2e3b440fca8256fb6.setContent(html_69516806e53007e2960892f3a83121e7);
+            
+        
+
+        marker_3e33fc39888e05695e32f65da81e51ca.bindPopup(popup_46e66989da2bfaf2e3b440fca8256fb6)
+        ;
+
+        
+    
+    
+            var marker_37624fa902a5beddb445b48e96e63dd3 = L.marker(
+                [32.11994547698517, 34.79366261127205],
+                {
+}
+            ).addTo(map_2c29fe5b285ce83a8eaaa3b06c6a3147);
+        
+    
+            var icon_a5035e0b534e0f3ab1ac8b250b60a012 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_37624fa902a5beddb445b48e96e63dd3.setIcon(icon_a5035e0b534e0f3ab1ac8b250b60a012);
+        
+    
+        var popup_ce1b97f93c492a52a4da92fa145cd320 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_84b6aef80dff15c7e7344f95875076db = $(`<div id="html_84b6aef80dff15c7e7344f95875076db" style="width: 100.0%; height: 100.0%;">Additional Match: שיטה כחלחלה (ID: 451)</div>`)[0];
+                popup_ce1b97f93c492a52a4da92fa145cd320.setContent(html_84b6aef80dff15c7e7344f95875076db);
+            
+        
+
+        marker_37624fa902a5beddb445b48e96e63dd3.bindPopup(popup_ce1b97f93c492a52a4da92fa145cd320)
+        ;
+
+        
+    
+    
+            var marker_bc314567d75dafe1f0907bd10e725481 = L.marker(
+                [32.11993650485674, 34.79370172018792],
+                {
+}
+            ).addTo(map_2c29fe5b285ce83a8eaaa3b06c6a3147);
+        
+    
+            var icon_25795685279c09b09bc5f7a932d3e2d9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_bc314567d75dafe1f0907bd10e725481.setIcon(icon_25795685279c09b09bc5f7a932d3e2d9);
+        
+    
+        var popup_a7fc5a75fb896119f82184c81413cfd9 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b6905fb27cc88ad308ce996829884d86 = $(`<div id="html_b6905fb27cc88ad308ce996829884d86" style="width: 100.0%; height: 100.0%;">Additional Match: זית אירופאי (ID: 450)</div>`)[0];
+                popup_a7fc5a75fb896119f82184c81413cfd9.setContent(html_b6905fb27cc88ad308ce996829884d86);
+            
+        
+
+        marker_bc314567d75dafe1f0907bd10e725481.bindPopup(popup_a7fc5a75fb896119f82184c81413cfd9)
+        ;
+
+        
+    
+    
+            var marker_5e26a96626fdf6d3d84d5d832539b263 = L.marker(
+                [32.12004782571309, 34.79387084404519],
+                {
+}
+            ).addTo(map_2c29fe5b285ce83a8eaaa3b06c6a3147);
+        
+    
+            var icon_e5633a28eed3a270a4355c57d908aa54 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_5e26a96626fdf6d3d84d5d832539b263.setIcon(icon_e5633a28eed3a270a4355c57d908aa54);
+        
+    
+        var popup_99e1e907425c470a41a7f36f9472d044 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_dfa32aecae4a5c4500d0f4f7707822eb = $(`<div id="html_dfa32aecae4a5c4500d0f4f7707822eb" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.12004782571309,34.79387084404519&layer=c&cbll=32.12004782571309,34.79387084404519&cbp=12,240,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_99e1e907425c470a41a7f36f9472d044.setContent(html_dfa32aecae4a5c4500d0f4f7707822eb);
+            
+        
+
+        marker_5e26a96626fdf6d3d84d5d832539b263.bindPopup(popup_99e1e907425c470a41a7f36f9472d044)
+        ;
+
+        
+    
+</script>
+</html>

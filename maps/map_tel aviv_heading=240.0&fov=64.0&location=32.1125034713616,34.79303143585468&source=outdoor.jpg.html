@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_c6dfc6bcf9c4a9d2b23717bb9a2f9e4c {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+<div style="
+position: fixed;
+bottom: 50px;
+left: 50px;
+width: 200px;
+background-color: white;
+z-index:9999;
+font-size:14px;
+padding: 10px;
+border: 2px solid grey;
+border-radius: 8px;
+box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+">
+<b>Legend</b><br>
+<i class="fa fa-map-marker fa-2x" style="color:orange"></i> Car location<br>
+<i class="fa fa-map-marker fa-2x" style="color:red"></i> Detection location<br>
+<i class="fa fa-map-marker fa-2x" style="color:green"></i> Seker best match<br>
+<i class="fa fa-map-marker fa-2x" style="color:blue"></i> Seker additional match<br>
+</div>
+    
+            <div class="folium-map" id="map_c6dfc6bcf9c4a9d2b23717bb9a2f9e4c" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_c6dfc6bcf9c4a9d2b23717bb9a2f9e4c = L.map(
+                "map_c6dfc6bcf9c4a9d2b23717bb9a2f9e4c",
+                {
+                    center: [32.11213417064064, 34.79257717550432],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 15,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_9b33d6979a3ebcf277f539400bf1b1d1 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_9b33d6979a3ebcf277f539400bf1b1d1.addTo(map_c6dfc6bcf9c4a9d2b23717bb9a2f9e4c);
+        
+    
+            var marker_cf77e1ff2a740d736fdab8d3784ef2cd = L.marker(
+                [32.11243086800246, 34.79294072944701],
+                {
+}
+            ).addTo(map_c6dfc6bcf9c4a9d2b23717bb9a2f9e4c);
+        
+    
+            var icon_8c575c2330d2d3fb722ae90d1a4e6713 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_cf77e1ff2a740d736fdab8d3784ef2cd.setIcon(icon_8c575c2330d2d3fb722ae90d1a4e6713);
+        
+    
+        var popup_c023094496e57c560fcd4ac7de484066 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4324358f8b4bff4229fe14ff96911673 = $(`<div id="html_4324358f8b4bff4229fe14ff96911673" style="width: 100.0%; height: 100.0%;">Best Match: וושינגטוניה חסונה (ID: 277.0)</div>`)[0];
+                popup_c023094496e57c560fcd4ac7de484066.setContent(html_4324358f8b4bff4229fe14ff96911673);
+            
+        
+
+        marker_cf77e1ff2a740d736fdab8d3784ef2cd.bindPopup(popup_c023094496e57c560fcd4ac7de484066)
+        ;
+
+        
+    
+    
+            var poly_line_d7f263174af3bb06404786bed352a02b = L.polyline(
+                [[32.11243086800246, 34.79294072944701], [32.11235327451109, 34.7928776481495]],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "black", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_c6dfc6bcf9c4a9d2b23717bb9a2f9e4c);
+        
+    
+        var popup_681fad1126b5cdfd3b841201114ee6f3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f51d29f66bb562a2dbcf357fd1eda77c = $(`<div id="html_f51d29f66bb562a2dbcf357fd1eda77c" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 1, angle: 4.029788478257859</div>`)[0];
+                popup_681fad1126b5cdfd3b841201114ee6f3.setContent(html_f51d29f66bb562a2dbcf357fd1eda77c);
+            
+        
+
+        poly_line_d7f263174af3bb06404786bed352a02b.bindPopup(popup_681fad1126b5cdfd3b841201114ee6f3)
+        ;
+
+        
+    
+    
+            var marker_a79a41f46a1236374ca1a42fefb8e73b = L.marker(
+                [32.11241474900321, 34.79281735383697],
+                {
+}
+            ).addTo(map_c6dfc6bcf9c4a9d2b23717bb9a2f9e4c);
+        
+    
+            var icon_34a6e8e71e057311061a737e0be7c8de = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_a79a41f46a1236374ca1a42fefb8e73b.setIcon(icon_34a6e8e71e057311061a737e0be7c8de);
+        
+    
+        var popup_376648c2620de5dbbb69c32d83307da0 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_09e5c1cfe89de5cfbde602aa3f014c5a = $(`<div id="html_09e5c1cfe89de5cfbde602aa3f014c5a" style="width: 100.0%; height: 100.0%;">Additional Match: איקליפטוס המקור (ID: 278)</div>`)[0];
+                popup_376648c2620de5dbbb69c32d83307da0.setContent(html_09e5c1cfe89de5cfbde602aa3f014c5a);
+            
+        
+
+        marker_a79a41f46a1236374ca1a42fefb8e73b.bindPopup(popup_376648c2620de5dbbb69c32d83307da0)
+        ;
+
+        
+    
+    
+            var marker_88910b8ce3de0a7ba94398e9604ed0ba = L.marker(
+                [32.11229291016101, 34.79282601661354],
+                {
+}
+            ).addTo(map_c6dfc6bcf9c4a9d2b23717bb9a2f9e4c);
+        
+    
+            var icon_dac1355f6248ecf2d9f436ebc268c502 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_88910b8ce3de0a7ba94398e9604ed0ba.setIcon(icon_dac1355f6248ecf2d9f436ebc268c502);
+        
+    
+        var popup_b97c14238dd13f83107f7c63043ff8b4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_db18a8c2d8a92356bc0cfdc636e97f41 = $(`<div id="html_db18a8c2d8a92356bc0cfdc636e97f41" style="width: 100.0%; height: 100.0%;">Additional Match: פיקוס חלוד (ID: 268)</div>`)[0];
+                popup_b97c14238dd13f83107f7c63043ff8b4.setContent(html_db18a8c2d8a92356bc0cfdc636e97f41);
+            
+        
+
+        marker_88910b8ce3de0a7ba94398e9604ed0ba.bindPopup(popup_b97c14238dd13f83107f7c63043ff8b4)
+        ;
+
+        
+    
+    
+            var marker_dab5a45ec8a6a1d8b21237a35074f6ec = L.marker(
+                [32.11235588508554, 34.79289088562118],
+                {
+}
+            ).addTo(map_c6dfc6bcf9c4a9d2b23717bb9a2f9e4c);
+        
+    
+            var icon_82075499841b1906819cedd1c6465de5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_dab5a45ec8a6a1d8b21237a35074f6ec.setIcon(icon_82075499841b1906819cedd1c6465de5);
+        
+    
+        var popup_e36b799784d3166f6b501eeec10b41c6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4002af34013593b7b0a959480e92630c = $(`<div id="html_4002af34013593b7b0a959480e92630c" style="width: 100.0%; height: 100.0%;">Additional Match: פיקוס חלוד (ID: 270)</div>`)[0];
+                popup_e36b799784d3166f6b501eeec10b41c6.setContent(html_4002af34013593b7b0a959480e92630c);
+            
+        
+
+        marker_dab5a45ec8a6a1d8b21237a35074f6ec.bindPopup(popup_e36b799784d3166f6b501eeec10b41c6)
+        ;
+
+        
+    
+    
+            var marker_0e91aadffaaeb95a5ac982d4f75cad2c = L.marker(
+                [32.11245933555396, 34.79295962065161],
+                {
+}
+            ).addTo(map_c6dfc6bcf9c4a9d2b23717bb9a2f9e4c);
+        
+    
+            var icon_0344d9caf4a7d9a2f96e81efd13c3841 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_0e91aadffaaeb95a5ac982d4f75cad2c.setIcon(icon_0344d9caf4a7d9a2f96e81efd13c3841);
+        
+    
+        var popup_337914f9e7bff01df1be6e026e18e07b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f01004fcd8c4a39112b725cea0794e77 = $(`<div id="html_f01004fcd8c4a39112b725cea0794e77" style="width: 100.0%; height: 100.0%;">Additional Match: וושינגטוניה חוטית (ID: 276)</div>`)[0];
+                popup_337914f9e7bff01df1be6e026e18e07b.setContent(html_f01004fcd8c4a39112b725cea0794e77);
+            
+        
+
+        marker_0e91aadffaaeb95a5ac982d4f75cad2c.bindPopup(popup_337914f9e7bff01df1be6e026e18e07b)
+        ;
+
+        
+    
+    
+            var marker_cee51f2bda2a1df88c505076d67ce68d = L.marker(
+                [32.1125034713616, 34.79303143585468],
+                {
+}
+            ).addTo(map_c6dfc6bcf9c4a9d2b23717bb9a2f9e4c);
+        
+    
+            var icon_50ff81ec05f60115b2ea648aee19a29b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_cee51f2bda2a1df88c505076d67ce68d.setIcon(icon_50ff81ec05f60115b2ea648aee19a29b);
+        
+    
+        var popup_a19afc0ad26bdaf785319c3c150bf34a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f099d74c15b985f353f53d3d1a9629bd = $(`<div id="html_f099d74c15b985f353f53d3d1a9629bd" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.1125034713616,34.79303143585468&layer=c&cbll=32.1125034713616,34.79303143585468&cbp=12,240,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_a19afc0ad26bdaf785319c3c150bf34a.setContent(html_f099d74c15b985f353f53d3d1a9629bd);
+            
+        
+
+        marker_cee51f2bda2a1df88c505076d67ce68d.bindPopup(popup_a19afc0ad26bdaf785319c3c150bf34a)
+        ;
+
+        
+    
+</script>
+</html>
