@@ -393,7 +393,10 @@ def fix_and_eval(value):
 
 
 if __name__ == '__main__':
-    # df = pd.read_excel("all_trees_output_meters_divide=100000_angle_divide=3_y_times=12_y_exponent=2_count_distinct_trees=30590.xlsx")
+    # df = pd.read_excel("all_trees_updated_min_angle_diff.xlsx")
+    # df_non_nan_tree_id = df[df["tree_id"].notna()]
+    # df_non_nan_tree_id.to_excel("only_matches_updated_min_angle_diff.xlsx")
+
     # df = pd.read_excel("real_angle_south_trees_output_meters_divide=100000_angle_divide=3_y_times=12_y_exponent=2_count_distinct_trees=256.xlsx")
     # df = pd.read_parquet('combined_data.parquet', engine="pyarrow")
 
@@ -409,7 +412,7 @@ if __name__ == '__main__':
     # df_subset = df_sorted.head(1000)
 
     # Save the list of selected images to a text file
-    # df_subset["file_name_with_detections"].drop_duplicates().to_csv("selected_images_list.txt", index=False, header=False)
+    # df_non_nan_tree_id["file_name_with_detections"].drop_duplicates().to_csv("selected_images_list.txt", index=False, header=False)
 
     # # Conversion factor from decimal to meters
     # conversion_factor = 100000
@@ -417,7 +420,7 @@ if __name__ == '__main__':
     # df['distance_in_meters'] = df['distance'] * conversion_factor
     # df_sorted = df.sort_values(by='distance_in_meters')
 
-    df_subset = pd.read_excel("first_1000_rows_updated_min_angle_diff.xlsx")
+    df_subset = pd.read_excel("only_matches_updated_min_angle_diff.xlsx")
 
     df_subset.loc[:, 'additional_matches'] = df_subset['additional_matches'].apply(fix_and_eval)
 
