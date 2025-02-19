@@ -103,7 +103,7 @@ def create_html_with_images_and_details(df, detected_images_folder, output_html_
         # Get the corresponding image path
         file_name_with_detections_full_path = filtered_df.iloc[0]['file_name_with_detections']
         file_name_with_detections = Path(file_name_with_detections_full_path).name
-        image_path = os.path.join(detected_images_folder, file_name_with_detections)
+        image_path = Path(detected_images_folder) / file_name_with_detections
 
         # Add a section for the current file_name
         html_content += f"<div class='file-section'>"
