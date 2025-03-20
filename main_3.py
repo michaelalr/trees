@@ -8,6 +8,7 @@ from folium import Element
 import math
 import re
 from urllib.parse import quote
+import json
 import matplotlib.pyplot as plt
 
 # Add legend as an HTML element
@@ -207,13 +208,13 @@ def create_html_with_images_and_details(df, detected_images_folder, output_html_
 
         if len(det_trees_without_match) > 0:
             html_content += f"<strong>Detection Trees Without Match</strong>"
-        for tree in det_trees_without_match:
-            tree_index, real_angle, x_tree_image, y_tree_image = tree
-            html_content += "<p>"
-            html_content += f"Tree Index: {tree_index}<br>"
-            html_content += f"Real Angle (rad): {real_angle:.5f}<br>"
-            html_content += f"Location: ({x_tree_image}, {y_tree_image})<br>"
-            html_content += "</p>"
+            for tree in det_trees_without_match:
+                tree_index, real_angle, x_tree_image, y_tree_image = tree
+                html_content += "<p>"
+                html_content += f"Tree Index: {tree_index}<br>"
+                html_content += f"Real Angle (rad): {real_angle:.5f}<br>"
+                html_content += f"Location: ({x_tree_image}, {y_tree_image})<br>"
+                html_content += "</p>"
 
         # Additional matches
         # Replace 'nan' with 'None' in the 'additional_matches' column
@@ -488,14 +489,14 @@ if __name__ == '__main__':
     # df['distance_in_meters'] = df['distance'] * conversion_factor
     # df_sorted = df.sort_values(by='distance_in_meters')
 
-    df_subset = pd.read_excel("images_rerun_0.2_0.25_meters_divide=100000_angle_divide=3_y_times=12_y_exponent=2_count_distinct_trees=1029.xlsx")
+    df_subset = pd.read_excel("images_sample_0.2_0.25_meters_divide=100000_angle_divide=3_y_times=12_y_exponent=2_count_distinct_trees=27.xlsx")
 
     df_subset.loc[:, 'additional_matches'] = df_subset['additional_matches'].apply(fix_and_eval)
 
     df_subset['tree_name'] = df_subset['tree_name'].apply(
         lambda x: x.encode('utf-8').decode('utf-8', 'ignore') if isinstance(x, str) else x)
 
-    detected_images_folder = "detected_images/images_to_rerun"
+    detected_images_folder = "detected_images/images_sample/0.2_0.25"
     output_html_file = "index.html"
     create_html_with_images_and_details(df=df_subset, detected_images_folder=detected_images_folder,
                                         output_html_file=output_html_file)
