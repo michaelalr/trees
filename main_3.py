@@ -1,15 +1,14 @@
 import ast
+import math
 import os
+import re
 from pathlib import Path
-import numpy as np
+from urllib.parse import quote
+
 import folium
+import numpy as np
 import pandas as pd
 from folium import Element
-import math
-import re
-from urllib.parse import quote
-import json
-import matplotlib.pyplot as plt
 
 # Add legend as an HTML element
 legend_html = """
@@ -190,7 +189,8 @@ def create_html_with_images_and_details(df, detected_images_folder, output_html_
         # Add detection details
         for _, row in filtered_df.iterrows():
             if pd.isna(row['tree_id']):
-                det_trees_without_match.append((row['tree_index'], row['real_angle'], row['x_tree_image'], row['y_tree_image']))
+                det_trees_without_match.append(
+                    (row['tree_index'], row['real_angle'], row['x_tree_image'], row['y_tree_image']))
                 continue
 
             html_content += "<p>"
@@ -321,8 +321,6 @@ def generate_map(filtered_df):
         #     icon=folium.Icon(color='red')
         # ).add_to(map_obj)
 
-
-
         # Car location
         x_car = row['x_image']
         y_car = row['y_image']
@@ -343,10 +341,10 @@ def generate_map(filtered_df):
 
     return map_path
 
+
 def select_images(df):
     # Load or use existing dataframe
     df = df.copy()  # Ensure original df is not modified
-
 
     # Separate matched and non-matched cases
     matched = df[df["tree_id"].notna()]  # Rows where a match exists
@@ -364,7 +362,6 @@ def select_images(df):
     # Compute quantiles for best_angle_diff
     matched_high_threshold = matched["best_angle_diff"].quantile(0.9)  # Top 10%
     matched_low_threshold = matched["best_angle_diff"].quantile(0.1)  # Bottom 10%
-
 
     # Prioritize interesting matched cases
     matched_interesting = matched[
@@ -448,6 +445,7 @@ def update_df_with_min_angle_diff(df, min_threshold=20, second_threshold=30):
 
     return updated_df
 
+
 def fix_and_eval(value):
     if isinstance(value, str):
         value = value.strip()  # Remove extra spaces
@@ -489,7 +487,8 @@ if __name__ == '__main__':
     # df['distance_in_meters'] = df['distance'] * conversion_factor
     # df_sorted = df.sort_values(by='distance_in_meters')
 
-    df_subset = pd.read_excel("images_sample_0.2_0.25_meters_divide=100000_angle_divide=3_y_times=12_y_exponent=2_count_distinct_trees=27.xlsx")
+    df_subset = pd.read_excel(
+        "images_sample_0.2_0.25_meters_divide=100000_angle_divide=3_y_times=12_y_exponent=2_count_distinct_trees=27.xlsx")
 
     df_subset.loc[:, 'additional_matches'] = df_subset['additional_matches'].apply(fix_and_eval)
 
@@ -500,4 +499,3 @@ if __name__ == '__main__':
     output_html_file = "index.html"
     create_html_with_images_and_details(df=df_subset, detected_images_folder=detected_images_folder,
                                         output_html_file=output_html_file)
-
