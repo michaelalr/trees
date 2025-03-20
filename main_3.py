@@ -7,6 +7,7 @@ import pandas as pd
 from folium import Element
 import math
 import re
+from urllib.parse import quote
 import matplotlib.pyplot as plt
 
 # Add legend as an HTML element
@@ -87,9 +88,75 @@ def create_html_with_images_and_details(df, detected_images_folder, output_html_
                 margin-top: 10px;
             }
         </style>
+        
+        <!-- Load Leaflet FIRST -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+        
+        <!-- Leaflet Awesome Markers (fix L undefined issue) -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.awesome-markers/2.0.4/leaflet.awesome-markers.css">
+        <script defer src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.awesome-markers/2.0.4/leaflet.awesome-markers.min.js"></script>
+        
+        <!-- jQuery and Bootstrap (deferred for performance) -->
+        <script defer src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                let currentIndex = 0;
+                const fileSections = document.querySelectorAll(".file-section");
+                const totalCases = fileSections.length;
+                const progressBar = document.getElementById("progressBar");
+                const progressText = document.getElementById("progress");
+                const prevBtn = document.getElementById("prevBtn");
+                const nextBtn = document.getElementById("nextBtn");
+    
+                function showCase(index) {
+                    fileSections.forEach((section, i) => {
+                        section.style.display = i === index ? "block" : "none";
+                    });
+    
+                    progressText.innerText = `Case ${index + 1} of ${totalCases}`;
+                    prevBtn.disabled = index === 0;
+                    nextBtn.disabled = index === totalCases - 1;
+    
+                    updateProgress(index, totalCases);
+                }
+    
+                function nextCase() {
+                    if (currentIndex < totalCases - 1) {
+                        currentIndex++;
+                        showCase(currentIndex);
+                    }
+                }
+    
+                function prevCase() {
+                    if (currentIndex > 0) {
+                        currentIndex--;
+                        showCase(currentIndex);
+                    }
+                }
+    
+                function updateProgress(currentIndex, totalImages) {
+                    let progress = ((currentIndex + 1) / totalImages) * 100;
+                    progressBar.value = progress;
+                }
+    
+                prevBtn.addEventListener("click", prevCase);
+                nextBtn.addEventListener("click", nextCase);
+    
+                showCase(currentIndex);
+            });
+        </script>
     </head>
     <body>
-    <h1>Detections and Matches</h1>
+        <h1>Detections and Matches</h1>
+        <div style="text-align: center; margin-bottom: 20px;">
+            <span id="progress">Case 1 of X</span><br>
+            <progress id="progressBar" value="0" max="100" style="width: 100%;"></progress><br>
+            <button id="prevBtn" disabled>Previous</button>
+            <button id="nextBtn">Next</button>
+        </div>
     """
     # Process each file_name
     for file_name in df['file_name'].unique():
@@ -104,9 +171,10 @@ def create_html_with_images_and_details(df, detected_images_folder, output_html_
         file_name_with_detections_full_path = filtered_df.iloc[0]['file_name_with_detections']
         file_name_with_detections = Path(file_name_with_detections_full_path).name
         image_path = Path(detected_images_folder) / file_name_with_detections
+        image_path_str = quote(image_path.as_posix())  # Convert path to URL format
 
         # Add a section for the current file_name
-        html_content += f"<div class='file-section'>"
+        html_content += f"<div class='file-section' style='display: none;'>"
         html_content += f"<div class='file-title'>File: {file_name}</div>"
 
         # Add a row for image and map
@@ -114,7 +182,7 @@ def create_html_with_images_and_details(df, detected_images_folder, output_html_
         html_content += "<div class='left'>"
 
         # Add the detected image
-        html_content += f"<img src='{image_path}' alt='Detected Image'><div class='details'>"
+        html_content += f"<img src='{image_path_str}' loading='lazy' alt='Detected Image'><div class='details'>"
 
         det_trees_without_match = []
 
@@ -420,14 +488,14 @@ if __name__ == '__main__':
     # df['distance_in_meters'] = df['distance'] * conversion_factor
     # df_sorted = df.sort_values(by='distance_in_meters')
 
-    df_subset = pd.read_excel("only_matches_updated_min_angle_diff.xlsx")
+    df_subset = pd.read_excel("images_rerun_0.2_0.25_meters_divide=100000_angle_divide=3_y_times=12_y_exponent=2_count_distinct_trees=1029.xlsx")
 
     df_subset.loc[:, 'additional_matches'] = df_subset['additional_matches'].apply(fix_and_eval)
 
     df_subset['tree_name'] = df_subset['tree_name'].apply(
         lambda x: x.encode('utf-8').decode('utf-8', 'ignore') if isinstance(x, str) else x)
 
-    detected_images_folder = "detected_images/chosen_images_to_download"
+    detected_images_folder = "detected_images/images_to_rerun"
     output_html_file = "index.html"
     create_html_with_images_and_details(df=df_subset, detected_images_folder=detected_images_folder,
                                         output_html_file=output_html_file)
