@@ -10,6 +10,8 @@ import numpy as np
 import pandas as pd
 from folium import Element
 
+colors_dict = {1: (230, 25, 75), 2: (60, 180, 75), 3: (255, 225, 25), 4: (0, 130, 200), 5: (245, 130, 49), 6: (145, 30, 180), 7: (70, 240, 240), 8: (240, 50, 230), 9: (210, 245, 60), 10: (250, 190, 190), 11: (0, 128, 128), 12: (230, 190, 255), 13: (170, 110, 40), 14: (255, 250, 200), 15: (128, 0, 0), 16: (170, 255, 195)}
+
 # Add legend as an HTML element
 legend_html = """
 <div style="
@@ -86,6 +88,12 @@ def create_html_with_images_and_details(df, detected_images_folder, output_html_
             }
             .details {
                 margin-top: 10px;
+            }
+            .legend {
+                margin-bottom: 10px;
+                padding: 5px;
+                border: 1px solid #ccc;
+                display: inline-block;
             }
         </style>
         
@@ -173,8 +181,23 @@ def create_html_with_images_and_details(df, detected_images_folder, output_html_
         image_path = Path(detected_images_folder) / file_name_with_detections
         image_path_str = quote(image_path.as_posix())  # Convert path to URL format
 
+        # Extract the number of detections from the filename (first number before "_")
+        num_detections = int(file_name_with_detections.split("_")[0]) if file_name_with_detections.split("_")[0].isdigit() else 0
+
         # Add a section for the current file_name
         html_content += f"<div class='file-section' style='display: none;'>"
+
+        # Add the legend section with colors corresponding to detections
+        html_content += "<div class='legend'>"
+        html_content += "<strong>Legend:</strong><br>"
+
+        for i in range(1, num_detections + 1):  # Loop through the required number of colors
+            color_index = (i - 1) % 16 + 1  # Cycle through colors 1 to 16
+            r, g, b = colors_dict[color_index]
+            html_content += f"<span style='display: inline-block; width: 20px; height: 20px; background-color: rgb({r},{g},{b}); margin-right: 5px;'></span> Tree index {i}<br>"
+
+        html_content += "</div>"  # Close legend div
+
         html_content += f"<div class='file-title'>File: {file_name}</div>"
 
         # Add a row for image and map
