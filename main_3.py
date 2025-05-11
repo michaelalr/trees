@@ -365,7 +365,7 @@ def generate_map(filtered_df):
     return map_path
 
 
-def select_images(df):
+def select_images(df, n):
     # Load or use existing dataframe
     df = df.copy()  # Ensure original df is not modified
 
@@ -406,7 +406,7 @@ def select_images(df):
         print("No available images to sample from.")
         selected_non_matched_images = pd.Series(dtype=object)
     else:
-        sample_size = min(20, len(unique_files))  # Ensure we don't sample more than available
+        sample_size = min(n, len(unique_files))  # Ensure we don't sample more than available
         selected_non_matched_images = unique_files.sample(n=sample_size, random_state=42)
 
     # selected_non_matched_images = non_matched_interesting["file_name"].drop_duplicates().sample(n=50, random_state=42)
@@ -483,6 +483,8 @@ def fix_and_eval(value):
 
 
 if __name__ == '__main__':
+    df = pd.read_excel(
+        "images_rerun_0.2_0.25_meters_divide=100000_angle_divide=3_y_times=12_y_exponent=2_count_distinct_trees=1029.xlsx")
     # df = pd.read_excel("all_trees_updated_min_angle_diff.xlsx")
     # df_non_nan_tree_id = df[df["tree_id"].notna()]
     # df_non_nan_tree_id.to_excel("only_matches_updated_min_angle_diff.xlsx")
@@ -510,8 +512,13 @@ if __name__ == '__main__':
     # df['distance_in_meters'] = df['distance'] * conversion_factor
     # df_sorted = df.sort_values(by='distance_in_meters')
 
-    df_subset = pd.read_excel(
-        "images_rerun_0.2_0.25_meters_divide=100000_angle_divide=3_y_times=12_y_exponent=2_count_distinct_trees=1029.xlsx")
+    # df_subset = pd.read_excel(
+    #     "images_rerun_0.2_0.25_meters_divide=100000_angle_divide=3_y_times=12_y_exponent=2_count_distinct_trees=1029.xlsx")
+
+    # Step 1: Randomly choose 100 unique file_names
+    sample_file_names = df["file_name"].drop_duplicates().sample(n=100, random_state=42)
+    # Step 2: Subset the original DataFrame to only include those file_names
+    df_subset = df[df["file_name"].isin(sample_file_names)]
 
     df_subset.loc[:, 'additional_matches'] = df_subset['additional_matches'].apply(fix_and_eval)
 
