@@ -511,7 +511,7 @@ if __name__ == '__main__':
     # df_sorted = df.sort_values(by='distance_in_meters')
 
     df_subset = pd.read_excel(
-        "images_sample_0.2_0.25_meters_divide=100000_angle_divide=3_y_times=12_y_exponent=2_count_distinct_trees=27.xlsx")
+        "images_rerun_0.2_0.25_meters_divide=100000_angle_divide=3_y_times=12_y_exponent=2_count_distinct_trees=1029.xlsx")
 
     df_subset.loc[:, 'additional_matches'] = df_subset['additional_matches'].apply(fix_and_eval)
 
