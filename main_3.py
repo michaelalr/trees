@@ -175,6 +175,10 @@ def create_html_with_images_and_details(df, detected_images_folder, output_html_
         if filtered_df['possible_trees'].eq(0).all() or filtered_df["possible_trees"].astype(np.int64).eq(0).all():
             continue  # Skip to the next file_name
 
+        # Skip if all tree_id values are NaN
+        if filtered_df['tree_id'].isna().all():
+            continue
+
         # Get the corresponding image path
         file_name_with_detections_full_path = filtered_df.iloc[0]['file_name_with_detections']
         file_name_with_detections = Path(file_name_with_detections_full_path).name
@@ -247,7 +251,9 @@ def create_html_with_images_and_details(df, detected_images_folder, output_html_
         )
 
         # if not pd.isna(filtered_df.iloc[0]['additional_matches']):
-        if len(filtered_df.iloc[0]['additional_matches']) > 0:
+        # if len(filtered_df.iloc[0]['additional_matches']) > 0:
+        additional_matches = filtered_df.iloc[0]['additional_matches']
+        if additional_matches:
             html_content += f"<strong>Seker Matches:</strong>"
             for match in filtered_df.iloc[0]['additional_matches']:
                 html_content += "<p>"
@@ -323,7 +329,8 @@ def generate_map(filtered_df):
 
         # Additional matches
         # if pd.notna(row['additional_matches']):
-        if len(row['additional_matches']) > 0:
+        # if len(row['additional_matches']) > 0:
+        if row['additional_matches']:
             for match in row['additional_matches']:
                 id = match['id']
                 if id not in best_match_ids:
@@ -444,10 +451,11 @@ def update_df_with_min_angle_diff(df, min_threshold=20, second_threshold=30):
             second_min_angle_diff = float('inf')  # No second value available
 
         # Check if conditions are met
-        if min_angle_diff < min_threshold and second_min_angle_diff > second_threshold:
-            min_distance_idx = sorted_group.index[0]
-        else:
-            min_distance_idx = None  # No valid match
+        # if min_angle_diff < min_threshold and second_min_angle_diff > second_threshold:
+        #     min_distance_idx = sorted_group.index[0]
+        # else:
+        #     min_distance_idx = None  # No valid match
+        min_distance_idx = sorted_group.index[0]
 
         # Get all indices of the group
         group_indices = group.index
@@ -463,13 +471,16 @@ def update_df_with_min_angle_diff(df, min_threshold=20, second_threshold=30):
             if idx != min_distance_idx:
                 updated_df.loc[idx, numeric_cols] = np.nan  # Assign NaN to numeric columns
                 updated_df.loc[idx, string_cols] = "None"  # Assign "None" to string columns
-        print(counter)
+        # print(counter)
         counter += 1
 
     return updated_df
 
 
 def fix_and_eval(value):
+    if pd.isna(value):  # handles np.nan, None, etc.
+        return None
+
     if isinstance(value, str):
         value = value.strip()  # Remove extra spaces
         value = value.replace("nan", "None")  # Replace 'nan' with 'None'
@@ -481,10 +492,31 @@ def fix_and_eval(value):
             return None  # Return None for problematic values
     return value  # Return as is if not a string
 
+def get_subset_df(df, table_name, n, images_list):
+    # Step 1: Randomly choose 100 unique file_names
+    sample_file_names = df["file_name"].drop_duplicates().sample(n=n, random_state=42)
+    # Step 2: Subset the original DataFrame to only include those file_names
+    df_subset = df[df["file_name"].isin(sample_file_names)]
+
+    # Remove the extension from the original file
+    base_name = os.path.splitext(table_name)[0]
+    # Create the new filename
+    new_filename = f"{n}_{base_name}.csv"
+
+    # Save to CSV
+    df_subset.to_csv(new_filename, index=False)
+    df_subset["file_name"].to_csv(images_list, index=False, header=False)
+
+    return df_subset
+
+def save_file_names_to_txt(df, output_path):
+    with open(output_path, "w") as f:
+        for name in df["file_name"]:
+            f.write(f"{name}\n")
 
 if __name__ == '__main__':
-    df = pd.read_excel(
-        "images_rerun_0.2_0.25_meters_divide=100000_angle_divide=3_y_times=12_y_exponent=2_count_distinct_trees=1029.xlsx")
+    table_name = "nadav_output_meters_divide=100000_angle_divide=3_y_times=12_y_exponent=2_count_distinct_trees=608.xlsx"
+    df = pd.read_excel(table_name)
     # df = pd.read_excel("all_trees_updated_min_angle_diff.xlsx")
     # df_non_nan_tree_id = df[df["tree_id"].notna()]
     # df_non_nan_tree_id.to_excel("only_matches_updated_min_angle_diff.xlsx")
@@ -493,15 +525,15 @@ if __name__ == '__main__':
     # df = pd.read_parquet('combined_data.parquet', engine="pyarrow")
 
     # clearance
-    # df.replace("None", np.nan, inplace=True)
-    # df["best_angle_diff"] = pd.to_numeric(df["best_angle_diff"].astype(float), errors="coerce")
-    # df["x_tree"] = pd.to_numeric(df["x_tree"].astype(float), errors="coerce")
-    # df["y_tree"] = pd.to_numeric(df["y_tree"].astype(float), errors="coerce")
+    df.replace("None", np.nan, inplace=True)
+    df["best_angle_diff"] = pd.to_numeric(df["best_angle_diff"].astype(float), errors="coerce")
+    df["x_tree"] = pd.to_numeric(df["x_tree"].astype(float), errors="coerce")
+    df["y_tree"] = pd.to_numeric(df["y_tree"].astype(float), errors="coerce")
 
     # selected_df = select_images(df=df)
-    # updated_df = update_df_with_min_angle_diff(df=df)
+    updated_df = update_df_with_min_angle_diff(df=df)
     # df_sorted = updated_df.sort_values(by='best_angle_diff')
-    # df_subset = df_sorted.head(1000)
+    # df_subset = df.head(500)
 
     # Save the list of selected images to a text file
     # df_non_nan_tree_id["file_name_with_detections"].drop_duplicates().to_csv("selected_images_list.txt", index=False, header=False)
@@ -515,17 +547,22 @@ if __name__ == '__main__':
     # df_subset = pd.read_excel(
     #     "images_rerun_0.2_0.25_meters_divide=100000_angle_divide=3_y_times=12_y_exponent=2_count_distinct_trees=1029.xlsx")
 
-    # Step 1: Randomly choose 100 unique file_names
-    sample_file_names = df["file_name"].drop_duplicates().sample(n=100, random_state=42)
-    # Step 2: Subset the original DataFrame to only include those file_names
-    df_subset = df[df["file_name"].isin(sample_file_names)]
+    # n = 100
+    # images_list = f"images_sample_{n}.txt"
+    # df_subset = get_subset_df(df=df, table_name=table_name, n=n, images_list=images_list)
+
+    df_subset = updated_df
+
+    # save_file_names_to_txt(df=df_subset, output_path="images_sample_100.txt")
 
     df_subset.loc[:, 'additional_matches'] = df_subset['additional_matches'].apply(fix_and_eval)
 
     df_subset['tree_name'] = df_subset['tree_name'].apply(
         lambda x: x.encode('utf-8').decode('utf-8', 'ignore') if isinstance(x, str) else x)
 
-    detected_images_folder = "detected_images/images_sample/0.2_0.25"
+
+
+    detected_images_folder = "detected_images/tree_nadav_merged"
     output_html_file = "index.html"
     create_html_with_images_and_details(df=df_subset, detected_images_folder=detected_images_folder,
                                         output_html_file=output_html_file)
