@@ -1,0 +1,1605 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_30803b0508af1ea2b380dda1fb66adb6 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+<div style="
+position: fixed;
+bottom: 50px;
+left: 50px;
+width: 200px;
+background-color: white;
+z-index:9999;
+font-size:14px;
+padding: 10px;
+border: 2px solid grey;
+border-radius: 8px;
+box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+">
+<b>Legend</b><br>
+<i class="fa fa-map-marker fa-2x" style="color:orange"></i> Car location<br>
+<i class="fa fa-map-marker fa-2x" style="color:red"></i> Detection location<br>
+<i class="fa fa-map-marker fa-2x" style="color:green"></i> Seker best match<br>
+<i class="fa fa-map-marker fa-2x" style="color:blue"></i> Seker additional match<br>
+</div>
+    
+            <div class="folium-map" id="map_30803b0508af1ea2b380dda1fb66adb6" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_30803b0508af1ea2b380dda1fb66adb6 = L.map(
+                "map_30803b0508af1ea2b380dda1fb66adb6",
+                {
+                    center: [32.10735097426083, 34.81422950604674],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 15,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_5fa4197609032cd01809151bcf71974c = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_5fa4197609032cd01809151bcf71974c.addTo(map_30803b0508af1ea2b380dda1fb66adb6);
+        
+    
+            var marker_3e67c1f76841798b3ef251db1978459b = L.marker(
+                [32.10754348, 34.81486253],
+                {
+}
+            ).addTo(map_30803b0508af1ea2b380dda1fb66adb6);
+        
+    
+            var icon_1ea79454f84720a7bda40e054b585b2d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_3e67c1f76841798b3ef251db1978459b.setIcon(icon_1ea79454f84720a7bda40e054b585b2d);
+        
+    
+        var popup_ef54ef86740ee21c21ca59a8581cd915 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3ffe14855dc3789312e5ac04db6a3885 = $(`<div id="html_3ffe14855dc3789312e5ac04db6a3885" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600011)</div>`)[0];
+                popup_ef54ef86740ee21c21ca59a8581cd915.setContent(html_3ffe14855dc3789312e5ac04db6a3885);
+            
+        
+
+        marker_3e67c1f76841798b3ef251db1978459b.bindPopup(popup_ef54ef86740ee21c21ca59a8581cd915)
+        ;
+
+        
+    
+    
+            var marker_9b2f84f385d03da24a7d6425f9a92786 = L.marker(
+                [32.10744233, 34.81487228],
+                {
+}
+            ).addTo(map_30803b0508af1ea2b380dda1fb66adb6);
+        
+    
+            var icon_402bc635b333d49372ce13b765741276 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_9b2f84f385d03da24a7d6425f9a92786.setIcon(icon_402bc635b333d49372ce13b765741276);
+        
+    
+        var popup_ee2f31776e87e498ce013815a463e8b4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6768ca26db4e9607269edfff138968b0 = $(`<div id="html_6768ca26db4e9607269edfff138968b0" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600009)</div>`)[0];
+                popup_ee2f31776e87e498ce013815a463e8b4.setContent(html_6768ca26db4e9607269edfff138968b0);
+            
+        
+
+        marker_9b2f84f385d03da24a7d6425f9a92786.bindPopup(popup_ee2f31776e87e498ce013815a463e8b4)
+        ;
+
+        
+    
+    
+            var marker_7968afa43e9db670a199f89c910a6ac8 = L.marker(
+                [32.10742818, 34.8148163],
+                {
+}
+            ).addTo(map_30803b0508af1ea2b380dda1fb66adb6);
+        
+    
+            var icon_87a8a3d1bb452dc59e5e1cbcf927429e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_7968afa43e9db670a199f89c910a6ac8.setIcon(icon_87a8a3d1bb452dc59e5e1cbcf927429e);
+        
+    
+        var popup_3238d127a8b1e91764a624a273f73607 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9bceb98acde40e0ea815dd4e4673a1ed = $(`<div id="html_9bceb98acde40e0ea815dd4e4673a1ed" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4600008)</div>`)[0];
+                popup_3238d127a8b1e91764a624a273f73607.setContent(html_9bceb98acde40e0ea815dd4e4673a1ed);
+            
+        
+
+        marker_7968afa43e9db670a199f89c910a6ac8.bindPopup(popup_3238d127a8b1e91764a624a273f73607)
+        ;
+
+        
+    
+    
+            var marker_3f666625b0f771417cb42696d97bc02c = L.marker(
+                [32.10747631, 34.81486578],
+                {
+}
+            ).addTo(map_30803b0508af1ea2b380dda1fb66adb6);
+        
+    
+            var icon_de8440cc6f79f4e8827245ba1bc18865 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_3f666625b0f771417cb42696d97bc02c.setIcon(icon_de8440cc6f79f4e8827245ba1bc18865);
+        
+    
+        var popup_16f221dd268e88195befd486b642de30 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_088860b71369a86bf49cc73cc1113ed1 = $(`<div id="html_088860b71369a86bf49cc73cc1113ed1" style="width: 100.0%; height: 100.0%;">Additional Match: Dalbergia sissoo (ID: 4600010)</div>`)[0];
+                popup_16f221dd268e88195befd486b642de30.setContent(html_088860b71369a86bf49cc73cc1113ed1);
+            
+        
+
+        marker_3f666625b0f771417cb42696d97bc02c.bindPopup(popup_16f221dd268e88195befd486b642de30)
+        ;
+
+        
+    
+    
+            var marker_dd1bee05a5f2ead4ea9365ff4798316b = L.marker(
+                [32.1077441254458, 34.81510713131442],
+                {
+}
+            ).addTo(map_30803b0508af1ea2b380dda1fb66adb6);
+        
+    
+            var icon_1af8632271284cbc8604f74c5cb02eea = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_dd1bee05a5f2ead4ea9365ff4798316b.setIcon(icon_1af8632271284cbc8604f74c5cb02eea);
+        
+    
+        var popup_64536811a14737a371ff6c76254eb4de = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_820a2f94a4efb5e979c6f1fa12b91bb4 = $(`<div id="html_820a2f94a4efb5e979c6f1fa12b91bb4" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.1077441254458,34.81510713131442&layer=c&cbll=32.1077441254458,34.81510713131442&cbp=12,240,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_64536811a14737a371ff6c76254eb4de.setContent(html_820a2f94a4efb5e979c6f1fa12b91bb4);
+            
+        
+
+        marker_dd1bee05a5f2ead4ea9365ff4798316b.bindPopup(popup_64536811a14737a371ff6c76254eb4de)
+        ;
+
+        
+    
+    
+            var marker_abf799dabfe6d0f92368e471128df3e1 = L.marker(
+                [32.10754348, 34.81486253],
+                {
+}
+            ).addTo(map_30803b0508af1ea2b380dda1fb66adb6);
+        
+    
+            var icon_c59219b77dd913acbb81aed4fb40cbb5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_abf799dabfe6d0f92368e471128df3e1.setIcon(icon_c59219b77dd913acbb81aed4fb40cbb5);
+        
+    
+        var popup_98cb97327a794137fa89c663123654d4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6d62fb05f1730dd5cfcf4e3f0311bba1 = $(`<div id="html_6d62fb05f1730dd5cfcf4e3f0311bba1" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600011)</div>`)[0];
+                popup_98cb97327a794137fa89c663123654d4.setContent(html_6d62fb05f1730dd5cfcf4e3f0311bba1);
+            
+        
+
+        marker_abf799dabfe6d0f92368e471128df3e1.bindPopup(popup_98cb97327a794137fa89c663123654d4)
+        ;
+
+        
+    
+    
+            var marker_9c6e800e501a22675724a9277a8e0542 = L.marker(
+                [32.10744233, 34.81487228],
+                {
+}
+            ).addTo(map_30803b0508af1ea2b380dda1fb66adb6);
+        
+    
+            var icon_1c63abcef2785c1f001c235e7de79e32 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_9c6e800e501a22675724a9277a8e0542.setIcon(icon_1c63abcef2785c1f001c235e7de79e32);
+        
+    
+        var popup_9b1b50e45d4f187fa900a59c51e166db = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_609b44d5f0177664c52039bd59c6e345 = $(`<div id="html_609b44d5f0177664c52039bd59c6e345" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600009)</div>`)[0];
+                popup_9b1b50e45d4f187fa900a59c51e166db.setContent(html_609b44d5f0177664c52039bd59c6e345);
+            
+        
+
+        marker_9c6e800e501a22675724a9277a8e0542.bindPopup(popup_9b1b50e45d4f187fa900a59c51e166db)
+        ;
+
+        
+    
+    
+            var marker_9c7aff056c4ebf8936cff2e5fb4cab00 = L.marker(
+                [32.10742818, 34.8148163],
+                {
+}
+            ).addTo(map_30803b0508af1ea2b380dda1fb66adb6);
+        
+    
+            var icon_dc34af626fd4004df0f12dab3d6b07b7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_9c7aff056c4ebf8936cff2e5fb4cab00.setIcon(icon_dc34af626fd4004df0f12dab3d6b07b7);
+        
+    
+        var popup_7cee21133dd9da02135c7ba224782a5b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1595cb19de6d084b16ee61f0240b46eb = $(`<div id="html_1595cb19de6d084b16ee61f0240b46eb" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4600008)</div>`)[0];
+                popup_7cee21133dd9da02135c7ba224782a5b.setContent(html_1595cb19de6d084b16ee61f0240b46eb);
+            
+        
+
+        marker_9c7aff056c4ebf8936cff2e5fb4cab00.bindPopup(popup_7cee21133dd9da02135c7ba224782a5b)
+        ;
+
+        
+    
+    
+            var marker_195d1466ccdea48d8070081b6c44d9d9 = L.marker(
+                [32.10747631, 34.81486578],
+                {
+}
+            ).addTo(map_30803b0508af1ea2b380dda1fb66adb6);
+        
+    
+            var icon_72fcc57bddbe2865dff9580559867608 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_195d1466ccdea48d8070081b6c44d9d9.setIcon(icon_72fcc57bddbe2865dff9580559867608);
+        
+    
+        var popup_a3e97baa840b3d4c0a51d997175b8d63 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_65f9c7bef9f827d426e1b379f1d3d669 = $(`<div id="html_65f9c7bef9f827d426e1b379f1d3d669" style="width: 100.0%; height: 100.0%;">Additional Match: Dalbergia sissoo (ID: 4600010)</div>`)[0];
+                popup_a3e97baa840b3d4c0a51d997175b8d63.setContent(html_65f9c7bef9f827d426e1b379f1d3d669);
+            
+        
+
+        marker_195d1466ccdea48d8070081b6c44d9d9.bindPopup(popup_a3e97baa840b3d4c0a51d997175b8d63)
+        ;
+
+        
+    
+    
+            var marker_bacd2a1995cc4f544a6ab8c6626ea1a4 = L.marker(
+                [32.1077441254458, 34.81510713131442],
+                {
+}
+            ).addTo(map_30803b0508af1ea2b380dda1fb66adb6);
+        
+    
+            var icon_554480a43824c83208f5dd03a3370f13 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_bacd2a1995cc4f544a6ab8c6626ea1a4.setIcon(icon_554480a43824c83208f5dd03a3370f13);
+        
+    
+        var popup_c73fc861f45a7756d58b6a63601e0fa0 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_879614389ba0ea84724b369d3e31e905 = $(`<div id="html_879614389ba0ea84724b369d3e31e905" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.1077441254458,34.81510713131442&layer=c&cbll=32.1077441254458,34.81510713131442&cbp=12,240,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_c73fc861f45a7756d58b6a63601e0fa0.setContent(html_879614389ba0ea84724b369d3e31e905);
+            
+        
+
+        marker_bacd2a1995cc4f544a6ab8c6626ea1a4.bindPopup(popup_c73fc861f45a7756d58b6a63601e0fa0)
+        ;
+
+        
+    
+    
+            var marker_f159be7ed26dfb19c7bc8b0d38794c81 = L.marker(
+                [32.10754348, 34.81486253],
+                {
+}
+            ).addTo(map_30803b0508af1ea2b380dda1fb66adb6);
+        
+    
+            var icon_15d367dedeb91f6d3851012baea3d164 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_f159be7ed26dfb19c7bc8b0d38794c81.setIcon(icon_15d367dedeb91f6d3851012baea3d164);
+        
+    
+        var popup_8b5b07db79ff34c5a0bf43d1ceffc46a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a49218ae0987fa60c47ea76369c4cadd = $(`<div id="html_a49218ae0987fa60c47ea76369c4cadd" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600011)</div>`)[0];
+                popup_8b5b07db79ff34c5a0bf43d1ceffc46a.setContent(html_a49218ae0987fa60c47ea76369c4cadd);
+            
+        
+
+        marker_f159be7ed26dfb19c7bc8b0d38794c81.bindPopup(popup_8b5b07db79ff34c5a0bf43d1ceffc46a)
+        ;
+
+        
+    
+    
+            var marker_2ef22eb8b5946904e29c5fc346d4be42 = L.marker(
+                [32.10744233, 34.81487228],
+                {
+}
+            ).addTo(map_30803b0508af1ea2b380dda1fb66adb6);
+        
+    
+            var icon_3f7349bffdd88d2553388893d69e4e7d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_2ef22eb8b5946904e29c5fc346d4be42.setIcon(icon_3f7349bffdd88d2553388893d69e4e7d);
+        
+    
+        var popup_5c6f9bb2bf918ab5648164048f60d174 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f1de0020189a7182cf4e5a8c4ac0308c = $(`<div id="html_f1de0020189a7182cf4e5a8c4ac0308c" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600009)</div>`)[0];
+                popup_5c6f9bb2bf918ab5648164048f60d174.setContent(html_f1de0020189a7182cf4e5a8c4ac0308c);
+            
+        
+
+        marker_2ef22eb8b5946904e29c5fc346d4be42.bindPopup(popup_5c6f9bb2bf918ab5648164048f60d174)
+        ;
+
+        
+    
+    
+            var marker_7b40ba3d50402c85dce74e534784a027 = L.marker(
+                [32.10742818, 34.8148163],
+                {
+}
+            ).addTo(map_30803b0508af1ea2b380dda1fb66adb6);
+        
+    
+            var icon_db1f9cef8d0f2d25e69dbaf1074934fd = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_7b40ba3d50402c85dce74e534784a027.setIcon(icon_db1f9cef8d0f2d25e69dbaf1074934fd);
+        
+    
+        var popup_668a976a9e20effd12a711762787177e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e64572d6945b99be7c586972d25ac242 = $(`<div id="html_e64572d6945b99be7c586972d25ac242" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4600008)</div>`)[0];
+                popup_668a976a9e20effd12a711762787177e.setContent(html_e64572d6945b99be7c586972d25ac242);
+            
+        
+
+        marker_7b40ba3d50402c85dce74e534784a027.bindPopup(popup_668a976a9e20effd12a711762787177e)
+        ;
+
+        
+    
+    
+            var marker_64bfa3470703648749f7dc89eb92826f = L.marker(
+                [32.10747631, 34.81486578],
+                {
+}
+            ).addTo(map_30803b0508af1ea2b380dda1fb66adb6);
+        
+    
+            var icon_5619de6beeaa9fcbe97fb28c876c204e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_64bfa3470703648749f7dc89eb92826f.setIcon(icon_5619de6beeaa9fcbe97fb28c876c204e);
+        
+    
+        var popup_5b2a23223366b2acb8ba47db1c1b5d8e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_27081efbca7683a0a75285aef05c50f6 = $(`<div id="html_27081efbca7683a0a75285aef05c50f6" style="width: 100.0%; height: 100.0%;">Additional Match: Dalbergia sissoo (ID: 4600010)</div>`)[0];
+                popup_5b2a23223366b2acb8ba47db1c1b5d8e.setContent(html_27081efbca7683a0a75285aef05c50f6);
+            
+        
+
+        marker_64bfa3470703648749f7dc89eb92826f.bindPopup(popup_5b2a23223366b2acb8ba47db1c1b5d8e)
+        ;
+
+        
+    
+    
+            var marker_979caa37c31f9640e500d4ce6d9e29f4 = L.marker(
+                [32.1077441254458, 34.81510713131442],
+                {
+}
+            ).addTo(map_30803b0508af1ea2b380dda1fb66adb6);
+        
+    
+            var icon_a7ae072f0293423ab72de41e9dd85dbf = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_979caa37c31f9640e500d4ce6d9e29f4.setIcon(icon_a7ae072f0293423ab72de41e9dd85dbf);
+        
+    
+        var popup_dba1675ee65d6f972bc82cc2a44eab62 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_64719832f1d926ee483b673518a7fd09 = $(`<div id="html_64719832f1d926ee483b673518a7fd09" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.1077441254458,34.81510713131442&layer=c&cbll=32.1077441254458,34.81510713131442&cbp=12,240,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_dba1675ee65d6f972bc82cc2a44eab62.setContent(html_64719832f1d926ee483b673518a7fd09);
+            
+        
+
+        marker_979caa37c31f9640e500d4ce6d9e29f4.bindPopup(popup_dba1675ee65d6f972bc82cc2a44eab62)
+        ;
+
+        
+    
+    
+            var marker_15e7ae568f2b6f3ed03dcd52d45612cb = L.marker(
+                [32.10754348, 34.81486253],
+                {
+}
+            ).addTo(map_30803b0508af1ea2b380dda1fb66adb6);
+        
+    
+            var icon_00bf87fdab1aefdc72958b05ffe6740d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_15e7ae568f2b6f3ed03dcd52d45612cb.setIcon(icon_00bf87fdab1aefdc72958b05ffe6740d);
+        
+    
+        var popup_15d3f0475c2df04c804782616ffbed21 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_389b5cd90da5961b8cd697c8d9f3cb19 = $(`<div id="html_389b5cd90da5961b8cd697c8d9f3cb19" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600011)</div>`)[0];
+                popup_15d3f0475c2df04c804782616ffbed21.setContent(html_389b5cd90da5961b8cd697c8d9f3cb19);
+            
+        
+
+        marker_15e7ae568f2b6f3ed03dcd52d45612cb.bindPopup(popup_15d3f0475c2df04c804782616ffbed21)
+        ;
+
+        
+    
+    
+            var marker_d7a9ed02febe0847511a65002f87424a = L.marker(
+                [32.10744233, 34.81487228],
+                {
+}
+            ).addTo(map_30803b0508af1ea2b380dda1fb66adb6);
+        
+    
+            var icon_340dd0271e4f5d207c3a6caba8c84006 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_d7a9ed02febe0847511a65002f87424a.setIcon(icon_340dd0271e4f5d207c3a6caba8c84006);
+        
+    
+        var popup_ddf45fc4746b074cb1223dcc11e1a31b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_01a00f272a923b5239cb72de45bfa380 = $(`<div id="html_01a00f272a923b5239cb72de45bfa380" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600009)</div>`)[0];
+                popup_ddf45fc4746b074cb1223dcc11e1a31b.setContent(html_01a00f272a923b5239cb72de45bfa380);
+            
+        
+
+        marker_d7a9ed02febe0847511a65002f87424a.bindPopup(popup_ddf45fc4746b074cb1223dcc11e1a31b)
+        ;
+
+        
+    
+    
+            var marker_b1b3ec777a71993763dfcf66d514241f = L.marker(
+                [32.10742818, 34.8148163],
+                {
+}
+            ).addTo(map_30803b0508af1ea2b380dda1fb66adb6);
+        
+    
+            var icon_c2a65ccfca1f2293b90aa963fada8610 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_b1b3ec777a71993763dfcf66d514241f.setIcon(icon_c2a65ccfca1f2293b90aa963fada8610);
+        
+    
+        var popup_3bf16f88052965d37c796c311e7b6b51 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e1dbdd164aa271914b5e7f191dea97ca = $(`<div id="html_e1dbdd164aa271914b5e7f191dea97ca" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4600008)</div>`)[0];
+                popup_3bf16f88052965d37c796c311e7b6b51.setContent(html_e1dbdd164aa271914b5e7f191dea97ca);
+            
+        
+
+        marker_b1b3ec777a71993763dfcf66d514241f.bindPopup(popup_3bf16f88052965d37c796c311e7b6b51)
+        ;
+
+        
+    
+    
+            var marker_1a9b7afe341c44bc51f26e8ab6b5d373 = L.marker(
+                [32.10747631, 34.81486578],
+                {
+}
+            ).addTo(map_30803b0508af1ea2b380dda1fb66adb6);
+        
+    
+            var icon_e657529c3f99e95f8e9719933b7db29f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_1a9b7afe341c44bc51f26e8ab6b5d373.setIcon(icon_e657529c3f99e95f8e9719933b7db29f);
+        
+    
+        var popup_cc0da6880c32cebef0689f265c53772f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e2e649a7a40f03565280d87a6d326b6f = $(`<div id="html_e2e649a7a40f03565280d87a6d326b6f" style="width: 100.0%; height: 100.0%;">Additional Match: Dalbergia sissoo (ID: 4600010)</div>`)[0];
+                popup_cc0da6880c32cebef0689f265c53772f.setContent(html_e2e649a7a40f03565280d87a6d326b6f);
+            
+        
+
+        marker_1a9b7afe341c44bc51f26e8ab6b5d373.bindPopup(popup_cc0da6880c32cebef0689f265c53772f)
+        ;
+
+        
+    
+    
+            var marker_d26de196dcf1819e199e48a3e0d0cbc5 = L.marker(
+                [32.1077441254458, 34.81510713131442],
+                {
+}
+            ).addTo(map_30803b0508af1ea2b380dda1fb66adb6);
+        
+    
+            var icon_2a36aa3ed35b7a1934a0e07dc0c2c76e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_d26de196dcf1819e199e48a3e0d0cbc5.setIcon(icon_2a36aa3ed35b7a1934a0e07dc0c2c76e);
+        
+    
+        var popup_10a9fb649dc9c2f19917c17d85139f89 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_643e6f3ed40a75a859f4294b51d8ac1a = $(`<div id="html_643e6f3ed40a75a859f4294b51d8ac1a" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.1077441254458,34.81510713131442&layer=c&cbll=32.1077441254458,34.81510713131442&cbp=12,240,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_10a9fb649dc9c2f19917c17d85139f89.setContent(html_643e6f3ed40a75a859f4294b51d8ac1a);
+            
+        
+
+        marker_d26de196dcf1819e199e48a3e0d0cbc5.bindPopup(popup_10a9fb649dc9c2f19917c17d85139f89)
+        ;
+
+        
+    
+    
+            var marker_32364183775fd8cdfb95987033a8c751 = L.marker(
+                [32.10743115, 34.81478471],
+                {
+}
+            ).addTo(map_30803b0508af1ea2b380dda1fb66adb6);
+        
+    
+            var icon_e222a8daf2f4df3a3e161e9519910b6c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_32364183775fd8cdfb95987033a8c751.setIcon(icon_e222a8daf2f4df3a3e161e9519910b6c);
+        
+    
+        var popup_f19a38bba142992a94b0a4da16eda30e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_136c2868e118931b2006b6a9d59c40f0 = $(`<div id="html_136c2868e118931b2006b6a9d59c40f0" style="width: 100.0%; height: 100.0%;">Best Match: Olea europaea (ID: 4614207.0)</div>`)[0];
+                popup_f19a38bba142992a94b0a4da16eda30e.setContent(html_136c2868e118931b2006b6a9d59c40f0);
+            
+        
+
+        marker_32364183775fd8cdfb95987033a8c751.bindPopup(popup_f19a38bba142992a94b0a4da16eda30e)
+        ;
+
+        
+    
+    
+            var poly_line_88c63efc0422834dbe5386302016dd3a = L.polyline(
+                [[32.10743115, 34.81478471], [32.1073352652387, 34.81475631787871]],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "black", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_30803b0508af1ea2b380dda1fb66adb6);
+        
+    
+        var popup_f42f8a7557daca04cd5540e8c8b72e23 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ad5cab5a2d4eaf82628c5b8f368f4cd8 = $(`<div id="html_ad5cab5a2d4eaf82628c5b8f368f4cd8" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 5, angle: 4.424507827042393</div>`)[0];
+                popup_f42f8a7557daca04cd5540e8c8b72e23.setContent(html_ad5cab5a2d4eaf82628c5b8f368f4cd8);
+            
+        
+
+        poly_line_88c63efc0422834dbe5386302016dd3a.bindPopup(popup_f42f8a7557daca04cd5540e8c8b72e23)
+        ;
+
+        
+    
+    
+            var marker_8a3efcb53bd6a4df6918dcda457dc674 = L.marker(
+                [32.10754348, 34.81486253],
+                {
+}
+            ).addTo(map_30803b0508af1ea2b380dda1fb66adb6);
+        
+    
+            var icon_544cc2f1a0b60ae66c03ef5a0ca9acf5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_8a3efcb53bd6a4df6918dcda457dc674.setIcon(icon_544cc2f1a0b60ae66c03ef5a0ca9acf5);
+        
+    
+        var popup_5929bd7634e174356651a3d5b175403e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9eb7a0984e5d01cab2db8cd7f0f34d1d = $(`<div id="html_9eb7a0984e5d01cab2db8cd7f0f34d1d" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600011)</div>`)[0];
+                popup_5929bd7634e174356651a3d5b175403e.setContent(html_9eb7a0984e5d01cab2db8cd7f0f34d1d);
+            
+        
+
+        marker_8a3efcb53bd6a4df6918dcda457dc674.bindPopup(popup_5929bd7634e174356651a3d5b175403e)
+        ;
+
+        
+    
+    
+            var marker_7a267ccfae7bc84912eb7f2124dc45dc = L.marker(
+                [32.10744233, 34.81487228],
+                {
+}
+            ).addTo(map_30803b0508af1ea2b380dda1fb66adb6);
+        
+    
+            var icon_da75c40fe4c34f0342f0fe6a59c0114d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_7a267ccfae7bc84912eb7f2124dc45dc.setIcon(icon_da75c40fe4c34f0342f0fe6a59c0114d);
+        
+    
+        var popup_b1ef4e3e6d6e86ab2accad81b7b295d4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_24a8ee45d0033525667afabcfa3a7bbf = $(`<div id="html_24a8ee45d0033525667afabcfa3a7bbf" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600009)</div>`)[0];
+                popup_b1ef4e3e6d6e86ab2accad81b7b295d4.setContent(html_24a8ee45d0033525667afabcfa3a7bbf);
+            
+        
+
+        marker_7a267ccfae7bc84912eb7f2124dc45dc.bindPopup(popup_b1ef4e3e6d6e86ab2accad81b7b295d4)
+        ;
+
+        
+    
+    
+            var marker_114602729458b79f1dc4cc4d1014e744 = L.marker(
+                [32.10742818, 34.8148163],
+                {
+}
+            ).addTo(map_30803b0508af1ea2b380dda1fb66adb6);
+        
+    
+            var icon_9f2722eb2b6a23922d13a5abdc3ac17d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_114602729458b79f1dc4cc4d1014e744.setIcon(icon_9f2722eb2b6a23922d13a5abdc3ac17d);
+        
+    
+        var popup_954e11b776b830a054e3d5ebce427172 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_664772ff0c4257a378dbc015061641c0 = $(`<div id="html_664772ff0c4257a378dbc015061641c0" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4600008)</div>`)[0];
+                popup_954e11b776b830a054e3d5ebce427172.setContent(html_664772ff0c4257a378dbc015061641c0);
+            
+        
+
+        marker_114602729458b79f1dc4cc4d1014e744.bindPopup(popup_954e11b776b830a054e3d5ebce427172)
+        ;
+
+        
+    
+    
+            var marker_09a6e5610d8e6436f40eb0a21dc36ee6 = L.marker(
+                [32.10747631, 34.81486578],
+                {
+}
+            ).addTo(map_30803b0508af1ea2b380dda1fb66adb6);
+        
+    
+            var icon_11eae6e306daea177eb0ff5c3944b2fe = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_09a6e5610d8e6436f40eb0a21dc36ee6.setIcon(icon_11eae6e306daea177eb0ff5c3944b2fe);
+        
+    
+        var popup_30a3d0024b5b1688ddcdd44a7cf8131a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e2929338426934f02d12097893c10cc8 = $(`<div id="html_e2929338426934f02d12097893c10cc8" style="width: 100.0%; height: 100.0%;">Additional Match: Dalbergia sissoo (ID: 4600010)</div>`)[0];
+                popup_30a3d0024b5b1688ddcdd44a7cf8131a.setContent(html_e2929338426934f02d12097893c10cc8);
+            
+        
+
+        marker_09a6e5610d8e6436f40eb0a21dc36ee6.bindPopup(popup_30a3d0024b5b1688ddcdd44a7cf8131a)
+        ;
+
+        
+    
+    
+            var marker_b3cd24029e851f7935020524bbc4c346 = L.marker(
+                [32.1077441254458, 34.81510713131442],
+                {
+}
+            ).addTo(map_30803b0508af1ea2b380dda1fb66adb6);
+        
+    
+            var icon_1bd77407b7f7d7709d9bd410ed5ca7bf = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_b3cd24029e851f7935020524bbc4c346.setIcon(icon_1bd77407b7f7d7709d9bd410ed5ca7bf);
+        
+    
+        var popup_f1b7ce358d36c4414afb082a95b2bab2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9d33bd39ec0bd0b76165ffdce8dd86b3 = $(`<div id="html_9d33bd39ec0bd0b76165ffdce8dd86b3" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.1077441254458,34.81510713131442&layer=c&cbll=32.1077441254458,34.81510713131442&cbp=12,240,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_f1b7ce358d36c4414afb082a95b2bab2.setContent(html_9d33bd39ec0bd0b76165ffdce8dd86b3);
+            
+        
+
+        marker_b3cd24029e851f7935020524bbc4c346.bindPopup(popup_f1b7ce358d36c4414afb082a95b2bab2)
+        ;
+
+        
+    
+    
+            var marker_5e166ce1f2aa4f367f72dad8edf89018 = L.marker(
+                [32.10754348, 34.81486253],
+                {
+}
+            ).addTo(map_30803b0508af1ea2b380dda1fb66adb6);
+        
+    
+            var icon_0551483631c96a8a95a4940eecd5d655 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_5e166ce1f2aa4f367f72dad8edf89018.setIcon(icon_0551483631c96a8a95a4940eecd5d655);
+        
+    
+        var popup_e2af368754ed9fb4a4c19da2c30b4012 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c034204267ea3d072158cc4e80e74203 = $(`<div id="html_c034204267ea3d072158cc4e80e74203" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600011)</div>`)[0];
+                popup_e2af368754ed9fb4a4c19da2c30b4012.setContent(html_c034204267ea3d072158cc4e80e74203);
+            
+        
+
+        marker_5e166ce1f2aa4f367f72dad8edf89018.bindPopup(popup_e2af368754ed9fb4a4c19da2c30b4012)
+        ;
+
+        
+    
+    
+            var marker_9b3d5f93423a9a07d001e19a46128fbe = L.marker(
+                [32.10744233, 34.81487228],
+                {
+}
+            ).addTo(map_30803b0508af1ea2b380dda1fb66adb6);
+        
+    
+            var icon_1d344aba2344af037182d2cd1c3c4bb0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_9b3d5f93423a9a07d001e19a46128fbe.setIcon(icon_1d344aba2344af037182d2cd1c3c4bb0);
+        
+    
+        var popup_eed938529b4814ab00f82f7d6d016071 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0f7d148534ebe97832ac800f77ca866e = $(`<div id="html_0f7d148534ebe97832ac800f77ca866e" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600009)</div>`)[0];
+                popup_eed938529b4814ab00f82f7d6d016071.setContent(html_0f7d148534ebe97832ac800f77ca866e);
+            
+        
+
+        marker_9b3d5f93423a9a07d001e19a46128fbe.bindPopup(popup_eed938529b4814ab00f82f7d6d016071)
+        ;
+
+        
+    
+    
+            var marker_0964acf9afee668d636419304633771a = L.marker(
+                [32.10742818, 34.8148163],
+                {
+}
+            ).addTo(map_30803b0508af1ea2b380dda1fb66adb6);
+        
+    
+            var icon_294f75574c38bfebd3da987770f9c4ed = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_0964acf9afee668d636419304633771a.setIcon(icon_294f75574c38bfebd3da987770f9c4ed);
+        
+    
+        var popup_2ae60391401b010ab49b12a12c7fe349 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5e1f10d36d538e104df30bc2f6bb2350 = $(`<div id="html_5e1f10d36d538e104df30bc2f6bb2350" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4600008)</div>`)[0];
+                popup_2ae60391401b010ab49b12a12c7fe349.setContent(html_5e1f10d36d538e104df30bc2f6bb2350);
+            
+        
+
+        marker_0964acf9afee668d636419304633771a.bindPopup(popup_2ae60391401b010ab49b12a12c7fe349)
+        ;
+
+        
+    
+    
+            var marker_355b1bc9012676825278fcc4502cfe71 = L.marker(
+                [32.10747631, 34.81486578],
+                {
+}
+            ).addTo(map_30803b0508af1ea2b380dda1fb66adb6);
+        
+    
+            var icon_abfb6fa5498783a697a8d2492bf5b98c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_355b1bc9012676825278fcc4502cfe71.setIcon(icon_abfb6fa5498783a697a8d2492bf5b98c);
+        
+    
+        var popup_d2c50abf445d71ee6f1386016a1ff138 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a1853a2e9a34a7b49855cc77920c7f21 = $(`<div id="html_a1853a2e9a34a7b49855cc77920c7f21" style="width: 100.0%; height: 100.0%;">Additional Match: Dalbergia sissoo (ID: 4600010)</div>`)[0];
+                popup_d2c50abf445d71ee6f1386016a1ff138.setContent(html_a1853a2e9a34a7b49855cc77920c7f21);
+            
+        
+
+        marker_355b1bc9012676825278fcc4502cfe71.bindPopup(popup_d2c50abf445d71ee6f1386016a1ff138)
+        ;
+
+        
+    
+    
+            var marker_76d1d2639ab4cd0c0fb981425aac7d22 = L.marker(
+                [32.1077441254458, 34.81510713131442],
+                {
+}
+            ).addTo(map_30803b0508af1ea2b380dda1fb66adb6);
+        
+    
+            var icon_cf54a764c541505fd3e17dc56af5a148 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_76d1d2639ab4cd0c0fb981425aac7d22.setIcon(icon_cf54a764c541505fd3e17dc56af5a148);
+        
+    
+        var popup_9461ec074b265b134ee5842ea0111aa7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_327bdff813cf61d1c5af6167035a4270 = $(`<div id="html_327bdff813cf61d1c5af6167035a4270" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.1077441254458,34.81510713131442&layer=c&cbll=32.1077441254458,34.81510713131442&cbp=12,240,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_9461ec074b265b134ee5842ea0111aa7.setContent(html_327bdff813cf61d1c5af6167035a4270);
+            
+        
+
+        marker_76d1d2639ab4cd0c0fb981425aac7d22.bindPopup(popup_9461ec074b265b134ee5842ea0111aa7)
+        ;
+
+        
+    
+    
+            var marker_e3bf75ac0db330145b70642173d3f7b4 = L.marker(
+                [32.10754348, 34.81486253],
+                {
+}
+            ).addTo(map_30803b0508af1ea2b380dda1fb66adb6);
+        
+    
+            var icon_1034c682e22c333eccf6581b30368620 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_e3bf75ac0db330145b70642173d3f7b4.setIcon(icon_1034c682e22c333eccf6581b30368620);
+        
+    
+        var popup_65302941e002bd0c66e591265746c4f1 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_cdac910e9c342429fd619a06cbb4d2a9 = $(`<div id="html_cdac910e9c342429fd619a06cbb4d2a9" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600011)</div>`)[0];
+                popup_65302941e002bd0c66e591265746c4f1.setContent(html_cdac910e9c342429fd619a06cbb4d2a9);
+            
+        
+
+        marker_e3bf75ac0db330145b70642173d3f7b4.bindPopup(popup_65302941e002bd0c66e591265746c4f1)
+        ;
+
+        
+    
+    
+            var marker_6b9c9aafc478f483d840b691d81629bc = L.marker(
+                [32.10744233, 34.81487228],
+                {
+}
+            ).addTo(map_30803b0508af1ea2b380dda1fb66adb6);
+        
+    
+            var icon_c3a89cc955a2a2b3ba78bc49adaf0eb4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_6b9c9aafc478f483d840b691d81629bc.setIcon(icon_c3a89cc955a2a2b3ba78bc49adaf0eb4);
+        
+    
+        var popup_c49192a8fe5db30a1f16a96e13c892f7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f96c68a7131b11471def7d3893f2b051 = $(`<div id="html_f96c68a7131b11471def7d3893f2b051" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600009)</div>`)[0];
+                popup_c49192a8fe5db30a1f16a96e13c892f7.setContent(html_f96c68a7131b11471def7d3893f2b051);
+            
+        
+
+        marker_6b9c9aafc478f483d840b691d81629bc.bindPopup(popup_c49192a8fe5db30a1f16a96e13c892f7)
+        ;
+
+        
+    
+    
+            var marker_d63a6c518508688ba808db1192f3fd0d = L.marker(
+                [32.10742818, 34.8148163],
+                {
+}
+            ).addTo(map_30803b0508af1ea2b380dda1fb66adb6);
+        
+    
+            var icon_c02972d6b10dd2268efc1b8db276d0d0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_d63a6c518508688ba808db1192f3fd0d.setIcon(icon_c02972d6b10dd2268efc1b8db276d0d0);
+        
+    
+        var popup_24d9326440f22bb2b8bb404ab5076053 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b3bdd9e42ab6f91bcc69c047465f1e75 = $(`<div id="html_b3bdd9e42ab6f91bcc69c047465f1e75" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4600008)</div>`)[0];
+                popup_24d9326440f22bb2b8bb404ab5076053.setContent(html_b3bdd9e42ab6f91bcc69c047465f1e75);
+            
+        
+
+        marker_d63a6c518508688ba808db1192f3fd0d.bindPopup(popup_24d9326440f22bb2b8bb404ab5076053)
+        ;
+
+        
+    
+    
+            var marker_6bd454e067cdd967ac58cd4a9fe0fe0f = L.marker(
+                [32.10747631, 34.81486578],
+                {
+}
+            ).addTo(map_30803b0508af1ea2b380dda1fb66adb6);
+        
+    
+            var icon_e20e27eaa5804b4917e33ac7ae087903 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_6bd454e067cdd967ac58cd4a9fe0fe0f.setIcon(icon_e20e27eaa5804b4917e33ac7ae087903);
+        
+    
+        var popup_c4dcb7e82a9251c56c9575190802af57 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1119cdf66d5b80a77d5ddc2485c933bf = $(`<div id="html_1119cdf66d5b80a77d5ddc2485c933bf" style="width: 100.0%; height: 100.0%;">Additional Match: Dalbergia sissoo (ID: 4600010)</div>`)[0];
+                popup_c4dcb7e82a9251c56c9575190802af57.setContent(html_1119cdf66d5b80a77d5ddc2485c933bf);
+            
+        
+
+        marker_6bd454e067cdd967ac58cd4a9fe0fe0f.bindPopup(popup_c4dcb7e82a9251c56c9575190802af57)
+        ;
+
+        
+    
+    
+            var marker_b5a3324b2d874cbc076760fd09a45996 = L.marker(
+                [32.1077441254458, 34.81510713131442],
+                {
+}
+            ).addTo(map_30803b0508af1ea2b380dda1fb66adb6);
+        
+    
+            var icon_fbeb9650130598981d75cafe18c5f564 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_b5a3324b2d874cbc076760fd09a45996.setIcon(icon_fbeb9650130598981d75cafe18c5f564);
+        
+    
+        var popup_fc29b9994b8e41889b96126471dbc2ce = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8497a352e5dc35ba5aded5cebbeab0d0 = $(`<div id="html_8497a352e5dc35ba5aded5cebbeab0d0" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.1077441254458,34.81510713131442&layer=c&cbll=32.1077441254458,34.81510713131442&cbp=12,240,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_fc29b9994b8e41889b96126471dbc2ce.setContent(html_8497a352e5dc35ba5aded5cebbeab0d0);
+            
+        
+
+        marker_b5a3324b2d874cbc076760fd09a45996.bindPopup(popup_fc29b9994b8e41889b96126471dbc2ce)
+        ;
+
+        
+    
+    
+            var marker_c321180154075310636999c99e9f2ba4 = L.marker(
+                [32.10754348, 34.81486253],
+                {
+}
+            ).addTo(map_30803b0508af1ea2b380dda1fb66adb6);
+        
+    
+            var icon_10e28d06774587436510c49fcb7df528 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_c321180154075310636999c99e9f2ba4.setIcon(icon_10e28d06774587436510c49fcb7df528);
+        
+    
+        var popup_d9fd1c2ce2dc975af107f9452e83dd95 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f1ce137e5b868a67678b6599802b1924 = $(`<div id="html_f1ce137e5b868a67678b6599802b1924" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600011)</div>`)[0];
+                popup_d9fd1c2ce2dc975af107f9452e83dd95.setContent(html_f1ce137e5b868a67678b6599802b1924);
+            
+        
+
+        marker_c321180154075310636999c99e9f2ba4.bindPopup(popup_d9fd1c2ce2dc975af107f9452e83dd95)
+        ;
+
+        
+    
+    
+            var marker_b30967875ba165b99334892a2d2294b8 = L.marker(
+                [32.10744233, 34.81487228],
+                {
+}
+            ).addTo(map_30803b0508af1ea2b380dda1fb66adb6);
+        
+    
+            var icon_c5e130b3c7f44292eeaef5a77802a9e5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_b30967875ba165b99334892a2d2294b8.setIcon(icon_c5e130b3c7f44292eeaef5a77802a9e5);
+        
+    
+        var popup_e80ff853fb7705418814410e19fbc84a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f8f3ef78714ece2f27add1dd824bee60 = $(`<div id="html_f8f3ef78714ece2f27add1dd824bee60" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600009)</div>`)[0];
+                popup_e80ff853fb7705418814410e19fbc84a.setContent(html_f8f3ef78714ece2f27add1dd824bee60);
+            
+        
+
+        marker_b30967875ba165b99334892a2d2294b8.bindPopup(popup_e80ff853fb7705418814410e19fbc84a)
+        ;
+
+        
+    
+    
+            var marker_3624f1a330aeeed00ab4613b1961bad0 = L.marker(
+                [32.10742818, 34.8148163],
+                {
+}
+            ).addTo(map_30803b0508af1ea2b380dda1fb66adb6);
+        
+    
+            var icon_9a6527383da35c22c5c57970301468b4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_3624f1a330aeeed00ab4613b1961bad0.setIcon(icon_9a6527383da35c22c5c57970301468b4);
+        
+    
+        var popup_4c8fe54f1f543faca582c8303d4ed80a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_15cc45b9db5253bb01a1e645831a1f8c = $(`<div id="html_15cc45b9db5253bb01a1e645831a1f8c" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4600008)</div>`)[0];
+                popup_4c8fe54f1f543faca582c8303d4ed80a.setContent(html_15cc45b9db5253bb01a1e645831a1f8c);
+            
+        
+
+        marker_3624f1a330aeeed00ab4613b1961bad0.bindPopup(popup_4c8fe54f1f543faca582c8303d4ed80a)
+        ;
+
+        
+    
+    
+            var marker_40b21d9e1b1d21f02c11b438efb76c7e = L.marker(
+                [32.10747631, 34.81486578],
+                {
+}
+            ).addTo(map_30803b0508af1ea2b380dda1fb66adb6);
+        
+    
+            var icon_63b2ff6f483df7dc2efe80d4be96111f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_40b21d9e1b1d21f02c11b438efb76c7e.setIcon(icon_63b2ff6f483df7dc2efe80d4be96111f);
+        
+    
+        var popup_ca5f7ffd22783e701d68c69fad7df0ef = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ee5167b4d5cd2c9240b49ce78a497049 = $(`<div id="html_ee5167b4d5cd2c9240b49ce78a497049" style="width: 100.0%; height: 100.0%;">Additional Match: Dalbergia sissoo (ID: 4600010)</div>`)[0];
+                popup_ca5f7ffd22783e701d68c69fad7df0ef.setContent(html_ee5167b4d5cd2c9240b49ce78a497049);
+            
+        
+
+        marker_40b21d9e1b1d21f02c11b438efb76c7e.bindPopup(popup_ca5f7ffd22783e701d68c69fad7df0ef)
+        ;
+
+        
+    
+    
+            var marker_4be4058c5bb77468dbca164d89e6cbe1 = L.marker(
+                [32.1077441254458, 34.81510713131442],
+                {
+}
+            ).addTo(map_30803b0508af1ea2b380dda1fb66adb6);
+        
+    
+            var icon_10f35dd1223a35e537aa9de90b517c58 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_4be4058c5bb77468dbca164d89e6cbe1.setIcon(icon_10f35dd1223a35e537aa9de90b517c58);
+        
+    
+        var popup_a0fa549c3697fe53786ddc0f094fbbee = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_116f57b8d9256f373fc9e6411e44c131 = $(`<div id="html_116f57b8d9256f373fc9e6411e44c131" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.1077441254458,34.81510713131442&layer=c&cbll=32.1077441254458,34.81510713131442&cbp=12,240,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_a0fa549c3697fe53786ddc0f094fbbee.setContent(html_116f57b8d9256f373fc9e6411e44c131);
+            
+        
+
+        marker_4be4058c5bb77468dbca164d89e6cbe1.bindPopup(popup_a0fa549c3697fe53786ddc0f094fbbee)
+        ;
+
+        
+    
+</script>
+</html>

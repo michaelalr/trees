@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_56ac1b1f032dde100233655b6144f5c5 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+<div style="
+position: fixed;
+bottom: 50px;
+left: 50px;
+width: 200px;
+background-color: white;
+z-index:9999;
+font-size:14px;
+padding: 10px;
+border: 2px solid grey;
+border-radius: 8px;
+box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+">
+<b>Legend</b><br>
+<i class="fa fa-map-marker fa-2x" style="color:orange"></i> Car location<br>
+<i class="fa fa-map-marker fa-2x" style="color:red"></i> Detection location<br>
+<i class="fa fa-map-marker fa-2x" style="color:green"></i> Seker best match<br>
+<i class="fa fa-map-marker fa-2x" style="color:blue"></i> Seker additional match<br>
+</div>
+    
+            <div class="folium-map" id="map_56ac1b1f032dde100233655b6144f5c5" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_56ac1b1f032dde100233655b6144f5c5 = L.map(
+                "map_56ac1b1f032dde100233655b6144f5c5",
+                {
+                    center: [32.10781560001686, 34.81560244745737],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 15,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_c27de566292d51d708c453ca1b205651 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_c27de566292d51d708c453ca1b205651.addTo(map_56ac1b1f032dde100233655b6144f5c5);
+        
+    
+            var marker_9b8f64279e30e089a56d89c883f35fbf = L.marker(
+                [32.10766765, 34.81532829],
+                {
+}
+            ).addTo(map_56ac1b1f032dde100233655b6144f5c5);
+        
+    
+            var icon_d422c84e7a939627de561b9aed1d50ae = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_9b8f64279e30e089a56d89c883f35fbf.setIcon(icon_d422c84e7a939627de561b9aed1d50ae);
+        
+    
+        var popup_2bd411ce84ee67f3ffc46c72b649373f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f4d5d4df59f16cdd657cea068b6c6084 = $(`<div id="html_f4d5d4df59f16cdd657cea068b6c6084" style="width: 100.0%; height: 100.0%;">Additional Match: Jacaranda mimosifolia (ID: 4600034)</div>`)[0];
+                popup_2bd411ce84ee67f3ffc46c72b649373f.setContent(html_f4d5d4df59f16cdd657cea068b6c6084);
+            
+        
+
+        marker_9b8f64279e30e089a56d89c883f35fbf.bindPopup(popup_2bd411ce84ee67f3ffc46c72b649373f)
+        ;
+
+        
+    
+    
+            var marker_fb6481cc4713bf59990bc4ba9cb2fdcd = L.marker(
+                [32.10763421, 34.81536382],
+                {
+}
+            ).addTo(map_56ac1b1f032dde100233655b6144f5c5);
+        
+    
+            var icon_98c07b502ce23d4fdc41fe7939f0f11c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_fb6481cc4713bf59990bc4ba9cb2fdcd.setIcon(icon_98c07b502ce23d4fdc41fe7939f0f11c);
+        
+    
+        var popup_6be15e129d555a0c12ff9fe4827d0484 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7c14f44110f06952c424bc0f315fa9ad = $(`<div id="html_7c14f44110f06952c424bc0f315fa9ad" style="width: 100.0%; height: 100.0%;">Additional Match: Jacaranda mimosifolia (ID: 4600035)</div>`)[0];
+                popup_6be15e129d555a0c12ff9fe4827d0484.setContent(html_7c14f44110f06952c424bc0f315fa9ad);
+            
+        
+
+        marker_fb6481cc4713bf59990bc4ba9cb2fdcd.bindPopup(popup_6be15e129d555a0c12ff9fe4827d0484)
+        ;
+
+        
+    
+    
+            var marker_4b161f33667dd6f0f0e72ba0d1938748 = L.marker(
+                [32.10767337, 34.81551929],
+                {
+}
+            ).addTo(map_56ac1b1f032dde100233655b6144f5c5);
+        
+    
+            var icon_0e8e25cb314ec459fd3278194591adf8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_4b161f33667dd6f0f0e72ba0d1938748.setIcon(icon_0e8e25cb314ec459fd3278194591adf8);
+        
+    
+        var popup_f1a8c4f34b6aa049d03dd440f2b4e408 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_368437cb6f7168fa9418c1eaf13853df = $(`<div id="html_368437cb6f7168fa9418c1eaf13853df" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4614351)</div>`)[0];
+                popup_f1a8c4f34b6aa049d03dd440f2b4e408.setContent(html_368437cb6f7168fa9418c1eaf13853df);
+            
+        
+
+        marker_4b161f33667dd6f0f0e72ba0d1938748.bindPopup(popup_f1a8c4f34b6aa049d03dd440f2b4e408)
+        ;
+
+        
+    
+    
+            var marker_df6bd2ea3aea6ff1039fef2a1ae40141 = L.marker(
+                [32.10761101595112, 34.81524807836753],
+                {
+}
+            ).addTo(map_56ac1b1f032dde100233655b6144f5c5);
+        
+    
+            var icon_baee5c35bfe87e0bcb3184b8615a789e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_df6bd2ea3aea6ff1039fef2a1ae40141.setIcon(icon_baee5c35bfe87e0bcb3184b8615a789e);
+        
+    
+        var popup_e2e1282b4ace229f1ac377f917e1415a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0ceb5a0ee6319d1b73c988e7bc575ac6 = $(`<div id="html_0ceb5a0ee6319d1b73c988e7bc575ac6" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10761101595112,34.81524807836753&layer=c&cbll=32.10761101595112,34.81524807836753&cbp=12,60,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_e2e1282b4ace229f1ac377f917e1415a.setContent(html_0ceb5a0ee6319d1b73c988e7bc575ac6);
+            
+        
+
+        marker_df6bd2ea3aea6ff1039fef2a1ae40141.bindPopup(popup_e2e1282b4ace229f1ac377f917e1415a)
+        ;
+
+        
+    
+    
+            var marker_240d63d82663bcbecffc393c84d214c7 = L.marker(
+                [32.10762863, 34.81545549],
+                {
+}
+            ).addTo(map_56ac1b1f032dde100233655b6144f5c5);
+        
+    
+            var icon_21d0748bc922a238c6ac0622d7bcd51d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_240d63d82663bcbecffc393c84d214c7.setIcon(icon_21d0748bc922a238c6ac0622d7bcd51d);
+        
+    
+        var popup_bc0c9235b2e14359f827da43081442d3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_95f75b2363af607f65810fc32ef7b599 = $(`<div id="html_95f75b2363af607f65810fc32ef7b599" style="width: 100.0%; height: 100.0%;">Best Match: Fraxinus syriaca (ID: 4600036.0)</div>`)[0];
+                popup_bc0c9235b2e14359f827da43081442d3.setContent(html_95f75b2363af607f65810fc32ef7b599);
+            
+        
+
+        marker_240d63d82663bcbecffc393c84d214c7.bindPopup(popup_bc0c9235b2e14359f827da43081442d3)
+        ;
+
+        
+    
+    
+            var poly_line_9b5ce6aefc09df57fd811c78f61ffcb5 = L.polyline(
+                [[32.10762863, 34.81545549], [32.1077240443365, 34.81548542500276]],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "black", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_56ac1b1f032dde100233655b6144f5c5);
+        
+    
+        var popup_745decf829abb3b2f67b610d7b39dd66 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8ed71da0bd754672010df7700332187d = $(`<div id="html_8ed71da0bd754672010df7700332187d" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 2, angle: 1.266784956038896</div>`)[0];
+                popup_745decf829abb3b2f67b610d7b39dd66.setContent(html_8ed71da0bd754672010df7700332187d);
+            
+        
+
+        poly_line_9b5ce6aefc09df57fd811c78f61ffcb5.bindPopup(popup_745decf829abb3b2f67b610d7b39dd66)
+        ;
+
+        
+    
+    
+            var marker_ac324ff68e3d726b83d4e6a67dfbdc6f = L.marker(
+                [32.10766765, 34.81532829],
+                {
+}
+            ).addTo(map_56ac1b1f032dde100233655b6144f5c5);
+        
+    
+            var icon_da6705293850f3c0bfadfbe2c955528a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_ac324ff68e3d726b83d4e6a67dfbdc6f.setIcon(icon_da6705293850f3c0bfadfbe2c955528a);
+        
+    
+        var popup_5a51f324b839e8b61c0009cc1f6fe2b2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_31764e765c979f211626756cc1e4b113 = $(`<div id="html_31764e765c979f211626756cc1e4b113" style="width: 100.0%; height: 100.0%;">Additional Match: Jacaranda mimosifolia (ID: 4600034)</div>`)[0];
+                popup_5a51f324b839e8b61c0009cc1f6fe2b2.setContent(html_31764e765c979f211626756cc1e4b113);
+            
+        
+
+        marker_ac324ff68e3d726b83d4e6a67dfbdc6f.bindPopup(popup_5a51f324b839e8b61c0009cc1f6fe2b2)
+        ;
+
+        
+    
+    
+            var marker_b12cf547978ee65472807960ae09600d = L.marker(
+                [32.10763421, 34.81536382],
+                {
+}
+            ).addTo(map_56ac1b1f032dde100233655b6144f5c5);
+        
+    
+            var icon_eac268108aeb811b5e579c96b33bf489 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_b12cf547978ee65472807960ae09600d.setIcon(icon_eac268108aeb811b5e579c96b33bf489);
+        
+    
+        var popup_4bfc74aa465ece11db1f4bfe23c67118 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_bd99250edd81584077c3250d17361f60 = $(`<div id="html_bd99250edd81584077c3250d17361f60" style="width: 100.0%; height: 100.0%;">Additional Match: Jacaranda mimosifolia (ID: 4600035)</div>`)[0];
+                popup_4bfc74aa465ece11db1f4bfe23c67118.setContent(html_bd99250edd81584077c3250d17361f60);
+            
+        
+
+        marker_b12cf547978ee65472807960ae09600d.bindPopup(popup_4bfc74aa465ece11db1f4bfe23c67118)
+        ;
+
+        
+    
+    
+            var marker_3f61261dd599de2dcaf1fd4c89dd6806 = L.marker(
+                [32.10767337, 34.81551929],
+                {
+}
+            ).addTo(map_56ac1b1f032dde100233655b6144f5c5);
+        
+    
+            var icon_263a1f8f0c7eb12caebb89c75b4ea0dc = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_3f61261dd599de2dcaf1fd4c89dd6806.setIcon(icon_263a1f8f0c7eb12caebb89c75b4ea0dc);
+        
+    
+        var popup_74fbd4333028eba57bee2d86712c2fc8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_fbfb5d77253035d25c258fba21ba6fb5 = $(`<div id="html_fbfb5d77253035d25c258fba21ba6fb5" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4614351)</div>`)[0];
+                popup_74fbd4333028eba57bee2d86712c2fc8.setContent(html_fbfb5d77253035d25c258fba21ba6fb5);
+            
+        
+
+        marker_3f61261dd599de2dcaf1fd4c89dd6806.bindPopup(popup_74fbd4333028eba57bee2d86712c2fc8)
+        ;
+
+        
+    
+    
+            var marker_a139d445c0c4affa41c9bbdedd3aa66b = L.marker(
+                [32.10761101595112, 34.81524807836753],
+                {
+}
+            ).addTo(map_56ac1b1f032dde100233655b6144f5c5);
+        
+    
+            var icon_08418ef98a9f5d30a7813b772d730222 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_a139d445c0c4affa41c9bbdedd3aa66b.setIcon(icon_08418ef98a9f5d30a7813b772d730222);
+        
+    
+        var popup_795d084f8ff32c140101927b59e3e79f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3ff581a409a10ad5ea6d2d925485091e = $(`<div id="html_3ff581a409a10ad5ea6d2d925485091e" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10761101595112,34.81524807836753&layer=c&cbll=32.10761101595112,34.81524807836753&cbp=12,60,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_795d084f8ff32c140101927b59e3e79f.setContent(html_3ff581a409a10ad5ea6d2d925485091e);
+            
+        
+
+        marker_a139d445c0c4affa41c9bbdedd3aa66b.bindPopup(popup_795d084f8ff32c140101927b59e3e79f)
+        ;
+
+        
+    
+    
+            var marker_3cc633c6d247eff6d4381b511ff8a497 = L.marker(
+                [32.10766765, 34.81532829],
+                {
+}
+            ).addTo(map_56ac1b1f032dde100233655b6144f5c5);
+        
+    
+            var icon_b23ce3db4e3fad2e3c5eb8ea52138aef = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_3cc633c6d247eff6d4381b511ff8a497.setIcon(icon_b23ce3db4e3fad2e3c5eb8ea52138aef);
+        
+    
+        var popup_00923e6bcdf0e2b1931be8d039adb4d3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1ae8f19a4d675b4f5d54fc04b1f63e1d = $(`<div id="html_1ae8f19a4d675b4f5d54fc04b1f63e1d" style="width: 100.0%; height: 100.0%;">Additional Match: Jacaranda mimosifolia (ID: 4600034)</div>`)[0];
+                popup_00923e6bcdf0e2b1931be8d039adb4d3.setContent(html_1ae8f19a4d675b4f5d54fc04b1f63e1d);
+            
+        
+
+        marker_3cc633c6d247eff6d4381b511ff8a497.bindPopup(popup_00923e6bcdf0e2b1931be8d039adb4d3)
+        ;
+
+        
+    
+    
+            var marker_4c0d623d041d076cdd68d6f34fd0f458 = L.marker(
+                [32.10763421, 34.81536382],
+                {
+}
+            ).addTo(map_56ac1b1f032dde100233655b6144f5c5);
+        
+    
+            var icon_9807021e31b2a41a1599b46e31ecd91a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_4c0d623d041d076cdd68d6f34fd0f458.setIcon(icon_9807021e31b2a41a1599b46e31ecd91a);
+        
+    
+        var popup_a52711228730d66f71c607d74c296246 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0e0f4062f4694f9a617c15bffee0b37e = $(`<div id="html_0e0f4062f4694f9a617c15bffee0b37e" style="width: 100.0%; height: 100.0%;">Additional Match: Jacaranda mimosifolia (ID: 4600035)</div>`)[0];
+                popup_a52711228730d66f71c607d74c296246.setContent(html_0e0f4062f4694f9a617c15bffee0b37e);
+            
+        
+
+        marker_4c0d623d041d076cdd68d6f34fd0f458.bindPopup(popup_a52711228730d66f71c607d74c296246)
+        ;
+
+        
+    
+    
+            var marker_a0c8b0b06b0ddcc8d1a5c6a2fb4b6a75 = L.marker(
+                [32.10767337, 34.81551929],
+                {
+}
+            ).addTo(map_56ac1b1f032dde100233655b6144f5c5);
+        
+    
+            var icon_6098505a4d31f93d7c65c3c906f7a802 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_a0c8b0b06b0ddcc8d1a5c6a2fb4b6a75.setIcon(icon_6098505a4d31f93d7c65c3c906f7a802);
+        
+    
+        var popup_66addffbb4ad1715988c835a6d95b066 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6b0ff21a4840b13c91a4780915be8787 = $(`<div id="html_6b0ff21a4840b13c91a4780915be8787" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4614351)</div>`)[0];
+                popup_66addffbb4ad1715988c835a6d95b066.setContent(html_6b0ff21a4840b13c91a4780915be8787);
+            
+        
+
+        marker_a0c8b0b06b0ddcc8d1a5c6a2fb4b6a75.bindPopup(popup_66addffbb4ad1715988c835a6d95b066)
+        ;
+
+        
+    
+    
+            var marker_6f00eedff3d455dc3a3598d6b56a3918 = L.marker(
+                [32.10761101595112, 34.81524807836753],
+                {
+}
+            ).addTo(map_56ac1b1f032dde100233655b6144f5c5);
+        
+    
+            var icon_45c9a696b5068467921e8a6f5e32c62f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_6f00eedff3d455dc3a3598d6b56a3918.setIcon(icon_45c9a696b5068467921e8a6f5e32c62f);
+        
+    
+        var popup_77160d460ed3dfc4e29712d788337b40 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9370d879ad538ff11b7b4e03c00d3ed3 = $(`<div id="html_9370d879ad538ff11b7b4e03c00d3ed3" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10761101595112,34.81524807836753&layer=c&cbll=32.10761101595112,34.81524807836753&cbp=12,60,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_77160d460ed3dfc4e29712d788337b40.setContent(html_9370d879ad538ff11b7b4e03c00d3ed3);
+            
+        
+
+        marker_6f00eedff3d455dc3a3598d6b56a3918.bindPopup(popup_77160d460ed3dfc4e29712d788337b40)
+        ;
+
+        
+    
+    
+            var marker_4e09755e54e5db57359fa0e72272bf98 = L.marker(
+                [32.10766765, 34.81532829],
+                {
+}
+            ).addTo(map_56ac1b1f032dde100233655b6144f5c5);
+        
+    
+            var icon_ab93b292a0fabd42a7e822e377285c45 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_4e09755e54e5db57359fa0e72272bf98.setIcon(icon_ab93b292a0fabd42a7e822e377285c45);
+        
+    
+        var popup_1e9bb5532b66203692ea0d8fde28759c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8ecfdbb292d088e722419cfba214fd6a = $(`<div id="html_8ecfdbb292d088e722419cfba214fd6a" style="width: 100.0%; height: 100.0%;">Additional Match: Jacaranda mimosifolia (ID: 4600034)</div>`)[0];
+                popup_1e9bb5532b66203692ea0d8fde28759c.setContent(html_8ecfdbb292d088e722419cfba214fd6a);
+            
+        
+
+        marker_4e09755e54e5db57359fa0e72272bf98.bindPopup(popup_1e9bb5532b66203692ea0d8fde28759c)
+        ;
+
+        
+    
+    
+            var marker_05db24d6bb9f047297a26fbbd47b3c29 = L.marker(
+                [32.10763421, 34.81536382],
+                {
+}
+            ).addTo(map_56ac1b1f032dde100233655b6144f5c5);
+        
+    
+            var icon_ee32eef208ab6ff53b38d3ea0e47ee01 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_05db24d6bb9f047297a26fbbd47b3c29.setIcon(icon_ee32eef208ab6ff53b38d3ea0e47ee01);
+        
+    
+        var popup_70b9d5f1b9471980b86433bb2ce6f0e7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_77c459b6ab869d9bb2718a856228bb81 = $(`<div id="html_77c459b6ab869d9bb2718a856228bb81" style="width: 100.0%; height: 100.0%;">Additional Match: Jacaranda mimosifolia (ID: 4600035)</div>`)[0];
+                popup_70b9d5f1b9471980b86433bb2ce6f0e7.setContent(html_77c459b6ab869d9bb2718a856228bb81);
+            
+        
+
+        marker_05db24d6bb9f047297a26fbbd47b3c29.bindPopup(popup_70b9d5f1b9471980b86433bb2ce6f0e7)
+        ;
+
+        
+    
+    
+            var marker_6f3c7c944da065f5cb2ef5f698130b2e = L.marker(
+                [32.10767337, 34.81551929],
+                {
+}
+            ).addTo(map_56ac1b1f032dde100233655b6144f5c5);
+        
+    
+            var icon_506427ef9e42bc690e634fb5cd880581 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_6f3c7c944da065f5cb2ef5f698130b2e.setIcon(icon_506427ef9e42bc690e634fb5cd880581);
+        
+    
+        var popup_15cba5c11bd91fff5f18980b6a728634 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8de8495d4497aa1fda83d2fb9a9f646d = $(`<div id="html_8de8495d4497aa1fda83d2fb9a9f646d" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4614351)</div>`)[0];
+                popup_15cba5c11bd91fff5f18980b6a728634.setContent(html_8de8495d4497aa1fda83d2fb9a9f646d);
+            
+        
+
+        marker_6f3c7c944da065f5cb2ef5f698130b2e.bindPopup(popup_15cba5c11bd91fff5f18980b6a728634)
+        ;
+
+        
+    
+    
+            var marker_eb3e25a9cd23da6fa67b44d79df2fd6f = L.marker(
+                [32.10761101595112, 34.81524807836753],
+                {
+}
+            ).addTo(map_56ac1b1f032dde100233655b6144f5c5);
+        
+    
+            var icon_e4297d19f94601e1e0ee5ad6c3806e0e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_eb3e25a9cd23da6fa67b44d79df2fd6f.setIcon(icon_e4297d19f94601e1e0ee5ad6c3806e0e);
+        
+    
+        var popup_5eb0b6fc013c48812726011ec960f623 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0edd0ae968868bfea76d6fbf6f37ae60 = $(`<div id="html_0edd0ae968868bfea76d6fbf6f37ae60" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10761101595112,34.81524807836753&layer=c&cbll=32.10761101595112,34.81524807836753&cbp=12,60,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_5eb0b6fc013c48812726011ec960f623.setContent(html_0edd0ae968868bfea76d6fbf6f37ae60);
+            
+        
+
+        marker_eb3e25a9cd23da6fa67b44d79df2fd6f.bindPopup(popup_5eb0b6fc013c48812726011ec960f623)
+        ;
+
+        
+    
+    
+            var marker_4e80f04037834b7ae8d28fa7140ecd1b = L.marker(
+                [32.10766765, 34.81532829],
+                {
+}
+            ).addTo(map_56ac1b1f032dde100233655b6144f5c5);
+        
+    
+            var icon_cc97fe85befea46ffb848c4e9991b611 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_4e80f04037834b7ae8d28fa7140ecd1b.setIcon(icon_cc97fe85befea46ffb848c4e9991b611);
+        
+    
+        var popup_51f3a47de9987391d745fa064304050e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d9faf5712715c12c79b68f1a6647a9c3 = $(`<div id="html_d9faf5712715c12c79b68f1a6647a9c3" style="width: 100.0%; height: 100.0%;">Additional Match: Jacaranda mimosifolia (ID: 4600034)</div>`)[0];
+                popup_51f3a47de9987391d745fa064304050e.setContent(html_d9faf5712715c12c79b68f1a6647a9c3);
+            
+        
+
+        marker_4e80f04037834b7ae8d28fa7140ecd1b.bindPopup(popup_51f3a47de9987391d745fa064304050e)
+        ;
+
+        
+    
+    
+            var marker_14fb197c59a2f64f6a6a165d35cffb84 = L.marker(
+                [32.10763421, 34.81536382],
+                {
+}
+            ).addTo(map_56ac1b1f032dde100233655b6144f5c5);
+        
+    
+            var icon_cd016e80ce855c0c0b75d0205f0269a4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_14fb197c59a2f64f6a6a165d35cffb84.setIcon(icon_cd016e80ce855c0c0b75d0205f0269a4);
+        
+    
+        var popup_ae061e401f38199f827f5cc79cf7f7bf = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_fde13d72ff27743ef5a74154376ae94f = $(`<div id="html_fde13d72ff27743ef5a74154376ae94f" style="width: 100.0%; height: 100.0%;">Additional Match: Jacaranda mimosifolia (ID: 4600035)</div>`)[0];
+                popup_ae061e401f38199f827f5cc79cf7f7bf.setContent(html_fde13d72ff27743ef5a74154376ae94f);
+            
+        
+
+        marker_14fb197c59a2f64f6a6a165d35cffb84.bindPopup(popup_ae061e401f38199f827f5cc79cf7f7bf)
+        ;
+
+        
+    
+    
+            var marker_b8f0023110b54dbf5b4f4449d07f7ce1 = L.marker(
+                [32.10767337, 34.81551929],
+                {
+}
+            ).addTo(map_56ac1b1f032dde100233655b6144f5c5);
+        
+    
+            var icon_070cdc1f378d4513d0c55a618b7804c6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_b8f0023110b54dbf5b4f4449d07f7ce1.setIcon(icon_070cdc1f378d4513d0c55a618b7804c6);
+        
+    
+        var popup_5baa375523285f4ea9995a781433010b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a9dbfa65ad56395a401d6da4fc38eec0 = $(`<div id="html_a9dbfa65ad56395a401d6da4fc38eec0" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4614351)</div>`)[0];
+                popup_5baa375523285f4ea9995a781433010b.setContent(html_a9dbfa65ad56395a401d6da4fc38eec0);
+            
+        
+
+        marker_b8f0023110b54dbf5b4f4449d07f7ce1.bindPopup(popup_5baa375523285f4ea9995a781433010b)
+        ;
+
+        
+    
+    
+            var marker_bd29b8a2724db21a1cba0b427155ff9d = L.marker(
+                [32.10761101595112, 34.81524807836753],
+                {
+}
+            ).addTo(map_56ac1b1f032dde100233655b6144f5c5);
+        
+    
+            var icon_d98f1a183c4f6519fd1cbf4dee56344d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_bd29b8a2724db21a1cba0b427155ff9d.setIcon(icon_d98f1a183c4f6519fd1cbf4dee56344d);
+        
+    
+        var popup_fe0bc3711a62f3f9aa485afb47b17457 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_77d1c215cfcc4a53b0fd2ca5ef1990d0 = $(`<div id="html_77d1c215cfcc4a53b0fd2ca5ef1990d0" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10761101595112,34.81524807836753&layer=c&cbll=32.10761101595112,34.81524807836753&cbp=12,60,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_fe0bc3711a62f3f9aa485afb47b17457.setContent(html_77d1c215cfcc4a53b0fd2ca5ef1990d0);
+            
+        
+
+        marker_bd29b8a2724db21a1cba0b427155ff9d.bindPopup(popup_fe0bc3711a62f3f9aa485afb47b17457)
+        ;
+
+        
+    
+</script>
+</html>

@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_8d0de0d57d67f332e87bcea5275a63ae {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+<div style="
+position: fixed;
+bottom: 50px;
+left: 50px;
+width: 200px;
+background-color: white;
+z-index:9999;
+font-size:14px;
+padding: 10px;
+border: 2px solid grey;
+border-radius: 8px;
+box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+">
+<b>Legend</b><br>
+<i class="fa fa-map-marker fa-2x" style="color:orange"></i> Car location<br>
+<i class="fa fa-map-marker fa-2x" style="color:red"></i> Detection location<br>
+<i class="fa fa-map-marker fa-2x" style="color:green"></i> Seker best match<br>
+<i class="fa fa-map-marker fa-2x" style="color:blue"></i> Seker additional match<br>
+</div>
+    
+            <div class="folium-map" id="map_8d0de0d57d67f332e87bcea5275a63ae" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_8d0de0d57d67f332e87bcea5275a63ae = L.map(
+                "map_8d0de0d57d67f332e87bcea5275a63ae",
+                {
+                    center: [32.10876944888007, 34.81534470334104],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 15,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_f985a4c18df176bce4f4f85a3dd7ab90 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_f985a4c18df176bce4f4f85a3dd7ab90.addTo(map_8d0de0d57d67f332e87bcea5275a63ae);
+        
+    
+            var marker_2d30f7348ffabddfd639b7029401cec1 = L.marker(
+                [32.10787752, 34.81525058],
+                {
+}
+            ).addTo(map_8d0de0d57d67f332e87bcea5275a63ae);
+        
+    
+            var icon_8ca475a7a704c82931db0489118c0df6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_2d30f7348ffabddfd639b7029401cec1.setIcon(icon_8ca475a7a704c82931db0489118c0df6);
+        
+    
+        var popup_4997cf77c277ad1c4905df39e116121a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6596c064ecd5b2c188bbb23c2257f91e = $(`<div id="html_6596c064ecd5b2c188bbb23c2257f91e" style="width: 100.0%; height: 100.0%;">Best Match: Tipuana tipu (ID: 4600024.0)</div>`)[0];
+                popup_4997cf77c277ad1c4905df39e116121a.setContent(html_6596c064ecd5b2c188bbb23c2257f91e);
+            
+        
+
+        marker_2d30f7348ffabddfd639b7029401cec1.bindPopup(popup_4997cf77c277ad1c4905df39e116121a)
+        ;
+
+        
+    
+    
+            var poly_line_b10109b1e2747352f132da04e4b7df9c = L.polyline(
+                [[32.10787752, 34.81525058], [32.10789154266983, 34.815349591942365]],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "black", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_8d0de0d57d67f332e87bcea5275a63ae);
+        
+    
+        var popup_f785d5f5fd951bd99e561d8ae2410a98 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3cc0c6ec6e1326d8b1028427e4f99c04 = $(`<div id="html_3cc0c6ec6e1326d8b1028427e4f99c04" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 1, angle: 0.1406903715648768</div>`)[0];
+                popup_f785d5f5fd951bd99e561d8ae2410a98.setContent(html_3cc0c6ec6e1326d8b1028427e4f99c04);
+            
+        
+
+        poly_line_b10109b1e2747352f132da04e4b7df9c.bindPopup(popup_f785d5f5fd951bd99e561d8ae2410a98)
+        ;
+
+        
+    
+    
+            var marker_18e113c23c62d0aa4f15ec944f6f093e = L.marker(
+                [32.10777567, 34.81520779],
+                {
+}
+            ).addTo(map_8d0de0d57d67f332e87bcea5275a63ae);
+        
+    
+            var icon_b715b24b16980ad80b5e775d423021a2 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_18e113c23c62d0aa4f15ec944f6f093e.setIcon(icon_b715b24b16980ad80b5e775d423021a2);
+        
+    
+        var popup_49898845ca328469253c67703e3768c0 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_292569d83baf5c18d8b366f184c918cf = $(`<div id="html_292569d83baf5c18d8b366f184c918cf" style="width: 100.0%; height: 100.0%;">Additional Match: Delonix regia (ID: 4600026)</div>`)[0];
+                popup_49898845ca328469253c67703e3768c0.setContent(html_292569d83baf5c18d8b366f184c918cf);
+            
+        
+
+        marker_18e113c23c62d0aa4f15ec944f6f093e.bindPopup(popup_49898845ca328469253c67703e3768c0)
+        ;
+
+        
+    
+    
+            var marker_573b571c72d18ee9a9d4b6570e3dc268 = L.marker(
+                [32.10784889, 34.81523608],
+                {
+}
+            ).addTo(map_8d0de0d57d67f332e87bcea5275a63ae);
+        
+    
+            var icon_aa5eb3e232a391dd318630c45078fb31 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_573b571c72d18ee9a9d4b6570e3dc268.setIcon(icon_aa5eb3e232a391dd318630c45078fb31);
+        
+    
+        var popup_383581da31835641804a64ac0226752a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5f90d562c16d41cd415d2ca3fe2ae0b8 = $(`<div id="html_5f90d562c16d41cd415d2ca3fe2ae0b8" style="width: 100.0%; height: 100.0%;">Additional Match: Tipuana tipu (ID: 4600025)</div>`)[0];
+                popup_383581da31835641804a64ac0226752a.setContent(html_5f90d562c16d41cd415d2ca3fe2ae0b8);
+            
+        
+
+        marker_573b571c72d18ee9a9d4b6570e3dc268.bindPopup(popup_383581da31835641804a64ac0226752a)
+        ;
+
+        
+    
+    
+            var marker_781fffe076b3c7aaaf786fe74be695d9 = L.marker(
+                [32.10756074109509, 34.81517351883758],
+                {
+}
+            ).addTo(map_8d0de0d57d67f332e87bcea5275a63ae);
+        
+    
+            var icon_1b83075795d438780ee770948119c4d7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_781fffe076b3c7aaaf786fe74be695d9.setIcon(icon_1b83075795d438780ee770948119c4d7);
+        
+    
+        var popup_60ab8f7dc97d9a3ab69a2f50117548e9 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_631e2fa403c5bec77e42d4a7a8446449 = $(`<div id="html_631e2fa403c5bec77e42d4a7a8446449" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10756074109509,34.81517351883758&layer=c&cbll=32.10756074109509,34.81517351883758&cbp=12,0,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_60ab8f7dc97d9a3ab69a2f50117548e9.setContent(html_631e2fa403c5bec77e42d4a7a8446449);
+            
+        
+
+        marker_781fffe076b3c7aaaf786fe74be695d9.bindPopup(popup_60ab8f7dc97d9a3ab69a2f50117548e9)
+        ;
+
+        
+    
+    
+            var marker_c9542a00a725d992e1cfd9dac2259dfa = L.marker(
+                [32.10777567, 34.81520779],
+                {
+}
+            ).addTo(map_8d0de0d57d67f332e87bcea5275a63ae);
+        
+    
+            var icon_a979de690279e9e3a6b0841afbfafa22 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_c9542a00a725d992e1cfd9dac2259dfa.setIcon(icon_a979de690279e9e3a6b0841afbfafa22);
+        
+    
+        var popup_dab02a2d28a64af4ebb139f9f7a3b78c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d21377af8fd0692e40cabf0c0a8eb800 = $(`<div id="html_d21377af8fd0692e40cabf0c0a8eb800" style="width: 100.0%; height: 100.0%;">Additional Match: Delonix regia (ID: 4600026)</div>`)[0];
+                popup_dab02a2d28a64af4ebb139f9f7a3b78c.setContent(html_d21377af8fd0692e40cabf0c0a8eb800);
+            
+        
+
+        marker_c9542a00a725d992e1cfd9dac2259dfa.bindPopup(popup_dab02a2d28a64af4ebb139f9f7a3b78c)
+        ;
+
+        
+    
+    
+            var marker_ebfd2a120b7e7a45c00386626e4c0397 = L.marker(
+                [32.10784889, 34.81523608],
+                {
+}
+            ).addTo(map_8d0de0d57d67f332e87bcea5275a63ae);
+        
+    
+            var icon_a2299907356e34a76138aba91dbdf674 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_ebfd2a120b7e7a45c00386626e4c0397.setIcon(icon_a2299907356e34a76138aba91dbdf674);
+        
+    
+        var popup_fefae0b5c1fb13fe2e0b3894142e0d57 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_73d5b733f52527ed1d139d08917803df = $(`<div id="html_73d5b733f52527ed1d139d08917803df" style="width: 100.0%; height: 100.0%;">Additional Match: Tipuana tipu (ID: 4600025)</div>`)[0];
+                popup_fefae0b5c1fb13fe2e0b3894142e0d57.setContent(html_73d5b733f52527ed1d139d08917803df);
+            
+        
+
+        marker_ebfd2a120b7e7a45c00386626e4c0397.bindPopup(popup_fefae0b5c1fb13fe2e0b3894142e0d57)
+        ;
+
+        
+    
+    
+            var marker_0fec0101f528dc52be35be03c53a5d84 = L.marker(
+                [32.10756074109509, 34.81517351883758],
+                {
+}
+            ).addTo(map_8d0de0d57d67f332e87bcea5275a63ae);
+        
+    
+            var icon_f0fb2976a27cb25eb50413fff4c4b659 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_0fec0101f528dc52be35be03c53a5d84.setIcon(icon_f0fb2976a27cb25eb50413fff4c4b659);
+        
+    
+        var popup_9328c032f86c221ab90fdf5acb4507c6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0d84485ec443de3d7ae915c2cb5a6b59 = $(`<div id="html_0d84485ec443de3d7ae915c2cb5a6b59" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10756074109509,34.81517351883758&layer=c&cbll=32.10756074109509,34.81517351883758&cbp=12,0,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_9328c032f86c221ab90fdf5acb4507c6.setContent(html_0d84485ec443de3d7ae915c2cb5a6b59);
+            
+        
+
+        marker_0fec0101f528dc52be35be03c53a5d84.bindPopup(popup_9328c032f86c221ab90fdf5acb4507c6)
+        ;
+
+        
+    
+    
+            var marker_a04da9647d27c4749ff5f00d69d24f52 = L.marker(
+                [32.10777567, 34.81520779],
+                {
+}
+            ).addTo(map_8d0de0d57d67f332e87bcea5275a63ae);
+        
+    
+            var icon_4d7c3250a854425d6053c0fc7e111ef9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_a04da9647d27c4749ff5f00d69d24f52.setIcon(icon_4d7c3250a854425d6053c0fc7e111ef9);
+        
+    
+        var popup_cc32c634f832b936c16addff3f19bef2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_bc56f208391f363c24dc2ed633666dd7 = $(`<div id="html_bc56f208391f363c24dc2ed633666dd7" style="width: 100.0%; height: 100.0%;">Additional Match: Delonix regia (ID: 4600026)</div>`)[0];
+                popup_cc32c634f832b936c16addff3f19bef2.setContent(html_bc56f208391f363c24dc2ed633666dd7);
+            
+        
+
+        marker_a04da9647d27c4749ff5f00d69d24f52.bindPopup(popup_cc32c634f832b936c16addff3f19bef2)
+        ;
+
+        
+    
+    
+            var marker_f2a0f0f4ed0d1802b1d96bdc8aa77fe7 = L.marker(
+                [32.10784889, 34.81523608],
+                {
+}
+            ).addTo(map_8d0de0d57d67f332e87bcea5275a63ae);
+        
+    
+            var icon_bc0bb5c188697371a047fb66fe1536fe = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_f2a0f0f4ed0d1802b1d96bdc8aa77fe7.setIcon(icon_bc0bb5c188697371a047fb66fe1536fe);
+        
+    
+        var popup_a4bb2a31f7c7d9c32002f1f636ca7bb1 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_fdee2919ef0128469d51028b2bb4d6e1 = $(`<div id="html_fdee2919ef0128469d51028b2bb4d6e1" style="width: 100.0%; height: 100.0%;">Additional Match: Tipuana tipu (ID: 4600025)</div>`)[0];
+                popup_a4bb2a31f7c7d9c32002f1f636ca7bb1.setContent(html_fdee2919ef0128469d51028b2bb4d6e1);
+            
+        
+
+        marker_f2a0f0f4ed0d1802b1d96bdc8aa77fe7.bindPopup(popup_a4bb2a31f7c7d9c32002f1f636ca7bb1)
+        ;
+
+        
+    
+    
+            var marker_f5bf80e818bd95e8508d40fe387c8baf = L.marker(
+                [32.10756074109509, 34.81517351883758],
+                {
+}
+            ).addTo(map_8d0de0d57d67f332e87bcea5275a63ae);
+        
+    
+            var icon_d2c399ac1fe1b7d4128e21977b4b59a5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_f5bf80e818bd95e8508d40fe387c8baf.setIcon(icon_d2c399ac1fe1b7d4128e21977b4b59a5);
+        
+    
+        var popup_2c8b991717d2a610fd8e73d73e2880bb = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c74e1a2407c47f99049be9a45b774525 = $(`<div id="html_c74e1a2407c47f99049be9a45b774525" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10756074109509,34.81517351883758&layer=c&cbll=32.10756074109509,34.81517351883758&cbp=12,0,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_2c8b991717d2a610fd8e73d73e2880bb.setContent(html_c74e1a2407c47f99049be9a45b774525);
+            
+        
+
+        marker_f5bf80e818bd95e8508d40fe387c8baf.bindPopup(popup_2c8b991717d2a610fd8e73d73e2880bb)
+        ;
+
+        
+    
+    
+            var marker_8ed53a0ba4d1f27c84bb948b129d8e83 = L.marker(
+                [32.10777567, 34.81520779],
+                {
+}
+            ).addTo(map_8d0de0d57d67f332e87bcea5275a63ae);
+        
+    
+            var icon_0c21e7550941a16b57a808c60b0cb0fa = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_8ed53a0ba4d1f27c84bb948b129d8e83.setIcon(icon_0c21e7550941a16b57a808c60b0cb0fa);
+        
+    
+        var popup_af332c8972106f823b6d1ed0d69bce27 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3edaa0dfd65fe8157aadd1f326afa914 = $(`<div id="html_3edaa0dfd65fe8157aadd1f326afa914" style="width: 100.0%; height: 100.0%;">Additional Match: Delonix regia (ID: 4600026)</div>`)[0];
+                popup_af332c8972106f823b6d1ed0d69bce27.setContent(html_3edaa0dfd65fe8157aadd1f326afa914);
+            
+        
+
+        marker_8ed53a0ba4d1f27c84bb948b129d8e83.bindPopup(popup_af332c8972106f823b6d1ed0d69bce27)
+        ;
+
+        
+    
+    
+            var marker_0b088b96048d7c84c3eae5e5d4d9d3f2 = L.marker(
+                [32.10784889, 34.81523608],
+                {
+}
+            ).addTo(map_8d0de0d57d67f332e87bcea5275a63ae);
+        
+    
+            var icon_cc41c665163eab1e71cf8729de9f67a2 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_0b088b96048d7c84c3eae5e5d4d9d3f2.setIcon(icon_cc41c665163eab1e71cf8729de9f67a2);
+        
+    
+        var popup_8cc4672a1ff14fbf332fc862057a5887 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_88a1b94fe81e144aa41beda2b342aeef = $(`<div id="html_88a1b94fe81e144aa41beda2b342aeef" style="width: 100.0%; height: 100.0%;">Additional Match: Tipuana tipu (ID: 4600025)</div>`)[0];
+                popup_8cc4672a1ff14fbf332fc862057a5887.setContent(html_88a1b94fe81e144aa41beda2b342aeef);
+            
+        
+
+        marker_0b088b96048d7c84c3eae5e5d4d9d3f2.bindPopup(popup_8cc4672a1ff14fbf332fc862057a5887)
+        ;
+
+        
+    
+    
+            var marker_42ead64ef954ec20461d1105793e915c = L.marker(
+                [32.10756074109509, 34.81517351883758],
+                {
+}
+            ).addTo(map_8d0de0d57d67f332e87bcea5275a63ae);
+        
+    
+            var icon_c5988138a7acd09eeb4e89663d18c8a3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_42ead64ef954ec20461d1105793e915c.setIcon(icon_c5988138a7acd09eeb4e89663d18c8a3);
+        
+    
+        var popup_a96a49a66fd0f777d35779e4cb924a0a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4421c3995e219e7477374c4752435ef5 = $(`<div id="html_4421c3995e219e7477374c4752435ef5" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10756074109509,34.81517351883758&layer=c&cbll=32.10756074109509,34.81517351883758&cbp=12,0,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_a96a49a66fd0f777d35779e4cb924a0a.setContent(html_4421c3995e219e7477374c4752435ef5);
+            
+        
+
+        marker_42ead64ef954ec20461d1105793e915c.bindPopup(popup_a96a49a66fd0f777d35779e4cb924a0a)
+        ;
+
+        
+    
+</script>
+</html>

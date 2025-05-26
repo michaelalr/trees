@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_f5e0657a6cf5f122e8aacd948f1c6d5c {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+<div style="
+position: fixed;
+bottom: 50px;
+left: 50px;
+width: 200px;
+background-color: white;
+z-index:9999;
+font-size:14px;
+padding: 10px;
+border: 2px solid grey;
+border-radius: 8px;
+box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+">
+<b>Legend</b><br>
+<i class="fa fa-map-marker fa-2x" style="color:orange"></i> Car location<br>
+<i class="fa fa-map-marker fa-2x" style="color:red"></i> Detection location<br>
+<i class="fa fa-map-marker fa-2x" style="color:green"></i> Seker best match<br>
+<i class="fa fa-map-marker fa-2x" style="color:blue"></i> Seker additional match<br>
+</div>
+    
+            <div class="folium-map" id="map_f5e0657a6cf5f122e8aacd948f1c6d5c" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_f5e0657a6cf5f122e8aacd948f1c6d5c = L.map(
+                "map_f5e0657a6cf5f122e8aacd948f1c6d5c",
+                {
+                    center: [32.10770713953873, 34.81486194285726],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 15,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_5dc3fb14056f66b555d01b947aebf757 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_5dc3fb14056f66b555d01b947aebf757.addTo(map_f5e0657a6cf5f122e8aacd948f1c6d5c);
+        
+    
+            var marker_6d989a42610611530e68878e5f5e2052 = L.marker(
+                [32.107495, 34.81505016],
+                {
+}
+            ).addTo(map_f5e0657a6cf5f122e8aacd948f1c6d5c);
+        
+    
+            var icon_5ff06f47f27b4facde9c913175106a5f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_6d989a42610611530e68878e5f5e2052.setIcon(icon_5ff06f47f27b4facde9c913175106a5f);
+        
+    
+        var popup_1886227b1beb0eb14e698f4b383d3c9e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4f104c42b6414b11dd1490fe8dee7d7d = $(`<div id="html_4f104c42b6414b11dd1490fe8dee7d7d" style="width: 100.0%; height: 100.0%;">Additional Match: Washingtonia robusta (ID: 4600071)</div>`)[0];
+                popup_1886227b1beb0eb14e698f4b383d3c9e.setContent(html_4f104c42b6414b11dd1490fe8dee7d7d);
+            
+        
+
+        marker_6d989a42610611530e68878e5f5e2052.bindPopup(popup_1886227b1beb0eb14e698f4b383d3c9e)
+        ;
+
+        
+    
+    
+            var marker_77c87a122e99a8917a4b6bf3e8f17b55 = L.marker(
+                [32.10744449, 34.81516194],
+                {
+}
+            ).addTo(map_f5e0657a6cf5f122e8aacd948f1c6d5c);
+        
+    
+            var icon_ee85bca30faafc9bace8ac1d4097b102 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_77c87a122e99a8917a4b6bf3e8f17b55.setIcon(icon_ee85bca30faafc9bace8ac1d4097b102);
+        
+    
+        var popup_7f6eb8d02323765c7bba07098e4e60b0 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a563a88d73d1ba34eb5f2b9a5088d3b7 = $(`<div id="html_a563a88d73d1ba34eb5f2b9a5088d3b7" style="width: 100.0%; height: 100.0%;">Additional Match: Washingtonia robusta (ID: 4600081)</div>`)[0];
+                popup_7f6eb8d02323765c7bba07098e4e60b0.setContent(html_a563a88d73d1ba34eb5f2b9a5088d3b7);
+            
+        
+
+        marker_77c87a122e99a8917a4b6bf3e8f17b55.bindPopup(popup_7f6eb8d02323765c7bba07098e4e60b0)
+        ;
+
+        
+    
+    
+            var marker_53dfedfb1f4cd2be673baa6dc6e3c194 = L.marker(
+                [32.10733069808172, 34.81539500678775],
+                {
+}
+            ).addTo(map_f5e0657a6cf5f122e8aacd948f1c6d5c);
+        
+    
+            var icon_5796278508189a460ddeb669646f9c9b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_53dfedfb1f4cd2be673baa6dc6e3c194.setIcon(icon_5796278508189a460ddeb669646f9c9b);
+        
+    
+        var popup_bb5643ff4b3ff6fb5b747e6d61f74e75 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6a019898cc1a7d92b2b8dd713dac2870 = $(`<div id="html_6a019898cc1a7d92b2b8dd713dac2870" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10733069808172,34.81539500678775&layer=c&cbll=32.10733069808172,34.81539500678775&cbp=12,300,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_bb5643ff4b3ff6fb5b747e6d61f74e75.setContent(html_6a019898cc1a7d92b2b8dd713dac2870);
+            
+        
+
+        marker_53dfedfb1f4cd2be673baa6dc6e3c194.bindPopup(popup_bb5643ff4b3ff6fb5b747e6d61f74e75)
+        ;
+
+        
+    
+    
+            var marker_e268f7a0b4024072e56acccae895c190 = L.marker(
+                [32.107495, 34.81505016],
+                {
+}
+            ).addTo(map_f5e0657a6cf5f122e8aacd948f1c6d5c);
+        
+    
+            var icon_b67c73ca2d97ab1ca7f7dfb350354cf6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_e268f7a0b4024072e56acccae895c190.setIcon(icon_b67c73ca2d97ab1ca7f7dfb350354cf6);
+        
+    
+        var popup_418d2b4113c0d4af205b6beca16d57bf = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_316498c22a0b02fdde160ee6de800ed3 = $(`<div id="html_316498c22a0b02fdde160ee6de800ed3" style="width: 100.0%; height: 100.0%;">Additional Match: Washingtonia robusta (ID: 4600071)</div>`)[0];
+                popup_418d2b4113c0d4af205b6beca16d57bf.setContent(html_316498c22a0b02fdde160ee6de800ed3);
+            
+        
+
+        marker_e268f7a0b4024072e56acccae895c190.bindPopup(popup_418d2b4113c0d4af205b6beca16d57bf)
+        ;
+
+        
+    
+    
+            var marker_9a97161461148890e88344061fa3cddb = L.marker(
+                [32.10744449, 34.81516194],
+                {
+}
+            ).addTo(map_f5e0657a6cf5f122e8aacd948f1c6d5c);
+        
+    
+            var icon_d3b0c92ae62692e791bdbbfd68243a2b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_9a97161461148890e88344061fa3cddb.setIcon(icon_d3b0c92ae62692e791bdbbfd68243a2b);
+        
+    
+        var popup_f5829cefa15a4fe94e611b1e64148da4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c8e4364b1bccd88021ea7cb872807374 = $(`<div id="html_c8e4364b1bccd88021ea7cb872807374" style="width: 100.0%; height: 100.0%;">Additional Match: Washingtonia robusta (ID: 4600081)</div>`)[0];
+                popup_f5829cefa15a4fe94e611b1e64148da4.setContent(html_c8e4364b1bccd88021ea7cb872807374);
+            
+        
+
+        marker_9a97161461148890e88344061fa3cddb.bindPopup(popup_f5829cefa15a4fe94e611b1e64148da4)
+        ;
+
+        
+    
+    
+            var marker_598f64a537afc1687ec6e77760263ac3 = L.marker(
+                [32.10733069808172, 34.81539500678775],
+                {
+}
+            ).addTo(map_f5e0657a6cf5f122e8aacd948f1c6d5c);
+        
+    
+            var icon_2660b77f56baf5ade559f96718e798b9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_598f64a537afc1687ec6e77760263ac3.setIcon(icon_2660b77f56baf5ade559f96718e798b9);
+        
+    
+        var popup_f066269282e4917726cdafa5c721ca06 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9a697ba80ae6ca454afca0d4dc8b8f1d = $(`<div id="html_9a697ba80ae6ca454afca0d4dc8b8f1d" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10733069808172,34.81539500678775&layer=c&cbll=32.10733069808172,34.81539500678775&cbp=12,300,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_f066269282e4917726cdafa5c721ca06.setContent(html_9a697ba80ae6ca454afca0d4dc8b8f1d);
+            
+        
+
+        marker_598f64a537afc1687ec6e77760263ac3.bindPopup(popup_f066269282e4917726cdafa5c721ca06)
+        ;
+
+        
+    
+    
+            var marker_8dd1283fee6128f4bd77758d3e043434 = L.marker(
+                [32.107495, 34.81505016],
+                {
+}
+            ).addTo(map_f5e0657a6cf5f122e8aacd948f1c6d5c);
+        
+    
+            var icon_f697e9e06605a38a4aca20a9b1ff7cf2 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_8dd1283fee6128f4bd77758d3e043434.setIcon(icon_f697e9e06605a38a4aca20a9b1ff7cf2);
+        
+    
+        var popup_4ffe9aaecb92cc593dc3d19298a794a1 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3db6794a8bd83deb9e03431c87e47783 = $(`<div id="html_3db6794a8bd83deb9e03431c87e47783" style="width: 100.0%; height: 100.0%;">Additional Match: Washingtonia robusta (ID: 4600071)</div>`)[0];
+                popup_4ffe9aaecb92cc593dc3d19298a794a1.setContent(html_3db6794a8bd83deb9e03431c87e47783);
+            
+        
+
+        marker_8dd1283fee6128f4bd77758d3e043434.bindPopup(popup_4ffe9aaecb92cc593dc3d19298a794a1)
+        ;
+
+        
+    
+    
+            var marker_78592d14d6c040b8bc759eba0c7d56f6 = L.marker(
+                [32.10744449, 34.81516194],
+                {
+}
+            ).addTo(map_f5e0657a6cf5f122e8aacd948f1c6d5c);
+        
+    
+            var icon_d47448a3c43d11c37309ff8f56c856f9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_78592d14d6c040b8bc759eba0c7d56f6.setIcon(icon_d47448a3c43d11c37309ff8f56c856f9);
+        
+    
+        var popup_a1d7a39cf9da021c665e34844aedc25c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_92d6665da1560a56e21406fb9ebc4770 = $(`<div id="html_92d6665da1560a56e21406fb9ebc4770" style="width: 100.0%; height: 100.0%;">Additional Match: Washingtonia robusta (ID: 4600081)</div>`)[0];
+                popup_a1d7a39cf9da021c665e34844aedc25c.setContent(html_92d6665da1560a56e21406fb9ebc4770);
+            
+        
+
+        marker_78592d14d6c040b8bc759eba0c7d56f6.bindPopup(popup_a1d7a39cf9da021c665e34844aedc25c)
+        ;
+
+        
+    
+    
+            var marker_508957b84fd273396fbd5c4b1ae134c1 = L.marker(
+                [32.10733069808172, 34.81539500678775],
+                {
+}
+            ).addTo(map_f5e0657a6cf5f122e8aacd948f1c6d5c);
+        
+    
+            var icon_9d6a4087f534445a8963b14061a11318 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_508957b84fd273396fbd5c4b1ae134c1.setIcon(icon_9d6a4087f534445a8963b14061a11318);
+        
+    
+        var popup_688185c2c0768df9f07291f1dc825d6f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_472d3ab47cba7826ea09d1f6e92240f1 = $(`<div id="html_472d3ab47cba7826ea09d1f6e92240f1" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10733069808172,34.81539500678775&layer=c&cbll=32.10733069808172,34.81539500678775&cbp=12,300,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_688185c2c0768df9f07291f1dc825d6f.setContent(html_472d3ab47cba7826ea09d1f6e92240f1);
+            
+        
+
+        marker_508957b84fd273396fbd5c4b1ae134c1.bindPopup(popup_688185c2c0768df9f07291f1dc825d6f)
+        ;
+
+        
+    
+    
+            var marker_c9159d24fb068ebacc1162d042daf8ac = L.marker(
+                [32.107495, 34.81505016],
+                {
+}
+            ).addTo(map_f5e0657a6cf5f122e8aacd948f1c6d5c);
+        
+    
+            var icon_9922b02aa91cc7e73d1129e4f2b073fd = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_c9159d24fb068ebacc1162d042daf8ac.setIcon(icon_9922b02aa91cc7e73d1129e4f2b073fd);
+        
+    
+        var popup_c17ee6d2162ac55447cba2363e913fa3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f115e40d904e88d6fff965223b199b7b = $(`<div id="html_f115e40d904e88d6fff965223b199b7b" style="width: 100.0%; height: 100.0%;">Additional Match: Washingtonia robusta (ID: 4600071)</div>`)[0];
+                popup_c17ee6d2162ac55447cba2363e913fa3.setContent(html_f115e40d904e88d6fff965223b199b7b);
+            
+        
+
+        marker_c9159d24fb068ebacc1162d042daf8ac.bindPopup(popup_c17ee6d2162ac55447cba2363e913fa3)
+        ;
+
+        
+    
+    
+            var marker_03297208c838b12b6984140b401cc109 = L.marker(
+                [32.10744449, 34.81516194],
+                {
+}
+            ).addTo(map_f5e0657a6cf5f122e8aacd948f1c6d5c);
+        
+    
+            var icon_e6f4cde42c923414b2fa8ffc52e7d378 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_03297208c838b12b6984140b401cc109.setIcon(icon_e6f4cde42c923414b2fa8ffc52e7d378);
+        
+    
+        var popup_26ed3a64fccb0cd6d0561983632427b3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d923953675b441333fd5cdca6fa9696c = $(`<div id="html_d923953675b441333fd5cdca6fa9696c" style="width: 100.0%; height: 100.0%;">Additional Match: Washingtonia robusta (ID: 4600081)</div>`)[0];
+                popup_26ed3a64fccb0cd6d0561983632427b3.setContent(html_d923953675b441333fd5cdca6fa9696c);
+            
+        
+
+        marker_03297208c838b12b6984140b401cc109.bindPopup(popup_26ed3a64fccb0cd6d0561983632427b3)
+        ;
+
+        
+    
+    
+            var marker_b737da1d30249f7b2ac117ada151ddfe = L.marker(
+                [32.10733069808172, 34.81539500678775],
+                {
+}
+            ).addTo(map_f5e0657a6cf5f122e8aacd948f1c6d5c);
+        
+    
+            var icon_21fe90ff586afca4ebfa2b6a7c6c72b1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_b737da1d30249f7b2ac117ada151ddfe.setIcon(icon_21fe90ff586afca4ebfa2b6a7c6c72b1);
+        
+    
+        var popup_a4d47672fed90176a971eca4fed912a2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_87a6466b7c09e7a4b818633c4e98dd72 = $(`<div id="html_87a6466b7c09e7a4b818633c4e98dd72" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10733069808172,34.81539500678775&layer=c&cbll=32.10733069808172,34.81539500678775&cbp=12,300,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_a4d47672fed90176a971eca4fed912a2.setContent(html_87a6466b7c09e7a4b818633c4e98dd72);
+            
+        
+
+        marker_b737da1d30249f7b2ac117ada151ddfe.bindPopup(popup_a4d47672fed90176a971eca4fed912a2)
+        ;
+
+        
+    
+    
+            var marker_882af8c25603fe57a593c7e4245f723a = L.marker(
+                [32.107495, 34.81505016],
+                {
+}
+            ).addTo(map_f5e0657a6cf5f122e8aacd948f1c6d5c);
+        
+    
+            var icon_a109b942b065d5d19a4a7a87f50dd356 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_882af8c25603fe57a593c7e4245f723a.setIcon(icon_a109b942b065d5d19a4a7a87f50dd356);
+        
+    
+        var popup_0034e7891fb440a4d65986b88bf414a4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_72c07f9760e118a7d88d20315c97ff58 = $(`<div id="html_72c07f9760e118a7d88d20315c97ff58" style="width: 100.0%; height: 100.0%;">Additional Match: Washingtonia robusta (ID: 4600071)</div>`)[0];
+                popup_0034e7891fb440a4d65986b88bf414a4.setContent(html_72c07f9760e118a7d88d20315c97ff58);
+            
+        
+
+        marker_882af8c25603fe57a593c7e4245f723a.bindPopup(popup_0034e7891fb440a4d65986b88bf414a4)
+        ;
+
+        
+    
+    
+            var marker_59fcb2332e54667e0586b2359a2bb172 = L.marker(
+                [32.10744449, 34.81516194],
+                {
+}
+            ).addTo(map_f5e0657a6cf5f122e8aacd948f1c6d5c);
+        
+    
+            var icon_4f3666a0b158bcfcab9a4bf834a32209 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_59fcb2332e54667e0586b2359a2bb172.setIcon(icon_4f3666a0b158bcfcab9a4bf834a32209);
+        
+    
+        var popup_afa529406ef5961e76cdd4c7f303dd4b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d52c4dbe724d80e77b2615c2614c9023 = $(`<div id="html_d52c4dbe724d80e77b2615c2614c9023" style="width: 100.0%; height: 100.0%;">Additional Match: Washingtonia robusta (ID: 4600081)</div>`)[0];
+                popup_afa529406ef5961e76cdd4c7f303dd4b.setContent(html_d52c4dbe724d80e77b2615c2614c9023);
+            
+        
+
+        marker_59fcb2332e54667e0586b2359a2bb172.bindPopup(popup_afa529406ef5961e76cdd4c7f303dd4b)
+        ;
+
+        
+    
+    
+            var marker_b680325482ef449ebffb95e35c832a37 = L.marker(
+                [32.10733069808172, 34.81539500678775],
+                {
+}
+            ).addTo(map_f5e0657a6cf5f122e8aacd948f1c6d5c);
+        
+    
+            var icon_ede2a50aa4db1df6a8c01a441f75790c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_b680325482ef449ebffb95e35c832a37.setIcon(icon_ede2a50aa4db1df6a8c01a441f75790c);
+        
+    
+        var popup_3d849ab0b26c9ab6c344ffd545212d93 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_68b0ab9b2fca2b38ea40e4603645a506 = $(`<div id="html_68b0ab9b2fca2b38ea40e4603645a506" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10733069808172,34.81539500678775&layer=c&cbll=32.10733069808172,34.81539500678775&cbp=12,300,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_3d849ab0b26c9ab6c344ffd545212d93.setContent(html_68b0ab9b2fca2b38ea40e4603645a506);
+            
+        
+
+        marker_b680325482ef449ebffb95e35c832a37.bindPopup(popup_3d849ab0b26c9ab6c344ffd545212d93)
+        ;
+
+        
+    
+    
+            var marker_1841fa131932073392e01594003c6dbb = L.marker(
+                [32.107495, 34.81505016],
+                {
+}
+            ).addTo(map_f5e0657a6cf5f122e8aacd948f1c6d5c);
+        
+    
+            var icon_80118f3d83a133799583c5bec7a1bc90 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_1841fa131932073392e01594003c6dbb.setIcon(icon_80118f3d83a133799583c5bec7a1bc90);
+        
+    
+        var popup_f1bae34adfe7f2eeba9b908b4d7d394f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_896cd6ff3293c4276521e465e6c3e1fc = $(`<div id="html_896cd6ff3293c4276521e465e6c3e1fc" style="width: 100.0%; height: 100.0%;">Additional Match: Washingtonia robusta (ID: 4600071)</div>`)[0];
+                popup_f1bae34adfe7f2eeba9b908b4d7d394f.setContent(html_896cd6ff3293c4276521e465e6c3e1fc);
+            
+        
+
+        marker_1841fa131932073392e01594003c6dbb.bindPopup(popup_f1bae34adfe7f2eeba9b908b4d7d394f)
+        ;
+
+        
+    
+    
+            var marker_0962bf6a4b85e7e557f8217286a5effa = L.marker(
+                [32.10744449, 34.81516194],
+                {
+}
+            ).addTo(map_f5e0657a6cf5f122e8aacd948f1c6d5c);
+        
+    
+            var icon_e04b343e4d8d0ea0bdf3843be1a70b51 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_0962bf6a4b85e7e557f8217286a5effa.setIcon(icon_e04b343e4d8d0ea0bdf3843be1a70b51);
+        
+    
+        var popup_c41cb1916b1982229649ad906e6856c0 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0ac84a32643eda32069c71ff506843b9 = $(`<div id="html_0ac84a32643eda32069c71ff506843b9" style="width: 100.0%; height: 100.0%;">Additional Match: Washingtonia robusta (ID: 4600081)</div>`)[0];
+                popup_c41cb1916b1982229649ad906e6856c0.setContent(html_0ac84a32643eda32069c71ff506843b9);
+            
+        
+
+        marker_0962bf6a4b85e7e557f8217286a5effa.bindPopup(popup_c41cb1916b1982229649ad906e6856c0)
+        ;
+
+        
+    
+    
+            var marker_55577d8de6f5a72605abb082b4b45c8d = L.marker(
+                [32.10733069808172, 34.81539500678775],
+                {
+}
+            ).addTo(map_f5e0657a6cf5f122e8aacd948f1c6d5c);
+        
+    
+            var icon_813c5354e5a76438d48d679942dffd6a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_55577d8de6f5a72605abb082b4b45c8d.setIcon(icon_813c5354e5a76438d48d679942dffd6a);
+        
+    
+        var popup_1c68c10365f4515dc2cc8c6ab91d0d8b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_34f739b6a84f7a1125ea36e7a3ea7362 = $(`<div id="html_34f739b6a84f7a1125ea36e7a3ea7362" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10733069808172,34.81539500678775&layer=c&cbll=32.10733069808172,34.81539500678775&cbp=12,300,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_1c68c10365f4515dc2cc8c6ab91d0d8b.setContent(html_34f739b6a84f7a1125ea36e7a3ea7362);
+            
+        
+
+        marker_55577d8de6f5a72605abb082b4b45c8d.bindPopup(popup_1c68c10365f4515dc2cc8c6ab91d0d8b)
+        ;
+
+        
+    
+    
+            var marker_dd513344a0ec8900621b88b0cc889bc4 = L.marker(
+                [32.107495, 34.81505016],
+                {
+}
+            ).addTo(map_f5e0657a6cf5f122e8aacd948f1c6d5c);
+        
+    
+            var icon_eddaa6e7d479b7dbabfc31dd4f26d209 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_dd513344a0ec8900621b88b0cc889bc4.setIcon(icon_eddaa6e7d479b7dbabfc31dd4f26d209);
+        
+    
+        var popup_c562d8dff5cb22c73854ee7cf69a8cae = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4349f01dcc5bc3991540aabae93da268 = $(`<div id="html_4349f01dcc5bc3991540aabae93da268" style="width: 100.0%; height: 100.0%;">Additional Match: Washingtonia robusta (ID: 4600071)</div>`)[0];
+                popup_c562d8dff5cb22c73854ee7cf69a8cae.setContent(html_4349f01dcc5bc3991540aabae93da268);
+            
+        
+
+        marker_dd513344a0ec8900621b88b0cc889bc4.bindPopup(popup_c562d8dff5cb22c73854ee7cf69a8cae)
+        ;
+
+        
+    
+    
+            var marker_1be5198c5411dc4bde71684b9d9d99db = L.marker(
+                [32.10744449, 34.81516194],
+                {
+}
+            ).addTo(map_f5e0657a6cf5f122e8aacd948f1c6d5c);
+        
+    
+            var icon_7230331256c552266477cf8ba3c30734 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_1be5198c5411dc4bde71684b9d9d99db.setIcon(icon_7230331256c552266477cf8ba3c30734);
+        
+    
+        var popup_cd288f3f536c1d933d25c356eb178d88 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_65faa883317ec581a561bde80c0fc597 = $(`<div id="html_65faa883317ec581a561bde80c0fc597" style="width: 100.0%; height: 100.0%;">Additional Match: Washingtonia robusta (ID: 4600081)</div>`)[0];
+                popup_cd288f3f536c1d933d25c356eb178d88.setContent(html_65faa883317ec581a561bde80c0fc597);
+            
+        
+
+        marker_1be5198c5411dc4bde71684b9d9d99db.bindPopup(popup_cd288f3f536c1d933d25c356eb178d88)
+        ;
+
+        
+    
+    
+            var marker_ba03cde254d889ec3cb657a738a603a1 = L.marker(
+                [32.10733069808172, 34.81539500678775],
+                {
+}
+            ).addTo(map_f5e0657a6cf5f122e8aacd948f1c6d5c);
+        
+    
+            var icon_785d26025a3557004a042cf1ba827eed = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_ba03cde254d889ec3cb657a738a603a1.setIcon(icon_785d26025a3557004a042cf1ba827eed);
+        
+    
+        var popup_87b53ef4aeea95be5bc4403490da9957 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2101af45a0fbbecd8f44bbdb078d6096 = $(`<div id="html_2101af45a0fbbecd8f44bbdb078d6096" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10733069808172,34.81539500678775&layer=c&cbll=32.10733069808172,34.81539500678775&cbp=12,300,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_87b53ef4aeea95be5bc4403490da9957.setContent(html_2101af45a0fbbecd8f44bbdb078d6096);
+            
+        
+
+        marker_ba03cde254d889ec3cb657a738a603a1.bindPopup(popup_87b53ef4aeea95be5bc4403490da9957)
+        ;
+
+        
+    
+    
+            var marker_3cc8bd939974b3c1a7acc85ee4db4f9f = L.marker(
+                [32.107495, 34.81505016],
+                {
+}
+            ).addTo(map_f5e0657a6cf5f122e8aacd948f1c6d5c);
+        
+    
+            var icon_fbf7c8d126b6437f198dbd5933093b8d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_3cc8bd939974b3c1a7acc85ee4db4f9f.setIcon(icon_fbf7c8d126b6437f198dbd5933093b8d);
+        
+    
+        var popup_9124cd26f7aad949f65f4faa010775dd = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_bb7d502721730ca0e26ea3d3bca4127e = $(`<div id="html_bb7d502721730ca0e26ea3d3bca4127e" style="width: 100.0%; height: 100.0%;">Additional Match: Washingtonia robusta (ID: 4600071)</div>`)[0];
+                popup_9124cd26f7aad949f65f4faa010775dd.setContent(html_bb7d502721730ca0e26ea3d3bca4127e);
+            
+        
+
+        marker_3cc8bd939974b3c1a7acc85ee4db4f9f.bindPopup(popup_9124cd26f7aad949f65f4faa010775dd)
+        ;
+
+        
+    
+    
+            var marker_550f854cb8990ea1c255a88b465d89ca = L.marker(
+                [32.10744449, 34.81516194],
+                {
+}
+            ).addTo(map_f5e0657a6cf5f122e8aacd948f1c6d5c);
+        
+    
+            var icon_673b298a226e1269a1a926779b8783fe = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_550f854cb8990ea1c255a88b465d89ca.setIcon(icon_673b298a226e1269a1a926779b8783fe);
+        
+    
+        var popup_378fcd3f60f607d1a48d5c91282fdc05 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9224654bf2d3820ee94218a4a298bff6 = $(`<div id="html_9224654bf2d3820ee94218a4a298bff6" style="width: 100.0%; height: 100.0%;">Additional Match: Washingtonia robusta (ID: 4600081)</div>`)[0];
+                popup_378fcd3f60f607d1a48d5c91282fdc05.setContent(html_9224654bf2d3820ee94218a4a298bff6);
+            
+        
+
+        marker_550f854cb8990ea1c255a88b465d89ca.bindPopup(popup_378fcd3f60f607d1a48d5c91282fdc05)
+        ;
+
+        
+    
+    
+            var marker_bddb953c925ffcec08c4d305ae6a7317 = L.marker(
+                [32.10733069808172, 34.81539500678775],
+                {
+}
+            ).addTo(map_f5e0657a6cf5f122e8aacd948f1c6d5c);
+        
+    
+            var icon_09f7bb04ea7f0142546015335d201e29 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_bddb953c925ffcec08c4d305ae6a7317.setIcon(icon_09f7bb04ea7f0142546015335d201e29);
+        
+    
+        var popup_87d0c75f2e9e4d9f1d95e05490b86ebf = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e3bb7c68064e8dabb6833bc24a906768 = $(`<div id="html_e3bb7c68064e8dabb6833bc24a906768" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10733069808172,34.81539500678775&layer=c&cbll=32.10733069808172,34.81539500678775&cbp=12,300,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_87d0c75f2e9e4d9f1d95e05490b86ebf.setContent(html_e3bb7c68064e8dabb6833bc24a906768);
+            
+        
+
+        marker_bddb953c925ffcec08c4d305ae6a7317.bindPopup(popup_87d0c75f2e9e4d9f1d95e05490b86ebf)
+        ;
+
+        
+    
+    
+            var marker_925127210404ae0ce22fa6c5466cd7ab = L.marker(
+                [32.107495, 34.81505016],
+                {
+}
+            ).addTo(map_f5e0657a6cf5f122e8aacd948f1c6d5c);
+        
+    
+            var icon_6f36e253008359b08ff1bc602bdde5c5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_925127210404ae0ce22fa6c5466cd7ab.setIcon(icon_6f36e253008359b08ff1bc602bdde5c5);
+        
+    
+        var popup_4d5fa7e8161c6823d19037ed69507b8d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2d733128933d0df5e5501df11299f0d6 = $(`<div id="html_2d733128933d0df5e5501df11299f0d6" style="width: 100.0%; height: 100.0%;">Additional Match: Washingtonia robusta (ID: 4600071)</div>`)[0];
+                popup_4d5fa7e8161c6823d19037ed69507b8d.setContent(html_2d733128933d0df5e5501df11299f0d6);
+            
+        
+
+        marker_925127210404ae0ce22fa6c5466cd7ab.bindPopup(popup_4d5fa7e8161c6823d19037ed69507b8d)
+        ;
+
+        
+    
+    
+            var marker_3ee4c5be3421aea56b7ced21c74b7af2 = L.marker(
+                [32.10744449, 34.81516194],
+                {
+}
+            ).addTo(map_f5e0657a6cf5f122e8aacd948f1c6d5c);
+        
+    
+            var icon_c50b94039261b5eabf7c9651a50a04df = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_3ee4c5be3421aea56b7ced21c74b7af2.setIcon(icon_c50b94039261b5eabf7c9651a50a04df);
+        
+    
+        var popup_47c372018a2ce72af1b79fbb9cece005 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_492fbdad21e73252925947601315cebf = $(`<div id="html_492fbdad21e73252925947601315cebf" style="width: 100.0%; height: 100.0%;">Additional Match: Washingtonia robusta (ID: 4600081)</div>`)[0];
+                popup_47c372018a2ce72af1b79fbb9cece005.setContent(html_492fbdad21e73252925947601315cebf);
+            
+        
+
+        marker_3ee4c5be3421aea56b7ced21c74b7af2.bindPopup(popup_47c372018a2ce72af1b79fbb9cece005)
+        ;
+
+        
+    
+    
+            var marker_d4c88b717145dc847a2a9b7fea840741 = L.marker(
+                [32.10733069808172, 34.81539500678775],
+                {
+}
+            ).addTo(map_f5e0657a6cf5f122e8aacd948f1c6d5c);
+        
+    
+            var icon_e4c78e54b5a11cff661af01bb13bf852 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_d4c88b717145dc847a2a9b7fea840741.setIcon(icon_e4c78e54b5a11cff661af01bb13bf852);
+        
+    
+        var popup_3d8b10afae67721af3d349fc8a33582b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d2a103dfd19c0bdead066c44c535108c = $(`<div id="html_d2a103dfd19c0bdead066c44c535108c" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10733069808172,34.81539500678775&layer=c&cbll=32.10733069808172,34.81539500678775&cbp=12,300,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_3d8b10afae67721af3d349fc8a33582b.setContent(html_d2a103dfd19c0bdead066c44c535108c);
+            
+        
+
+        marker_d4c88b717145dc847a2a9b7fea840741.bindPopup(popup_3d8b10afae67721af3d349fc8a33582b)
+        ;
+
+        
+    
+    
+            var marker_546fea044ba45d6fdf6367602c912f12 = L.marker(
+                [32.10755393, 34.81521032],
+                {
+}
+            ).addTo(map_f5e0657a6cf5f122e8aacd948f1c6d5c);
+        
+    
+            var icon_0fc31a7341d232dd28f890530e979e4c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_546fea044ba45d6fdf6367602c912f12.setIcon(icon_0fc31a7341d232dd28f890530e979e4c);
+        
+    
+        var popup_54566448aa188473b48f42f44fc7875e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_80bb42c874b21f57b8d0a7564b7b3f95 = $(`<div id="html_80bb42c874b21f57b8d0a7564b7b3f95" style="width: 100.0%; height: 100.0%;">Best Match: Phoenix dactylifera (ID: 4600044.0)</div>`)[0];
+                popup_54566448aa188473b48f42f44fc7875e.setContent(html_80bb42c874b21f57b8d0a7564b7b3f95);
+            
+        
+
+        marker_546fea044ba45d6fdf6367602c912f12.bindPopup(popup_54566448aa188473b48f42f44fc7875e)
+        ;
+
+        
+    
+    
+            var poly_line_d90d328c971595c09122a88200521e82 = L.polyline(
+                [[32.10755393, 34.81521032], [32.10747968252252, 34.81527730740246]],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "black", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_f5e0657a6cf5f122e8aacd948f1c6d5c);
+        
+    
+        var popup_0ee3cbe91bba6fb8b946512dff8af0a8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_725d6f3ec1b2b8422a19159ee20d6cec = $(`<div id="html_725d6f3ec1b2b8422a19159ee20d6cec" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 10, angle: 5.446428085263721</div>`)[0];
+                popup_0ee3cbe91bba6fb8b946512dff8af0a8.setContent(html_725d6f3ec1b2b8422a19159ee20d6cec);
+            
+        
+
+        poly_line_d90d328c971595c09122a88200521e82.bindPopup(popup_0ee3cbe91bba6fb8b946512dff8af0a8)
+        ;
+
+        
+    
+    
+            var marker_88824cc6c70f66069cd32139920c4490 = L.marker(
+                [32.107495, 34.81505016],
+                {
+}
+            ).addTo(map_f5e0657a6cf5f122e8aacd948f1c6d5c);
+        
+    
+            var icon_4b822f7cb853042bde6f0b47032a30aa = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_88824cc6c70f66069cd32139920c4490.setIcon(icon_4b822f7cb853042bde6f0b47032a30aa);
+        
+    
+        var popup_4021dc4694342775fcd50ac5e467fc9b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_054fdb024b737f24ad1a41a2c2ecd797 = $(`<div id="html_054fdb024b737f24ad1a41a2c2ecd797" style="width: 100.0%; height: 100.0%;">Additional Match: Washingtonia robusta (ID: 4600071)</div>`)[0];
+                popup_4021dc4694342775fcd50ac5e467fc9b.setContent(html_054fdb024b737f24ad1a41a2c2ecd797);
+            
+        
+
+        marker_88824cc6c70f66069cd32139920c4490.bindPopup(popup_4021dc4694342775fcd50ac5e467fc9b)
+        ;
+
+        
+    
+    
+            var marker_56b9968294d2b3f1195dcd1e4e7a00e0 = L.marker(
+                [32.10744449, 34.81516194],
+                {
+}
+            ).addTo(map_f5e0657a6cf5f122e8aacd948f1c6d5c);
+        
+    
+            var icon_adf64f7530cb7ff684dc3d25698f96af = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_56b9968294d2b3f1195dcd1e4e7a00e0.setIcon(icon_adf64f7530cb7ff684dc3d25698f96af);
+        
+    
+        var popup_af6c17f54c911ff1819e05f5760bb8de = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f6eb05642182b52206d768ac06208937 = $(`<div id="html_f6eb05642182b52206d768ac06208937" style="width: 100.0%; height: 100.0%;">Additional Match: Washingtonia robusta (ID: 4600081)</div>`)[0];
+                popup_af6c17f54c911ff1819e05f5760bb8de.setContent(html_f6eb05642182b52206d768ac06208937);
+            
+        
+
+        marker_56b9968294d2b3f1195dcd1e4e7a00e0.bindPopup(popup_af6c17f54c911ff1819e05f5760bb8de)
+        ;
+
+        
+    
+    
+            var marker_d94f1082b3d2452032c7a56b9756b5ab = L.marker(
+                [32.10733069808172, 34.81539500678775],
+                {
+}
+            ).addTo(map_f5e0657a6cf5f122e8aacd948f1c6d5c);
+        
+    
+            var icon_ecafd49bccf3ced02277e5032155cf3a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_d94f1082b3d2452032c7a56b9756b5ab.setIcon(icon_ecafd49bccf3ced02277e5032155cf3a);
+        
+    
+        var popup_251f8a84bef617ae14c56942d247ae5d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8909dbb8afee23ed062b86d1dbfdcfa5 = $(`<div id="html_8909dbb8afee23ed062b86d1dbfdcfa5" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10733069808172,34.81539500678775&layer=c&cbll=32.10733069808172,34.81539500678775&cbp=12,300,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_251f8a84bef617ae14c56942d247ae5d.setContent(html_8909dbb8afee23ed062b86d1dbfdcfa5);
+            
+        
+
+        marker_d94f1082b3d2452032c7a56b9756b5ab.bindPopup(popup_251f8a84bef617ae14c56942d247ae5d)
+        ;
+
+        
+    
+</script>
+</html>

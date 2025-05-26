@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_4a9f3e2c6d319be9b6fce94cba536ed2 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+<div style="
+position: fixed;
+bottom: 50px;
+left: 50px;
+width: 200px;
+background-color: white;
+z-index:9999;
+font-size:14px;
+padding: 10px;
+border: 2px solid grey;
+border-radius: 8px;
+box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+">
+<b>Legend</b><br>
+<i class="fa fa-map-marker fa-2x" style="color:orange"></i> Car location<br>
+<i class="fa fa-map-marker fa-2x" style="color:red"></i> Detection location<br>
+<i class="fa fa-map-marker fa-2x" style="color:green"></i> Seker best match<br>
+<i class="fa fa-map-marker fa-2x" style="color:blue"></i> Seker additional match<br>
+</div>
+    
+            <div class="folium-map" id="map_4a9f3e2c6d319be9b6fce94cba536ed2" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_4a9f3e2c6d319be9b6fce94cba536ed2 = L.map(
+                "map_4a9f3e2c6d319be9b6fce94cba536ed2",
+                {
+                    center: [32.10887065242507, 34.81521210659373],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 15,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_0290a49ed4fe33cdbdc8a9bd7a754de1 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_0290a49ed4fe33cdbdc8a9bd7a754de1.addTo(map_4a9f3e2c6d319be9b6fce94cba536ed2);
+        
+    
+            var marker_9781ac03f6248b2a91ae959446b70a7b = L.marker(
+                [32.10766765, 34.81532829],
+                {
+}
+            ).addTo(map_4a9f3e2c6d319be9b6fce94cba536ed2);
+        
+    
+            var icon_4af1eac7130c58cf3bbee09d618c764a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_9781ac03f6248b2a91ae959446b70a7b.setIcon(icon_4af1eac7130c58cf3bbee09d618c764a);
+        
+    
+        var popup_1f35f99dae9a31bf3f74702db4f0a4d6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c780c3b0ba1b39415965ff64d9ab502a = $(`<div id="html_c780c3b0ba1b39415965ff64d9ab502a" style="width: 100.0%; height: 100.0%;">Additional Match: Jacaranda mimosifolia (ID: 4600034)</div>`)[0];
+                popup_1f35f99dae9a31bf3f74702db4f0a4d6.setContent(html_c780c3b0ba1b39415965ff64d9ab502a);
+            
+        
+
+        marker_9781ac03f6248b2a91ae959446b70a7b.bindPopup(popup_1f35f99dae9a31bf3f74702db4f0a4d6)
+        ;
+
+        
+    
+    
+            var marker_427f197d732405afe13d9647312a90d7 = L.marker(
+                [32.10754123092221, 34.81532255358455],
+                {
+}
+            ).addTo(map_4a9f3e2c6d319be9b6fce94cba536ed2);
+        
+    
+            var icon_569467b430754b11db4631e11e52782e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_427f197d732405afe13d9647312a90d7.setIcon(icon_569467b430754b11db4631e11e52782e);
+        
+    
+        var popup_f7ea94f69a14f7bacc86cd0a2e663345 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_bfa4846e8dcd70ca40dd38de6ef5b159 = $(`<div id="html_bfa4846e8dcd70ca40dd38de6ef5b159" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10754123092221,34.81532255358455&layer=c&cbll=32.10754123092221,34.81532255358455&cbp=12,0,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_f7ea94f69a14f7bacc86cd0a2e663345.setContent(html_bfa4846e8dcd70ca40dd38de6ef5b159);
+            
+        
+
+        marker_427f197d732405afe13d9647312a90d7.bindPopup(popup_f7ea94f69a14f7bacc86cd0a2e663345)
+        ;
+
+        
+    
+    
+            var marker_2e5b5de39b6114d6e0828cf895fce821 = L.marker(
+                [32.10766765, 34.81532829],
+                {
+}
+            ).addTo(map_4a9f3e2c6d319be9b6fce94cba536ed2);
+        
+    
+            var icon_bbb5419cf015dc6d9beb74575f4bb261 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_2e5b5de39b6114d6e0828cf895fce821.setIcon(icon_bbb5419cf015dc6d9beb74575f4bb261);
+        
+    
+        var popup_b57cf28b2116f2665f09cac6e8947473 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a07ca4c5c931988eb5e27a30ecaf3e7f = $(`<div id="html_a07ca4c5c931988eb5e27a30ecaf3e7f" style="width: 100.0%; height: 100.0%;">Additional Match: Jacaranda mimosifolia (ID: 4600034)</div>`)[0];
+                popup_b57cf28b2116f2665f09cac6e8947473.setContent(html_a07ca4c5c931988eb5e27a30ecaf3e7f);
+            
+        
+
+        marker_2e5b5de39b6114d6e0828cf895fce821.bindPopup(popup_b57cf28b2116f2665f09cac6e8947473)
+        ;
+
+        
+    
+    
+            var marker_2cf7eb93de0f34aa9f77ccb0459eef7e = L.marker(
+                [32.10754123092221, 34.81532255358455],
+                {
+}
+            ).addTo(map_4a9f3e2c6d319be9b6fce94cba536ed2);
+        
+    
+            var icon_edc6cc124370d9af00917ed4d5a38d82 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_2cf7eb93de0f34aa9f77ccb0459eef7e.setIcon(icon_edc6cc124370d9af00917ed4d5a38d82);
+        
+    
+        var popup_f4da963046e936085a98fe9c1eff5e59 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2e40f732aad3e251c68ae4cff9e8fc3b = $(`<div id="html_2e40f732aad3e251c68ae4cff9e8fc3b" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10754123092221,34.81532255358455&layer=c&cbll=32.10754123092221,34.81532255358455&cbp=12,0,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_f4da963046e936085a98fe9c1eff5e59.setContent(html_2e40f732aad3e251c68ae4cff9e8fc3b);
+            
+        
+
+        marker_2cf7eb93de0f34aa9f77ccb0459eef7e.bindPopup(popup_f4da963046e936085a98fe9c1eff5e59)
+        ;
+
+        
+    
+    
+            var marker_d99d4ad6256aa0d96c3ebe5f76691a72 = L.marker(
+                [32.10766765, 34.81532829],
+                {
+}
+            ).addTo(map_4a9f3e2c6d319be9b6fce94cba536ed2);
+        
+    
+            var icon_7638e95a8d605d9c7b676cf99f5e02c0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_d99d4ad6256aa0d96c3ebe5f76691a72.setIcon(icon_7638e95a8d605d9c7b676cf99f5e02c0);
+        
+    
+        var popup_c718326e04e8f9d1d6cf891f822a101d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_987dff5a4a813ab35e35100be026fd4e = $(`<div id="html_987dff5a4a813ab35e35100be026fd4e" style="width: 100.0%; height: 100.0%;">Additional Match: Jacaranda mimosifolia (ID: 4600034)</div>`)[0];
+                popup_c718326e04e8f9d1d6cf891f822a101d.setContent(html_987dff5a4a813ab35e35100be026fd4e);
+            
+        
+
+        marker_d99d4ad6256aa0d96c3ebe5f76691a72.bindPopup(popup_c718326e04e8f9d1d6cf891f822a101d)
+        ;
+
+        
+    
+    
+            var marker_bd9c73b30af509df38ba6c72164dac0b = L.marker(
+                [32.10754123092221, 34.81532255358455],
+                {
+}
+            ).addTo(map_4a9f3e2c6d319be9b6fce94cba536ed2);
+        
+    
+            var icon_b2e5dacec67e4c17751d1d2c4d032828 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_bd9c73b30af509df38ba6c72164dac0b.setIcon(icon_b2e5dacec67e4c17751d1d2c4d032828);
+        
+    
+        var popup_fa231498a4c3dcdb0b6b33d29bbd0537 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a50539a2a9eb3aea186195841d49a2b1 = $(`<div id="html_a50539a2a9eb3aea186195841d49a2b1" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10754123092221,34.81532255358455&layer=c&cbll=32.10754123092221,34.81532255358455&cbp=12,0,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_fa231498a4c3dcdb0b6b33d29bbd0537.setContent(html_a50539a2a9eb3aea186195841d49a2b1);
+            
+        
+
+        marker_bd9c73b30af509df38ba6c72164dac0b.bindPopup(popup_fa231498a4c3dcdb0b6b33d29bbd0537)
+        ;
+
+        
+    
+    
+            var marker_dd5a8b478ee124e9dca9e15d9e8ffa1a = L.marker(
+                [32.10766765, 34.81532829],
+                {
+}
+            ).addTo(map_4a9f3e2c6d319be9b6fce94cba536ed2);
+        
+    
+            var icon_c65d8afb3500908ace1c0a0c30fdd371 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_dd5a8b478ee124e9dca9e15d9e8ffa1a.setIcon(icon_c65d8afb3500908ace1c0a0c30fdd371);
+        
+    
+        var popup_fbb3ee382aaa53801806179658812fc5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4bc2ed3232a0f78bdc02638e1ff4e6f8 = $(`<div id="html_4bc2ed3232a0f78bdc02638e1ff4e6f8" style="width: 100.0%; height: 100.0%;">Additional Match: Jacaranda mimosifolia (ID: 4600034)</div>`)[0];
+                popup_fbb3ee382aaa53801806179658812fc5.setContent(html_4bc2ed3232a0f78bdc02638e1ff4e6f8);
+            
+        
+
+        marker_dd5a8b478ee124e9dca9e15d9e8ffa1a.bindPopup(popup_fbb3ee382aaa53801806179658812fc5)
+        ;
+
+        
+    
+    
+            var marker_bac1120d0421d06d5fa204c77929a887 = L.marker(
+                [32.10754123092221, 34.81532255358455],
+                {
+}
+            ).addTo(map_4a9f3e2c6d319be9b6fce94cba536ed2);
+        
+    
+            var icon_451a39d325bb933b1171706796d9c477 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_bac1120d0421d06d5fa204c77929a887.setIcon(icon_451a39d325bb933b1171706796d9c477);
+        
+    
+        var popup_730646474a54d09a5c0ffca07f64dea7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b9b78336c38fa4d0badbd4aaf66cd1c1 = $(`<div id="html_b9b78336c38fa4d0badbd4aaf66cd1c1" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10754123092221,34.81532255358455&layer=c&cbll=32.10754123092221,34.81532255358455&cbp=12,0,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_730646474a54d09a5c0ffca07f64dea7.setContent(html_b9b78336c38fa4d0badbd4aaf66cd1c1);
+            
+        
+
+        marker_bac1120d0421d06d5fa204c77929a887.bindPopup(popup_730646474a54d09a5c0ffca07f64dea7)
+        ;
+
+        
+    
+    
+            var marker_5cf2d60bfa2fb0d8e001714b0ea97287 = L.marker(
+                [32.10766765, 34.81532829],
+                {
+}
+            ).addTo(map_4a9f3e2c6d319be9b6fce94cba536ed2);
+        
+    
+            var icon_75aa809c893d84f6572b8371a986ef10 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_5cf2d60bfa2fb0d8e001714b0ea97287.setIcon(icon_75aa809c893d84f6572b8371a986ef10);
+        
+    
+        var popup_ae45356368d8a15e4252944633e1acff = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_08f8114be6ca59fea6c803214e267daf = $(`<div id="html_08f8114be6ca59fea6c803214e267daf" style="width: 100.0%; height: 100.0%;">Additional Match: Jacaranda mimosifolia (ID: 4600034)</div>`)[0];
+                popup_ae45356368d8a15e4252944633e1acff.setContent(html_08f8114be6ca59fea6c803214e267daf);
+            
+        
+
+        marker_5cf2d60bfa2fb0d8e001714b0ea97287.bindPopup(popup_ae45356368d8a15e4252944633e1acff)
+        ;
+
+        
+    
+    
+            var marker_de62095681a204dacf0d8191f000113d = L.marker(
+                [32.10754123092221, 34.81532255358455],
+                {
+}
+            ).addTo(map_4a9f3e2c6d319be9b6fce94cba536ed2);
+        
+    
+            var icon_b31dfabc717577878e220579743420cf = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_de62095681a204dacf0d8191f000113d.setIcon(icon_b31dfabc717577878e220579743420cf);
+        
+    
+        var popup_b97e26080f1b665a0c3bab0799f5d25c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e21760b21511991ff159fbbccec1c336 = $(`<div id="html_e21760b21511991ff159fbbccec1c336" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10754123092221,34.81532255358455&layer=c&cbll=32.10754123092221,34.81532255358455&cbp=12,0,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_b97e26080f1b665a0c3bab0799f5d25c.setContent(html_e21760b21511991ff159fbbccec1c336);
+            
+        
+
+        marker_de62095681a204dacf0d8191f000113d.bindPopup(popup_b97e26080f1b665a0c3bab0799f5d25c)
+        ;
+
+        
+    
+    
+            var marker_d582f8a98361b458a858d13c410b765a = L.marker(
+                [32.10766765, 34.81532829],
+                {
+}
+            ).addTo(map_4a9f3e2c6d319be9b6fce94cba536ed2);
+        
+    
+            var icon_9e327378d7d28a2c1db1a185ea59a965 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_d582f8a98361b458a858d13c410b765a.setIcon(icon_9e327378d7d28a2c1db1a185ea59a965);
+        
+    
+        var popup_3b4f5a9aa897432c005390eed918bac1 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e36ff5369a1be5f391c056033c357054 = $(`<div id="html_e36ff5369a1be5f391c056033c357054" style="width: 100.0%; height: 100.0%;">Additional Match: Jacaranda mimosifolia (ID: 4600034)</div>`)[0];
+                popup_3b4f5a9aa897432c005390eed918bac1.setContent(html_e36ff5369a1be5f391c056033c357054);
+            
+        
+
+        marker_d582f8a98361b458a858d13c410b765a.bindPopup(popup_3b4f5a9aa897432c005390eed918bac1)
+        ;
+
+        
+    
+    
+            var marker_cd052b367ab2f543bda9351e9ad3a37a = L.marker(
+                [32.10754123092221, 34.81532255358455],
+                {
+}
+            ).addTo(map_4a9f3e2c6d319be9b6fce94cba536ed2);
+        
+    
+            var icon_6bba729f1a22aaaf8f131e2feef3f32b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_cd052b367ab2f543bda9351e9ad3a37a.setIcon(icon_6bba729f1a22aaaf8f131e2feef3f32b);
+        
+    
+        var popup_0c943c06526cced03379c296f1ac750a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ca2d3702816e79082e98592caea96da6 = $(`<div id="html_ca2d3702816e79082e98592caea96da6" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10754123092221,34.81532255358455&layer=c&cbll=32.10754123092221,34.81532255358455&cbp=12,0,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_0c943c06526cced03379c296f1ac750a.setContent(html_ca2d3702816e79082e98592caea96da6);
+            
+        
+
+        marker_cd052b367ab2f543bda9351e9ad3a37a.bindPopup(popup_0c943c06526cced03379c296f1ac750a)
+        ;
+
+        
+    
+    
+            var marker_f1bfb399912e9255a9e7f0fab800a26d = L.marker(
+                [32.10766765, 34.81532829],
+                {
+}
+            ).addTo(map_4a9f3e2c6d319be9b6fce94cba536ed2);
+        
+    
+            var icon_e19d04631e6a990142203a23d37fb0fe = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_f1bfb399912e9255a9e7f0fab800a26d.setIcon(icon_e19d04631e6a990142203a23d37fb0fe);
+        
+    
+        var popup_a779a9b73e6d7202a749c632e4a76c64 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1157d5515a98fe943d9e27be9a24c90e = $(`<div id="html_1157d5515a98fe943d9e27be9a24c90e" style="width: 100.0%; height: 100.0%;">Additional Match: Jacaranda mimosifolia (ID: 4600034)</div>`)[0];
+                popup_a779a9b73e6d7202a749c632e4a76c64.setContent(html_1157d5515a98fe943d9e27be9a24c90e);
+            
+        
+
+        marker_f1bfb399912e9255a9e7f0fab800a26d.bindPopup(popup_a779a9b73e6d7202a749c632e4a76c64)
+        ;
+
+        
+    
+    
+            var marker_cad84cd0cd828a80653456f4680fe777 = L.marker(
+                [32.10754123092221, 34.81532255358455],
+                {
+}
+            ).addTo(map_4a9f3e2c6d319be9b6fce94cba536ed2);
+        
+    
+            var icon_dee3d51b4808bb2d68b7efb795fa34dd = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_cad84cd0cd828a80653456f4680fe777.setIcon(icon_dee3d51b4808bb2d68b7efb795fa34dd);
+        
+    
+        var popup_a3c5531c54424ab5992bcf038a79f32e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_895f1d3e3130655c2d73a3b701ae3999 = $(`<div id="html_895f1d3e3130655c2d73a3b701ae3999" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10754123092221,34.81532255358455&layer=c&cbll=32.10754123092221,34.81532255358455&cbp=12,0,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_a3c5531c54424ab5992bcf038a79f32e.setContent(html_895f1d3e3130655c2d73a3b701ae3999);
+            
+        
+
+        marker_cad84cd0cd828a80653456f4680fe777.bindPopup(popup_a3c5531c54424ab5992bcf038a79f32e)
+        ;
+
+        
+    
+    
+            var marker_7fba438756bc7d7bb2a7618f0293dd8b = L.marker(
+                [32.10766765, 34.81532829],
+                {
+}
+            ).addTo(map_4a9f3e2c6d319be9b6fce94cba536ed2);
+        
+    
+            var icon_e63594d98ad46344ea7bc810774b5359 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_7fba438756bc7d7bb2a7618f0293dd8b.setIcon(icon_e63594d98ad46344ea7bc810774b5359);
+        
+    
+        var popup_919655336f314244a7b3e8ba443d3647 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_19c51a69e5fe7d69b39ae8d7308e0aca = $(`<div id="html_19c51a69e5fe7d69b39ae8d7308e0aca" style="width: 100.0%; height: 100.0%;">Additional Match: Jacaranda mimosifolia (ID: 4600034)</div>`)[0];
+                popup_919655336f314244a7b3e8ba443d3647.setContent(html_19c51a69e5fe7d69b39ae8d7308e0aca);
+            
+        
+
+        marker_7fba438756bc7d7bb2a7618f0293dd8b.bindPopup(popup_919655336f314244a7b3e8ba443d3647)
+        ;
+
+        
+    
+    
+            var marker_5c8e575586089112357ed40a13dac6c0 = L.marker(
+                [32.10754123092221, 34.81532255358455],
+                {
+}
+            ).addTo(map_4a9f3e2c6d319be9b6fce94cba536ed2);
+        
+    
+            var icon_fee5814695c444387b05e2c4784fb5ef = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_5c8e575586089112357ed40a13dac6c0.setIcon(icon_fee5814695c444387b05e2c4784fb5ef);
+        
+    
+        var popup_e586523ba6d47c68d3f5b67651e78e66 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_cdc982f978e28de33f45901ac4de6074 = $(`<div id="html_cdc982f978e28de33f45901ac4de6074" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10754123092221,34.81532255358455&layer=c&cbll=32.10754123092221,34.81532255358455&cbp=12,0,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_e586523ba6d47c68d3f5b67651e78e66.setContent(html_cdc982f978e28de33f45901ac4de6074);
+            
+        
+
+        marker_5c8e575586089112357ed40a13dac6c0.bindPopup(popup_e586523ba6d47c68d3f5b67651e78e66)
+        ;
+
+        
+    
+    
+            var marker_fe0d82569c4dcd60fa052739a779cf3a = L.marker(
+                [32.10763421, 34.81536382],
+                {
+}
+            ).addTo(map_4a9f3e2c6d319be9b6fce94cba536ed2);
+        
+    
+            var icon_a0ed53e2f7492af9c565bb793bc14f93 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_fe0d82569c4dcd60fa052739a779cf3a.setIcon(icon_a0ed53e2f7492af9c565bb793bc14f93);
+        
+    
+        var popup_dd2de66efddf6c55dd2a0e70d9098613 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c9fa5d1030ba69305e21c54e14ea317b = $(`<div id="html_c9fa5d1030ba69305e21c54e14ea317b" style="width: 100.0%; height: 100.0%;">Best Match: Jacaranda mimosifolia (ID: 4600035.0)</div>`)[0];
+                popup_dd2de66efddf6c55dd2a0e70d9098613.setContent(html_c9fa5d1030ba69305e21c54e14ea317b);
+            
+        
+
+        marker_fe0d82569c4dcd60fa052739a779cf3a.bindPopup(popup_dd2de66efddf6c55dd2a0e70d9098613)
+        ;
+
+        
+    
+    
+            var poly_line_10c3da16a0ecb332af21053ace46d7dd = L.polyline(
+                [[32.10763421, 34.81536382], [32.107654218272295, 34.815461797900774]],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "black", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_4a9f3e2c6d319be9b6fce94cba536ed2);
+        
+    
+        var popup_40f02ddc1afb7d6fea5523873c42c1f8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_616cb64f59b66c6c630a26a447432b99 = $(`<div id="html_616cb64f59b66c6c630a26a447432b99" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 9, angle: 0.2014423502967399</div>`)[0];
+                popup_40f02ddc1afb7d6fea5523873c42c1f8.setContent(html_616cb64f59b66c6c630a26a447432b99);
+            
+        
+
+        poly_line_10c3da16a0ecb332af21053ace46d7dd.bindPopup(popup_40f02ddc1afb7d6fea5523873c42c1f8)
+        ;
+
+        
+    
+    
+            var marker_3fd18b5ea737fc39112fa1f6202bdceb = L.marker(
+                [32.10766765, 34.81532829],
+                {
+}
+            ).addTo(map_4a9f3e2c6d319be9b6fce94cba536ed2);
+        
+    
+            var icon_746ffc3d0dd457aa713a6415fea9f840 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_3fd18b5ea737fc39112fa1f6202bdceb.setIcon(icon_746ffc3d0dd457aa713a6415fea9f840);
+        
+    
+        var popup_93a431a5729e58ad8a6bdc48388a64b1 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f22326396e0fd1ffef309f20320a8caa = $(`<div id="html_f22326396e0fd1ffef309f20320a8caa" style="width: 100.0%; height: 100.0%;">Additional Match: Jacaranda mimosifolia (ID: 4600034)</div>`)[0];
+                popup_93a431a5729e58ad8a6bdc48388a64b1.setContent(html_f22326396e0fd1ffef309f20320a8caa);
+            
+        
+
+        marker_3fd18b5ea737fc39112fa1f6202bdceb.bindPopup(popup_93a431a5729e58ad8a6bdc48388a64b1)
+        ;
+
+        
+    
+    
+            var marker_d864eec68859918f954f68bece0ca6f2 = L.marker(
+                [32.10754123092221, 34.81532255358455],
+                {
+}
+            ).addTo(map_4a9f3e2c6d319be9b6fce94cba536ed2);
+        
+    
+            var icon_7b8e363f351a66f2155c4336b366a07a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_d864eec68859918f954f68bece0ca6f2.setIcon(icon_7b8e363f351a66f2155c4336b366a07a);
+        
+    
+        var popup_2f0aab2c7aa4d3323f004ea53f3b1ca2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1cd2aaa0105ec8bd092fa353d8b613d1 = $(`<div id="html_1cd2aaa0105ec8bd092fa353d8b613d1" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10754123092221,34.81532255358455&layer=c&cbll=32.10754123092221,34.81532255358455&cbp=12,0,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_2f0aab2c7aa4d3323f004ea53f3b1ca2.setContent(html_1cd2aaa0105ec8bd092fa353d8b613d1);
+            
+        
+
+        marker_d864eec68859918f954f68bece0ca6f2.bindPopup(popup_2f0aab2c7aa4d3323f004ea53f3b1ca2)
+        ;
+
+        
+    
+</script>
+</html>

@@ -1,0 +1,3585 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_a52bfd33c964a4c5d1dcfb2dabb811af {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+<div style="
+position: fixed;
+bottom: 50px;
+left: 50px;
+width: 200px;
+background-color: white;
+z-index:9999;
+font-size:14px;
+padding: 10px;
+border: 2px solid grey;
+border-radius: 8px;
+box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+">
+<b>Legend</b><br>
+<i class="fa fa-map-marker fa-2x" style="color:orange"></i> Car location<br>
+<i class="fa fa-map-marker fa-2x" style="color:red"></i> Detection location<br>
+<i class="fa fa-map-marker fa-2x" style="color:green"></i> Seker best match<br>
+<i class="fa fa-map-marker fa-2x" style="color:blue"></i> Seker additional match<br>
+</div>
+    
+            <div class="folium-map" id="map_a52bfd33c964a4c5d1dcfb2dabb811af" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_a52bfd33c964a4c5d1dcfb2dabb811af = L.map(
+                "map_a52bfd33c964a4c5d1dcfb2dabb811af",
+                {
+                    center: [32.10722022078684, 34.81435543749699],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 15,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_fd2e7fd5ddc4fa8f8275825c5a3450f7 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_fd2e7fd5ddc4fa8f8275825c5a3450f7.addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var marker_e032fc75136fc5ddac3c8425adaf5f61 = L.marker(
+                [32.10744233, 34.81487228],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_2a29dae1e0d7c7307f5a7f35beaa50bb = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_e032fc75136fc5ddac3c8425adaf5f61.setIcon(icon_2a29dae1e0d7c7307f5a7f35beaa50bb);
+        
+    
+        var popup_f5592a7da9be2a9c7d1d3a5b9cb3d8b1 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5cd3f69981aa2c127524f576960a8f83 = $(`<div id="html_5cd3f69981aa2c127524f576960a8f83" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600009)</div>`)[0];
+                popup_f5592a7da9be2a9c7d1d3a5b9cb3d8b1.setContent(html_5cd3f69981aa2c127524f576960a8f83);
+            
+        
+
+        marker_e032fc75136fc5ddac3c8425adaf5f61.bindPopup(popup_f5592a7da9be2a9c7d1d3a5b9cb3d8b1)
+        ;
+
+        
+    
+    
+            var marker_327e754b2265d83df8b59ca117782616 = L.marker(
+                [32.1073026, 34.81477095],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_2e23c932801fa4f584c6a18852b3082b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_327e754b2265d83df8b59ca117782616.setIcon(icon_2e23c932801fa4f584c6a18852b3082b);
+        
+    
+        var popup_dc244f9c731da46f219fb49334b13082 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_80c17826f986ffbf00ef0b8d2657bc7b = $(`<div id="html_80c17826f986ffbf00ef0b8d2657bc7b" style="width: 100.0%; height: 100.0%;">Additional Match: Phoenix dactylifera (ID: 4600007)</div>`)[0];
+                popup_dc244f9c731da46f219fb49334b13082.setContent(html_80c17826f986ffbf00ef0b8d2657bc7b);
+            
+        
+
+        marker_327e754b2265d83df8b59ca117782616.bindPopup(popup_dc244f9c731da46f219fb49334b13082)
+        ;
+
+        
+    
+    
+            var marker_ea56485e4288f61adf41123c3b030a34 = L.marker(
+                [32.10743115, 34.81478471],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_23e869a3c8ab08793f09619a4092cefd = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_ea56485e4288f61adf41123c3b030a34.setIcon(icon_23e869a3c8ab08793f09619a4092cefd);
+        
+    
+        var popup_f73cecec64a1407a2a6becae30f73578 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_37b235654280f0c2fe9f793b1433910a = $(`<div id="html_37b235654280f0c2fe9f793b1433910a" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4614207)</div>`)[0];
+                popup_f73cecec64a1407a2a6becae30f73578.setContent(html_37b235654280f0c2fe9f793b1433910a);
+            
+        
+
+        marker_ea56485e4288f61adf41123c3b030a34.bindPopup(popup_f73cecec64a1407a2a6becae30f73578)
+        ;
+
+        
+    
+    
+            var marker_e28c43a45f38ba28835a10031b98aa62 = L.marker(
+                [32.10742818, 34.8148163],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_971ff8678a1fc5e8d2bf3f380f5467dc = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_e28c43a45f38ba28835a10031b98aa62.setIcon(icon_971ff8678a1fc5e8d2bf3f380f5467dc);
+        
+    
+        var popup_8b857e10de67290f1ff03ceda09491b7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_cd361e0b8f95ba51f257fb64fca4010f = $(`<div id="html_cd361e0b8f95ba51f257fb64fca4010f" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4600008)</div>`)[0];
+                popup_8b857e10de67290f1ff03ceda09491b7.setContent(html_cd361e0b8f95ba51f257fb64fca4010f);
+            
+        
+
+        marker_e28c43a45f38ba28835a10031b98aa62.bindPopup(popup_8b857e10de67290f1ff03ceda09491b7)
+        ;
+
+        
+    
+    
+            var marker_64dc057529ec92b5860c9890e9867db7 = L.marker(
+                [32.10747074151942, 34.81516972767331],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_4062b70961d7c70fad615f0417814071 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_64dc057529ec92b5860c9890e9867db7.setIcon(icon_4062b70961d7c70fad615f0417814071);
+        
+    
+        var popup_61c9bc17d9e052effc510ea5090481c1 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_96f7d0cf5bc4018d79c007c31dcd379e = $(`<div id="html_96f7d0cf5bc4018d79c007c31dcd379e" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10747074151942,34.81516972767331&layer=c&cbll=32.10747074151942,34.81516972767331&cbp=12,240,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_61c9bc17d9e052effc510ea5090481c1.setContent(html_96f7d0cf5bc4018d79c007c31dcd379e);
+            
+        
+
+        marker_64dc057529ec92b5860c9890e9867db7.bindPopup(popup_61c9bc17d9e052effc510ea5090481c1)
+        ;
+
+        
+    
+    
+            var marker_5ff2b0d74f2e6c37d333f1233a255dd9 = L.marker(
+                [32.10744233, 34.81487228],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_ad06582e8bb61e559d77555e58cfef75 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_5ff2b0d74f2e6c37d333f1233a255dd9.setIcon(icon_ad06582e8bb61e559d77555e58cfef75);
+        
+    
+        var popup_e756723aef48b182c008f5b2a3edd05f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_eee8b7c6b2ed2ff0d57d0690deba1c9b = $(`<div id="html_eee8b7c6b2ed2ff0d57d0690deba1c9b" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600009)</div>`)[0];
+                popup_e756723aef48b182c008f5b2a3edd05f.setContent(html_eee8b7c6b2ed2ff0d57d0690deba1c9b);
+            
+        
+
+        marker_5ff2b0d74f2e6c37d333f1233a255dd9.bindPopup(popup_e756723aef48b182c008f5b2a3edd05f)
+        ;
+
+        
+    
+    
+            var marker_0e8e50fdab7a2d34c221c5edbe58a77c = L.marker(
+                [32.1073026, 34.81477095],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_c5f04d5764b8f59b0d8889ef9700068f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_0e8e50fdab7a2d34c221c5edbe58a77c.setIcon(icon_c5f04d5764b8f59b0d8889ef9700068f);
+        
+    
+        var popup_842632eb03cba139d7ef76eeb2d9fa0a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1cacd639a41976a3289d3a89af7bc53c = $(`<div id="html_1cacd639a41976a3289d3a89af7bc53c" style="width: 100.0%; height: 100.0%;">Additional Match: Phoenix dactylifera (ID: 4600007)</div>`)[0];
+                popup_842632eb03cba139d7ef76eeb2d9fa0a.setContent(html_1cacd639a41976a3289d3a89af7bc53c);
+            
+        
+
+        marker_0e8e50fdab7a2d34c221c5edbe58a77c.bindPopup(popup_842632eb03cba139d7ef76eeb2d9fa0a)
+        ;
+
+        
+    
+    
+            var marker_fbf6ff17b93682497c48dbe0d9b5e6f2 = L.marker(
+                [32.10743115, 34.81478471],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_1ab866994966d4ff7cc66f6dbf1795d1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_fbf6ff17b93682497c48dbe0d9b5e6f2.setIcon(icon_1ab866994966d4ff7cc66f6dbf1795d1);
+        
+    
+        var popup_dc97c09a21d4e4122c57b97f6b2a67a8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_397ce31274d188688f82d3cf3951d573 = $(`<div id="html_397ce31274d188688f82d3cf3951d573" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4614207)</div>`)[0];
+                popup_dc97c09a21d4e4122c57b97f6b2a67a8.setContent(html_397ce31274d188688f82d3cf3951d573);
+            
+        
+
+        marker_fbf6ff17b93682497c48dbe0d9b5e6f2.bindPopup(popup_dc97c09a21d4e4122c57b97f6b2a67a8)
+        ;
+
+        
+    
+    
+            var marker_70c34833d4c0ce8cf262b4d8e2012e02 = L.marker(
+                [32.10742818, 34.8148163],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_034dec5efa4d4ac62670dbedecaf64dc = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_70c34833d4c0ce8cf262b4d8e2012e02.setIcon(icon_034dec5efa4d4ac62670dbedecaf64dc);
+        
+    
+        var popup_b12f081c8a2d7a85c2bbfb136b69cbb3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7771099e3b4cf60a9e1de7eeaef07428 = $(`<div id="html_7771099e3b4cf60a9e1de7eeaef07428" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4600008)</div>`)[0];
+                popup_b12f081c8a2d7a85c2bbfb136b69cbb3.setContent(html_7771099e3b4cf60a9e1de7eeaef07428);
+            
+        
+
+        marker_70c34833d4c0ce8cf262b4d8e2012e02.bindPopup(popup_b12f081c8a2d7a85c2bbfb136b69cbb3)
+        ;
+
+        
+    
+    
+            var marker_b52ee2242cc174271eb5c842df8bf812 = L.marker(
+                [32.10747074151942, 34.81516972767331],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_17938095d7bd15aab0ef19653cab7802 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_b52ee2242cc174271eb5c842df8bf812.setIcon(icon_17938095d7bd15aab0ef19653cab7802);
+        
+    
+        var popup_b624118432066cba22fb1bb3c1f1fdc8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_486c34def0dfbb9443b42f1f682ee226 = $(`<div id="html_486c34def0dfbb9443b42f1f682ee226" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10747074151942,34.81516972767331&layer=c&cbll=32.10747074151942,34.81516972767331&cbp=12,240,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_b624118432066cba22fb1bb3c1f1fdc8.setContent(html_486c34def0dfbb9443b42f1f682ee226);
+            
+        
+
+        marker_b52ee2242cc174271eb5c842df8bf812.bindPopup(popup_b624118432066cba22fb1bb3c1f1fdc8)
+        ;
+
+        
+    
+    
+            var marker_b02276eb1b2c866cc867d880549914c6 = L.marker(
+                [32.10744233, 34.81487228],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_57ab65a758db7facaf34d2a38ada8cd9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_b02276eb1b2c866cc867d880549914c6.setIcon(icon_57ab65a758db7facaf34d2a38ada8cd9);
+        
+    
+        var popup_82087ce29edd0ba62be23718534f8391 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_851ed644ac02aa091c7d409cdc159e07 = $(`<div id="html_851ed644ac02aa091c7d409cdc159e07" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600009)</div>`)[0];
+                popup_82087ce29edd0ba62be23718534f8391.setContent(html_851ed644ac02aa091c7d409cdc159e07);
+            
+        
+
+        marker_b02276eb1b2c866cc867d880549914c6.bindPopup(popup_82087ce29edd0ba62be23718534f8391)
+        ;
+
+        
+    
+    
+            var marker_bb0919da990401eecbf8e089f0214b4b = L.marker(
+                [32.1073026, 34.81477095],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_cde39a63c5d0e7a4ab6ff85a2aa59739 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_bb0919da990401eecbf8e089f0214b4b.setIcon(icon_cde39a63c5d0e7a4ab6ff85a2aa59739);
+        
+    
+        var popup_e933749d69eb9588be05c17aaa3cc37e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8aec0ea92301937f52c26c34a72f5dec = $(`<div id="html_8aec0ea92301937f52c26c34a72f5dec" style="width: 100.0%; height: 100.0%;">Additional Match: Phoenix dactylifera (ID: 4600007)</div>`)[0];
+                popup_e933749d69eb9588be05c17aaa3cc37e.setContent(html_8aec0ea92301937f52c26c34a72f5dec);
+            
+        
+
+        marker_bb0919da990401eecbf8e089f0214b4b.bindPopup(popup_e933749d69eb9588be05c17aaa3cc37e)
+        ;
+
+        
+    
+    
+            var marker_548624ec75d63071c29a44d7807bc2dd = L.marker(
+                [32.10743115, 34.81478471],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_58e77ec86a9d48acbd3a958d017412d3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_548624ec75d63071c29a44d7807bc2dd.setIcon(icon_58e77ec86a9d48acbd3a958d017412d3);
+        
+    
+        var popup_0b332f638243a3ddade5aa388fc2b921 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_fffb56de2322bf7900fd09437e449ba1 = $(`<div id="html_fffb56de2322bf7900fd09437e449ba1" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4614207)</div>`)[0];
+                popup_0b332f638243a3ddade5aa388fc2b921.setContent(html_fffb56de2322bf7900fd09437e449ba1);
+            
+        
+
+        marker_548624ec75d63071c29a44d7807bc2dd.bindPopup(popup_0b332f638243a3ddade5aa388fc2b921)
+        ;
+
+        
+    
+    
+            var marker_11b7b455d7427f7b2e0dff4c699987cd = L.marker(
+                [32.10742818, 34.8148163],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_e358e6c7eed6326b4e77bbb3aa213edb = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_11b7b455d7427f7b2e0dff4c699987cd.setIcon(icon_e358e6c7eed6326b4e77bbb3aa213edb);
+        
+    
+        var popup_54e9ddaf6fdd0457289e6f77c4dfa56d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b4ce4e801c087f14cae6ff7868270c19 = $(`<div id="html_b4ce4e801c087f14cae6ff7868270c19" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4600008)</div>`)[0];
+                popup_54e9ddaf6fdd0457289e6f77c4dfa56d.setContent(html_b4ce4e801c087f14cae6ff7868270c19);
+            
+        
+
+        marker_11b7b455d7427f7b2e0dff4c699987cd.bindPopup(popup_54e9ddaf6fdd0457289e6f77c4dfa56d)
+        ;
+
+        
+    
+    
+            var marker_c26dec17b3a204a30fdffbfde069c143 = L.marker(
+                [32.10747074151942, 34.81516972767331],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_d8ff90aae1b2d9d1a165a6b94893c144 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_c26dec17b3a204a30fdffbfde069c143.setIcon(icon_d8ff90aae1b2d9d1a165a6b94893c144);
+        
+    
+        var popup_940e144247931d1ea9dd54cefaff109f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b5876d9e17a2ccf7a3efee5096161cba = $(`<div id="html_b5876d9e17a2ccf7a3efee5096161cba" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10747074151942,34.81516972767331&layer=c&cbll=32.10747074151942,34.81516972767331&cbp=12,240,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_940e144247931d1ea9dd54cefaff109f.setContent(html_b5876d9e17a2ccf7a3efee5096161cba);
+            
+        
+
+        marker_c26dec17b3a204a30fdffbfde069c143.bindPopup(popup_940e144247931d1ea9dd54cefaff109f)
+        ;
+
+        
+    
+    
+            var marker_d8b159517e5efe38eefb89c641cab329 = L.marker(
+                [32.10744233, 34.81487228],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_eb4e5d0447fcef6f6d46cc36d9b60e2d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_d8b159517e5efe38eefb89c641cab329.setIcon(icon_eb4e5d0447fcef6f6d46cc36d9b60e2d);
+        
+    
+        var popup_3bf9815f24d87d8ff80412366d5aeaee = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1cd66d5dd6d6fc0c1e0684eb8ac3c163 = $(`<div id="html_1cd66d5dd6d6fc0c1e0684eb8ac3c163" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600009)</div>`)[0];
+                popup_3bf9815f24d87d8ff80412366d5aeaee.setContent(html_1cd66d5dd6d6fc0c1e0684eb8ac3c163);
+            
+        
+
+        marker_d8b159517e5efe38eefb89c641cab329.bindPopup(popup_3bf9815f24d87d8ff80412366d5aeaee)
+        ;
+
+        
+    
+    
+            var marker_bc1e5185c57c52420ccc88f7c60427ec = L.marker(
+                [32.1073026, 34.81477095],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_ced3305d31603f5df6b90880c7446347 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_bc1e5185c57c52420ccc88f7c60427ec.setIcon(icon_ced3305d31603f5df6b90880c7446347);
+        
+    
+        var popup_545ad131c262bb2e233cfb8a09e420c2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_23e24b1d020ca8b6670d029af3e469ae = $(`<div id="html_23e24b1d020ca8b6670d029af3e469ae" style="width: 100.0%; height: 100.0%;">Additional Match: Phoenix dactylifera (ID: 4600007)</div>`)[0];
+                popup_545ad131c262bb2e233cfb8a09e420c2.setContent(html_23e24b1d020ca8b6670d029af3e469ae);
+            
+        
+
+        marker_bc1e5185c57c52420ccc88f7c60427ec.bindPopup(popup_545ad131c262bb2e233cfb8a09e420c2)
+        ;
+
+        
+    
+    
+            var marker_fe28ef2a6e82e775f6cba52cf2eb529b = L.marker(
+                [32.10743115, 34.81478471],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_23951818eaae1ef6552dca1d775645a6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_fe28ef2a6e82e775f6cba52cf2eb529b.setIcon(icon_23951818eaae1ef6552dca1d775645a6);
+        
+    
+        var popup_f64067bb358c6544c2c51ad6d2ba68de = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6f2146233bf40a1b229e630dcee53ae2 = $(`<div id="html_6f2146233bf40a1b229e630dcee53ae2" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4614207)</div>`)[0];
+                popup_f64067bb358c6544c2c51ad6d2ba68de.setContent(html_6f2146233bf40a1b229e630dcee53ae2);
+            
+        
+
+        marker_fe28ef2a6e82e775f6cba52cf2eb529b.bindPopup(popup_f64067bb358c6544c2c51ad6d2ba68de)
+        ;
+
+        
+    
+    
+            var marker_e6f5498598426f5c50b1ba4114947686 = L.marker(
+                [32.10742818, 34.8148163],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_f4621e719f356b07fca44374475dc308 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_e6f5498598426f5c50b1ba4114947686.setIcon(icon_f4621e719f356b07fca44374475dc308);
+        
+    
+        var popup_479bb35634a7e6efbcf5d03692999473 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_88f1f394ac1752af7a3dd0f403ff150c = $(`<div id="html_88f1f394ac1752af7a3dd0f403ff150c" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4600008)</div>`)[0];
+                popup_479bb35634a7e6efbcf5d03692999473.setContent(html_88f1f394ac1752af7a3dd0f403ff150c);
+            
+        
+
+        marker_e6f5498598426f5c50b1ba4114947686.bindPopup(popup_479bb35634a7e6efbcf5d03692999473)
+        ;
+
+        
+    
+    
+            var marker_14ba45390886c40b982156aa2eef14ff = L.marker(
+                [32.10747074151942, 34.81516972767331],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_35fe361c7ce0e1af6016eaa707732ee3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_14ba45390886c40b982156aa2eef14ff.setIcon(icon_35fe361c7ce0e1af6016eaa707732ee3);
+        
+    
+        var popup_74c250dbb1f761975a6a52e7678c0e00 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f05064bc7c0538ce763444d5e8e7e75b = $(`<div id="html_f05064bc7c0538ce763444d5e8e7e75b" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10747074151942,34.81516972767331&layer=c&cbll=32.10747074151942,34.81516972767331&cbp=12,240,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_74c250dbb1f761975a6a52e7678c0e00.setContent(html_f05064bc7c0538ce763444d5e8e7e75b);
+            
+        
+
+        marker_14ba45390886c40b982156aa2eef14ff.bindPopup(popup_74c250dbb1f761975a6a52e7678c0e00)
+        ;
+
+        
+    
+    
+            var marker_882fad3670397eacad779159b7bbaea8 = L.marker(
+                [32.10744233, 34.81487228],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_8b83765107a1487c8edbecc5b90cd02e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_882fad3670397eacad779159b7bbaea8.setIcon(icon_8b83765107a1487c8edbecc5b90cd02e);
+        
+    
+        var popup_ec0a5a52ca0f4d6f208f1d9d49ea6a67 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9b40c4e9e4424e280bf9444d959e7773 = $(`<div id="html_9b40c4e9e4424e280bf9444d959e7773" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600009)</div>`)[0];
+                popup_ec0a5a52ca0f4d6f208f1d9d49ea6a67.setContent(html_9b40c4e9e4424e280bf9444d959e7773);
+            
+        
+
+        marker_882fad3670397eacad779159b7bbaea8.bindPopup(popup_ec0a5a52ca0f4d6f208f1d9d49ea6a67)
+        ;
+
+        
+    
+    
+            var marker_e86ba3e0596211f349d50a2f16a7f728 = L.marker(
+                [32.1073026, 34.81477095],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_3fafd290fe4671ce06fa146ec0541008 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_e86ba3e0596211f349d50a2f16a7f728.setIcon(icon_3fafd290fe4671ce06fa146ec0541008);
+        
+    
+        var popup_168641289c33491d8e21e7670a8342f1 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_75fe1070d082156f78d0e80c2050ae8d = $(`<div id="html_75fe1070d082156f78d0e80c2050ae8d" style="width: 100.0%; height: 100.0%;">Additional Match: Phoenix dactylifera (ID: 4600007)</div>`)[0];
+                popup_168641289c33491d8e21e7670a8342f1.setContent(html_75fe1070d082156f78d0e80c2050ae8d);
+            
+        
+
+        marker_e86ba3e0596211f349d50a2f16a7f728.bindPopup(popup_168641289c33491d8e21e7670a8342f1)
+        ;
+
+        
+    
+    
+            var marker_fddb654062692d8af459155a38b059e9 = L.marker(
+                [32.10743115, 34.81478471],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_370d2091b4a6d0d95dd10c4183ea3e6b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_fddb654062692d8af459155a38b059e9.setIcon(icon_370d2091b4a6d0d95dd10c4183ea3e6b);
+        
+    
+        var popup_0b63a63eea55b18f700e7976af1abf66 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4c373e9f73981a306727dc2bbd7423a1 = $(`<div id="html_4c373e9f73981a306727dc2bbd7423a1" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4614207)</div>`)[0];
+                popup_0b63a63eea55b18f700e7976af1abf66.setContent(html_4c373e9f73981a306727dc2bbd7423a1);
+            
+        
+
+        marker_fddb654062692d8af459155a38b059e9.bindPopup(popup_0b63a63eea55b18f700e7976af1abf66)
+        ;
+
+        
+    
+    
+            var marker_0b3be368542a4de012a124ba9c24e923 = L.marker(
+                [32.10742818, 34.8148163],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_ad6909dd5a7291f805e85354695c63de = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_0b3be368542a4de012a124ba9c24e923.setIcon(icon_ad6909dd5a7291f805e85354695c63de);
+        
+    
+        var popup_4f2ab91d7d4dffa3a868008e832c1598 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f65690f95fcb451ba2cc1ed99ec7e8fb = $(`<div id="html_f65690f95fcb451ba2cc1ed99ec7e8fb" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4600008)</div>`)[0];
+                popup_4f2ab91d7d4dffa3a868008e832c1598.setContent(html_f65690f95fcb451ba2cc1ed99ec7e8fb);
+            
+        
+
+        marker_0b3be368542a4de012a124ba9c24e923.bindPopup(popup_4f2ab91d7d4dffa3a868008e832c1598)
+        ;
+
+        
+    
+    
+            var marker_37e228b92b40628338c145553e722578 = L.marker(
+                [32.10747074151942, 34.81516972767331],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_128a2c3b0229fe44a6c3941e5819a736 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_37e228b92b40628338c145553e722578.setIcon(icon_128a2c3b0229fe44a6c3941e5819a736);
+        
+    
+        var popup_8a33882384f1332a38533cfa39218976 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ece55c7dd887ca9a100783487ce985d7 = $(`<div id="html_ece55c7dd887ca9a100783487ce985d7" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10747074151942,34.81516972767331&layer=c&cbll=32.10747074151942,34.81516972767331&cbp=12,240,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_8a33882384f1332a38533cfa39218976.setContent(html_ece55c7dd887ca9a100783487ce985d7);
+            
+        
+
+        marker_37e228b92b40628338c145553e722578.bindPopup(popup_8a33882384f1332a38533cfa39218976)
+        ;
+
+        
+    
+    
+            var marker_833d740255ba0af2e9ed7a4087748d46 = L.marker(
+                [32.10744233, 34.81487228],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_388161086106386bf7a709a2483a17a2 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_833d740255ba0af2e9ed7a4087748d46.setIcon(icon_388161086106386bf7a709a2483a17a2);
+        
+    
+        var popup_f7597efd265b749a01a218dd42ce2f10 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6ae45b3c0eb8f88f793b47a9a84216ee = $(`<div id="html_6ae45b3c0eb8f88f793b47a9a84216ee" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600009)</div>`)[0];
+                popup_f7597efd265b749a01a218dd42ce2f10.setContent(html_6ae45b3c0eb8f88f793b47a9a84216ee);
+            
+        
+
+        marker_833d740255ba0af2e9ed7a4087748d46.bindPopup(popup_f7597efd265b749a01a218dd42ce2f10)
+        ;
+
+        
+    
+    
+            var marker_1e4c9cdc37bb7efd34b7aa3230d7a835 = L.marker(
+                [32.1073026, 34.81477095],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_7c9a9c8974f630d79910dcb4b64e49ef = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_1e4c9cdc37bb7efd34b7aa3230d7a835.setIcon(icon_7c9a9c8974f630d79910dcb4b64e49ef);
+        
+    
+        var popup_685cbd0fef6ba03ca0a6679dad40bc16 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_36e98a14a6acfe4f4df9318a7ce0566d = $(`<div id="html_36e98a14a6acfe4f4df9318a7ce0566d" style="width: 100.0%; height: 100.0%;">Additional Match: Phoenix dactylifera (ID: 4600007)</div>`)[0];
+                popup_685cbd0fef6ba03ca0a6679dad40bc16.setContent(html_36e98a14a6acfe4f4df9318a7ce0566d);
+            
+        
+
+        marker_1e4c9cdc37bb7efd34b7aa3230d7a835.bindPopup(popup_685cbd0fef6ba03ca0a6679dad40bc16)
+        ;
+
+        
+    
+    
+            var marker_e88b696d44ce7d9b0e1584b788c4d843 = L.marker(
+                [32.10743115, 34.81478471],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_dbfecf60c0eb0a48ccb4680fa03ab080 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_e88b696d44ce7d9b0e1584b788c4d843.setIcon(icon_dbfecf60c0eb0a48ccb4680fa03ab080);
+        
+    
+        var popup_e19727bafc928206780ecfbea3579054 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2d02a30c238d1409d2b7f27f138c88b2 = $(`<div id="html_2d02a30c238d1409d2b7f27f138c88b2" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4614207)</div>`)[0];
+                popup_e19727bafc928206780ecfbea3579054.setContent(html_2d02a30c238d1409d2b7f27f138c88b2);
+            
+        
+
+        marker_e88b696d44ce7d9b0e1584b788c4d843.bindPopup(popup_e19727bafc928206780ecfbea3579054)
+        ;
+
+        
+    
+    
+            var marker_548e2d8e899af539ce49087b0f42d99c = L.marker(
+                [32.10742818, 34.8148163],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_946c35f9a0c4c90356b3966ab240267f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_548e2d8e899af539ce49087b0f42d99c.setIcon(icon_946c35f9a0c4c90356b3966ab240267f);
+        
+    
+        var popup_d9564bbbc57100264c75e55f5906947b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d302073c3de44beaaa133c07b00e8325 = $(`<div id="html_d302073c3de44beaaa133c07b00e8325" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4600008)</div>`)[0];
+                popup_d9564bbbc57100264c75e55f5906947b.setContent(html_d302073c3de44beaaa133c07b00e8325);
+            
+        
+
+        marker_548e2d8e899af539ce49087b0f42d99c.bindPopup(popup_d9564bbbc57100264c75e55f5906947b)
+        ;
+
+        
+    
+    
+            var marker_3a77df7929ff24d3af81e102f4db3195 = L.marker(
+                [32.10747074151942, 34.81516972767331],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_b60f84280abcfcb3761060f2d4e203a9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_3a77df7929ff24d3af81e102f4db3195.setIcon(icon_b60f84280abcfcb3761060f2d4e203a9);
+        
+    
+        var popup_4946e1923a11d2d890099a3ac94ba6ca = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9ba3deb4303953326045ae5c31b40b89 = $(`<div id="html_9ba3deb4303953326045ae5c31b40b89" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10747074151942,34.81516972767331&layer=c&cbll=32.10747074151942,34.81516972767331&cbp=12,240,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_4946e1923a11d2d890099a3ac94ba6ca.setContent(html_9ba3deb4303953326045ae5c31b40b89);
+            
+        
+
+        marker_3a77df7929ff24d3af81e102f4db3195.bindPopup(popup_4946e1923a11d2d890099a3ac94ba6ca)
+        ;
+
+        
+    
+    
+            var marker_3d4474d845a05189b997b65091547ffe = L.marker(
+                [32.10744233, 34.81487228],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_9439a663074f8b26d552be52db867776 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_3d4474d845a05189b997b65091547ffe.setIcon(icon_9439a663074f8b26d552be52db867776);
+        
+    
+        var popup_fe1eedf712b7ad79b3481dcb4895bd60 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8a2c950a37a11ab740b2d89e7ce0e36a = $(`<div id="html_8a2c950a37a11ab740b2d89e7ce0e36a" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600009)</div>`)[0];
+                popup_fe1eedf712b7ad79b3481dcb4895bd60.setContent(html_8a2c950a37a11ab740b2d89e7ce0e36a);
+            
+        
+
+        marker_3d4474d845a05189b997b65091547ffe.bindPopup(popup_fe1eedf712b7ad79b3481dcb4895bd60)
+        ;
+
+        
+    
+    
+            var marker_fe9a82438c094e0880caa232fa028a8f = L.marker(
+                [32.1073026, 34.81477095],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_bef19a79cd21b2b68dc6f07dcdb1cb02 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_fe9a82438c094e0880caa232fa028a8f.setIcon(icon_bef19a79cd21b2b68dc6f07dcdb1cb02);
+        
+    
+        var popup_97841a5b7df3fd0aef38761c4bf2c89d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e531120376584d049c43240db491d37d = $(`<div id="html_e531120376584d049c43240db491d37d" style="width: 100.0%; height: 100.0%;">Additional Match: Phoenix dactylifera (ID: 4600007)</div>`)[0];
+                popup_97841a5b7df3fd0aef38761c4bf2c89d.setContent(html_e531120376584d049c43240db491d37d);
+            
+        
+
+        marker_fe9a82438c094e0880caa232fa028a8f.bindPopup(popup_97841a5b7df3fd0aef38761c4bf2c89d)
+        ;
+
+        
+    
+    
+            var marker_88ef72213de26b6078f96da53d21a56b = L.marker(
+                [32.10743115, 34.81478471],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_85ef91b6f5e6d80c0b42c099ae13a00f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_88ef72213de26b6078f96da53d21a56b.setIcon(icon_85ef91b6f5e6d80c0b42c099ae13a00f);
+        
+    
+        var popup_faeadac63cdb6e85aa4b5000c07c5605 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a92f30d190085cc4e60826235624bb7e = $(`<div id="html_a92f30d190085cc4e60826235624bb7e" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4614207)</div>`)[0];
+                popup_faeadac63cdb6e85aa4b5000c07c5605.setContent(html_a92f30d190085cc4e60826235624bb7e);
+            
+        
+
+        marker_88ef72213de26b6078f96da53d21a56b.bindPopup(popup_faeadac63cdb6e85aa4b5000c07c5605)
+        ;
+
+        
+    
+    
+            var marker_4e8418557ceffad2ce3052c386a24a63 = L.marker(
+                [32.10742818, 34.8148163],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_8319f00ea396a5f8cde8ce5698185f64 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_4e8418557ceffad2ce3052c386a24a63.setIcon(icon_8319f00ea396a5f8cde8ce5698185f64);
+        
+    
+        var popup_8754f99a40df5e0c641115c12aeb7ae0 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d0ed1fef7c3314f0e61876c4c91a96f2 = $(`<div id="html_d0ed1fef7c3314f0e61876c4c91a96f2" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4600008)</div>`)[0];
+                popup_8754f99a40df5e0c641115c12aeb7ae0.setContent(html_d0ed1fef7c3314f0e61876c4c91a96f2);
+            
+        
+
+        marker_4e8418557ceffad2ce3052c386a24a63.bindPopup(popup_8754f99a40df5e0c641115c12aeb7ae0)
+        ;
+
+        
+    
+    
+            var marker_b61d35e7aa20bbf5dec081f4c585393d = L.marker(
+                [32.10747074151942, 34.81516972767331],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_83599bcbf5eff10e659dcf03aaabce49 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_b61d35e7aa20bbf5dec081f4c585393d.setIcon(icon_83599bcbf5eff10e659dcf03aaabce49);
+        
+    
+        var popup_834e957b4c44c0c59a8b30bec43098a9 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5936d9b55033cabaefb60df344cbb952 = $(`<div id="html_5936d9b55033cabaefb60df344cbb952" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10747074151942,34.81516972767331&layer=c&cbll=32.10747074151942,34.81516972767331&cbp=12,240,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_834e957b4c44c0c59a8b30bec43098a9.setContent(html_5936d9b55033cabaefb60df344cbb952);
+            
+        
+
+        marker_b61d35e7aa20bbf5dec081f4c585393d.bindPopup(popup_834e957b4c44c0c59a8b30bec43098a9)
+        ;
+
+        
+    
+    
+            var marker_be1d7c67efdb7af686a4fdfcd933bf4d = L.marker(
+                [32.10744233, 34.81487228],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_eb8d57ed9715f51ce7424ac5811144f1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_be1d7c67efdb7af686a4fdfcd933bf4d.setIcon(icon_eb8d57ed9715f51ce7424ac5811144f1);
+        
+    
+        var popup_37e956eba0e46627791adac0ab20b732 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e88eb72e84f195bbcfbb6d5d7a730f83 = $(`<div id="html_e88eb72e84f195bbcfbb6d5d7a730f83" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600009)</div>`)[0];
+                popup_37e956eba0e46627791adac0ab20b732.setContent(html_e88eb72e84f195bbcfbb6d5d7a730f83);
+            
+        
+
+        marker_be1d7c67efdb7af686a4fdfcd933bf4d.bindPopup(popup_37e956eba0e46627791adac0ab20b732)
+        ;
+
+        
+    
+    
+            var marker_ce2c9511cd4b135666325e69c8caab05 = L.marker(
+                [32.1073026, 34.81477095],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_3b288811ae8ed0a1233dbb020d9a176b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_ce2c9511cd4b135666325e69c8caab05.setIcon(icon_3b288811ae8ed0a1233dbb020d9a176b);
+        
+    
+        var popup_439a00d0cac028aa70f50951766829c5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_25dbaf2eb63134fec2f990f86e8e6604 = $(`<div id="html_25dbaf2eb63134fec2f990f86e8e6604" style="width: 100.0%; height: 100.0%;">Additional Match: Phoenix dactylifera (ID: 4600007)</div>`)[0];
+                popup_439a00d0cac028aa70f50951766829c5.setContent(html_25dbaf2eb63134fec2f990f86e8e6604);
+            
+        
+
+        marker_ce2c9511cd4b135666325e69c8caab05.bindPopup(popup_439a00d0cac028aa70f50951766829c5)
+        ;
+
+        
+    
+    
+            var marker_6e6be3e074c6bddba3ec903a35784642 = L.marker(
+                [32.10743115, 34.81478471],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_e4246b9214697586ab862d7b8333d030 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_6e6be3e074c6bddba3ec903a35784642.setIcon(icon_e4246b9214697586ab862d7b8333d030);
+        
+    
+        var popup_f9e1cd3c9346c3ae30e6d8e3de3755fd = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7270db6572f086b6d94410c5ea88fab8 = $(`<div id="html_7270db6572f086b6d94410c5ea88fab8" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4614207)</div>`)[0];
+                popup_f9e1cd3c9346c3ae30e6d8e3de3755fd.setContent(html_7270db6572f086b6d94410c5ea88fab8);
+            
+        
+
+        marker_6e6be3e074c6bddba3ec903a35784642.bindPopup(popup_f9e1cd3c9346c3ae30e6d8e3de3755fd)
+        ;
+
+        
+    
+    
+            var marker_9dad1070f2e94eef1726cead7b756272 = L.marker(
+                [32.10742818, 34.8148163],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_f1243ba41ad5b617e60234673cf08670 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_9dad1070f2e94eef1726cead7b756272.setIcon(icon_f1243ba41ad5b617e60234673cf08670);
+        
+    
+        var popup_935b32553c3b48587587e49913ed42c8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_bc593ccf905d526521e2afe265a075ef = $(`<div id="html_bc593ccf905d526521e2afe265a075ef" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4600008)</div>`)[0];
+                popup_935b32553c3b48587587e49913ed42c8.setContent(html_bc593ccf905d526521e2afe265a075ef);
+            
+        
+
+        marker_9dad1070f2e94eef1726cead7b756272.bindPopup(popup_935b32553c3b48587587e49913ed42c8)
+        ;
+
+        
+    
+    
+            var marker_75c2e36c8e76c4ae9469fa858c2c9a3d = L.marker(
+                [32.10747074151942, 34.81516972767331],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_e57e0a8eff605de1a5f60b60fbf1b071 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_75c2e36c8e76c4ae9469fa858c2c9a3d.setIcon(icon_e57e0a8eff605de1a5f60b60fbf1b071);
+        
+    
+        var popup_0a162745cb1d3926f032edf20e1c0454 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a1c7152ccc025f8b841ad3b8a904b36f = $(`<div id="html_a1c7152ccc025f8b841ad3b8a904b36f" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10747074151942,34.81516972767331&layer=c&cbll=32.10747074151942,34.81516972767331&cbp=12,240,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_0a162745cb1d3926f032edf20e1c0454.setContent(html_a1c7152ccc025f8b841ad3b8a904b36f);
+            
+        
+
+        marker_75c2e36c8e76c4ae9469fa858c2c9a3d.bindPopup(popup_0a162745cb1d3926f032edf20e1c0454)
+        ;
+
+        
+    
+    
+            var marker_bf5b2b8bac39a06ecd70a38793a65637 = L.marker(
+                [32.10744233, 34.81487228],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_62d0adde1d89f63d3cd35d2d3d67e1e9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_bf5b2b8bac39a06ecd70a38793a65637.setIcon(icon_62d0adde1d89f63d3cd35d2d3d67e1e9);
+        
+    
+        var popup_d676971d371b759d8da11f3edafb1e2c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_135aa9325568eacc4e28e9882468dbbf = $(`<div id="html_135aa9325568eacc4e28e9882468dbbf" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600009)</div>`)[0];
+                popup_d676971d371b759d8da11f3edafb1e2c.setContent(html_135aa9325568eacc4e28e9882468dbbf);
+            
+        
+
+        marker_bf5b2b8bac39a06ecd70a38793a65637.bindPopup(popup_d676971d371b759d8da11f3edafb1e2c)
+        ;
+
+        
+    
+    
+            var marker_3a1ea0b5e3566e154a01f30061e940a6 = L.marker(
+                [32.1073026, 34.81477095],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_cf110454b1bc7f0819d5723aa183bcf8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_3a1ea0b5e3566e154a01f30061e940a6.setIcon(icon_cf110454b1bc7f0819d5723aa183bcf8);
+        
+    
+        var popup_12c51dc93287cc949d62e73d05035109 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d6503a7ab5f7c22b5ee9af275217ff48 = $(`<div id="html_d6503a7ab5f7c22b5ee9af275217ff48" style="width: 100.0%; height: 100.0%;">Additional Match: Phoenix dactylifera (ID: 4600007)</div>`)[0];
+                popup_12c51dc93287cc949d62e73d05035109.setContent(html_d6503a7ab5f7c22b5ee9af275217ff48);
+            
+        
+
+        marker_3a1ea0b5e3566e154a01f30061e940a6.bindPopup(popup_12c51dc93287cc949d62e73d05035109)
+        ;
+
+        
+    
+    
+            var marker_9807c85f412fa2988af54fb77e0bd4ee = L.marker(
+                [32.10743115, 34.81478471],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_e0377d8be2c6b2ca46388c836eae7da7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_9807c85f412fa2988af54fb77e0bd4ee.setIcon(icon_e0377d8be2c6b2ca46388c836eae7da7);
+        
+    
+        var popup_f94c05e250760be1d918933a7ce05f43 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_43b9ba2eb1c9280311c2ebdcd1db10c6 = $(`<div id="html_43b9ba2eb1c9280311c2ebdcd1db10c6" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4614207)</div>`)[0];
+                popup_f94c05e250760be1d918933a7ce05f43.setContent(html_43b9ba2eb1c9280311c2ebdcd1db10c6);
+            
+        
+
+        marker_9807c85f412fa2988af54fb77e0bd4ee.bindPopup(popup_f94c05e250760be1d918933a7ce05f43)
+        ;
+
+        
+    
+    
+            var marker_200698aa49b38dc86f2af173db5f1437 = L.marker(
+                [32.10742818, 34.8148163],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_887528464df0e5e8a66700352a7fb52e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_200698aa49b38dc86f2af173db5f1437.setIcon(icon_887528464df0e5e8a66700352a7fb52e);
+        
+    
+        var popup_bce38cde7051d42bf6be1088a153a349 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_55692429974586e1e99c78897a0c05e1 = $(`<div id="html_55692429974586e1e99c78897a0c05e1" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4600008)</div>`)[0];
+                popup_bce38cde7051d42bf6be1088a153a349.setContent(html_55692429974586e1e99c78897a0c05e1);
+            
+        
+
+        marker_200698aa49b38dc86f2af173db5f1437.bindPopup(popup_bce38cde7051d42bf6be1088a153a349)
+        ;
+
+        
+    
+    
+            var marker_f1cd16e746121eef9652857f18578c4f = L.marker(
+                [32.10747074151942, 34.81516972767331],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_b89b7e07cc9c75ebf7d4b8b2f38eec9e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_f1cd16e746121eef9652857f18578c4f.setIcon(icon_b89b7e07cc9c75ebf7d4b8b2f38eec9e);
+        
+    
+        var popup_17a0dc583d096ef0552c030196268551 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_23f018edad96824addad0ce294297764 = $(`<div id="html_23f018edad96824addad0ce294297764" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10747074151942,34.81516972767331&layer=c&cbll=32.10747074151942,34.81516972767331&cbp=12,240,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_17a0dc583d096ef0552c030196268551.setContent(html_23f018edad96824addad0ce294297764);
+            
+        
+
+        marker_f1cd16e746121eef9652857f18578c4f.bindPopup(popup_17a0dc583d096ef0552c030196268551)
+        ;
+
+        
+    
+    
+            var marker_207771c9dfcc79808ea5472fe2bd625a = L.marker(
+                [32.10744233, 34.81487228],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_7e7bd14f41638190dcda14d0ad6a8427 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_207771c9dfcc79808ea5472fe2bd625a.setIcon(icon_7e7bd14f41638190dcda14d0ad6a8427);
+        
+    
+        var popup_f420706f69824f34b8fb3af741b0f4a3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_740cb47af32344700b198c260dbf9f67 = $(`<div id="html_740cb47af32344700b198c260dbf9f67" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600009)</div>`)[0];
+                popup_f420706f69824f34b8fb3af741b0f4a3.setContent(html_740cb47af32344700b198c260dbf9f67);
+            
+        
+
+        marker_207771c9dfcc79808ea5472fe2bd625a.bindPopup(popup_f420706f69824f34b8fb3af741b0f4a3)
+        ;
+
+        
+    
+    
+            var marker_6877eeafd050827e278d696aef94534e = L.marker(
+                [32.1073026, 34.81477095],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_15cb817eac9d4a062b0ab30dbeccb9de = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_6877eeafd050827e278d696aef94534e.setIcon(icon_15cb817eac9d4a062b0ab30dbeccb9de);
+        
+    
+        var popup_8dfa5e22c86250e694748c0f15beedac = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5bc228e2298bd496aeb95f323986e8d9 = $(`<div id="html_5bc228e2298bd496aeb95f323986e8d9" style="width: 100.0%; height: 100.0%;">Additional Match: Phoenix dactylifera (ID: 4600007)</div>`)[0];
+                popup_8dfa5e22c86250e694748c0f15beedac.setContent(html_5bc228e2298bd496aeb95f323986e8d9);
+            
+        
+
+        marker_6877eeafd050827e278d696aef94534e.bindPopup(popup_8dfa5e22c86250e694748c0f15beedac)
+        ;
+
+        
+    
+    
+            var marker_f569d6927e5fe5cb0d7d1a5de48ef883 = L.marker(
+                [32.10743115, 34.81478471],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_523d445209ad723f0b41504cfce4c86e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_f569d6927e5fe5cb0d7d1a5de48ef883.setIcon(icon_523d445209ad723f0b41504cfce4c86e);
+        
+    
+        var popup_dee199c34e507220fc1292b832a8033a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_bac24a4dbcd282404f280cf4cec9d496 = $(`<div id="html_bac24a4dbcd282404f280cf4cec9d496" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4614207)</div>`)[0];
+                popup_dee199c34e507220fc1292b832a8033a.setContent(html_bac24a4dbcd282404f280cf4cec9d496);
+            
+        
+
+        marker_f569d6927e5fe5cb0d7d1a5de48ef883.bindPopup(popup_dee199c34e507220fc1292b832a8033a)
+        ;
+
+        
+    
+    
+            var marker_34c78a02bbc4b48897a9f18b369fa237 = L.marker(
+                [32.10742818, 34.8148163],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_cace68fafb74b4c2517d1e6f93800b64 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_34c78a02bbc4b48897a9f18b369fa237.setIcon(icon_cace68fafb74b4c2517d1e6f93800b64);
+        
+    
+        var popup_4ee992e920a5a1ba15303739740f0eec = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f3574b9c23856352a2e3a38e422ac95b = $(`<div id="html_f3574b9c23856352a2e3a38e422ac95b" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4600008)</div>`)[0];
+                popup_4ee992e920a5a1ba15303739740f0eec.setContent(html_f3574b9c23856352a2e3a38e422ac95b);
+            
+        
+
+        marker_34c78a02bbc4b48897a9f18b369fa237.bindPopup(popup_4ee992e920a5a1ba15303739740f0eec)
+        ;
+
+        
+    
+    
+            var marker_3acbd8aa528bcaa66f7eeb4192b93bfa = L.marker(
+                [32.10747074151942, 34.81516972767331],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_c4b69ae5e86ab8d23787fab30d776cad = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_3acbd8aa528bcaa66f7eeb4192b93bfa.setIcon(icon_c4b69ae5e86ab8d23787fab30d776cad);
+        
+    
+        var popup_9e34136bd239c7bbc877aafce60beadb = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8cdc9a406819918dbf47e3e98f86dd42 = $(`<div id="html_8cdc9a406819918dbf47e3e98f86dd42" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10747074151942,34.81516972767331&layer=c&cbll=32.10747074151942,34.81516972767331&cbp=12,240,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_9e34136bd239c7bbc877aafce60beadb.setContent(html_8cdc9a406819918dbf47e3e98f86dd42);
+            
+        
+
+        marker_3acbd8aa528bcaa66f7eeb4192b93bfa.bindPopup(popup_9e34136bd239c7bbc877aafce60beadb)
+        ;
+
+        
+    
+    
+            var marker_b49a7ea21675ea0ed72273e94bf3f879 = L.marker(
+                [32.10744233, 34.81487228],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_82301b98562bd113a9281e158b371ca4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_b49a7ea21675ea0ed72273e94bf3f879.setIcon(icon_82301b98562bd113a9281e158b371ca4);
+        
+    
+        var popup_7ad4564e35b551294e518c8a9b2e7c22 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b39ae1b75851d377cf0133c6a6b3d00e = $(`<div id="html_b39ae1b75851d377cf0133c6a6b3d00e" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600009)</div>`)[0];
+                popup_7ad4564e35b551294e518c8a9b2e7c22.setContent(html_b39ae1b75851d377cf0133c6a6b3d00e);
+            
+        
+
+        marker_b49a7ea21675ea0ed72273e94bf3f879.bindPopup(popup_7ad4564e35b551294e518c8a9b2e7c22)
+        ;
+
+        
+    
+    
+            var marker_7ab2e60499013e2d6fc8af1743478377 = L.marker(
+                [32.1073026, 34.81477095],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_46114a407c10fd62e4410f231052a552 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_7ab2e60499013e2d6fc8af1743478377.setIcon(icon_46114a407c10fd62e4410f231052a552);
+        
+    
+        var popup_41987375b6c969d597802dac0d62f381 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f9476cf49dac180395ae1c4641234396 = $(`<div id="html_f9476cf49dac180395ae1c4641234396" style="width: 100.0%; height: 100.0%;">Additional Match: Phoenix dactylifera (ID: 4600007)</div>`)[0];
+                popup_41987375b6c969d597802dac0d62f381.setContent(html_f9476cf49dac180395ae1c4641234396);
+            
+        
+
+        marker_7ab2e60499013e2d6fc8af1743478377.bindPopup(popup_41987375b6c969d597802dac0d62f381)
+        ;
+
+        
+    
+    
+            var marker_904e26776b4e89b5e0e84492604ee2f0 = L.marker(
+                [32.10743115, 34.81478471],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_9f0ee4c8bd05ed805c12e73e1b0a7902 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_904e26776b4e89b5e0e84492604ee2f0.setIcon(icon_9f0ee4c8bd05ed805c12e73e1b0a7902);
+        
+    
+        var popup_7dde0cada16517f97c48988c17db45d7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5ade3fd2b23edd292db2e21587d94048 = $(`<div id="html_5ade3fd2b23edd292db2e21587d94048" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4614207)</div>`)[0];
+                popup_7dde0cada16517f97c48988c17db45d7.setContent(html_5ade3fd2b23edd292db2e21587d94048);
+            
+        
+
+        marker_904e26776b4e89b5e0e84492604ee2f0.bindPopup(popup_7dde0cada16517f97c48988c17db45d7)
+        ;
+
+        
+    
+    
+            var marker_593bb1000f6ead6e61a60064b31cf4e8 = L.marker(
+                [32.10742818, 34.8148163],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_ae653daf2e801347e6d8a1ac733e5379 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_593bb1000f6ead6e61a60064b31cf4e8.setIcon(icon_ae653daf2e801347e6d8a1ac733e5379);
+        
+    
+        var popup_f18795d989ece18705c44ac73a5d5b04 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_04ab0729861d434e01c0984a159282b3 = $(`<div id="html_04ab0729861d434e01c0984a159282b3" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4600008)</div>`)[0];
+                popup_f18795d989ece18705c44ac73a5d5b04.setContent(html_04ab0729861d434e01c0984a159282b3);
+            
+        
+
+        marker_593bb1000f6ead6e61a60064b31cf4e8.bindPopup(popup_f18795d989ece18705c44ac73a5d5b04)
+        ;
+
+        
+    
+    
+            var marker_a44be5b22c47bfcb7e8ab70fc5351f56 = L.marker(
+                [32.10747074151942, 34.81516972767331],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_ddc98b21d9214b11f2c353085cabb547 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_a44be5b22c47bfcb7e8ab70fc5351f56.setIcon(icon_ddc98b21d9214b11f2c353085cabb547);
+        
+    
+        var popup_796a3fe4c4e18092f73538a71a8dfe3f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a57082888e40f58dee95d5073aa164c3 = $(`<div id="html_a57082888e40f58dee95d5073aa164c3" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10747074151942,34.81516972767331&layer=c&cbll=32.10747074151942,34.81516972767331&cbp=12,240,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_796a3fe4c4e18092f73538a71a8dfe3f.setContent(html_a57082888e40f58dee95d5073aa164c3);
+            
+        
+
+        marker_a44be5b22c47bfcb7e8ab70fc5351f56.bindPopup(popup_796a3fe4c4e18092f73538a71a8dfe3f)
+        ;
+
+        
+    
+    
+            var marker_1bd043144a293657e6fbd23a17e93b87 = L.marker(
+                [32.10744233, 34.81487228],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_2aebc0f107bdc13b311df6b7ff49618c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_1bd043144a293657e6fbd23a17e93b87.setIcon(icon_2aebc0f107bdc13b311df6b7ff49618c);
+        
+    
+        var popup_865eb0e09cdd7e1bcf524fc2e4ed5360 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_46b19c49d6e1a304a9ff60e8bcb78ae0 = $(`<div id="html_46b19c49d6e1a304a9ff60e8bcb78ae0" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600009)</div>`)[0];
+                popup_865eb0e09cdd7e1bcf524fc2e4ed5360.setContent(html_46b19c49d6e1a304a9ff60e8bcb78ae0);
+            
+        
+
+        marker_1bd043144a293657e6fbd23a17e93b87.bindPopup(popup_865eb0e09cdd7e1bcf524fc2e4ed5360)
+        ;
+
+        
+    
+    
+            var marker_64bb9f82a843ec19501137d54404dc86 = L.marker(
+                [32.1073026, 34.81477095],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_d633f224c77f942f2ef84234a89c5a84 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_64bb9f82a843ec19501137d54404dc86.setIcon(icon_d633f224c77f942f2ef84234a89c5a84);
+        
+    
+        var popup_01ef9a98d3f635f0a99e64bc8c9237f6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1bc46a89bd1c10b41406ee22efc518f9 = $(`<div id="html_1bc46a89bd1c10b41406ee22efc518f9" style="width: 100.0%; height: 100.0%;">Additional Match: Phoenix dactylifera (ID: 4600007)</div>`)[0];
+                popup_01ef9a98d3f635f0a99e64bc8c9237f6.setContent(html_1bc46a89bd1c10b41406ee22efc518f9);
+            
+        
+
+        marker_64bb9f82a843ec19501137d54404dc86.bindPopup(popup_01ef9a98d3f635f0a99e64bc8c9237f6)
+        ;
+
+        
+    
+    
+            var marker_0e1b31ab8e7d43093613ab9c97ef5815 = L.marker(
+                [32.10743115, 34.81478471],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_5124225068f55856f770225d95fb8bb9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_0e1b31ab8e7d43093613ab9c97ef5815.setIcon(icon_5124225068f55856f770225d95fb8bb9);
+        
+    
+        var popup_30246fc0adfa69c26bb6f602664eb081 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_948c334a95111626256e75683320fba2 = $(`<div id="html_948c334a95111626256e75683320fba2" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4614207)</div>`)[0];
+                popup_30246fc0adfa69c26bb6f602664eb081.setContent(html_948c334a95111626256e75683320fba2);
+            
+        
+
+        marker_0e1b31ab8e7d43093613ab9c97ef5815.bindPopup(popup_30246fc0adfa69c26bb6f602664eb081)
+        ;
+
+        
+    
+    
+            var marker_ac441c74e1fc6c76776f8ca073e98aff = L.marker(
+                [32.10742818, 34.8148163],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_a2503258f84c9d64bfcadc290dae3f58 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_ac441c74e1fc6c76776f8ca073e98aff.setIcon(icon_a2503258f84c9d64bfcadc290dae3f58);
+        
+    
+        var popup_8d774b7633855ad19e1b0a40f704bb8f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e3742b65f0082ec555b2f61ea6366626 = $(`<div id="html_e3742b65f0082ec555b2f61ea6366626" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4600008)</div>`)[0];
+                popup_8d774b7633855ad19e1b0a40f704bb8f.setContent(html_e3742b65f0082ec555b2f61ea6366626);
+            
+        
+
+        marker_ac441c74e1fc6c76776f8ca073e98aff.bindPopup(popup_8d774b7633855ad19e1b0a40f704bb8f)
+        ;
+
+        
+    
+    
+            var marker_c6d8be6a9b9cc9ef9298a570ee44b9c2 = L.marker(
+                [32.10747074151942, 34.81516972767331],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_827febdfacf02c0ec77afcb5bcdda30b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_c6d8be6a9b9cc9ef9298a570ee44b9c2.setIcon(icon_827febdfacf02c0ec77afcb5bcdda30b);
+        
+    
+        var popup_823dec3d416baf9dcc21a847ed6fc1fa = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_fb0171a38de56cf92801bb3ac2490b1a = $(`<div id="html_fb0171a38de56cf92801bb3ac2490b1a" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10747074151942,34.81516972767331&layer=c&cbll=32.10747074151942,34.81516972767331&cbp=12,240,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_823dec3d416baf9dcc21a847ed6fc1fa.setContent(html_fb0171a38de56cf92801bb3ac2490b1a);
+            
+        
+
+        marker_c6d8be6a9b9cc9ef9298a570ee44b9c2.bindPopup(popup_823dec3d416baf9dcc21a847ed6fc1fa)
+        ;
+
+        
+    
+    
+            var marker_a86c3304d23e3f8474007a3c43e39490 = L.marker(
+                [32.10727589, 34.81476312],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_9c86b2d9d6702855fcf434c8726acbc1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_a86c3304d23e3f8474007a3c43e39490.setIcon(icon_9c86b2d9d6702855fcf434c8726acbc1);
+        
+    
+        var popup_ddf5a8a27e9acf7f22042cf56fbe0a46 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_eb7b7e60dfd9b6f4f4244dfe53905255 = $(`<div id="html_eb7b7e60dfd9b6f4f4244dfe53905255" style="width: 100.0%; height: 100.0%;">Best Match: Phoenix dactylifera (ID: 4600006.0)</div>`)[0];
+                popup_ddf5a8a27e9acf7f22042cf56fbe0a46.setContent(html_eb7b7e60dfd9b6f4f4244dfe53905255);
+            
+        
+
+        marker_a86c3304d23e3f8474007a3c43e39490.bindPopup(popup_ddf5a8a27e9acf7f22042cf56fbe0a46)
+        ;
+
+        
+    
+    
+            var poly_line_a647ed9875b188a13a156d1a1e0caebb = L.polyline(
+                [[32.10727589, 34.81476312], [32.10719994890795, 34.81469805887076]],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "black", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+        var popup_c0fcd69529099347d27e47b95c0437c7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d783be0e684936749145120a394f8743 = $(`<div id="html_d783be0e684936749145120a394f8743" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 13, angle: 4.003999864881185</div>`)[0];
+                popup_c0fcd69529099347d27e47b95c0437c7.setContent(html_d783be0e684936749145120a394f8743);
+            
+        
+
+        poly_line_a647ed9875b188a13a156d1a1e0caebb.bindPopup(popup_c0fcd69529099347d27e47b95c0437c7)
+        ;
+
+        
+    
+    
+            var marker_13659379aa28596cae432395d6e7ab09 = L.marker(
+                [32.10744233, 34.81487228],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_392dd6cdcc7693cfc21f552e5c6308ff = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_13659379aa28596cae432395d6e7ab09.setIcon(icon_392dd6cdcc7693cfc21f552e5c6308ff);
+        
+    
+        var popup_5bfe3bfc018fc3b1e1b68e6a08a3faa3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d6d862a0c36ddb99e70cf48e7497fac6 = $(`<div id="html_d6d862a0c36ddb99e70cf48e7497fac6" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600009)</div>`)[0];
+                popup_5bfe3bfc018fc3b1e1b68e6a08a3faa3.setContent(html_d6d862a0c36ddb99e70cf48e7497fac6);
+            
+        
+
+        marker_13659379aa28596cae432395d6e7ab09.bindPopup(popup_5bfe3bfc018fc3b1e1b68e6a08a3faa3)
+        ;
+
+        
+    
+    
+            var marker_b4b924bf256fe200cec6fd0a09066949 = L.marker(
+                [32.1073026, 34.81477095],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_d65400b6dd2b3bf6d0a1832c19ed03ee = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_b4b924bf256fe200cec6fd0a09066949.setIcon(icon_d65400b6dd2b3bf6d0a1832c19ed03ee);
+        
+    
+        var popup_ce207af3c38c2f9482b75c4d3255e673 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d4be4b958082c4db64bcd1119eaacad5 = $(`<div id="html_d4be4b958082c4db64bcd1119eaacad5" style="width: 100.0%; height: 100.0%;">Additional Match: Phoenix dactylifera (ID: 4600007)</div>`)[0];
+                popup_ce207af3c38c2f9482b75c4d3255e673.setContent(html_d4be4b958082c4db64bcd1119eaacad5);
+            
+        
+
+        marker_b4b924bf256fe200cec6fd0a09066949.bindPopup(popup_ce207af3c38c2f9482b75c4d3255e673)
+        ;
+
+        
+    
+    
+            var marker_9dc8f3b10248399fbe556a46e20f5b86 = L.marker(
+                [32.10743115, 34.81478471],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_2193c01bb0c9861da220b4b4a563566f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_9dc8f3b10248399fbe556a46e20f5b86.setIcon(icon_2193c01bb0c9861da220b4b4a563566f);
+        
+    
+        var popup_8bceb14173754813e52eaf46a6ac8ece = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_fef31fe778dd3cf5116518081da4bd83 = $(`<div id="html_fef31fe778dd3cf5116518081da4bd83" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4614207)</div>`)[0];
+                popup_8bceb14173754813e52eaf46a6ac8ece.setContent(html_fef31fe778dd3cf5116518081da4bd83);
+            
+        
+
+        marker_9dc8f3b10248399fbe556a46e20f5b86.bindPopup(popup_8bceb14173754813e52eaf46a6ac8ece)
+        ;
+
+        
+    
+    
+            var marker_e316e43c382f29fc27cc4cb8918abfdc = L.marker(
+                [32.10742818, 34.8148163],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_2f1094ae3ae851bbd6330bbf58e1c81e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_e316e43c382f29fc27cc4cb8918abfdc.setIcon(icon_2f1094ae3ae851bbd6330bbf58e1c81e);
+        
+    
+        var popup_046ff2f1f080414217c3ecc3c152a27c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ffef9f0972e74567b0514ffc8affa450 = $(`<div id="html_ffef9f0972e74567b0514ffc8affa450" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4600008)</div>`)[0];
+                popup_046ff2f1f080414217c3ecc3c152a27c.setContent(html_ffef9f0972e74567b0514ffc8affa450);
+            
+        
+
+        marker_e316e43c382f29fc27cc4cb8918abfdc.bindPopup(popup_046ff2f1f080414217c3ecc3c152a27c)
+        ;
+
+        
+    
+    
+            var marker_d8afdd93c590087f4fba4f78031e6ba7 = L.marker(
+                [32.10747074151942, 34.81516972767331],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_3fcb08591025b79a0cee8d7fc015aeaf = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_d8afdd93c590087f4fba4f78031e6ba7.setIcon(icon_3fcb08591025b79a0cee8d7fc015aeaf);
+        
+    
+        var popup_5839f3186bd8da8a04a9263c677a5430 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b163ab6abdb9956606931958757ae456 = $(`<div id="html_b163ab6abdb9956606931958757ae456" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10747074151942,34.81516972767331&layer=c&cbll=32.10747074151942,34.81516972767331&cbp=12,240,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_5839f3186bd8da8a04a9263c677a5430.setContent(html_b163ab6abdb9956606931958757ae456);
+            
+        
+
+        marker_d8afdd93c590087f4fba4f78031e6ba7.bindPopup(popup_5839f3186bd8da8a04a9263c677a5430)
+        ;
+
+        
+    
+    
+            var marker_1513df9091d34f4fd230af3d106c29c6 = L.marker(
+                [32.10744233, 34.81487228],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_67727c926965ef6d9bc845172033107e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_1513df9091d34f4fd230af3d106c29c6.setIcon(icon_67727c926965ef6d9bc845172033107e);
+        
+    
+        var popup_e4d0ada3065cc0f39c25607bbbe81317 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b9a739f4b7bf756767c4e2d80a11554a = $(`<div id="html_b9a739f4b7bf756767c4e2d80a11554a" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600009)</div>`)[0];
+                popup_e4d0ada3065cc0f39c25607bbbe81317.setContent(html_b9a739f4b7bf756767c4e2d80a11554a);
+            
+        
+
+        marker_1513df9091d34f4fd230af3d106c29c6.bindPopup(popup_e4d0ada3065cc0f39c25607bbbe81317)
+        ;
+
+        
+    
+    
+            var marker_0600e6d5e3c4558233f893ac440dde7b = L.marker(
+                [32.1073026, 34.81477095],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_9dbc158340f1cc5e69e782c0b0bed8b2 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_0600e6d5e3c4558233f893ac440dde7b.setIcon(icon_9dbc158340f1cc5e69e782c0b0bed8b2);
+        
+    
+        var popup_67b1128bb97fdd881f31654af05afd46 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7f1c87f7552c8345c164c8a0e8150457 = $(`<div id="html_7f1c87f7552c8345c164c8a0e8150457" style="width: 100.0%; height: 100.0%;">Additional Match: Phoenix dactylifera (ID: 4600007)</div>`)[0];
+                popup_67b1128bb97fdd881f31654af05afd46.setContent(html_7f1c87f7552c8345c164c8a0e8150457);
+            
+        
+
+        marker_0600e6d5e3c4558233f893ac440dde7b.bindPopup(popup_67b1128bb97fdd881f31654af05afd46)
+        ;
+
+        
+    
+    
+            var marker_4eaba9d2cb4963a7d998d3556be57d12 = L.marker(
+                [32.10743115, 34.81478471],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_2fb76e68be3ec7c579ad2f85002aa1a0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_4eaba9d2cb4963a7d998d3556be57d12.setIcon(icon_2fb76e68be3ec7c579ad2f85002aa1a0);
+        
+    
+        var popup_1440d118a8d8fe469ca0a7e2132e9e5f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b1edd8279a6c553fc32395c940ee3133 = $(`<div id="html_b1edd8279a6c553fc32395c940ee3133" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4614207)</div>`)[0];
+                popup_1440d118a8d8fe469ca0a7e2132e9e5f.setContent(html_b1edd8279a6c553fc32395c940ee3133);
+            
+        
+
+        marker_4eaba9d2cb4963a7d998d3556be57d12.bindPopup(popup_1440d118a8d8fe469ca0a7e2132e9e5f)
+        ;
+
+        
+    
+    
+            var marker_a7a25d85618471cfdb0060b8884424fa = L.marker(
+                [32.10742818, 34.8148163],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_a58a725457fad45bba00141e946ffb8d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_a7a25d85618471cfdb0060b8884424fa.setIcon(icon_a58a725457fad45bba00141e946ffb8d);
+        
+    
+        var popup_44afda6f6741632a70570160fa883f69 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b1860c796e6de66fbbc7ddbb8f7f7b54 = $(`<div id="html_b1860c796e6de66fbbc7ddbb8f7f7b54" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4600008)</div>`)[0];
+                popup_44afda6f6741632a70570160fa883f69.setContent(html_b1860c796e6de66fbbc7ddbb8f7f7b54);
+            
+        
+
+        marker_a7a25d85618471cfdb0060b8884424fa.bindPopup(popup_44afda6f6741632a70570160fa883f69)
+        ;
+
+        
+    
+    
+            var marker_12a76fecc2f713db41f87f5064542c97 = L.marker(
+                [32.10747074151942, 34.81516972767331],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_cbe14af767be6e98033006faf16c4cf4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_12a76fecc2f713db41f87f5064542c97.setIcon(icon_cbe14af767be6e98033006faf16c4cf4);
+        
+    
+        var popup_91668790649749afc32eeadac484e9f0 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_39fdd4782a5f3ecf5908918d481fcd69 = $(`<div id="html_39fdd4782a5f3ecf5908918d481fcd69" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10747074151942,34.81516972767331&layer=c&cbll=32.10747074151942,34.81516972767331&cbp=12,240,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_91668790649749afc32eeadac484e9f0.setContent(html_39fdd4782a5f3ecf5908918d481fcd69);
+            
+        
+
+        marker_12a76fecc2f713db41f87f5064542c97.bindPopup(popup_91668790649749afc32eeadac484e9f0)
+        ;
+
+        
+    
+    
+            var marker_adb2490a7fae59b3e91f9ae22dc28ed9 = L.marker(
+                [32.10744233, 34.81487228],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_a8f01be3a7dd902ed134019d1c870b6b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_adb2490a7fae59b3e91f9ae22dc28ed9.setIcon(icon_a8f01be3a7dd902ed134019d1c870b6b);
+        
+    
+        var popup_459d6c71f977c9dcbfc71fbccc4dd226 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_668ffa3fe9f135471d2b90987d0b9d68 = $(`<div id="html_668ffa3fe9f135471d2b90987d0b9d68" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600009)</div>`)[0];
+                popup_459d6c71f977c9dcbfc71fbccc4dd226.setContent(html_668ffa3fe9f135471d2b90987d0b9d68);
+            
+        
+
+        marker_adb2490a7fae59b3e91f9ae22dc28ed9.bindPopup(popup_459d6c71f977c9dcbfc71fbccc4dd226)
+        ;
+
+        
+    
+    
+            var marker_5340e457f1dc4b803205250e265d8934 = L.marker(
+                [32.1073026, 34.81477095],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_fd544fc36681ad2d64bc6c3ecdac2f9f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_5340e457f1dc4b803205250e265d8934.setIcon(icon_fd544fc36681ad2d64bc6c3ecdac2f9f);
+        
+    
+        var popup_5418d3ede167bdb7e0c719919fb84071 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_fc624c6b3a0b145199e493c13ab72875 = $(`<div id="html_fc624c6b3a0b145199e493c13ab72875" style="width: 100.0%; height: 100.0%;">Additional Match: Phoenix dactylifera (ID: 4600007)</div>`)[0];
+                popup_5418d3ede167bdb7e0c719919fb84071.setContent(html_fc624c6b3a0b145199e493c13ab72875);
+            
+        
+
+        marker_5340e457f1dc4b803205250e265d8934.bindPopup(popup_5418d3ede167bdb7e0c719919fb84071)
+        ;
+
+        
+    
+    
+            var marker_b7cb94ae2c951e2cf2c288fa68a6128c = L.marker(
+                [32.10743115, 34.81478471],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_4ad636f2a33d453b52ce6a1c2fa42414 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_b7cb94ae2c951e2cf2c288fa68a6128c.setIcon(icon_4ad636f2a33d453b52ce6a1c2fa42414);
+        
+    
+        var popup_ecfc722cfbcf459ab22ef9a2d800d499 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_87298757c1c0b7d0fdfe2f011886f56d = $(`<div id="html_87298757c1c0b7d0fdfe2f011886f56d" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4614207)</div>`)[0];
+                popup_ecfc722cfbcf459ab22ef9a2d800d499.setContent(html_87298757c1c0b7d0fdfe2f011886f56d);
+            
+        
+
+        marker_b7cb94ae2c951e2cf2c288fa68a6128c.bindPopup(popup_ecfc722cfbcf459ab22ef9a2d800d499)
+        ;
+
+        
+    
+    
+            var marker_5561b12980fc0e73a6504cd0a3c4f7fa = L.marker(
+                [32.10742818, 34.8148163],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_6ba863eeebfce21a43754a7fc7f5c491 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_5561b12980fc0e73a6504cd0a3c4f7fa.setIcon(icon_6ba863eeebfce21a43754a7fc7f5c491);
+        
+    
+        var popup_ddc1fc248db586a8b16753242730cf69 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_25693a3b756882ba55cd8c46ae92f346 = $(`<div id="html_25693a3b756882ba55cd8c46ae92f346" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4600008)</div>`)[0];
+                popup_ddc1fc248db586a8b16753242730cf69.setContent(html_25693a3b756882ba55cd8c46ae92f346);
+            
+        
+
+        marker_5561b12980fc0e73a6504cd0a3c4f7fa.bindPopup(popup_ddc1fc248db586a8b16753242730cf69)
+        ;
+
+        
+    
+    
+            var marker_c3184a225895f9ee8b1ff6fa6d9df39e = L.marker(
+                [32.10747074151942, 34.81516972767331],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_77140479f7bb8200ddf66992c075e5ea = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_c3184a225895f9ee8b1ff6fa6d9df39e.setIcon(icon_77140479f7bb8200ddf66992c075e5ea);
+        
+    
+        var popup_bcd6303d2f556f715353810460171252 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d9c54dd1eddcf11b581358263ed3515c = $(`<div id="html_d9c54dd1eddcf11b581358263ed3515c" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10747074151942,34.81516972767331&layer=c&cbll=32.10747074151942,34.81516972767331&cbp=12,240,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_bcd6303d2f556f715353810460171252.setContent(html_d9c54dd1eddcf11b581358263ed3515c);
+            
+        
+
+        marker_c3184a225895f9ee8b1ff6fa6d9df39e.bindPopup(popup_bcd6303d2f556f715353810460171252)
+        ;
+
+        
+    
+    
+            var marker_b2256948ea316429422fd849394c5324 = L.marker(
+                [32.10744233, 34.81487228],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_f53fab7ce96f2a2ac6067538adf3d201 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_b2256948ea316429422fd849394c5324.setIcon(icon_f53fab7ce96f2a2ac6067538adf3d201);
+        
+    
+        var popup_b0e2beffba601f9c44c3f681a47b24ed = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_68da3376bb1389d1f349a5f7876f08eb = $(`<div id="html_68da3376bb1389d1f349a5f7876f08eb" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600009)</div>`)[0];
+                popup_b0e2beffba601f9c44c3f681a47b24ed.setContent(html_68da3376bb1389d1f349a5f7876f08eb);
+            
+        
+
+        marker_b2256948ea316429422fd849394c5324.bindPopup(popup_b0e2beffba601f9c44c3f681a47b24ed)
+        ;
+
+        
+    
+    
+            var marker_37fe27a2d3d18b8d65e469c3be62f850 = L.marker(
+                [32.1073026, 34.81477095],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_c1d54c0a61035566bbc6a0eaf97123a7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_37fe27a2d3d18b8d65e469c3be62f850.setIcon(icon_c1d54c0a61035566bbc6a0eaf97123a7);
+        
+    
+        var popup_701222d7bd5d14398c2a15411803c422 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5a035742afe752d3c197892635f030fa = $(`<div id="html_5a035742afe752d3c197892635f030fa" style="width: 100.0%; height: 100.0%;">Additional Match: Phoenix dactylifera (ID: 4600007)</div>`)[0];
+                popup_701222d7bd5d14398c2a15411803c422.setContent(html_5a035742afe752d3c197892635f030fa);
+            
+        
+
+        marker_37fe27a2d3d18b8d65e469c3be62f850.bindPopup(popup_701222d7bd5d14398c2a15411803c422)
+        ;
+
+        
+    
+    
+            var marker_02e2f73e9dad4fc37e073761da809c9a = L.marker(
+                [32.10743115, 34.81478471],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_4b0d5591a296e07b26adeec78350353a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_02e2f73e9dad4fc37e073761da809c9a.setIcon(icon_4b0d5591a296e07b26adeec78350353a);
+        
+    
+        var popup_a3ecdce03a666a07f9786a06c4a2c396 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d5bb7ade07bfa89660c199c3ab5b2f2b = $(`<div id="html_d5bb7ade07bfa89660c199c3ab5b2f2b" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4614207)</div>`)[0];
+                popup_a3ecdce03a666a07f9786a06c4a2c396.setContent(html_d5bb7ade07bfa89660c199c3ab5b2f2b);
+            
+        
+
+        marker_02e2f73e9dad4fc37e073761da809c9a.bindPopup(popup_a3ecdce03a666a07f9786a06c4a2c396)
+        ;
+
+        
+    
+    
+            var marker_a7b888efcab67dbec8a1ac058f6c0300 = L.marker(
+                [32.10742818, 34.8148163],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_5241e69eaa61202b0127591def1e3370 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_a7b888efcab67dbec8a1ac058f6c0300.setIcon(icon_5241e69eaa61202b0127591def1e3370);
+        
+    
+        var popup_2fc564fd72a1df4d2bc98cf61556da30 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0e6d75ab4cf0cc56842865528067e171 = $(`<div id="html_0e6d75ab4cf0cc56842865528067e171" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4600008)</div>`)[0];
+                popup_2fc564fd72a1df4d2bc98cf61556da30.setContent(html_0e6d75ab4cf0cc56842865528067e171);
+            
+        
+
+        marker_a7b888efcab67dbec8a1ac058f6c0300.bindPopup(popup_2fc564fd72a1df4d2bc98cf61556da30)
+        ;
+
+        
+    
+    
+            var marker_e36cadaef286d39eb2ea6958620914fa = L.marker(
+                [32.10747074151942, 34.81516972767331],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_62571b4d85515d6d62b8f21ae0738709 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_e36cadaef286d39eb2ea6958620914fa.setIcon(icon_62571b4d85515d6d62b8f21ae0738709);
+        
+    
+        var popup_3aaa2d32c66f3d2c3b833c2176faaa16 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_fcdf054563370a347984756b10a870e0 = $(`<div id="html_fcdf054563370a347984756b10a870e0" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10747074151942,34.81516972767331&layer=c&cbll=32.10747074151942,34.81516972767331&cbp=12,240,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_3aaa2d32c66f3d2c3b833c2176faaa16.setContent(html_fcdf054563370a347984756b10a870e0);
+            
+        
+
+        marker_e36cadaef286d39eb2ea6958620914fa.bindPopup(popup_3aaa2d32c66f3d2c3b833c2176faaa16)
+        ;
+
+        
+    
+    
+            var marker_3a3d3fcfd61ef782d632493a7622379f = L.marker(
+                [32.10744233, 34.81487228],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_f8b548de71e33f3697344ed2ffe58109 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_3a3d3fcfd61ef782d632493a7622379f.setIcon(icon_f8b548de71e33f3697344ed2ffe58109);
+        
+    
+        var popup_4b42f9c6403d59d0cb97a284afe58a8a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ce230e2a8126b69aa20551713542fb82 = $(`<div id="html_ce230e2a8126b69aa20551713542fb82" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600009)</div>`)[0];
+                popup_4b42f9c6403d59d0cb97a284afe58a8a.setContent(html_ce230e2a8126b69aa20551713542fb82);
+            
+        
+
+        marker_3a3d3fcfd61ef782d632493a7622379f.bindPopup(popup_4b42f9c6403d59d0cb97a284afe58a8a)
+        ;
+
+        
+    
+    
+            var marker_14f3417a08c84fc22522a7638671baae = L.marker(
+                [32.1073026, 34.81477095],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_74075cd25ea532e24a4e91e012a39aa5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_14f3417a08c84fc22522a7638671baae.setIcon(icon_74075cd25ea532e24a4e91e012a39aa5);
+        
+    
+        var popup_f011742ec8aaa3cef1d6b7d7222dbc99 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_bb6da0cc06b9410e9a1e32f3c9c1bb9f = $(`<div id="html_bb6da0cc06b9410e9a1e32f3c9c1bb9f" style="width: 100.0%; height: 100.0%;">Additional Match: Phoenix dactylifera (ID: 4600007)</div>`)[0];
+                popup_f011742ec8aaa3cef1d6b7d7222dbc99.setContent(html_bb6da0cc06b9410e9a1e32f3c9c1bb9f);
+            
+        
+
+        marker_14f3417a08c84fc22522a7638671baae.bindPopup(popup_f011742ec8aaa3cef1d6b7d7222dbc99)
+        ;
+
+        
+    
+    
+            var marker_b175065fd553395ce27fdce441493687 = L.marker(
+                [32.10743115, 34.81478471],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_2b0e2e6a9484c6b63d4a18e41e0543f9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_b175065fd553395ce27fdce441493687.setIcon(icon_2b0e2e6a9484c6b63d4a18e41e0543f9);
+        
+    
+        var popup_879cc2a0a9762d98ce8923c9783c0572 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_fdb94a1d32af4b37cb5e1e80f207949c = $(`<div id="html_fdb94a1d32af4b37cb5e1e80f207949c" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4614207)</div>`)[0];
+                popup_879cc2a0a9762d98ce8923c9783c0572.setContent(html_fdb94a1d32af4b37cb5e1e80f207949c);
+            
+        
+
+        marker_b175065fd553395ce27fdce441493687.bindPopup(popup_879cc2a0a9762d98ce8923c9783c0572)
+        ;
+
+        
+    
+    
+            var marker_d77250d815835d6e97a1b97478377a3e = L.marker(
+                [32.10742818, 34.8148163],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_632df32b2b1cde600593fa4bf15fdc6c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_d77250d815835d6e97a1b97478377a3e.setIcon(icon_632df32b2b1cde600593fa4bf15fdc6c);
+        
+    
+        var popup_963569c9580a427a8c5df53f6d9c36ab = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_04708fcd6b14df675680efe74c31c696 = $(`<div id="html_04708fcd6b14df675680efe74c31c696" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4600008)</div>`)[0];
+                popup_963569c9580a427a8c5df53f6d9c36ab.setContent(html_04708fcd6b14df675680efe74c31c696);
+            
+        
+
+        marker_d77250d815835d6e97a1b97478377a3e.bindPopup(popup_963569c9580a427a8c5df53f6d9c36ab)
+        ;
+
+        
+    
+    
+            var marker_46a01d8fce2aad4828425369cae82896 = L.marker(
+                [32.10747074151942, 34.81516972767331],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_f20447659be117de4c77510b310d5c27 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_46a01d8fce2aad4828425369cae82896.setIcon(icon_f20447659be117de4c77510b310d5c27);
+        
+    
+        var popup_ae4c91a798a340b0eaea67d397d8af6e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_dab697a79f2e126f8137ba815c833f5f = $(`<div id="html_dab697a79f2e126f8137ba815c833f5f" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10747074151942,34.81516972767331&layer=c&cbll=32.10747074151942,34.81516972767331&cbp=12,240,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_ae4c91a798a340b0eaea67d397d8af6e.setContent(html_dab697a79f2e126f8137ba815c833f5f);
+            
+        
+
+        marker_46a01d8fce2aad4828425369cae82896.bindPopup(popup_ae4c91a798a340b0eaea67d397d8af6e)
+        ;
+
+        
+    
+    
+            var marker_080829f3ab2a97c7226292059e89a481 = L.marker(
+                [32.10744233, 34.81487228],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_3190205fd8e5be08586eac52899397b3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_080829f3ab2a97c7226292059e89a481.setIcon(icon_3190205fd8e5be08586eac52899397b3);
+        
+    
+        var popup_f939e2906ba1e8a1f7cbb84ab9b05d45 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b6a72be10f2187155006b567c61e194d = $(`<div id="html_b6a72be10f2187155006b567c61e194d" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600009)</div>`)[0];
+                popup_f939e2906ba1e8a1f7cbb84ab9b05d45.setContent(html_b6a72be10f2187155006b567c61e194d);
+            
+        
+
+        marker_080829f3ab2a97c7226292059e89a481.bindPopup(popup_f939e2906ba1e8a1f7cbb84ab9b05d45)
+        ;
+
+        
+    
+    
+            var marker_481fc7687bd78087004bfd141c0a248a = L.marker(
+                [32.1073026, 34.81477095],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_d487811e78dde7f34f999d620d8c7862 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_481fc7687bd78087004bfd141c0a248a.setIcon(icon_d487811e78dde7f34f999d620d8c7862);
+        
+    
+        var popup_cf92d8e8f27d28cca97edb4ffda263aa = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_099ccb1307c383bacf08063aabcfe6e4 = $(`<div id="html_099ccb1307c383bacf08063aabcfe6e4" style="width: 100.0%; height: 100.0%;">Additional Match: Phoenix dactylifera (ID: 4600007)</div>`)[0];
+                popup_cf92d8e8f27d28cca97edb4ffda263aa.setContent(html_099ccb1307c383bacf08063aabcfe6e4);
+            
+        
+
+        marker_481fc7687bd78087004bfd141c0a248a.bindPopup(popup_cf92d8e8f27d28cca97edb4ffda263aa)
+        ;
+
+        
+    
+    
+            var marker_d551df705fce229bcd2ade3007324da4 = L.marker(
+                [32.10743115, 34.81478471],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_9739940553e133d820303a37201421b3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_d551df705fce229bcd2ade3007324da4.setIcon(icon_9739940553e133d820303a37201421b3);
+        
+    
+        var popup_594afaf578ac860197ca8afd74dce163 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_65b8525a574748e0466ccc6e2cbf5c4a = $(`<div id="html_65b8525a574748e0466ccc6e2cbf5c4a" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4614207)</div>`)[0];
+                popup_594afaf578ac860197ca8afd74dce163.setContent(html_65b8525a574748e0466ccc6e2cbf5c4a);
+            
+        
+
+        marker_d551df705fce229bcd2ade3007324da4.bindPopup(popup_594afaf578ac860197ca8afd74dce163)
+        ;
+
+        
+    
+    
+            var marker_43eea1a9b8be8618eb3d063a5b9752b6 = L.marker(
+                [32.10742818, 34.8148163],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_5227d887edb556175a1e9bc0c793693f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_43eea1a9b8be8618eb3d063a5b9752b6.setIcon(icon_5227d887edb556175a1e9bc0c793693f);
+        
+    
+        var popup_1fa4f63ebfe0dc7d54422525aaf43206 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a990963ef2e7d1462dbdaf11fd487ec1 = $(`<div id="html_a990963ef2e7d1462dbdaf11fd487ec1" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4600008)</div>`)[0];
+                popup_1fa4f63ebfe0dc7d54422525aaf43206.setContent(html_a990963ef2e7d1462dbdaf11fd487ec1);
+            
+        
+
+        marker_43eea1a9b8be8618eb3d063a5b9752b6.bindPopup(popup_1fa4f63ebfe0dc7d54422525aaf43206)
+        ;
+
+        
+    
+    
+            var marker_9c4b4a79cae53ea429fe6891de36a735 = L.marker(
+                [32.10747074151942, 34.81516972767331],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_78d44f98e9bb6b29daf0c611830ccf5b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_9c4b4a79cae53ea429fe6891de36a735.setIcon(icon_78d44f98e9bb6b29daf0c611830ccf5b);
+        
+    
+        var popup_63103f412256764ff5ca7fe3171b7060 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_598b047cc0091b06c3ccba8fe72130af = $(`<div id="html_598b047cc0091b06c3ccba8fe72130af" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10747074151942,34.81516972767331&layer=c&cbll=32.10747074151942,34.81516972767331&cbp=12,240,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_63103f412256764ff5ca7fe3171b7060.setContent(html_598b047cc0091b06c3ccba8fe72130af);
+            
+        
+
+        marker_9c4b4a79cae53ea429fe6891de36a735.bindPopup(popup_63103f412256764ff5ca7fe3171b7060)
+        ;
+
+        
+    
+    
+            var marker_9106fadcbc25ad7c858175ca07ed42f5 = L.marker(
+                [32.10744233, 34.81487228],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_883b64fbca4ace6215c1831d30afd73d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_9106fadcbc25ad7c858175ca07ed42f5.setIcon(icon_883b64fbca4ace6215c1831d30afd73d);
+        
+    
+        var popup_0fa0dfbd88f2491b37b83a86d39d476c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_fb4c63051950bd058298ef2afb7c3a30 = $(`<div id="html_fb4c63051950bd058298ef2afb7c3a30" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600009)</div>`)[0];
+                popup_0fa0dfbd88f2491b37b83a86d39d476c.setContent(html_fb4c63051950bd058298ef2afb7c3a30);
+            
+        
+
+        marker_9106fadcbc25ad7c858175ca07ed42f5.bindPopup(popup_0fa0dfbd88f2491b37b83a86d39d476c)
+        ;
+
+        
+    
+    
+            var marker_3b23dc607df829bfe7a96caa4bf3cbb9 = L.marker(
+                [32.1073026, 34.81477095],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_0bf271d1460ab8dfbc9e846c50086180 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_3b23dc607df829bfe7a96caa4bf3cbb9.setIcon(icon_0bf271d1460ab8dfbc9e846c50086180);
+        
+    
+        var popup_8dbb9cb4445865e95aac4d529196ad5f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9f2883ded291707e8dc094ade00583c3 = $(`<div id="html_9f2883ded291707e8dc094ade00583c3" style="width: 100.0%; height: 100.0%;">Additional Match: Phoenix dactylifera (ID: 4600007)</div>`)[0];
+                popup_8dbb9cb4445865e95aac4d529196ad5f.setContent(html_9f2883ded291707e8dc094ade00583c3);
+            
+        
+
+        marker_3b23dc607df829bfe7a96caa4bf3cbb9.bindPopup(popup_8dbb9cb4445865e95aac4d529196ad5f)
+        ;
+
+        
+    
+    
+            var marker_ef61bfd20fec8928d028eb43c9ee1b0e = L.marker(
+                [32.10743115, 34.81478471],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_de4d766af24023024bc6afc4a8ec6cf0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_ef61bfd20fec8928d028eb43c9ee1b0e.setIcon(icon_de4d766af24023024bc6afc4a8ec6cf0);
+        
+    
+        var popup_637b1ba7b3d483832724416b34abe148 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c6b6dc79f83a09e99f3da7b56435480e = $(`<div id="html_c6b6dc79f83a09e99f3da7b56435480e" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4614207)</div>`)[0];
+                popup_637b1ba7b3d483832724416b34abe148.setContent(html_c6b6dc79f83a09e99f3da7b56435480e);
+            
+        
+
+        marker_ef61bfd20fec8928d028eb43c9ee1b0e.bindPopup(popup_637b1ba7b3d483832724416b34abe148)
+        ;
+
+        
+    
+    
+            var marker_59c7bf5eacd0cb03912f0ea6a8aabf5b = L.marker(
+                [32.10742818, 34.8148163],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_cb1b8d8dfdfa2bd051f67b471ba45b7a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_59c7bf5eacd0cb03912f0ea6a8aabf5b.setIcon(icon_cb1b8d8dfdfa2bd051f67b471ba45b7a);
+        
+    
+        var popup_6cd94f1474d6204abe4f3affbfd09d19 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_424a2396a757172740140957226c53a8 = $(`<div id="html_424a2396a757172740140957226c53a8" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4600008)</div>`)[0];
+                popup_6cd94f1474d6204abe4f3affbfd09d19.setContent(html_424a2396a757172740140957226c53a8);
+            
+        
+
+        marker_59c7bf5eacd0cb03912f0ea6a8aabf5b.bindPopup(popup_6cd94f1474d6204abe4f3affbfd09d19)
+        ;
+
+        
+    
+    
+            var marker_191dbab6ab7fbaf2f51c81c760eefc33 = L.marker(
+                [32.10747074151942, 34.81516972767331],
+                {
+}
+            ).addTo(map_a52bfd33c964a4c5d1dcfb2dabb811af);
+        
+    
+            var icon_8c7e5cd270b3924990cb323f57896f10 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_191dbab6ab7fbaf2f51c81c760eefc33.setIcon(icon_8c7e5cd270b3924990cb323f57896f10);
+        
+    
+        var popup_04e75414d474149cddf01d8bee41558a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1471db5b1e8c1d6e0584db3a6f379a5f = $(`<div id="html_1471db5b1e8c1d6e0584db3a6f379a5f" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10747074151942,34.81516972767331&layer=c&cbll=32.10747074151942,34.81516972767331&cbp=12,240,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_04e75414d474149cddf01d8bee41558a.setContent(html_1471db5b1e8c1d6e0584db3a6f379a5f);
+            
+        
+
+        marker_191dbab6ab7fbaf2f51c81c760eefc33.bindPopup(popup_04e75414d474149cddf01d8bee41558a)
+        ;
+
+        
+    
+</script>
+</html>

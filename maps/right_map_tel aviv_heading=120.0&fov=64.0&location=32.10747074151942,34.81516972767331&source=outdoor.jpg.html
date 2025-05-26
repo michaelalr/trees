@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_e4ec55fd5c6f291015905b6a20a03d40 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+<div style="
+position: fixed;
+bottom: 50px;
+left: 50px;
+width: 200px;
+background-color: white;
+z-index:9999;
+font-size:14px;
+padding: 10px;
+border: 2px solid grey;
+border-radius: 8px;
+box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+">
+<b>Legend</b><br>
+<i class="fa fa-map-marker fa-2x" style="color:orange"></i> Car location<br>
+<i class="fa fa-map-marker fa-2x" style="color:red"></i> Detection location<br>
+<i class="fa fa-map-marker fa-2x" style="color:green"></i> Seker best match<br>
+<i class="fa fa-map-marker fa-2x" style="color:blue"></i> Seker additional match<br>
+</div>
+    
+            <div class="folium-map" id="map_e4ec55fd5c6f291015905b6a20a03d40" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_e4ec55fd5c6f291015905b6a20a03d40 = L.map(
+                "map_e4ec55fd5c6f291015905b6a20a03d40",
+                {
+                    center: [32.1059239977363, 34.81691604804596],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 15,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_f8173b631bf9c595c4b1dc7f06d02848 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_f8173b631bf9c595c4b1dc7f06d02848.addTo(map_e4ec55fd5c6f291015905b6a20a03d40);
+        
+    
+            var marker_7ca527acc340bd29eba028f0e3c893ee = L.marker(
+                [32.10744421, 34.81533813],
+                {
+}
+            ).addTo(map_e4ec55fd5c6f291015905b6a20a03d40);
+        
+    
+            var icon_22eba5b24a4af19c941438b43a7127b3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_7ca527acc340bd29eba028f0e3c893ee.setIcon(icon_22eba5b24a4af19c941438b43a7127b3);
+        
+    
+        var popup_5bce5ff891d3b5675486c228e10c673d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ee5f5894a8cec195376eb5f56c167f6c = $(`<div id="html_ee5f5894a8cec195376eb5f56c167f6c" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600045)</div>`)[0];
+                popup_5bce5ff891d3b5675486c228e10c673d.setContent(html_ee5f5894a8cec195376eb5f56c167f6c);
+            
+        
+
+        marker_7ca527acc340bd29eba028f0e3c893ee.bindPopup(popup_5bce5ff891d3b5675486c228e10c673d)
+        ;
+
+        
+    
+    
+            var marker_d0cceb5bdf833fb1c958710c11733bfc = L.marker(
+                [32.10741681, 34.81537131],
+                {
+}
+            ).addTo(map_e4ec55fd5c6f291015905b6a20a03d40);
+        
+    
+            var icon_42a6652c97e14a3c6b4bfa0d5dac9dc3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_d0cceb5bdf833fb1c958710c11733bfc.setIcon(icon_42a6652c97e14a3c6b4bfa0d5dac9dc3);
+        
+    
+        var popup_b0ccfe9bec0a3f663e520dcfc5120d87 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4a427dc8ad75e5abb826bf78bc53853e = $(`<div id="html_4a427dc8ad75e5abb826bf78bc53853e" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600046)</div>`)[0];
+                popup_b0ccfe9bec0a3f663e520dcfc5120d87.setContent(html_4a427dc8ad75e5abb826bf78bc53853e);
+            
+        
+
+        marker_d0cceb5bdf833fb1c958710c11733bfc.bindPopup(popup_b0ccfe9bec0a3f663e520dcfc5120d87)
+        ;
+
+        
+    
+    
+            var marker_c741a81bcf1e135ce9f2b045c39d0632 = L.marker(
+                [32.10747074151942, 34.81516972767331],
+                {
+}
+            ).addTo(map_e4ec55fd5c6f291015905b6a20a03d40);
+        
+    
+            var icon_ad5a51c63497bdec9c22bb0cad32f5cb = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_c741a81bcf1e135ce9f2b045c39d0632.setIcon(icon_ad5a51c63497bdec9c22bb0cad32f5cb);
+        
+    
+        var popup_c07c60eda9553ea674ce3e4857607e37 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_cf4db5e24bc49e343c15445bb2177600 = $(`<div id="html_cf4db5e24bc49e343c15445bb2177600" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10747074151942,34.81516972767331&layer=c&cbll=32.10747074151942,34.81516972767331&cbp=12,120,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_c07c60eda9553ea674ce3e4857607e37.setContent(html_cf4db5e24bc49e343c15445bb2177600);
+            
+        
+
+        marker_c741a81bcf1e135ce9f2b045c39d0632.bindPopup(popup_c07c60eda9553ea674ce3e4857607e37)
+        ;
+
+        
+    
+    
+            var marker_3d73906cc0802310ec14c05a73700f3a = L.marker(
+                [32.10744421, 34.81533813],
+                {
+}
+            ).addTo(map_e4ec55fd5c6f291015905b6a20a03d40);
+        
+    
+            var icon_08506419eb2b33709808fdca2a52ddec = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_3d73906cc0802310ec14c05a73700f3a.setIcon(icon_08506419eb2b33709808fdca2a52ddec);
+        
+    
+        var popup_c45faf40191318e2bd6356ac7553b6ea = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f5ea269899867df0d7eed43d201893a9 = $(`<div id="html_f5ea269899867df0d7eed43d201893a9" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600045)</div>`)[0];
+                popup_c45faf40191318e2bd6356ac7553b6ea.setContent(html_f5ea269899867df0d7eed43d201893a9);
+            
+        
+
+        marker_3d73906cc0802310ec14c05a73700f3a.bindPopup(popup_c45faf40191318e2bd6356ac7553b6ea)
+        ;
+
+        
+    
+    
+            var marker_a6dd86f6497376f3a3d70e005c5f3ec2 = L.marker(
+                [32.10741681, 34.81537131],
+                {
+}
+            ).addTo(map_e4ec55fd5c6f291015905b6a20a03d40);
+        
+    
+            var icon_a1c4eb62c04f6be6ff4b5d097145d0ff = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_a6dd86f6497376f3a3d70e005c5f3ec2.setIcon(icon_a1c4eb62c04f6be6ff4b5d097145d0ff);
+        
+    
+        var popup_b12f934929ca49076218ca050293b53a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c195e81ed586b2572647cfaa3459a432 = $(`<div id="html_c195e81ed586b2572647cfaa3459a432" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600046)</div>`)[0];
+                popup_b12f934929ca49076218ca050293b53a.setContent(html_c195e81ed586b2572647cfaa3459a432);
+            
+        
+
+        marker_a6dd86f6497376f3a3d70e005c5f3ec2.bindPopup(popup_b12f934929ca49076218ca050293b53a)
+        ;
+
+        
+    
+    
+            var marker_f4d36486a2ce0c774a716df66868c449 = L.marker(
+                [32.10747074151942, 34.81516972767331],
+                {
+}
+            ).addTo(map_e4ec55fd5c6f291015905b6a20a03d40);
+        
+    
+            var icon_94e65aa1cd1c8560d922307c7bd19c18 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_f4d36486a2ce0c774a716df66868c449.setIcon(icon_94e65aa1cd1c8560d922307c7bd19c18);
+        
+    
+        var popup_788daa9f30994196a2b9802053e747ee = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b9df1e4758dda527a56f08c6ec8f1f03 = $(`<div id="html_b9df1e4758dda527a56f08c6ec8f1f03" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10747074151942,34.81516972767331&layer=c&cbll=32.10747074151942,34.81516972767331&cbp=12,120,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_788daa9f30994196a2b9802053e747ee.setContent(html_b9df1e4758dda527a56f08c6ec8f1f03);
+            
+        
+
+        marker_f4d36486a2ce0c774a716df66868c449.bindPopup(popup_788daa9f30994196a2b9802053e747ee)
+        ;
+
+        
+    
+    
+            var marker_0f5574fd406b29a9418ce0d441e82af8 = L.marker(
+                [32.10744421, 34.81533813],
+                {
+}
+            ).addTo(map_e4ec55fd5c6f291015905b6a20a03d40);
+        
+    
+            var icon_e0adc974fc8b5b6ceaba6f16fc5773d1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_0f5574fd406b29a9418ce0d441e82af8.setIcon(icon_e0adc974fc8b5b6ceaba6f16fc5773d1);
+        
+    
+        var popup_1809fa934ec588acb04eeedc70e14c47 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_76f8fd7a758014af2ebc2d4a0be3a984 = $(`<div id="html_76f8fd7a758014af2ebc2d4a0be3a984" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600045)</div>`)[0];
+                popup_1809fa934ec588acb04eeedc70e14c47.setContent(html_76f8fd7a758014af2ebc2d4a0be3a984);
+            
+        
+
+        marker_0f5574fd406b29a9418ce0d441e82af8.bindPopup(popup_1809fa934ec588acb04eeedc70e14c47)
+        ;
+
+        
+    
+    
+            var marker_2b31e24b0d220c3bd0a0c7112bf87117 = L.marker(
+                [32.10741681, 34.81537131],
+                {
+}
+            ).addTo(map_e4ec55fd5c6f291015905b6a20a03d40);
+        
+    
+            var icon_7c579368a9622b17fff28140c9ebe441 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_2b31e24b0d220c3bd0a0c7112bf87117.setIcon(icon_7c579368a9622b17fff28140c9ebe441);
+        
+    
+        var popup_8f93106a4569f6d8d383ea48af6e5ea2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f2590a93ad4f141c7f9d1d3fd6b6b212 = $(`<div id="html_f2590a93ad4f141c7f9d1d3fd6b6b212" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600046)</div>`)[0];
+                popup_8f93106a4569f6d8d383ea48af6e5ea2.setContent(html_f2590a93ad4f141c7f9d1d3fd6b6b212);
+            
+        
+
+        marker_2b31e24b0d220c3bd0a0c7112bf87117.bindPopup(popup_8f93106a4569f6d8d383ea48af6e5ea2)
+        ;
+
+        
+    
+    
+            var marker_c88462d0f61c0f2ad51c2526799158ae = L.marker(
+                [32.10747074151942, 34.81516972767331],
+                {
+}
+            ).addTo(map_e4ec55fd5c6f291015905b6a20a03d40);
+        
+    
+            var icon_675f8f2a48db7dc3563f9b7258ff8e1a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_c88462d0f61c0f2ad51c2526799158ae.setIcon(icon_675f8f2a48db7dc3563f9b7258ff8e1a);
+        
+    
+        var popup_3e13459371e6076b68820e80f02a9ff7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8453264a5bdd28e6b2775879fcfbff48 = $(`<div id="html_8453264a5bdd28e6b2775879fcfbff48" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10747074151942,34.81516972767331&layer=c&cbll=32.10747074151942,34.81516972767331&cbp=12,120,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_3e13459371e6076b68820e80f02a9ff7.setContent(html_8453264a5bdd28e6b2775879fcfbff48);
+            
+        
+
+        marker_c88462d0f61c0f2ad51c2526799158ae.bindPopup(popup_3e13459371e6076b68820e80f02a9ff7)
+        ;
+
+        
+    
+    
+            var marker_42a4e0433f4d670ed0689232fa770406 = L.marker(
+                [32.10744421, 34.81533813],
+                {
+}
+            ).addTo(map_e4ec55fd5c6f291015905b6a20a03d40);
+        
+    
+            var icon_40a7555d60ddf61779143015367191ed = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_42a4e0433f4d670ed0689232fa770406.setIcon(icon_40a7555d60ddf61779143015367191ed);
+        
+    
+        var popup_5321f01380612a7ce5ddf4e80abc546d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_58962df876595d1c8a01b3c3739674b5 = $(`<div id="html_58962df876595d1c8a01b3c3739674b5" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600045)</div>`)[0];
+                popup_5321f01380612a7ce5ddf4e80abc546d.setContent(html_58962df876595d1c8a01b3c3739674b5);
+            
+        
+
+        marker_42a4e0433f4d670ed0689232fa770406.bindPopup(popup_5321f01380612a7ce5ddf4e80abc546d)
+        ;
+
+        
+    
+    
+            var marker_af00b4e28434750f3116fd45eb0087e6 = L.marker(
+                [32.10741681, 34.81537131],
+                {
+}
+            ).addTo(map_e4ec55fd5c6f291015905b6a20a03d40);
+        
+    
+            var icon_6fc2b86edb85463563e357e53ddbfd60 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_af00b4e28434750f3116fd45eb0087e6.setIcon(icon_6fc2b86edb85463563e357e53ddbfd60);
+        
+    
+        var popup_ce603bca18dbd9939c16df587bdd1da2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_da5a5b14f0f0447846e755840d835140 = $(`<div id="html_da5a5b14f0f0447846e755840d835140" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600046)</div>`)[0];
+                popup_ce603bca18dbd9939c16df587bdd1da2.setContent(html_da5a5b14f0f0447846e755840d835140);
+            
+        
+
+        marker_af00b4e28434750f3116fd45eb0087e6.bindPopup(popup_ce603bca18dbd9939c16df587bdd1da2)
+        ;
+
+        
+    
+    
+            var marker_da3ba9cbd73c5c3fa8f98492ec54d06e = L.marker(
+                [32.10747074151942, 34.81516972767331],
+                {
+}
+            ).addTo(map_e4ec55fd5c6f291015905b6a20a03d40);
+        
+    
+            var icon_074f1acacf80577be4659e116f854f9b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_da3ba9cbd73c5c3fa8f98492ec54d06e.setIcon(icon_074f1acacf80577be4659e116f854f9b);
+        
+    
+        var popup_49fe5fb8316d0602e454939be2d94040 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_70462d77f2432dc70a3f7efd8b496701 = $(`<div id="html_70462d77f2432dc70a3f7efd8b496701" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10747074151942,34.81516972767331&layer=c&cbll=32.10747074151942,34.81516972767331&cbp=12,120,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_49fe5fb8316d0602e454939be2d94040.setContent(html_70462d77f2432dc70a3f7efd8b496701);
+            
+        
+
+        marker_da3ba9cbd73c5c3fa8f98492ec54d06e.bindPopup(popup_49fe5fb8316d0602e454939be2d94040)
+        ;
+
+        
+    
+    
+            var marker_a70ba5a92273cca1bf60ec36b00a4b81 = L.marker(
+                [32.10732783, 34.81546577],
+                {
+}
+            ).addTo(map_e4ec55fd5c6f291015905b6a20a03d40);
+        
+    
+            var icon_07ec9c800f02ed67babe9cc452a87a8a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_a70ba5a92273cca1bf60ec36b00a4b81.setIcon(icon_07ec9c800f02ed67babe9cc452a87a8a);
+        
+    
+        var popup_223049a1cfc4cb44943d3fe00014cb09 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c2bd293af3b774f94feb7f9fa3dfc3d6 = $(`<div id="html_c2bd293af3b774f94feb7f9fa3dfc3d6" style="width: 100.0%; height: 100.0%;">Best Match: Phoenix dactylifera (ID: 4600047.0)</div>`)[0];
+                popup_223049a1cfc4cb44943d3fe00014cb09.setContent(html_c2bd293af3b774f94feb7f9fa3dfc3d6);
+            
+        
+
+        marker_a70ba5a92273cca1bf60ec36b00a4b81.bindPopup(popup_223049a1cfc4cb44943d3fe00014cb09)
+        ;
+
+        
+    
+    
+            var poly_line_da212423b40ed5760bf4514df2cfb3ec = L.polyline(
+                [[32.10732783, 34.81546577], [32.10740112252734, 34.81539773908471]],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "black", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_e4ec55fd5c6f291015905b6a20a03d40);
+        
+    
+        var popup_b9cd1686a18187148988c44699d64b24 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_16f7905ba11eb69fe4066d9ea74e701b = $(`<div id="html_16f7905ba11eb69fe4066d9ea74e701b" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 5, angle: 2.31898068583274</div>`)[0];
+                popup_b9cd1686a18187148988c44699d64b24.setContent(html_16f7905ba11eb69fe4066d9ea74e701b);
+            
+        
+
+        poly_line_da212423b40ed5760bf4514df2cfb3ec.bindPopup(popup_b9cd1686a18187148988c44699d64b24)
+        ;
+
+        
+    
+    
+            var marker_093b935e7ecd6d162256b08fe47cb5bf = L.marker(
+                [32.10744421, 34.81533813],
+                {
+}
+            ).addTo(map_e4ec55fd5c6f291015905b6a20a03d40);
+        
+    
+            var icon_4d58f9b152bcb558b2dcc810608a01bf = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_093b935e7ecd6d162256b08fe47cb5bf.setIcon(icon_4d58f9b152bcb558b2dcc810608a01bf);
+        
+    
+        var popup_51ce172172df7c7fd3111014901ee907 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_add9811957b980bed70796209a1eeb21 = $(`<div id="html_add9811957b980bed70796209a1eeb21" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600045)</div>`)[0];
+                popup_51ce172172df7c7fd3111014901ee907.setContent(html_add9811957b980bed70796209a1eeb21);
+            
+        
+
+        marker_093b935e7ecd6d162256b08fe47cb5bf.bindPopup(popup_51ce172172df7c7fd3111014901ee907)
+        ;
+
+        
+    
+    
+            var marker_eb532c0d348d9ca9d5f0411cf675683c = L.marker(
+                [32.10741681, 34.81537131],
+                {
+}
+            ).addTo(map_e4ec55fd5c6f291015905b6a20a03d40);
+        
+    
+            var icon_1aceb1bb23ec518c90bc131572a505ff = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_eb532c0d348d9ca9d5f0411cf675683c.setIcon(icon_1aceb1bb23ec518c90bc131572a505ff);
+        
+    
+        var popup_72b9ae1020d6ad9823a410d878c858eb = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f1a5ee4d8e49a451ae0de28c5ff95cbb = $(`<div id="html_f1a5ee4d8e49a451ae0de28c5ff95cbb" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600046)</div>`)[0];
+                popup_72b9ae1020d6ad9823a410d878c858eb.setContent(html_f1a5ee4d8e49a451ae0de28c5ff95cbb);
+            
+        
+
+        marker_eb532c0d348d9ca9d5f0411cf675683c.bindPopup(popup_72b9ae1020d6ad9823a410d878c858eb)
+        ;
+
+        
+    
+    
+            var marker_6c0c1fe4d23210e0aa84a4cb28b6b633 = L.marker(
+                [32.10747074151942, 34.81516972767331],
+                {
+}
+            ).addTo(map_e4ec55fd5c6f291015905b6a20a03d40);
+        
+    
+            var icon_8eced74d0b00ac671d8b6798d25dbb98 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_6c0c1fe4d23210e0aa84a4cb28b6b633.setIcon(icon_8eced74d0b00ac671d8b6798d25dbb98);
+        
+    
+        var popup_e778e3204f0ec7d1e7aa7ade48a706f9 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3d52d3dc93f9d3a703b0796dfeae8e24 = $(`<div id="html_3d52d3dc93f9d3a703b0796dfeae8e24" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10747074151942,34.81516972767331&layer=c&cbll=32.10747074151942,34.81516972767331&cbp=12,120,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_e778e3204f0ec7d1e7aa7ade48a706f9.setContent(html_3d52d3dc93f9d3a703b0796dfeae8e24);
+            
+        
+
+        marker_6c0c1fe4d23210e0aa84a4cb28b6b633.bindPopup(popup_e778e3204f0ec7d1e7aa7ade48a706f9)
+        ;
+
+        
+    
+    
+            var marker_4f2ac460a83eddd278bbbd124acd68a2 = L.marker(
+                [32.10744421, 34.81533813],
+                {
+}
+            ).addTo(map_e4ec55fd5c6f291015905b6a20a03d40);
+        
+    
+            var icon_2bf459d00a2f6729627793461e3ed4c5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_4f2ac460a83eddd278bbbd124acd68a2.setIcon(icon_2bf459d00a2f6729627793461e3ed4c5);
+        
+    
+        var popup_1f846d9d6ec5c04a909a1f136653e5cd = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_593ba7d595a1af2d94ee2081e1b02ae0 = $(`<div id="html_593ba7d595a1af2d94ee2081e1b02ae0" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600045)</div>`)[0];
+                popup_1f846d9d6ec5c04a909a1f136653e5cd.setContent(html_593ba7d595a1af2d94ee2081e1b02ae0);
+            
+        
+
+        marker_4f2ac460a83eddd278bbbd124acd68a2.bindPopup(popup_1f846d9d6ec5c04a909a1f136653e5cd)
+        ;
+
+        
+    
+    
+            var marker_b9a281db33579b260c8f64cdb134669d = L.marker(
+                [32.10741681, 34.81537131],
+                {
+}
+            ).addTo(map_e4ec55fd5c6f291015905b6a20a03d40);
+        
+    
+            var icon_45515043ea2fcd2153d607bc06efce32 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_b9a281db33579b260c8f64cdb134669d.setIcon(icon_45515043ea2fcd2153d607bc06efce32);
+        
+    
+        var popup_6f97d881275c77ff2d0beff92cbe3e17 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b7139789ab356fdcd63d56e9b02c5bfe = $(`<div id="html_b7139789ab356fdcd63d56e9b02c5bfe" style="width: 100.0%; height: 100.0%;">Additional Match: Olea europaea (ID: 4600046)</div>`)[0];
+                popup_6f97d881275c77ff2d0beff92cbe3e17.setContent(html_b7139789ab356fdcd63d56e9b02c5bfe);
+            
+        
+
+        marker_b9a281db33579b260c8f64cdb134669d.bindPopup(popup_6f97d881275c77ff2d0beff92cbe3e17)
+        ;
+
+        
+    
+    
+            var marker_aaaabfa090e67ee505818227ec11b3ae = L.marker(
+                [32.10747074151942, 34.81516972767331],
+                {
+}
+            ).addTo(map_e4ec55fd5c6f291015905b6a20a03d40);
+        
+    
+            var icon_7c24ec7b3af0203c99e0017733692e30 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_aaaabfa090e67ee505818227ec11b3ae.setIcon(icon_7c24ec7b3af0203c99e0017733692e30);
+        
+    
+        var popup_699d66c65d7831dbf1fbd3dd93af2d34 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c037a05a61629d7a7cb579d298418f95 = $(`<div id="html_c037a05a61629d7a7cb579d298418f95" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10747074151942,34.81516972767331&layer=c&cbll=32.10747074151942,34.81516972767331&cbp=12,120,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_699d66c65d7831dbf1fbd3dd93af2d34.setContent(html_c037a05a61629d7a7cb579d298418f95);
+            
+        
+
+        marker_aaaabfa090e67ee505818227ec11b3ae.bindPopup(popup_699d66c65d7831dbf1fbd3dd93af2d34)
+        ;
+
+        
+    
+</script>
+</html>

@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_c8fbcd16643b187715d814d6f860b974 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+<div style="
+position: fixed;
+bottom: 50px;
+left: 50px;
+width: 200px;
+background-color: white;
+z-index:9999;
+font-size:14px;
+padding: 10px;
+border: 2px solid grey;
+border-radius: 8px;
+box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+">
+<b>Legend</b><br>
+<i class="fa fa-map-marker fa-2x" style="color:orange"></i> Car location<br>
+<i class="fa fa-map-marker fa-2x" style="color:red"></i> Detection location<br>
+<i class="fa fa-map-marker fa-2x" style="color:green"></i> Seker best match<br>
+<i class="fa fa-map-marker fa-2x" style="color:blue"></i> Seker additional match<br>
+</div>
+    
+            <div class="folium-map" id="map_c8fbcd16643b187715d814d6f860b974" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_c8fbcd16643b187715d814d6f860b974 = L.map(
+                "map_c8fbcd16643b187715d814d6f860b974",
+                {
+                    center: [32.1078297624814, 34.81582232409393],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 15,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_5e64279d0c83ed5e0ddc796483ac2ddb = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_5e64279d0c83ed5e0ddc796483ac2ddb.addTo(map_c8fbcd16643b187715d814d6f860b974);
+        
+    
+            var marker_f49a4c4183e41f83f3497f61278625e0 = L.marker(
+                [32.10762863, 34.81545549],
+                {
+}
+            ).addTo(map_c8fbcd16643b187715d814d6f860b974);
+        
+    
+            var icon_f110d8259542db3cb362409c7a9ff748 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_f49a4c4183e41f83f3497f61278625e0.setIcon(icon_f110d8259542db3cb362409c7a9ff748);
+        
+    
+        var popup_d69cb76c24a644b5872f944217977d48 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5c48d0b09fe7d163f2357816896eb42f = $(`<div id="html_5c48d0b09fe7d163f2357816896eb42f" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4600036)</div>`)[0];
+                popup_d69cb76c24a644b5872f944217977d48.setContent(html_5c48d0b09fe7d163f2357816896eb42f);
+            
+        
+
+        marker_f49a4c4183e41f83f3497f61278625e0.bindPopup(popup_d69cb76c24a644b5872f944217977d48)
+        ;
+
+        
+    
+    
+            var marker_d1822c556a2f3262e540307f4ed1e910 = L.marker(
+                [32.10767337, 34.81551929],
+                {
+}
+            ).addTo(map_c8fbcd16643b187715d814d6f860b974);
+        
+    
+            var icon_5a80929b7cc606c3675118f7ee02bc06 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_d1822c556a2f3262e540307f4ed1e910.setIcon(icon_5a80929b7cc606c3675118f7ee02bc06);
+        
+    
+        var popup_2d1a162132b85b35651d309dfca816d2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c10f9ad512d212f7f10be66b2a19ac72 = $(`<div id="html_c10f9ad512d212f7f10be66b2a19ac72" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4614351)</div>`)[0];
+                popup_2d1a162132b85b35651d309dfca816d2.setContent(html_c10f9ad512d212f7f10be66b2a19ac72);
+            
+        
+
+        marker_d1822c556a2f3262e540307f4ed1e910.bindPopup(popup_2d1a162132b85b35651d309dfca816d2)
+        ;
+
+        
+    
+    
+            var marker_126b324d19fb183d6ede59a02f4e755d = L.marker(
+                [32.10754123092221, 34.81532255358455],
+                {
+}
+            ).addTo(map_c8fbcd16643b187715d814d6f860b974);
+        
+    
+            var icon_618b92a8c494c71ec7e1e78747dbfa2f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_126b324d19fb183d6ede59a02f4e755d.setIcon(icon_618b92a8c494c71ec7e1e78747dbfa2f);
+        
+    
+        var popup_ea6e589adbd2bebd76185d2934860c81 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c7fcaf9d82470f6ce2360b84065b2099 = $(`<div id="html_c7fcaf9d82470f6ce2360b84065b2099" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10754123092221,34.81532255358455&layer=c&cbll=32.10754123092221,34.81532255358455&cbp=12,60,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_ea6e589adbd2bebd76185d2934860c81.setContent(html_c7fcaf9d82470f6ce2360b84065b2099);
+            
+        
+
+        marker_126b324d19fb183d6ede59a02f4e755d.bindPopup(popup_ea6e589adbd2bebd76185d2934860c81)
+        ;
+
+        
+    
+    
+            var marker_6d374eace17c2e957106da1698b6233b = L.marker(
+                [32.10762863, 34.81545549],
+                {
+}
+            ).addTo(map_c8fbcd16643b187715d814d6f860b974);
+        
+    
+            var icon_0523016cad43adf6b5374ebf71cef824 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_6d374eace17c2e957106da1698b6233b.setIcon(icon_0523016cad43adf6b5374ebf71cef824);
+        
+    
+        var popup_912c6d1b27f9cba4d2ba720e22c32978 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0e0fe8155e025122855be6635fd61dc7 = $(`<div id="html_0e0fe8155e025122855be6635fd61dc7" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4600036)</div>`)[0];
+                popup_912c6d1b27f9cba4d2ba720e22c32978.setContent(html_0e0fe8155e025122855be6635fd61dc7);
+            
+        
+
+        marker_6d374eace17c2e957106da1698b6233b.bindPopup(popup_912c6d1b27f9cba4d2ba720e22c32978)
+        ;
+
+        
+    
+    
+            var marker_340ce08bb106ae62b029177fbf72c7c2 = L.marker(
+                [32.10767337, 34.81551929],
+                {
+}
+            ).addTo(map_c8fbcd16643b187715d814d6f860b974);
+        
+    
+            var icon_3405e011b1124f7bf62ede5ba5e75745 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_340ce08bb106ae62b029177fbf72c7c2.setIcon(icon_3405e011b1124f7bf62ede5ba5e75745);
+        
+    
+        var popup_a73ac7032832a79791659bdd2ba4e9f3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6971d7d475d52e49a26bf8a5314d1876 = $(`<div id="html_6971d7d475d52e49a26bf8a5314d1876" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4614351)</div>`)[0];
+                popup_a73ac7032832a79791659bdd2ba4e9f3.setContent(html_6971d7d475d52e49a26bf8a5314d1876);
+            
+        
+
+        marker_340ce08bb106ae62b029177fbf72c7c2.bindPopup(popup_a73ac7032832a79791659bdd2ba4e9f3)
+        ;
+
+        
+    
+    
+            var marker_219fe4143f709e9fe961ec51b5e744fb = L.marker(
+                [32.10754123092221, 34.81532255358455],
+                {
+}
+            ).addTo(map_c8fbcd16643b187715d814d6f860b974);
+        
+    
+            var icon_38269ce0aceb5f9e2bf47349673f3628 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_219fe4143f709e9fe961ec51b5e744fb.setIcon(icon_38269ce0aceb5f9e2bf47349673f3628);
+        
+    
+        var popup_05ea29e58b65b35beb7941a5880acb8a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_28dac92c4dfd8ee514dbd406e5020409 = $(`<div id="html_28dac92c4dfd8ee514dbd406e5020409" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10754123092221,34.81532255358455&layer=c&cbll=32.10754123092221,34.81532255358455&cbp=12,60,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_05ea29e58b65b35beb7941a5880acb8a.setContent(html_28dac92c4dfd8ee514dbd406e5020409);
+            
+        
+
+        marker_219fe4143f709e9fe961ec51b5e744fb.bindPopup(popup_05ea29e58b65b35beb7941a5880acb8a)
+        ;
+
+        
+    
+    
+            var marker_42ac02c0ce7310cc2168b76a11b269ea = L.marker(
+                [32.10762863, 34.81545549],
+                {
+}
+            ).addTo(map_c8fbcd16643b187715d814d6f860b974);
+        
+    
+            var icon_eed0d23ff2bab19713fc1af0905bdd56 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_42ac02c0ce7310cc2168b76a11b269ea.setIcon(icon_eed0d23ff2bab19713fc1af0905bdd56);
+        
+    
+        var popup_f4ef000b8ca7e8b33e4715af8db798b3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_beb40fb2003fc1d3b04c147e28cbe781 = $(`<div id="html_beb40fb2003fc1d3b04c147e28cbe781" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4600036)</div>`)[0];
+                popup_f4ef000b8ca7e8b33e4715af8db798b3.setContent(html_beb40fb2003fc1d3b04c147e28cbe781);
+            
+        
+
+        marker_42ac02c0ce7310cc2168b76a11b269ea.bindPopup(popup_f4ef000b8ca7e8b33e4715af8db798b3)
+        ;
+
+        
+    
+    
+            var marker_05bad61fd364ebddf21b266e924c82e0 = L.marker(
+                [32.10767337, 34.81551929],
+                {
+}
+            ).addTo(map_c8fbcd16643b187715d814d6f860b974);
+        
+    
+            var icon_898d609e999e661b5ef65cc0435a5dde = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_05bad61fd364ebddf21b266e924c82e0.setIcon(icon_898d609e999e661b5ef65cc0435a5dde);
+        
+    
+        var popup_70722405ee12f03cd5bbc7af23be6a6b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b349793bb441e43fa55df564c23f2a8f = $(`<div id="html_b349793bb441e43fa55df564c23f2a8f" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4614351)</div>`)[0];
+                popup_70722405ee12f03cd5bbc7af23be6a6b.setContent(html_b349793bb441e43fa55df564c23f2a8f);
+            
+        
+
+        marker_05bad61fd364ebddf21b266e924c82e0.bindPopup(popup_70722405ee12f03cd5bbc7af23be6a6b)
+        ;
+
+        
+    
+    
+            var marker_4bedd24ebd598e59cd5be9defe8b0838 = L.marker(
+                [32.10754123092221, 34.81532255358455],
+                {
+}
+            ).addTo(map_c8fbcd16643b187715d814d6f860b974);
+        
+    
+            var icon_4ecb2068f440aa21d7e030b53961a3b3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_4bedd24ebd598e59cd5be9defe8b0838.setIcon(icon_4ecb2068f440aa21d7e030b53961a3b3);
+        
+    
+        var popup_d80b0f97f9f01689cede4836d62f16f2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_791b07ecdb1f6d81740a77d2c3f2fd8b = $(`<div id="html_791b07ecdb1f6d81740a77d2c3f2fd8b" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10754123092221,34.81532255358455&layer=c&cbll=32.10754123092221,34.81532255358455&cbp=12,60,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_d80b0f97f9f01689cede4836d62f16f2.setContent(html_791b07ecdb1f6d81740a77d2c3f2fd8b);
+            
+        
+
+        marker_4bedd24ebd598e59cd5be9defe8b0838.bindPopup(popup_d80b0f97f9f01689cede4836d62f16f2)
+        ;
+
+        
+    
+    
+            var marker_3cce3d97820c69fa5800716963e08f13 = L.marker(
+                [32.10758243, 34.81550442],
+                {
+}
+            ).addTo(map_c8fbcd16643b187715d814d6f860b974);
+        
+    
+            var icon_c04c42c2762104b7372fc40730fc6162 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_3cce3d97820c69fa5800716963e08f13.setIcon(icon_c04c42c2762104b7372fc40730fc6162);
+        
+    
+        var popup_695532e78b7e6f5f1174e308a7ac750c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ec6ab3dfee6ec737b36448456b76c025 = $(`<div id="html_ec6ab3dfee6ec737b36448456b76c025" style="width: 100.0%; height: 100.0%;">Best Match: Fraxinus syriaca (ID: 4600037.0)</div>`)[0];
+                popup_695532e78b7e6f5f1174e308a7ac750c.setContent(html_ec6ab3dfee6ec737b36448456b76c025);
+            
+        
+
+        marker_3cce3d97820c69fa5800716963e08f13.bindPopup(popup_695532e78b7e6f5f1174e308a7ac750c)
+        ;
+
+        
+    
+    
+            var poly_line_0dcac8c24ee07fbd2a3e170d9590fea9 = L.polyline(
+                [[32.10758243, 34.81550442], [32.107677358602054, 34.81553586138216]],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "black", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_c8fbcd16643b187715d814d6f860b974);
+        
+    
+        var popup_59f8017f8ccf0ca4c57f5434f1c11204 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_fa4451b82272d805d0b169f8cc6b4bdb = $(`<div id="html_fa4451b82272d805d0b169f8cc6b4bdb" style="width: 100.0%; height: 100.0%;">Detection: Tree Index 4, angle: 1.250957229966047</div>`)[0];
+                popup_59f8017f8ccf0ca4c57f5434f1c11204.setContent(html_fa4451b82272d805d0b169f8cc6b4bdb);
+            
+        
+
+        poly_line_0dcac8c24ee07fbd2a3e170d9590fea9.bindPopup(popup_59f8017f8ccf0ca4c57f5434f1c11204)
+        ;
+
+        
+    
+    
+            var marker_c5e6905f848230b0c73b9dc46c703b76 = L.marker(
+                [32.10762863, 34.81545549],
+                {
+}
+            ).addTo(map_c8fbcd16643b187715d814d6f860b974);
+        
+    
+            var icon_7de7f10040afa2e81ba3a40cfac71351 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_c5e6905f848230b0c73b9dc46c703b76.setIcon(icon_7de7f10040afa2e81ba3a40cfac71351);
+        
+    
+        var popup_0208c2de6cf5f7294af6143e76b9f667 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5a46b43e0bf83bd77a41853f59f36489 = $(`<div id="html_5a46b43e0bf83bd77a41853f59f36489" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4600036)</div>`)[0];
+                popup_0208c2de6cf5f7294af6143e76b9f667.setContent(html_5a46b43e0bf83bd77a41853f59f36489);
+            
+        
+
+        marker_c5e6905f848230b0c73b9dc46c703b76.bindPopup(popup_0208c2de6cf5f7294af6143e76b9f667)
+        ;
+
+        
+    
+    
+            var marker_986b8265ca43e93fcee6cd96050eaec5 = L.marker(
+                [32.10767337, 34.81551929],
+                {
+}
+            ).addTo(map_c8fbcd16643b187715d814d6f860b974);
+        
+    
+            var icon_642230b177e3bd451b42670ed1d2c5a0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_986b8265ca43e93fcee6cd96050eaec5.setIcon(icon_642230b177e3bd451b42670ed1d2c5a0);
+        
+    
+        var popup_80c8e1ff85c1a879952bb2e586a20441 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_345f08bf7740b939c274c2ffbc98f70e = $(`<div id="html_345f08bf7740b939c274c2ffbc98f70e" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4614351)</div>`)[0];
+                popup_80c8e1ff85c1a879952bb2e586a20441.setContent(html_345f08bf7740b939c274c2ffbc98f70e);
+            
+        
+
+        marker_986b8265ca43e93fcee6cd96050eaec5.bindPopup(popup_80c8e1ff85c1a879952bb2e586a20441)
+        ;
+
+        
+    
+    
+            var marker_7cd3313664c037debaf809271baea9d1 = L.marker(
+                [32.10754123092221, 34.81532255358455],
+                {
+}
+            ).addTo(map_c8fbcd16643b187715d814d6f860b974);
+        
+    
+            var icon_eeb2b747d16820935203ab675c3f2e73 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_7cd3313664c037debaf809271baea9d1.setIcon(icon_eeb2b747d16820935203ab675c3f2e73);
+        
+    
+        var popup_b5e6ec5da3be3a03df0f4e1bdfd440c0 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3705c16d3afec35a0d0a9a048c269c9d = $(`<div id="html_3705c16d3afec35a0d0a9a048c269c9d" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10754123092221,34.81532255358455&layer=c&cbll=32.10754123092221,34.81532255358455&cbp=12,60,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_b5e6ec5da3be3a03df0f4e1bdfd440c0.setContent(html_3705c16d3afec35a0d0a9a048c269c9d);
+            
+        
+
+        marker_7cd3313664c037debaf809271baea9d1.bindPopup(popup_b5e6ec5da3be3a03df0f4e1bdfd440c0)
+        ;
+
+        
+    
+    
+            var marker_e20acf2397539a89bf4f7b5aff983569 = L.marker(
+                [32.10762863, 34.81545549],
+                {
+}
+            ).addTo(map_c8fbcd16643b187715d814d6f860b974);
+        
+    
+            var icon_ea585432d3ed00396bd58233be529351 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_e20acf2397539a89bf4f7b5aff983569.setIcon(icon_ea585432d3ed00396bd58233be529351);
+        
+    
+        var popup_ec66db449f0de28669d53972cf7ab6e0 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0cb132d693f70901edf6ae8510fd5f80 = $(`<div id="html_0cb132d693f70901edf6ae8510fd5f80" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4600036)</div>`)[0];
+                popup_ec66db449f0de28669d53972cf7ab6e0.setContent(html_0cb132d693f70901edf6ae8510fd5f80);
+            
+        
+
+        marker_e20acf2397539a89bf4f7b5aff983569.bindPopup(popup_ec66db449f0de28669d53972cf7ab6e0)
+        ;
+
+        
+    
+    
+            var marker_22cc284d7feb321db36e80a4797ad947 = L.marker(
+                [32.10767337, 34.81551929],
+                {
+}
+            ).addTo(map_c8fbcd16643b187715d814d6f860b974);
+        
+    
+            var icon_e33714d3c359aa03e5223bffde773df7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_22cc284d7feb321db36e80a4797ad947.setIcon(icon_e33714d3c359aa03e5223bffde773df7);
+        
+    
+        var popup_ae5ceeffb8212bf48592756962f99593 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9504aa744b4a1314fe1b71d287aa5c6c = $(`<div id="html_9504aa744b4a1314fe1b71d287aa5c6c" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4614351)</div>`)[0];
+                popup_ae5ceeffb8212bf48592756962f99593.setContent(html_9504aa744b4a1314fe1b71d287aa5c6c);
+            
+        
+
+        marker_22cc284d7feb321db36e80a4797ad947.bindPopup(popup_ae5ceeffb8212bf48592756962f99593)
+        ;
+
+        
+    
+    
+            var marker_0503ef398139c37f9cad85c0eb3778f1 = L.marker(
+                [32.10754123092221, 34.81532255358455],
+                {
+}
+            ).addTo(map_c8fbcd16643b187715d814d6f860b974);
+        
+    
+            var icon_74bbc8cf408895d21dc5dc22296d4cac = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_0503ef398139c37f9cad85c0eb3778f1.setIcon(icon_74bbc8cf408895d21dc5dc22296d4cac);
+        
+    
+        var popup_5a45ed2871ebf7be69549152a3ef7153 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d5279eb694ed83b665561dfd963ed4b5 = $(`<div id="html_d5279eb694ed83b665561dfd963ed4b5" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10754123092221,34.81532255358455&layer=c&cbll=32.10754123092221,34.81532255358455&cbp=12,60,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_5a45ed2871ebf7be69549152a3ef7153.setContent(html_d5279eb694ed83b665561dfd963ed4b5);
+            
+        
+
+        marker_0503ef398139c37f9cad85c0eb3778f1.bindPopup(popup_5a45ed2871ebf7be69549152a3ef7153)
+        ;
+
+        
+    
+    
+            var marker_ff1653500bc9f93631708615c6ed75e7 = L.marker(
+                [32.10762863, 34.81545549],
+                {
+}
+            ).addTo(map_c8fbcd16643b187715d814d6f860b974);
+        
+    
+            var icon_352985765e434e6c0684ccfbca5d78b1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_ff1653500bc9f93631708615c6ed75e7.setIcon(icon_352985765e434e6c0684ccfbca5d78b1);
+        
+    
+        var popup_b8b12f9022fa9d2821636149c5099f89 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5f55635eb3b0921360ba1a0843b07606 = $(`<div id="html_5f55635eb3b0921360ba1a0843b07606" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4600036)</div>`)[0];
+                popup_b8b12f9022fa9d2821636149c5099f89.setContent(html_5f55635eb3b0921360ba1a0843b07606);
+            
+        
+
+        marker_ff1653500bc9f93631708615c6ed75e7.bindPopup(popup_b8b12f9022fa9d2821636149c5099f89)
+        ;
+
+        
+    
+    
+            var marker_4d36c0181819e2ea6d06bb24ace0679d = L.marker(
+                [32.10767337, 34.81551929],
+                {
+}
+            ).addTo(map_c8fbcd16643b187715d814d6f860b974);
+        
+    
+            var icon_8fb1c727b6c148f25fde9febcc64b68b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_4d36c0181819e2ea6d06bb24ace0679d.setIcon(icon_8fb1c727b6c148f25fde9febcc64b68b);
+        
+    
+        var popup_419af734efb37cb151ea40db91540dd7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f74409e0f1cebe39180402a13620c91b = $(`<div id="html_f74409e0f1cebe39180402a13620c91b" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4614351)</div>`)[0];
+                popup_419af734efb37cb151ea40db91540dd7.setContent(html_f74409e0f1cebe39180402a13620c91b);
+            
+        
+
+        marker_4d36c0181819e2ea6d06bb24ace0679d.bindPopup(popup_419af734efb37cb151ea40db91540dd7)
+        ;
+
+        
+    
+    
+            var marker_00f6dfd36dae2f5c461f28a23e1de898 = L.marker(
+                [32.10754123092221, 34.81532255358455],
+                {
+}
+            ).addTo(map_c8fbcd16643b187715d814d6f860b974);
+        
+    
+            var icon_10885c6090fedb43f44ae780968df966 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_00f6dfd36dae2f5c461f28a23e1de898.setIcon(icon_10885c6090fedb43f44ae780968df966);
+        
+    
+        var popup_e98f24a436e7651a9ff02614567997b9 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_eb5024b8a9156005ef4b679e2ad61801 = $(`<div id="html_eb5024b8a9156005ef4b679e2ad61801" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10754123092221,34.81532255358455&layer=c&cbll=32.10754123092221,34.81532255358455&cbp=12,60,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_e98f24a436e7651a9ff02614567997b9.setContent(html_eb5024b8a9156005ef4b679e2ad61801);
+            
+        
+
+        marker_00f6dfd36dae2f5c461f28a23e1de898.bindPopup(popup_e98f24a436e7651a9ff02614567997b9)
+        ;
+
+        
+    
+    
+            var marker_0e8e20340d708135e1d8646f18e240a0 = L.marker(
+                [32.10762863, 34.81545549],
+                {
+}
+            ).addTo(map_c8fbcd16643b187715d814d6f860b974);
+        
+    
+            var icon_8a1b1b1e9b288ab3605f523103ab7b77 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_0e8e20340d708135e1d8646f18e240a0.setIcon(icon_8a1b1b1e9b288ab3605f523103ab7b77);
+        
+    
+        var popup_2d1eae35c7bace81a7f9a1f14da4c8fe = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_98926bb539a6539669af17ad35c0ce3c = $(`<div id="html_98926bb539a6539669af17ad35c0ce3c" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4600036)</div>`)[0];
+                popup_2d1eae35c7bace81a7f9a1f14da4c8fe.setContent(html_98926bb539a6539669af17ad35c0ce3c);
+            
+        
+
+        marker_0e8e20340d708135e1d8646f18e240a0.bindPopup(popup_2d1eae35c7bace81a7f9a1f14da4c8fe)
+        ;
+
+        
+    
+    
+            var marker_bbfd615826aece4a3b48edea9f593883 = L.marker(
+                [32.10767337, 34.81551929],
+                {
+}
+            ).addTo(map_c8fbcd16643b187715d814d6f860b974);
+        
+    
+            var icon_52e1c73aed74e079813a7af706dfc374 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_bbfd615826aece4a3b48edea9f593883.setIcon(icon_52e1c73aed74e079813a7af706dfc374);
+        
+    
+        var popup_7e5b63196c27293bc947bdc995020667 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_973d6837a8fbf0db86e03185f75368ba = $(`<div id="html_973d6837a8fbf0db86e03185f75368ba" style="width: 100.0%; height: 100.0%;">Additional Match: Fraxinus syriaca (ID: 4614351)</div>`)[0];
+                popup_7e5b63196c27293bc947bdc995020667.setContent(html_973d6837a8fbf0db86e03185f75368ba);
+            
+        
+
+        marker_bbfd615826aece4a3b48edea9f593883.bindPopup(popup_7e5b63196c27293bc947bdc995020667)
+        ;
+
+        
+    
+    
+            var marker_4cd8a2722231941bae1d52ba3126a40f = L.marker(
+                [32.10754123092221, 34.81532255358455],
+                {
+}
+            ).addTo(map_c8fbcd16643b187715d814d6f860b974);
+        
+    
+            var icon_0b3495ea8e1aa119f1687d4b85de23a7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_4cd8a2722231941bae1d52ba3126a40f.setIcon(icon_0b3495ea8e1aa119f1687d4b85de23a7);
+        
+    
+        var popup_55ddbeb0a03b5c3f23d04c73e84e4d8d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ddf091f340f1677cd1d14b93129c1bfe = $(`<div id="html_ddf091f340f1677cd1d14b93129c1bfe" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10754123092221,34.81532255358455&layer=c&cbll=32.10754123092221,34.81532255358455&cbp=12,60,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_55ddbeb0a03b5c3f23d04c73e84e4d8d.setContent(html_ddf091f340f1677cd1d14b93129c1bfe);
+            
+        
+
+        marker_4cd8a2722231941bae1d52ba3126a40f.bindPopup(popup_55ddbeb0a03b5c3f23d04c73e84e4d8d)
+        ;
+
+        
+    
+</script>
+</html>

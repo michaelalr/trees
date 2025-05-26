@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_d468db514fb2483e3014a22d8699bcc3 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+<div style="
+position: fixed;
+bottom: 50px;
+left: 50px;
+width: 200px;
+background-color: white;
+z-index:9999;
+font-size:14px;
+padding: 10px;
+border: 2px solid grey;
+border-radius: 8px;
+box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+">
+<b>Legend</b><br>
+<i class="fa fa-map-marker fa-2x" style="color:orange"></i> Car location<br>
+<i class="fa fa-map-marker fa-2x" style="color:red"></i> Detection location<br>
+<i class="fa fa-map-marker fa-2x" style="color:green"></i> Seker best match<br>
+<i class="fa fa-map-marker fa-2x" style="color:blue"></i> Seker additional match<br>
+</div>
+    
+            <div class="folium-map" id="map_d468db514fb2483e3014a22d8699bcc3" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_d468db514fb2483e3014a22d8699bcc3 = L.map(
+                "map_d468db514fb2483e3014a22d8699bcc3",
+                {
+                    center: [32.10760536988417, 34.81489318092408],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 15,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_b806409c027bc4db18985a8c02e04d94 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_b806409c027bc4db18985a8c02e04d94.addTo(map_d468db514fb2483e3014a22d8699bcc3);
+        
+    
+            var marker_bbbdc8c6a96358ec45c81551a24abe1a = L.marker(
+                [32.10734400496007, 34.8154035158227],
+                {
+}
+            ).addTo(map_d468db514fb2483e3014a22d8699bcc3);
+        
+    
+            var icon_6e98b4539ddb7378e2aaae1d99ffdc0f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_bbbdc8c6a96358ec45c81551a24abe1a.setIcon(icon_6e98b4539ddb7378e2aaae1d99ffdc0f);
+        
+    
+        var popup_28bae19f7cbb172930cb3bd529e22fc2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9a1f1775f73b1c7ffecae0c3fa9d65a1 = $(`<div id="html_9a1f1775f73b1c7ffecae0c3fa9d65a1" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10734400496007,34.8154035158227&layer=c&cbll=32.10734400496007,34.8154035158227&cbp=12,300,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_28bae19f7cbb172930cb3bd529e22fc2.setContent(html_9a1f1775f73b1c7ffecae0c3fa9d65a1);
+            
+        
+
+        marker_bbbdc8c6a96358ec45c81551a24abe1a.bindPopup(popup_28bae19f7cbb172930cb3bd529e22fc2)
+        ;
+
+        
+    
+    
+            var marker_b89707fb87ed4382def42eb50362791d = L.marker(
+                [32.10734400496007, 34.8154035158227],
+                {
+}
+            ).addTo(map_d468db514fb2483e3014a22d8699bcc3);
+        
+    
+            var icon_29623e98be7c1fb651228effc23625fa = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_b89707fb87ed4382def42eb50362791d.setIcon(icon_29623e98be7c1fb651228effc23625fa);
+        
+    
+        var popup_efcf1a8ca943ca5967bf081ec100368f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5344fdf366e32b7bff8faed2fc55d9a4 = $(`<div id="html_5344fdf366e32b7bff8faed2fc55d9a4" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10734400496007,34.8154035158227&layer=c&cbll=32.10734400496007,34.8154035158227&cbp=12,300,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_efcf1a8ca943ca5967bf081ec100368f.setContent(html_5344fdf366e32b7bff8faed2fc55d9a4);
+            
+        
+
+        marker_b89707fb87ed4382def42eb50362791d.bindPopup(popup_efcf1a8ca943ca5967bf081ec100368f)
+        ;
+
+        
+    
+    
+            var marker_731e3781077d26fe0f4c7e21b2cd32ee = L.marker(
+                [32.10734400496007, 34.8154035158227],
+                {
+}
+            ).addTo(map_d468db514fb2483e3014a22d8699bcc3);
+        
+    
+            var icon_4dd6d1cd44a866cb06a9e6ff4c80c6d0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_731e3781077d26fe0f4c7e21b2cd32ee.setIcon(icon_4dd6d1cd44a866cb06a9e6ff4c80c6d0);
+        
+    
+        var popup_fe775060eea1d8360d6fc72ed889e765 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f187712dc85e906442676b64bc881fd3 = $(`<div id="html_f187712dc85e906442676b64bc881fd3" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10734400496007,34.8154035158227&layer=c&cbll=32.10734400496007,34.8154035158227&cbp=12,300,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_fe775060eea1d8360d6fc72ed889e765.setContent(html_f187712dc85e906442676b64bc881fd3);
+            
+        
+
+        marker_731e3781077d26fe0f4c7e21b2cd32ee.bindPopup(popup_fe775060eea1d8360d6fc72ed889e765)
+        ;
+
+        
+    
+    
+            var marker_87dca3240d4c7001100a33787c35d62c = L.marker(
+                [32.10734400496007, 34.8154035158227],
+                {
+}
+            ).addTo(map_d468db514fb2483e3014a22d8699bcc3);
+        
+    
+            var icon_7f338df9d37c0fbc91718ef552e56f2e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_87dca3240d4c7001100a33787c35d62c.setIcon(icon_7f338df9d37c0fbc91718ef552e56f2e);
+        
+    
+        var popup_ecbeadb85cb044b4cd732b4525b2cb2b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_313906470c4684278fd313da42ae553a = $(`<div id="html_313906470c4684278fd313da42ae553a" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10734400496007,34.8154035158227&layer=c&cbll=32.10734400496007,34.8154035158227&cbp=12,300,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_ecbeadb85cb044b4cd732b4525b2cb2b.setContent(html_313906470c4684278fd313da42ae553a);
+            
+        
+
+        marker_87dca3240d4c7001100a33787c35d62c.bindPopup(popup_ecbeadb85cb044b4cd732b4525b2cb2b)
+        ;
+
+        
+    
+    
+            var marker_6a7e2cb820c13a71ff7d0d8d9e212487 = L.marker(
+                [32.10734400496007, 34.8154035158227],
+                {
+}
+            ).addTo(map_d468db514fb2483e3014a22d8699bcc3);
+        
+    
+            var icon_e28ad991b5763c9069c0d8ef2e8ecfb2 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_6a7e2cb820c13a71ff7d0d8d9e212487.setIcon(icon_e28ad991b5763c9069c0d8ef2e8ecfb2);
+        
+    
+        var popup_2910666912dd622c1bdacf300577ecd0 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5f1b7e64e387e6f7b738d1393b4e6b0e = $(`<div id="html_5f1b7e64e387e6f7b738d1393b4e6b0e" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10734400496007,34.8154035158227&layer=c&cbll=32.10734400496007,34.8154035158227&cbp=12,300,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_2910666912dd622c1bdacf300577ecd0.setContent(html_5f1b7e64e387e6f7b738d1393b4e6b0e);
+            
+        
+
+        marker_6a7e2cb820c13a71ff7d0d8d9e212487.bindPopup(popup_2910666912dd622c1bdacf300577ecd0)
+        ;
+
+        
+    
+    
+            var marker_72ee03944b5e60aa11cd2faca3d65019 = L.marker(
+                [32.10734400496007, 34.8154035158227],
+                {
+}
+            ).addTo(map_d468db514fb2483e3014a22d8699bcc3);
+        
+    
+            var icon_e99676aee4cab44571d8dd095b6fc904 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_72ee03944b5e60aa11cd2faca3d65019.setIcon(icon_e99676aee4cab44571d8dd095b6fc904);
+        
+    
+        var popup_c976fae9dc315c9bef5d3c919203509e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_29dc1da6c131d692a4dd31e58284b6de = $(`<div id="html_29dc1da6c131d692a4dd31e58284b6de" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10734400496007,34.8154035158227&layer=c&cbll=32.10734400496007,34.8154035158227&cbp=12,300,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_c976fae9dc315c9bef5d3c919203509e.setContent(html_29dc1da6c131d692a4dd31e58284b6de);
+            
+        
+
+        marker_72ee03944b5e60aa11cd2faca3d65019.bindPopup(popup_c976fae9dc315c9bef5d3c919203509e)
+        ;
+
+        
+    
+    
+            var marker_d44dee289d7235954fe35ae230439a96 = L.marker(
+                [32.10734400496007, 34.8154035158227],
+                {
+}
+            ).addTo(map_d468db514fb2483e3014a22d8699bcc3);
+        
+    
+            var icon_ac6da3a580741e8f0a46f940e840eafc = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_d44dee289d7235954fe35ae230439a96.setIcon(icon_ac6da3a580741e8f0a46f940e840eafc);
+        
+    
+        var popup_ea83b7898c7975fe20b6d6cbb8457058 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1efea907a5faacc53e8703003a3f783f = $(`<div id="html_1efea907a5faacc53e8703003a3f783f" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10734400496007,34.8154035158227&layer=c&cbll=32.10734400496007,34.8154035158227&cbp=12,300,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_ea83b7898c7975fe20b6d6cbb8457058.setContent(html_1efea907a5faacc53e8703003a3f783f);
+            
+        
+
+        marker_d44dee289d7235954fe35ae230439a96.bindPopup(popup_ea83b7898c7975fe20b6d6cbb8457058)
+        ;
+
+        
+    
+    
+            var marker_4fe9fa4d701178c4a3249e5026a16ccc = L.marker(
+                [32.10734400496007, 34.8154035158227],
+                {
+}
+            ).addTo(map_d468db514fb2483e3014a22d8699bcc3);
+        
+    
+            var icon_eaff3b8134a75dbc73c11e2097862cf1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_4fe9fa4d701178c4a3249e5026a16ccc.setIcon(icon_eaff3b8134a75dbc73c11e2097862cf1);
+        
+    
+        var popup_1ddaf21edc7755b4c72cc30090931a05 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6588346c7e7d6656a73b1869185f0c7d = $(`<div id="html_6588346c7e7d6656a73b1869185f0c7d" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10734400496007,34.8154035158227&layer=c&cbll=32.10734400496007,34.8154035158227&cbp=12,300,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_1ddaf21edc7755b4c72cc30090931a05.setContent(html_6588346c7e7d6656a73b1869185f0c7d);
+            
+        
+
+        marker_4fe9fa4d701178c4a3249e5026a16ccc.bindPopup(popup_1ddaf21edc7755b4c72cc30090931a05)
+        ;
+
+        
+    
+    
+            var marker_14c6a4c7b816278323c382d9fd424375 = L.marker(
+                [32.10734400496007, 34.8154035158227],
+                {
+}
+            ).addTo(map_d468db514fb2483e3014a22d8699bcc3);
+        
+    
+            var icon_3514b36c696654af336fbc4a52b51b45 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_14c6a4c7b816278323c382d9fd424375.setIcon(icon_3514b36c696654af336fbc4a52b51b45);
+        
+    
+        var popup_300d785f8a4102e0ff3ce0d38e1c02b3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7f401b9ce80bd07fac03952e5596bed5 = $(`<div id="html_7f401b9ce80bd07fac03952e5596bed5" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10734400496007,34.8154035158227&layer=c&cbll=32.10734400496007,34.8154035158227&cbp=12,300,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_300d785f8a4102e0ff3ce0d38e1c02b3.setContent(html_7f401b9ce80bd07fac03952e5596bed5);
+            
+        
+
+        marker_14c6a4c7b816278323c382d9fd424375.bindPopup(popup_300d785f8a4102e0ff3ce0d38e1c02b3)
+        ;
+
+        
+    
+    
+            var marker_53416c9449f4abd88ec872b9186329c0 = L.marker(
+                [32.10734400496007, 34.8154035158227],
+                {
+}
+            ).addTo(map_d468db514fb2483e3014a22d8699bcc3);
+        
+    
+            var icon_a62325f58570179680c6dee070656561 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_53416c9449f4abd88ec872b9186329c0.setIcon(icon_a62325f58570179680c6dee070656561);
+        
+    
+        var popup_59b25f820d5e5a0fb86b4b4063eaea69 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e7dc766836d03f72377b13e1303776c4 = $(`<div id="html_e7dc766836d03f72377b13e1303776c4" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10734400496007,34.8154035158227&layer=c&cbll=32.10734400496007,34.8154035158227&cbp=12,300,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_59b25f820d5e5a0fb86b4b4063eaea69.setContent(html_e7dc766836d03f72377b13e1303776c4);
+            
+        
+
+        marker_53416c9449f4abd88ec872b9186329c0.bindPopup(popup_59b25f820d5e5a0fb86b4b4063eaea69)
+        ;
+
+        
+    
+    
+            var marker_f3cfaece48dcaebf29a52794ff4e6563 = L.marker(
+                [32.10734400496007, 34.8154035158227],
+                {
+}
+            ).addTo(map_d468db514fb2483e3014a22d8699bcc3);
+        
+    
+            var icon_e6af5acd5d5f266b293b2f2f650b31a2 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_f3cfaece48dcaebf29a52794ff4e6563.setIcon(icon_e6af5acd5d5f266b293b2f2f650b31a2);
+        
+    
+        var popup_58fb350511dbf1512ab912504e5fb6e6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_083db671dc3df6134f61410f152e1315 = $(`<div id="html_083db671dc3df6134f61410f152e1315" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10734400496007,34.8154035158227&layer=c&cbll=32.10734400496007,34.8154035158227&cbp=12,300,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_58fb350511dbf1512ab912504e5fb6e6.setContent(html_083db671dc3df6134f61410f152e1315);
+            
+        
+
+        marker_f3cfaece48dcaebf29a52794ff4e6563.bindPopup(popup_58fb350511dbf1512ab912504e5fb6e6)
+        ;
+
+        
+    
+    
+            var marker_9aba580e1de520103539f54af44cc954 = L.marker(
+                [32.10734400496007, 34.8154035158227],
+                {
+}
+            ).addTo(map_d468db514fb2483e3014a22d8699bcc3);
+        
+    
+            var icon_61f746eef31529c75cd4db1d576a6131 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_9aba580e1de520103539f54af44cc954.setIcon(icon_61f746eef31529c75cd4db1d576a6131);
+        
+    
+        var popup_8a90b19b22d55f1b81e7d71e2dfdb8e2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7688c3c52c344c060f2c67aea3c419b8 = $(`<div id="html_7688c3c52c344c060f2c67aea3c419b8" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10734400496007,34.8154035158227&layer=c&cbll=32.10734400496007,34.8154035158227&cbp=12,300,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_8a90b19b22d55f1b81e7d71e2dfdb8e2.setContent(html_7688c3c52c344c060f2c67aea3c419b8);
+            
+        
+
+        marker_9aba580e1de520103539f54af44cc954.bindPopup(popup_8a90b19b22d55f1b81e7d71e2dfdb8e2)
+        ;
+
+        
+    
+    
+            var marker_381f0e3bcbc183b1b0aa046163c4180f = L.marker(
+                [32.10734400496007, 34.8154035158227],
+                {
+}
+            ).addTo(map_d468db514fb2483e3014a22d8699bcc3);
+        
+    
+            var icon_e51d76e237ba45c8a9694ce079fc0f3f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_381f0e3bcbc183b1b0aa046163c4180f.setIcon(icon_e51d76e237ba45c8a9694ce079fc0f3f);
+        
+    
+        var popup_ad637996d6e09119db3eec0ee77ce548 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_364667d4c42018cf7a4e153f240e59cb = $(`<div id="html_364667d4c42018cf7a4e153f240e59cb" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10734400496007,34.8154035158227&layer=c&cbll=32.10734400496007,34.8154035158227&cbp=12,300,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_ad637996d6e09119db3eec0ee77ce548.setContent(html_364667d4c42018cf7a4e153f240e59cb);
+            
+        
+
+        marker_381f0e3bcbc183b1b0aa046163c4180f.bindPopup(popup_ad637996d6e09119db3eec0ee77ce548)
+        ;
+
+        
+    
+    
+            var marker_52f133f5e5fee322a014843886b23880 = L.marker(
+                [32.10734400496007, 34.8154035158227],
+                {
+}
+            ).addTo(map_d468db514fb2483e3014a22d8699bcc3);
+        
+    
+            var icon_8a5ecd1d2a32ef3eecace7aff0848468 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_52f133f5e5fee322a014843886b23880.setIcon(icon_8a5ecd1d2a32ef3eecace7aff0848468);
+        
+    
+        var popup_209c2ae8b426cc5365133d59c6afa126 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_19585856b526be4f099d19fd87e4d164 = $(`<div id="html_19585856b526be4f099d19fd87e4d164" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10734400496007,34.8154035158227&layer=c&cbll=32.10734400496007,34.8154035158227&cbp=12,300,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_209c2ae8b426cc5365133d59c6afa126.setContent(html_19585856b526be4f099d19fd87e4d164);
+            
+        
+
+        marker_52f133f5e5fee322a014843886b23880.bindPopup(popup_209c2ae8b426cc5365133d59c6afa126)
+        ;
+
+        
+    
+    
+            var marker_54c78a459d46a072f1d2fd3b0516563f = L.marker(
+                [32.10734400496007, 34.8154035158227],
+                {
+}
+            ).addTo(map_d468db514fb2483e3014a22d8699bcc3);
+        
+    
+            var icon_23459a5cfd6a9a7b52caa0697af57769 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_54c78a459d46a072f1d2fd3b0516563f.setIcon(icon_23459a5cfd6a9a7b52caa0697af57769);
+        
+    
+        var popup_561bee985f127f33277d36f31c1f272f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b70cbf5cc8f945d07ffd8d0c79e10f4b = $(`<div id="html_b70cbf5cc8f945d07ffd8d0c79e10f4b" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10734400496007,34.8154035158227&layer=c&cbll=32.10734400496007,34.8154035158227&cbp=12,300,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_561bee985f127f33277d36f31c1f272f.setContent(html_b70cbf5cc8f945d07ffd8d0c79e10f4b);
+            
+        
+
+        marker_54c78a459d46a072f1d2fd3b0516563f.bindPopup(popup_561bee985f127f33277d36f31c1f272f)
+        ;
+
+        
+    
+    
+            var marker_3567d1be0e983fb9822588683bccb4fa = L.marker(
+                [32.10734400496007, 34.8154035158227],
+                {
+}
+            ).addTo(map_d468db514fb2483e3014a22d8699bcc3);
+        
+    
+            var icon_d3d7ffd52c2f3d147590bbe618ade936 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_3567d1be0e983fb9822588683bccb4fa.setIcon(icon_d3d7ffd52c2f3d147590bbe618ade936);
+        
+    
+        var popup_33a9afcb1d7d36b8c869a3450117a9a5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_85ad7a18419677a506511c93250b4b7a = $(`<div id="html_85ad7a18419677a506511c93250b4b7a" style="width: 100.0%; height: 100.0%;">Car location<br><a href='https://www.google.com/maps?q=32.10734400496007,34.8154035158227&layer=c&cbll=32.10734400496007,34.8154035158227&cbp=12,300,0,0,0' target='_blank'>View on Google Street View</a></div>`)[0];
+                popup_33a9afcb1d7d36b8c869a3450117a9a5.setContent(html_85ad7a18419677a506511c93250b4b7a);
+            
+        
+
+        marker_3567d1be0e983fb9822588683bccb4fa.bindPopup(popup_33a9afcb1d7d36b8c869a3450117a9a5)
+        ;
+
+        
+    
+</script>
+</html>
